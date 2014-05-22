@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Hoszt: 127.0.0.1
--- Létrehozás ideje: 2014. Máj 22. 20:18
+-- Létrehozás ideje: 2014. Máj 22. 22:06
 -- Szerver verzió: 5.5.32
 -- PHP verzió: 5.4.19
 
@@ -56,16 +56,23 @@ CREATE TABLE IF NOT EXISTS `residents` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `firstname` varchar(100) COLLATE utf8_hungarian_ci NOT NULL,
   `lastname` varchar(100) COLLATE utf8_hungarian_ci NOT NULL,
-  `e-mail` varchar(100) COLLATE utf8_hungarian_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8_hungarian_ci NOT NULL,
   `username` varchar(25) COLLATE utf8_hungarian_ci NOT NULL,
   `password` varchar(512) COLLATE utf8_hungarian_ci NOT NULL,
   `deposit_id` int(11) NOT NULL,
-  `active` int(11) NOT NULL,
-  `admin` int(11) NOT NULL,
+  `active` int(11) NOT NULL DEFAULT '1',
+  `admin` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `deposit_id` (`deposit_id`),
-  UNIQUE KEY `e-mail` (`e-mail`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci AUTO_INCREMENT=1 ;
+  UNIQUE KEY `e-mail` (`email`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci AUTO_INCREMENT=2 ;
+
+--
+-- A tábla adatainak kiíratása `residents`
+--
+
+INSERT INTO `residents` (`id`, `firstname`, `lastname`, `email`, `username`, `password`, `deposit_id`, `active`, `admin`) VALUES
+(1, 'Udvari', 'Szabolcs', 'szudvari@gmail.com', 'szudvari', '5420720b710f7f14d3d6d12c37c23a32032d14e08d6a13f613c775d28c388a31b3245d5458fda2d869153be6c0872118ef078df042f776210db7fdab8c46a5d3', 2, 1, 0);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
