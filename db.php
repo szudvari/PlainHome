@@ -45,3 +45,46 @@ function insertTable($table, $vars, $con) {
     return $result;
 }
 
+function listDeposits() {
+    mysql_query("set names 'utf8'");
+    mysql_query("set character set 'utf8'");
+    $sql = "SELECT * from deposits;";
+    $result = mysql_query($sql);
+    $table = array();
+    while ($row = mysql_fetch_assoc($result)) {
+        $table[] = $row;
+    }
+    echo '<table id="results">';
+    echo <<<EOT
+   <th> id </th>
+   <th> Emelet </th>
+   <th> Ajtó </th>
+   <th> Terület (nm) </th>
+   <th> Lakók száma </th>
+   <th> Megjegyzés </th>
+   <th> Módosítás </th>
+   
+   
+EOT;
+    foreach ($table as $row) {
+        echo '<tr>';
+        foreach ($row as $value) {
+            echo '<td>' . $value . '</td>';
+        }
+        echo "<td><a href=\"#\" target=\"blank\">Módosít</a></td>";
+        echo '</tr>';
+    }
+    echo '</table>';
+}
+
+function insertDepoDb($deposit, $con) {
+    $sql = "INSERT INTO  deposits (floor ,door ,area, residents_no, note) values "
+            . "(\"{$deposit['floor']}\", \"{$deposit['door']}\", \"{$deposit['area']}\", "
+            . "\"{$deposit['residents']}\", \"{$deposit['note']}\")";
+    $res = mysql_query($sql, $con);
+    if (!$res)
+    {
+        echo mysql_errno() . ": " . mysql_error();
+        exit();
+    }
+}
