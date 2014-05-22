@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Hoszt: 127.0.0.1
--- Létrehozás ideje: 2014. Máj 22. 16:06
+-- Létrehozás ideje: 2014. Máj 22. 20:18
 -- Szerver verzió: 5.5.32
 -- PHP verzió: 5.4.19
 
@@ -45,6 +45,27 @@ CREATE TABLE IF NOT EXISTS `deposits` (
 INSERT INTO `deposits` (`id`, `floor`, `door`, `area`, `residents_no`, `note`) VALUES
 (1, 0, 0, 50, 2, 'Kis lakás'),
 (2, 0, 1, 55, 1, 'Nagyobb lakás');
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `residents`
+--
+
+CREATE TABLE IF NOT EXISTS `residents` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `firstname` varchar(100) COLLATE utf8_hungarian_ci NOT NULL,
+  `lastname` varchar(100) COLLATE utf8_hungarian_ci NOT NULL,
+  `e-mail` varchar(100) COLLATE utf8_hungarian_ci NOT NULL,
+  `username` varchar(25) COLLATE utf8_hungarian_ci NOT NULL,
+  `password` varchar(512) COLLATE utf8_hungarian_ci NOT NULL,
+  `deposit_id` int(11) NOT NULL,
+  `active` int(11) NOT NULL,
+  `admin` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `deposit_id` (`deposit_id`),
+  UNIQUE KEY `e-mail` (`e-mail`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci AUTO_INCREMENT=1 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
