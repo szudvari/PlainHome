@@ -1,0 +1,4 @@
+USER reg megvalósítása:
+- Felvételnél meg kell adni, az emelet/ajtót
+- Regisztrációnál vizsgálni, hogy létezik-e adott emelet/ajtó visszakérdezni a depo ID-t
+- Userhez hozzáadni a depo id-t
