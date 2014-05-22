@@ -1,5 +1,4 @@
 <?php
-include_once 'userdb.php';
 include_once 'db.php';
 include_once 'config.php';
 
@@ -23,5 +22,11 @@ function auto_copyright($year = 'auto') {
     echo "JNF - ($cr)";
 }
 
-
+function encodePass($clearPass) {
+    $salt1 = "84ubbd%mkei";
+    $salt2 = "+jhbeza%oop";
+    $saltedText = $salt1 . $clearPass . $salt2;
+    $cryptedPass = hash("sha512", $saltedText);
+    return $cryptedPass;
+}
 

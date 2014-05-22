@@ -39,11 +39,14 @@ function insertTable($table, $vars, $con) {
 			VALUES
 				(" . $insert_list_values . ")
 		";
-    mysql_query($sql, $con);
+    $res = mysql_query($sql, $con);
+    if (!$res)
+    {
+        echo mysql_errno() . ": " . mysql_error();
+        exit();
+    }
 
-    $result = mysql_insert_id();
-    return $result;
-}
+ }
 
 function listDeposits() {
     mysql_query("set names 'utf8'");
@@ -87,4 +90,24 @@ function insertDepoDb($deposit, $con) {
         echo mysql_errno() . ": " . mysql_error();
         exit();
     }
+}
+
+function getDepositId($floor, $door) {
+    $sql = "select id from deposits where floor=\"$floor\" and door=\"$door\";";
+    $res = mysql_query($sql);
+    if (!$res)
+    {
+        echo "A ($sql) kérdés futtatása sikertelen: " . mysql_error();
+        exit;
+    }
+
+    if (mysql_num_rows($res) == 0)
+    {
+        echo "Nincs ilyen albetét";
+        exit;
+    }
+    while ($row = mysql_fetch_assoc($res)) {
+        $id = $row["id"];
+    }
+    return $id;
 }
