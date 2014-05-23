@@ -6,4 +6,5 @@ include_once 'html.php';
 
 htmlHead($website['title'], $house['name']);
 addUser();
+copyRight();
 htmlEnd();
