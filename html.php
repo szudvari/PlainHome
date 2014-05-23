@@ -73,3 +73,21 @@ function addUser() {
 </div>
 EOT;
 }
+
+function loginUser() {
+    echo <<<EOT
+<div id="loginform">
+<form action="auth.php" method="post">
+	<fieldset>
+		<legend>Belépés</legend>
+		<label for="user">Felahsználónév</label>
+		<input type="text" id="user" name="user"><br>
+		<label for="pass">Jelszó</label>
+		<input type="password" id="pass" name="pass"><br>
+		<input id="submit2" type="submit" value="Belépés">
+</fieldset>
+</form>
+</div>
+
+EOT;
+}

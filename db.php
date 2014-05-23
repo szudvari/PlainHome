@@ -111,3 +111,83 @@ function getDepositId($floor, $door) {
     }
     return $id;
 }
+
+function authUserDb($userdata, $con) {
+    $sql = "select username from residents where username=\"{$userdata['user']}\" 
+        and password=\"{$userdata['pass']}\" and active=1";
+    $res = mysql_query($sql, $con);
+    if (!$res)
+    {
+        echo "A ($sql) kérdés futtatása sikertelen: " . mysql_error();
+        exit();
+    }
+
+    if (mysql_num_rows($res) == 0)
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
+
+function getUserRole($userdata) {
+    $sql = "select admin from residents where username=\"{$userdata['user']}\";";
+    $res = mysql_query($sql);
+    if (!$res)
+    {
+        echo "A ($sql) kérdés futtatása sikertelen: " . mysql_error();
+        exit;
+    }
+
+    if (mysql_num_rows($res) == 0)
+    {
+        echo "Nincs ilyen felhasználó";
+        exit;
+    }
+    while ($row = mysql_fetch_assoc($res)) {
+        $role = $row["admin"];
+    }
+    return $role;
+}
+
+function getUserId($userdata) {
+    $sql = "select id from residents where username=\"{$userdata['user']}\";";
+    $res = mysql_query($sql);
+    if (!$res)
+    {
+        echo "A ($sql) kérdés futtatása sikertelen: " . mysql_error();
+        exit;
+    }
+
+    if (mysql_num_rows($res) == 0)
+    {
+        echo "Nincs ilyen felhasználó";
+        exit;
+    }
+    while ($row = mysql_fetch_assoc($res)) {
+        $id = $row["id"];
+    }
+    return $id;
+}
+
+function getUserDepositId($userdata) {
+    $sql = "select depositid from residents where username=\"{$userdata['user']}\";";
+    $res = mysql_query($sql);
+    if (!$res)
+    {
+        echo "A ($sql) kérdés futtatása sikertelen: " . mysql_error();
+        exit;
+    }
+
+    if (mysql_num_rows($res) == 0)
+    {
+        echo "Nincs ilyen felhasználó";
+        exit;
+    }
+    while ($row = mysql_fetch_assoc($res)) {
+        $depositId = $row["depositid"];
+    }
+    return $depositId;
+}

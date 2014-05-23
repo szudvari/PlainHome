@@ -14,7 +14,7 @@ include_once 'html.php';
     $userdata['lastname'] = $_POST['lastname'];
     $userdata['email'] = $_POST['email'];
     $userdata['username'] = $_POST['username'];
-    $userdata['deposit_id'] = getDepositId($floor, $door);
+    $userdata['depositid'] = getDepositId($floor, $door);
     $userdata['password'] = encodePass($pass);
 
     if ($pass == $pass2)
