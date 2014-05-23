@@ -1,4 +1,6 @@
 <?php
+include_once 'config.php';
+include_once 'functions.php';
 
 function htmlHead($title, $house) {
     echo <<<EOT
@@ -89,5 +91,31 @@ function loginUser() {
 </form>
 </div>
 
+EOT;
+}
+function letterHead() {
+    global $house;
+    echo <<<EOT
+<div id="menu">
+  <ul>
+      <li id="title"><a href="index.php">PlainHouse<span class="mini">{$house['name']}</span></a></span></li>
+      <li><a href="login.php">Bejelentkezés</a></li>
+      <li><a href="logout.php">Logout</a></li>                
+      <li><a href="deposits.php">Deposits</a></li>                
+      <li><a href="session.php">Session check</a></li>                
+  </ul>    
+</div>
+   
+EOT;
+}
+
+function copyRight() {
+    echo <<<EOT
+    <div id="footer">
+    ©  
+EOT;
+    auto_copyright(2014);
+    echo <<<EOT
+    </div>
 EOT;
 }

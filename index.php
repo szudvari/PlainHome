@@ -1,11 +1,8 @@
-<!DOCTYPE html>
+<?php
+include_once 'config.php';
+include_once 'html.php';
 
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title></title>
-    </head>
-    <body>
-
-    </body>
-</html>
+htmlHead($website['title'], $house['name']);
+letterHead();
+copyRight();
+htmlEnd();
