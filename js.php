@@ -8,6 +8,7 @@ function showContent ($areaId, $buttonId) {
             $("#$buttonId").click(function()
             {
                 $("#$areaId").fadeIn(500);
+                $("#$buttonId").hide();
             });
    </script>
             
