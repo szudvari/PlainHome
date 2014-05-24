@@ -11,7 +11,7 @@ if (!isset($_SESSION['user']))
 }
 else
 {
-     echo "<p>Már bejelentkeztél mint {$_SESSION['user']}.</p>";
+     echo "<p class=\"lead\">Már bejelentkeztél mint {$_SESSION['user']}.</p>";
 }
 copyRight();  
 htmlEnd();

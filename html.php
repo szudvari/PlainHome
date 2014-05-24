@@ -8,8 +8,14 @@ function htmlHead($title, $house) {
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>$title - $house</title>
-        <link rel="stylesheet" href="style.css" type="text/css">
+        <link rel="stylesheet" href="css/style.css" type="text/css">
+		<link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+		<!--[if lt IE 9]>
+			<script src="js/html5shiv.js"></script>
+			<script src="js/respond.js"></script>
+		<![endif]-->
     </head>
     <body>
 
@@ -18,9 +24,17 @@ EOT;
 
 function htmlEnd() {
 echo <<<EOT
-  </body>
-</html>
-	
+			<div class="footer">
+				<p class="textCenter">
+					&copy; 2014 <a href="http://webariel.hu" target="_blank">PlainHome Version 0.1a</a></p>
+			</div>
+		</div>
+		<script src="js/jquery.js"></script>
+		<script src="js/bootstrap.js"></script>
+		<script src="js/reside.js"></script>
+
+	</body>
+	</html>
 EOT;
 }
 
@@ -49,7 +63,7 @@ EOT;
 
 function addUser() {
     echo <<<EOT
-<div id="loginform">
+<div class="form-group">
 <form action="add.php" method="post">
 	<fieldset>
 		<legend>Új felhasználó</legend>
@@ -78,17 +92,31 @@ EOT;
 
 function loginUser() {
     echo <<<EOT
-<div id="loginform">
-<form action="auth.php" method="post">
-	<fieldset>
-		<legend>Belépés</legend>
-		<label for="user">Felahsználónév</label>
-		<input type="text" id="user" name="user"><br>
-		<label for="pass">Jelszó</label>
-		<input type="password" id="pass" name="pass"><br>
-		<input id="submit2" type="submit" value="Belépés">
-</fieldset>
-</form>
+
+<div class="container">
+		<div class="row">
+			<div class="col-md-8">
+				<div class="logo">
+					<a href=""><img alt="PlainHome" src="pics/logo.png" /></a>
+				</div>
+			</div>
+			<div class="col-md-4 userInfo">
+				<p class="textRight">Valami szoveg (datum?)</p>
+			</div>
+		</div>
+		<div class="content">
+			<h3>A belépéshez adja meg felhasználónevét és jelszavát.</h3>
+			<form action="auth.php" method="post" class="padTop">
+			<div class="form-group">
+					<label for="user">Felhasználónév</label>
+					<input type="text" id="user" name="user" class="form-control">
+			</div><br>
+			<div class="form-group">		
+					<label for="pass">Jelszó</label>
+					<input type="password" id="pass" name="pass" class="form-control">
+			</div><br>
+			<button type="input" name="submit" value="Belépés" class="btn btn-success btn-icon"><i class="fa fa-sign-in"></i>Belépés</button>
+		</div>
 </div>
 
 EOT;

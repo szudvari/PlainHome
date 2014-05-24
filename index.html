@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>PlainHome</title>
+
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+
+	<link href="css/bootstrap.css" rel="stylesheet">
+	<link href="css/custom.css" rel="stylesheet">
+	<link href="css/reside.css" rel="stylesheet">
+	<link href="css/font-awesome.min.css" rel="stylesheet">
+	<!--[if lt IE 9]>
+		<script src="js/html5shiv.js"></script>
+		<script src="js/respond.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8">
+				<div class="logo">
+					<a href=""><img alt="PlainHome" src="images/logo.png" /></a>
+				</div>
+			</div>
+			<div class="col-md-4 userInfo">
+				<p class="textRight">Today is Friday the 23rd of May, 2014</p>
+			</div>
+		</div>
+
+		<div class="navbar navbar-default">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a data-toggle="modal" href="#newAccount"><i class="fa fa-key"></i> Create a New Account</a></li>
+					<li><a data-toggle="modal" href="#resetPassword"><i class="fa fa-unlock"></i> Reset Password</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="content">
+
+			<h3>Welcome to Reside V2</h3>
+			<p class="lead">Enter your account information and click Sign In.</p>
+
+			
+			<form action="" method="post" class="padTop">
+				<div class="form-group">
+					<label for="tenantEmail">Email Address</label>
+					<input type="email" class="form-control" name="tenantEmail" id="tenantEmail">
+				</div>
+				<div class="form-group">
+					<label for="password">Password</label>
+					<input type="password" class="form-control" name="password" id="password">
+				</div>
+				<button type="input" name="submit" value="signIn" class="btn btn-success btn-icon"><i class="fa fa-sign-in"></i> Sign In</button>
+			</form>
+
+			<!-- REGISTER NEW ACCOUNT MODAL -->
+			<div class="modal fade" id="newAccount" tabindex="-1" role="dialog" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header modal-info">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+							<h4 class="modal-title">Create a New Reside V2 Account</h4>
+						</div>
+						<form action="" method="post">
+							<div class="modal-body">
+								<div class="form-group">
+									<label for="tenantFirstName">First Name</label>
+									<input type="text" class="form-control" name="tenantFirstName" id="tenantFirstName" value="">
+								</div>
+								<div class="form-group">
+									<label for="tenantLastName">Last Name</label>
+									<input type="text" class="form-control" name="tenantLastName" id="tenantLastName" value="">
+								</div>
+								<div class="form-group">
+									<label for="newEmail">Email Address</label>
+									<input type="email" class="form-control" name="newEmail" id="newEmail" value="">
+									<span class="help-block">A valid email address. Your account information will be sent to this address.</span>
+								</div>
+								<div class="form-group">
+									<label for="password1">Password</label>
+									<input type="text" class="form-control" name="password1" id="password1">
+									<span class="help-block">Type a Password for your new Account.</span>
+								</div>
+								<div class="form-group">
+									<label for="password2">Retype Password</label>
+									<input type="text" class="form-control" name="password2" id="password2">
+									<span class="help-block">Please type your desired Password again. Passwords MUST Match.</span>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<input name="isEmpty" id="isEmpty" value="" type="hidden">
+								<button type="input" name="submit" value="createAccount" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Create Account</button>
+								<button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Cancel</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
+			<!-- RESET PASSWORD MODAL -->
+			<div class="modal fade" id="resetPassword" tabindex="-1" role="dialog" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header modal-primary">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+							<h4 class="modal-title">Reset Your Reside V2 Account Password</h4>
+						</div>
+														<form action="" method="post">
+								<div class="modal-body">
+									<div class="form-group">
+										<label for="theEmail">Email Address</label>
+										<input type="email" class="form-control" name="theEmail" id="theEmail" value="">
+										<span class="help-block">The email address that is registered to your account.</span>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button type="input" name="submit" value="resetPass" class="btn btn-success btn-icon"><i class="fa fa-unlock"></i> Reset My Password</button>
+									<button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Cancel</button>
+								</div>
+							</form>
+												</div>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="footer">
+			<p class="textCenter">
+				&copy; 2014 <a href="http://codecanyon.net/item/reside-rental-property-management/5263078?ref=Luminary">Reside Property Management Version 2.0</a>
+				<span><i class="fa fa-plus"></i></span>
+				Created by <a href="http://codecanyon.net/user/Luminary" target="_blank">Luminary on Code Canyon</a>
+			</p>
+		</div>
+
+	</div>
+
+	<script src="js/jquery.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<script src="js/reside.js"></script>
+
+</body>
+</html>
