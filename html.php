@@ -10,6 +10,7 @@ function htmlHead($title, $house) {
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>$title - $house</title>
+        <script src="http://code.jquery.com/jquery.min.js"></script>
         <link rel="stylesheet" href="css/style.css" type="text/css">
 		<link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
 		<!--[if lt IE 9]>
@@ -40,52 +41,112 @@ EOT;
 
 function addDeposit() {
     echo <<<EOT
-<div id="loginform">
-<form action="adddepo.php" method="post">
-	<fieldset>
-		<legend>Új albetét felvétele</legend>
-		<label for="floor">Emelet</label> 
-		<input type="text" id="floor" name="floor"><br>
-		<label for="door">Ajtó</label>
-		<input type="text" id="door" name="door"><br>
-		<label for="pass">Alapterület</label>
-		<input type="text" id="area" name="area"><br>
-		<label for="residents">Lakók száma</label>
-		<input type="text" id="residents" name="residents"><br>
-		<label for="note">Megjegyzés</label>
-		<input type="text" id="note" name="note"><br>
-		<input id="submit" type="submit" value="Felvesz">
-</fieldset>
-</form>
+
+<div class="content">
+    <button id="newdepo" value="Új albetét felvétele" class="btn btn-success btn-icon"><i class="fa fa-sign-in"></i>Új albetét felvétele</button>
+    <div id="newdeposit">
+        <h3>Új albetét felvétele</h3>
+        <form action="adddepo.php" method="post">
+            <div class="form-group">
+                <label for="floor">Emelet</label> 
+                <input type="text" id="floor" name="floor" class="form-control"></div><br>
+
+            <div class="form-group">
+                <label for="door">Ajtó</label>
+                <input type="text" id="door" name="door" class="form-control"></div><br>
+
+            <div class="form-group">
+                <label for="pass">Alapterület</label>
+                <input type="text" id="area" name="area" class="form-control"></div><br>
+
+            <div class="form-group">
+                <label for="residents">Lakók száma</label>
+                <input type="text" id="residents" name="residents" class="form-control"></div><br>
+
+            <div class="form-group">
+                <label for="note">Megjegyzés</label>
+                <input type="text" id="note" name="note" class="form-control"></div><br>
+
+            <button type="input" name="submit" value="Hozzáad" class="btn btn-success btn-icon"><i class="fa fa-sign-in"></i>Hozzáad</button>
+
+        </form>
+    </div>
 </div>
 EOT;
 }
 
+
 function addUser() {
     echo <<<EOT
-<div class="form-group">
-<form action="add.php" method="post">
-	<fieldset>
-		<legend>Új felhasználó</legend>
-		<label for="firstname">Vezetéknév</label>
-		<input type="text" id="firstname" name="firstname"><br>
-		<label for="lastname">Keresztnév</label>
-		<input type="text" id="lastname" name="lastname"><br>
-                <label for="email">E-mail</label>
-		<input type="text" id="email" name="email"><br>
-                <label for="username">Felhasználónév</label>
-		<input type="text" id="username" name="username"><br>
-                <label for="floor">Emelet</label>
-		<input type="text" id="floor" name="floor"><br>
-		<label for="door">Ajtó</label>
-		<input type="text" id="door" name="door"><br>
-                <label for="pass">Jelszó</label>
-		<input type="password" id="pass" name="pass"><br>
-		<label for="pass2">Jelszó újra</label>
-		<input type="password" id="pass2" name="pass2"><br>
-		<input id="submit2" type="submit" value="Hozzáad">
-</fieldset>
-</form>
+<div class="content">
+    <h3>Új felhasználó felvétele</h3>
+
+    <form action="add.php" method="post">
+        <div class="form-group">
+
+            <label for="firstname">Vezetéknév</label>
+            <input type="text" id="firstname" name="firstname" class="form-control"></div><br>
+
+        <div class="form-group">
+            <label for="lastname">Keresztnév</label>
+            <input type="text" id="lastname" name="lastname" class="form-control"></div><br>
+
+        <div class="form-group">
+            <label for="email">E-mail</label>
+            <input type="text" id="email" name="email" class="form-control"></div><br>
+
+        <div class="form-group">
+            <label for="username">Felhasználónév</label>
+            <input type="text" id="username" name="username" class="form-control"></div><br>
+
+        <div class="form-group">
+            <label for="floor">Emelet</label>
+            <input type="text" id="floor" name="floor" class="form-control"></div><br>
+
+        <div class="form-group">
+            <label for="door">Ajtó</label>
+            <input type="text" id="door" name="door" class="form-control"></div><br>
+
+        <div class="form-group">
+            <label for="pass">Jelszó</label>
+            <input type="password" id="pass" name="pass" class="form-control"></div><br>
+
+        <div class="form-group">
+            <label for="pass2">Jelszó újra</label>
+            <input type="password" id="pass2" name="pass2" class="form-control"></div><br>
+
+
+        <button type="input" name="submit" value="Hozzáad" class="btn btn-success btn-icon"><i class="fa fa-sign-in"></i>Hozzáad</button>
+    </form>
+</div>
+EOT;
+}
+
+function addAdmin() {
+    echo <<<EOT
+    <div class="content">
+    <h3>Új admin felvétele</h3>
+    <form action="adda.php" method="post">
+        <div class="form-group">
+            <label for="username">Felhasználónév</label>
+            <input type="text" id="username" name="username" class="form-control"></div><br>
+
+        <div class="form-group">
+            <label for="email">E-mail cím</label>
+            <input type="text" id="email" name="email" class="form-control"></div><br>
+
+        <div class="form-group">
+            <label for="pass">Jelszó</label>
+            <input type="password" id="pass" name="pass" class="form-control"></div><br>
+
+        <div class="form-group">
+            <label for="pass2">Jelszó újra</label>
+            <input type="password" id="pass2" name="pass2" class="form-control"></div><br>
+
+
+        <button type="input" name="submit" value="Hozzáad" class="btn btn-success btn-icon"><i class="fa fa-sign-in"></i>Hozzáad</button>
+
+    </form>
 </div>
 EOT;
 }
@@ -126,16 +187,6 @@ function letterHead() {
 EOT;
 }
 
-function copyRight() {
-    echo <<<EOT
-    <div id="footer">
-    ©  
-EOT;
-    auto_copyright(2014);
-    echo <<<EOT
-    </div>
-EOT;
-}
 function webheader() {
     global $house;
 echo <<<EOT

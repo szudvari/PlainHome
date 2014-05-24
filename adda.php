@@ -10,18 +10,13 @@ webheader();
  $con = connectDb();   
     $pass = $_POST['pass'];
     $pass2 = $_POST['pass2'];
-    $floor = $_POST['floor'];
-    $door = $_POST['door'];
-    $userdata['firstname'] = $_POST['firstname'];
-    $userdata['lastname'] = $_POST['lastname'];
     $userdata['email'] = $_POST['email'];
     $userdata['username'] = $_POST['username'];
-    $userdata['depositid'] = getDepositId($floor, $door);
     $userdata['password'] = encodePass($pass);
 
     if ($pass == $pass2)
     {
-        insertTable("residents", $userdata, $con);
+        insertTable("admin", $userdata, $con);
         closeDb($con);
         echo '<p id="logout"> Felhasználó felvéve.</p>';
         //header("Refresh: 2; url=useradmin.php");
