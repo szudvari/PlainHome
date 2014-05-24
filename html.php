@@ -93,17 +93,6 @@ EOT;
 function loginUser() {
     echo <<<EOT
 
-<div class="container">
-		<div class="row">
-			<div class="col-md-8">
-				<div class="logo">
-					<a href=""><img alt="PlainHome" src="pics/logo.png" /></a>
-				</div>
-			</div>
-			<div class="col-md-4 userInfo">
-				<p class="textRight">Valami szoveg (datum?)</p>
-			</div>
-		</div>
 		<div class="content">
 			<h3>A belépéshez adja meg felhasználónevét és jelszavát.</h3>
 			<form action="auth.php" method="post" class="padTop">
@@ -145,5 +134,21 @@ EOT;
     auto_copyright(2014);
     echo <<<EOT
     </div>
+EOT;
+}
+function webheader() {
+    global $house;
+echo <<<EOT
+    <div class="container">
+		<div class="row">
+			<div class="col-md-8">
+				<div class="logo">
+					<a href=""><img alt="PlainHome" src="pics/logo.png" /></a>
+				</div>
+			</div>
+			<div class="col-md-4 userInfo">
+                                <p class="textRight">{$house['name']}</p>
+			</div>
+		</div>
 EOT;
 }

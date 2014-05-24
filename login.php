@@ -5,6 +5,7 @@ include_once 'db.php';
 include_once 'config.php';
 include_once 'html.php';
 htmlHead($website['title'], $house['name']);
+webheader ();
 if (!isset($_SESSION['user']))
 {
     loginUser();
