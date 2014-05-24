@@ -8,6 +8,5 @@ $con= connectDb();
 listDeposits();
 closeDb($con);
 addDeposit();
-copyRight();
 htmlEnd();
 

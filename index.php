@@ -4,5 +4,4 @@ include_once 'html.php';
 
 htmlHead($website['title'], $house['name']);
 letterHead();
-copyRight();
 htmlEnd();

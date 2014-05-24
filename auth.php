@@ -26,7 +26,9 @@ if ($login)
 }
 else
 {
+    htmlHead($website['title'], $house['name']);
     echo '<p id="notloggedin">Hibás felhasználónév vagy jelszó.</p>';
     header("Refresh: 3; url={$_SERVER['HTTP_REFERER']}");
+    htmlEnd();
 }
 

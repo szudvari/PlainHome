@@ -13,7 +13,6 @@ else
 {
     echo "No session";
 }
-copyRight();
 htmlEnd();
 
 

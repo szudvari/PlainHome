@@ -13,5 +13,4 @@ else
 {
      echo "<p class=\"lead\">Már bejelentkeztél mint {$_SESSION['user']}.</p>";
 }
-copyRight();  
 htmlEnd();
