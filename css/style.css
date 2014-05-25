@@ -736,16 +736,13 @@
 			/*
 			Label the data
 			*/
-			td:nth-of-type(1):before { content: "First Name"; }
-			td:nth-of-type(2):before { content: "Last Name"; }
-			td:nth-of-type(3):before { content: "Job Title"; }
-			td:nth-of-type(4):before { content: "Favorite Color"; }
-			td:nth-of-type(5):before { content: "Wars of Trek?"; }
-			td:nth-of-type(6):before { content: "Porn Name"; }
-			td:nth-of-type(7):before { content: "Date of Birth"; }
-			td:nth-of-type(8):before { content: "Dream Vacation City"; }
-			td:nth-of-type(9):before { content: "GPA"; }
-			td:nth-of-type(10):before { content: "Arbitrary Data"; }
+			th:nth-of-type(1):before { content: "ID"; }
+			th:nth-of-type(2):before { content: "Emelet"; }
+			th:nth-of-type(3):before { content: "Ajtó"; }
+			th:nth-of-type(4):before { content: "Terület"; }
+			th:nth-of-type(5):before { content: "Lakók"; }
+			th:nth-of-type(6):before { content: "Megjegyzés"; }
+			th:nth-of-type(7):before { content: "Módosítás"; }
 		}
 
 		/* Smartphones (portrait and landscape) ----------- */
@@ -763,4 +760,40 @@
 			body { 
 				width: 495px; 
 			}
-		}		
+		}
+		
+		* { 
+			margin: 0; 
+			padding: 0; 
+		}
+		body { 
+			font: 14px/1.4 "Open Sans",sans-serif; 
+		}
+		#page-wrap {
+			margin: 50px;
+		}
+		p {
+			margin: 20px 0; 
+		}
+
+			/* 
+			Generic Styling, for Desktops/Laptops 
+			*/
+			table { 
+				width: 100%; 
+				border-collapse: collapse; 
+			}
+			/* Zebra striping */
+			tr:nth-of-type(odd) { 
+				background: #f2f2f2; 
+			}
+			th { 
+				background: #2581bc; 
+				color: white; 
+				//font-weight: bold; 
+			}
+			td, th { 
+				padding: 6px; 
+				border: 1px solid #ccc; 
+				text-align: left; 
+			}		
