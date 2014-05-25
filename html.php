@@ -12,7 +12,9 @@ function htmlHead($title, $house) {
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>$title - $house</title>
         <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script type="text/javascript" src="js/jquery.reveal.js"></script>
         <link rel="stylesheet" href="css/style.css" type="text/css">
+        <link rel="stylesheet" href="css/reveal.css" type="text/css">
 		<link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
 		<!--[if lt IE 9]>
 			<script src="js/html5shiv.js"></script>
@@ -216,7 +218,7 @@ EOT;
 	                <label for="toggle" class="toggle" data-open="Menü" data-close="Bezár" onclick></label>
 	                <ul class="menu">
 	                    <li><a href="adminlogin.php">Admin login</a></li>
-	                    <li><a href="logout.php">Logout</a></li>                
+	                    <li><a href="logout.php" data-reveal-id="myModal">Logout</a></li>                
  	                    <li><a href="session.php">Session check</a></li>
 	                </ul>
 	            </div>
@@ -228,7 +230,7 @@ EOT;
 	            <div>
 	                <label for="toggle" class="toggle" data-open="Menü" data-close="Bezár" onclick></label>
 	                <ul class="menu">
-	                    <li><a href="logout.php">Logout</a></li>                
+	                    <li><a href="logout.php" data-reveal-id="myModal">Logout</a></li>                
 	                    <li><a href="deposits.php">Deposits</a></li>                
 	                    <li><a href="session.php">Session check</a></li>
 	                </ul>
