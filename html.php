@@ -207,7 +207,7 @@ echo <<<EOT
 	            <div>
 	                <label for="toggle" class="toggle" data-open="Menü" data-close="Bezár" onclick></label>
 	                <ul class="menu">
-	                    <li id="title"><a href="index.php">PlainHouse <span class="mini">- {$house['name']}</span></a></span></li>
+	                    <li id="title"><a href="index.php">PlainHome <span class="mini">- {$house['name']}</span></a></span></li>
 	                    <li><a href="login.php">Bejelentkezés</a></li>
 	                    <li><a href="logout.php">Logout</a></li>                
 	                    <li><a href="deposits.php">Deposits</a></li>                
