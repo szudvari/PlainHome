@@ -25,6 +25,7 @@ EOT;
 
 function htmlEnd() {
 echo <<<EOT
+			</div>
 			<div class="footer">
 				<p class="textCenter">
 					&copy; 2014 <a href="http://webariel.hu" target="_blank">PlainHome Version 0.1a</a></p>
@@ -166,8 +167,7 @@ function loginUser() {
 					<input type="password" id="pass" name="pass" class="form-control">
 			</div><br>
 			<button type="input" name="submit" value="Belépés" class="btn btn-success btn-icon"><i class="fa fa-sign-in"></i>Belépés</button>
-		</div>
-</div>
+			</form>
 
 EOT;
 }
@@ -176,7 +176,7 @@ function letterHead() {
     echo <<<EOT
 <div id="menu">
   <ul>
-      <li id="title"><a href="index.php">PlainHouse<span class="mini">{$house['name']}</span></a></span></li>
+      <li id="title"><a href="index.php">PlainHouse <span class="mini">- {$house['name']}</span></a></span></li>
       <li><a href="login.php">Bejelentkezés</a></li>
       <li><a href="logout.php">Logout</a></li>                
       <li><a href="deposits.php">Deposits</a></li>                
@@ -191,15 +191,30 @@ function webheader() {
     global $house;
 echo <<<EOT
     <div class="container">
-		<div class="row">
-			<div class="col-md-8">
-				<div class="logo">
-					<a href=""><img alt="PlainHome" src="pics/logo.png" /></a>
-				</div>
-			</div>
-			<div class="col-md-4 userInfo">
-                                <p class="textRight">{$house['name']}</p>
-			</div>
-		</div>
+	    <div class="row">
+	        <div class="col-md-8">
+	            <div class="logo">
+	                <a href=""><img alt="PlainHome" src="pics/logo.png" /></a>
+	            </div>
+	        </div>
+	        <div class="col-md-4 userInfo">
+	            <p class="textRight">{$house['name']}</p>
+	        </div>
+	        <div>
+	            <div>
+	                <input type="checkbox" id="toggle" />
+	            </div>
+	            <div>
+	                <label for="toggle" class="toggle" data-open="Menü" data-close="Bezár" onclick></label>
+	                <ul class="menu">
+	                    <li id="title"><a href="index.php">PlainHouse <span class="mini">- {$house['name']}</span></a></span></li>
+	                    <li><a href="login.php">Bejelentkezés</a></li>
+	                    <li><a href="logout.php">Logout</a></li>                
+	                    <li><a href="deposits.php">Deposits</a></li>                
+	                    <li><a href="session.php">Session check</a></li>
+	                </ul>
+	            </div>
+	        </div>
+	    </div>		
 EOT;
 }

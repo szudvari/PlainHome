@@ -4,5 +4,5 @@ include_once 'html.php';
 
 htmlHead($website['title'], $house['name']);
 webheader();
-letterHead();
+//letterHead();
 htmlEnd();
