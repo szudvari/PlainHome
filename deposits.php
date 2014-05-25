@@ -8,6 +8,10 @@ include_once 'js.php';
 
 htmlHead($website['title'], $house['name']);
 webheader($_SESSION["admin"]);
+if (isset($_GET["succes"]))
+{
+    popUp("Új albetét sikeresen felvéve");
+}
 if (isset($_SESSION["admin"]) && ($_SESSION["admin"] > 0))
 {
     $con = connectDb();

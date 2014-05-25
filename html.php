@@ -62,15 +62,31 @@ function addDeposit() {
                 <input type="text" id="door" name="door" class="form-control"></div><br>
 
             <div class="form-group">
-                <label for="pass">Alapterület</label>
+                <label for="area">Lakás alapterülete</label>
                 <input type="text" id="area" name="area" class="form-control"></div><br>
+            
+            <div class="form-group">
+                <label for="garage_area">Garázs alapterülete</label>
+                <input type="text" id="garage_area" name="garage_area" class="form-control"></div><br>
 
             <div class="form-group">
                 <label for="residents">Lakók száma</label>
                 <input type="text" id="residents" name="residents" class="form-control"></div><br>
+    
+            <div class="form-group">
+                <label for="area_ratio">Lakás tulajdoni hányad</label>
+                <input type="text" id="area_ratio" name="area_ratio" class="form-control"></div><br>
+    
+            <div class="form-group">
+                <label for="garage_area_ratio">Garázs tulajdoni hányad</label>
+                <input type="text" id="garage_area_ratio" name="garage_area_ratio" class="form-control"></div><br>
+    
+            <div class="form-group">
+                <label for="watermeter">Vízóra van</label>
+                <input type="checkbox" id="watermeter" name="watermeter" class="form-control"></div><br>
 
             <div class="form-group">
-                <label for="note">Megjegyzés</label>
+                <label for="note">Lakó neve</label>
                 <input type="text" id="note" name="note" class="form-control"></div><br>
 
             <button type="input" name="submit" value="Hozzáad" class="btn btn-success btn-icon"><i class="fa fa-sign-in"></i>Hozzáad</button>

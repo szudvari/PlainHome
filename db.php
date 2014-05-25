@@ -45,14 +45,20 @@ function insertTable($table, $vars, $con) {
         echo mysql_errno() . ": " . mysql_error();
         exit();
     }
-
- }
+}
 
 function listDeposits() {
     mysql_query("set names 'utf8'");
     mysql_query("set character set 'utf8'");
-    $sql = "SELECT * from deposits;";
+    $sql = $sql = "SELECT `id`, `floor`, `door`, `area`, `garage_area`, "
+            . "(`area`+`garage_area`), `residents_no`, `area_ratio`, "
+            . "`garage_area_ratio`, (`area_ratio`+`garage_area_ratio`), "
+            . "`watermeter`, `resident_name` FROM `deposits`;";
     $result = mysql_query($sql);
+    if (!$result) {
+        echo mysql_errno().": ".mysql_error();
+        exit;
+    }
     $table = array();
     while ($row = mysql_fetch_assoc($result)) {
         $table[] = $row;
@@ -64,32 +70,50 @@ function listDeposits() {
    <th> id </th>
    <th> Emelet </th>
    <th> Ajtó </th>
-   <th> Terület (nm) </th>
+   <th> Lakás terület (nm) </th>
+   <th> Garázs terület (nm) </th>
+   <th> Össz terület (nm) </th>
    <th> Lakók száma </th>
-   <th> Megjegyzés </th>
+   <th> Lakás tulajdoni hányad </th>
+   <th> Garázs tulajdoni hányad </th>
+   <th> Összes tulajdoni hányad </th>
+   <th> Vízóra </th>
+   <th> Lakó neve </th>
    <th> Módosítás </th>
 </tr>
 </thead>
    
 EOT;
     foreach ($table as $row) {
-		echo '<tbody>';
+        echo '<tbody>';
         echo '<tr>';
         foreach ($row as $value) {
-        echo '<td>' . $value . '</td>';
+            if (is_numeric($value))
+            {
+                echo '<td>' . round($value, 2) . '</td>';
+            }
+            else
+            {
+                echo '<td>' . $value . '</td>';
+            }
         }
         echo "<td><a href=\"#\" target=\"blank\">Módosít</a></td>";
         echo '</tr>';
-		echo '</tbody>';
+        echo '</tbody>';
     }
-    	echo '</table>';
-		echo '</div>';
+    echo '</table>';
+    echo '</div>';
 }
 
 function insertDepoDb($deposit, $con) {
-    $sql = "INSERT INTO  deposits (floor ,door ,area, residents_no, note) values "
-            . "(\"{$deposit['floor']}\", \"{$deposit['door']}\", \"{$deposit['area']}\", "
-            . "\"{$deposit['residents']}\", \"{$deposit['note']}\")";
+    $sql = "INSERT INTO  deposits (floor ,door ,area, garage_area, residents_no, "
+            . "area_ratio, garage_area_ratio, watermeter, resident_name) "
+            . "values (\"{$deposit['floor']}\", \"{$deposit['door']}\", "
+            . "\"{$deposit['area']}\", \"{$deposit['garage_area']}\", "
+            . "\"{$deposit['residents']}\", \"{$deposit['area_ratio']}\", "
+            . "\"{$deposit['garage_area_ratio']}\", \"{$deposit['watermeter']}\", "
+            . "\"{$deposit['resident_name']}\")";
+    echo $sql;
     $res = mysql_query($sql, $con);
     if (!$res)
     {

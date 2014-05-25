@@ -7,10 +7,15 @@ $deposit['floor'] = $_POST['floor'];
 $deposit['door'] = $_POST['door'];
 $deposit['area'] = $_POST['area'];
 $deposit['residents'] = $_POST['residents'];
-$deposit['note'] = $_POST['note'];
+$deposit['resident_name'] = $_POST['note'];
+$deposit['garage_area'] = $_POST['garage_area'];
+$deposit['area_ratio'] = $_POST['area_ratio'];
+$deposit['garage_area_ratio'] = $_POST['garage_area_ratio'];
+$deposit['watermeter'] = $_POST['watermeter'];
+
         
 $con= connectDb();
 insertDepoDb($deposit, $con);
 closeDb($con);
 
-header("Location:{$_SERVER['HTTP_REFERER']}");
+header("Location:deposits.php?succes=1");
