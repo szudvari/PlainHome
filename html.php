@@ -186,9 +186,9 @@ function webheader($user) {
 	            <p class="textRight">{$house['name']}</p>
 	        </div>
 	        <div>
-	            <div>
+	            <div class="nav">
 	                <input type="checkbox" id="toggle" />
-	            </div>
+	            
 EOT;
 
     if (!isset($user)) //nem belépet user
