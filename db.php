@@ -57,7 +57,7 @@ function listDeposits() {
     while ($row = mysql_fetch_assoc($result)) {
         $table[] = $row;
     }
-    echo '<table id="results">';
+    echo '<div class="content"><table id="results">';
     echo <<<EOT
    <th> id </th>
    <th> Emelet </th>
@@ -66,7 +66,7 @@ function listDeposits() {
    <th> Lakók száma </th>
    <th> Megjegyzés </th>
    <th> Módosítás </th>
-   
+   <div>
    
 EOT;
     foreach ($table as $row) {
