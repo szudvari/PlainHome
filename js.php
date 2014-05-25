@@ -15,12 +15,13 @@ function showContent ($areaId, $buttonId) {
 EOT;
 }
 
-function popUp ($elementId) {
+function popUp ($message) {
     echo <<<EOT
     <script type="text/javascript">
-     $(document).ready(function(){
-      show.($('#$elementId').reveal();)
-  });
+                   BootstrapDialog.show({
+            message: '$message'
+        });
+            </script>
     </script>
     
 EOT;

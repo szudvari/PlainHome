@@ -12,14 +12,16 @@ function htmlHead($title, $house) {
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>$title - $house</title>
         <script src="http://code.jquery.com/jquery.min.js"></script>
-        
+        <script src="js/bootstrap.js"></script>
+        <script src="js/bootstrap-dialog.js" type="text/javascript"></script>
         <link rel="stylesheet" href="css/style.css" type="text/css">
-        
-		<link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-		<!--[if lt IE 9]>
-			<script src="js/html5shiv.js"></script>
-			<script src="js/respond.js"></script>
-		<![endif]-->
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="css/bootstrap-dialog.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+	<!--[if lt IE 9]>
+		<script src="js/html5shiv.js"></script>
+		<script src="js/respond.js"></script>
+	<![endif]-->
     </head>
     <body>
 
@@ -35,15 +37,8 @@ function htmlEnd() {
 			</div>
 		</div>
 		<script src="js/jquery.js"></script>
-		<script src="js/bootstrap.js"></script>
-
 		<script src="js/reside.js"></script>
-		
-
 		<script src="js/plainhome.js"></script>
-		
-
-
 	</body>
 	</html>
 EOT;
