@@ -698,6 +698,7 @@
 		
 		
 		/* 
+		TABLE
 		Max width before this PARTICULAR table gets nasty
 		This query will take effect for any screen smaller than 760px
 		and also iPads specifically.
@@ -795,12 +796,14 @@
 			}
 			th { 
 				background: #2581bc; 
-				color: white; 
+				color: white;
+				font-size: 0.8em; 
 				//font-weight: bold; 
 			}
 			td, th { 
 				padding: 6px; 
-				border: 1px solid #ccc; 
+				border: 1px solid #ccc;
+				font-size: 0.8em; 
 				text-align: left; 
 			}		
 
