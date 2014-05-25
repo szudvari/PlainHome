@@ -795,15 +795,16 @@
 				background: #f2f2f2; 
 			}
 			th { 
-				background: #2581bc; 
-				color: white;
+				background: #336699; 
+				color: white !important;
 				font-size: 0.8em; 
 				//font-weight: bold; 
 			}
 			td, th { 
 				padding: 6px; 
 				border: 1px solid #ccc;
-				font-size: 0.8em; 
+				font-size: 0.8em;
+				color: #666666; 
 				text-align: left; 
 			}		
 
