@@ -183,7 +183,7 @@ function webheader($user) {
 	    <div class="row">
 	        <div class="col-md-8">
 	            <div class="logo">
-	                <a href="index.php"><img alt="PlainHome" src="pics/logo.png" /></a>
+	                <a href=""><img alt="PlainHome" src="pics/logo.png" /></a>
 	            </div>
 	        </div>
 	        <div class="col-md-4 userInfo">
@@ -214,7 +214,7 @@ EOT;
 	                <label for="toggle" class="toggle" data-open="Menü" data-close="Bezár" onclick></label>
 	                <ul class="menu">
 	                    <li><a href="adminlogin.php">Admin login</a></li>
-	                    <li><a href="index.php?logout=1">Logout</a></li>                
+	                    <li><a href="logout.php">Logout</a></li>                
  	                    <li><a href="session.php">Session check</a></li>
 	                </ul>
 	            </div>
@@ -226,7 +226,7 @@ EOT;
 	            <div>
 	                <label for="toggle" class="toggle" data-open="Menü" data-close="Bezár" onclick></label>
 	                <ul class="menu">
-	                    <li><a href="index.php?logout=1">Logout</a></li>                
+	                    <li><a href="logout.php">Logout</a></li>                
 	                    <li><a href="deposits.php">Deposits</a></li>                
 	                    <li><a href="session.php">Session check</a></li>
 	                </ul>

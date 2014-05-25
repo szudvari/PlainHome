@@ -959,3 +959,10 @@
 			            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
 			  }
 			}
+			button.close {
+			  padding: 0;
+			  cursor: pointer;
+			  background: transparent;
+			  border: 0;
+			  -webkit-appearance: none;
+			}
