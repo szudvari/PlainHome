@@ -8,8 +8,14 @@ include_once 'config.php';
 
 htmlHead($website['title'], $house['name']);
 webheader($_SESSION["admin"]);
-echo '<div id="logout">Sikeresen kijelentkezett!</div>';
-popUp("logout");
+echo <<<EOT
+<div id="myModal" class="reveal-modal" data-reveal-id="myModal">
+			<h1>Reveal Modal Goodness</h1>
+			<p>This is a default modal in all its glory, but any of the styles here can easily be changed in the CSS.</p>
+			<a class="close-reveal-modal">&#215;</a>
+</div>
+EOT;
+popUp("myModal");
 htmlEnd();
 
 //include 'index.php';
