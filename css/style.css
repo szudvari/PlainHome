@@ -294,6 +294,12 @@
 		/* ==========================================
 			Forms
 		   ========================================== */
+		#user {
+			padding-left: 20px;
+		}
+		#pass {
+			padding-left: 20px;
+		}
 		.form-control {
 		  display: block;
 		  width: 100%;
