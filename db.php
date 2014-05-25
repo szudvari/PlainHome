@@ -59,6 +59,8 @@ function listDeposits() {
     }
     echo '<div class="content"><table id="results">';
     echo <<<EOT
+<thead>
+<tr>
    <th> id </th>
    <th> Emelet </th>
    <th> Ajtó </th>
@@ -66,18 +68,22 @@ function listDeposits() {
    <th> Lakók száma </th>
    <th> Megjegyzés </th>
    <th> Módosítás </th>
-   <div>
+</tr>
+</thead>
    
 EOT;
     foreach ($table as $row) {
+		echo '<tbody>';
         echo '<tr>';
         foreach ($row as $value) {
-            echo '<td>' . $value . '</td>';
+        echo '<td>' . $value . '</td>';
         }
         echo "<td><a href=\"#\" target=\"blank\">Módosít</a></td>";
         echo '</tr>';
+		echo '</tbody>';
     }
-    echo '</table>';
+    	echo '</table>';
+		echo '</div>';
 }
 
 function insertDepoDb($deposit, $con) {
