@@ -6,7 +6,7 @@ include_once 'config.php';
 include_once 'html.php';
 
 htmlHead($website['title'], $house['name']);
-webheader();
+webheader($_SESSION["admin"]);
  $con = connectDb();   
     $pass = $_POST['pass'];
     $pass2 = $_POST['pass2'];

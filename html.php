@@ -1,4 +1,5 @@
 <?php
+
 include_once 'config.php';
 include_once 'functions.php';
 
@@ -24,7 +25,7 @@ EOT;
 }
 
 function htmlEnd() {
-echo <<<EOT
+    echo <<<EOT
 			</div>
 			<div class="footer">
 				<p class="textCenter">
@@ -75,7 +76,6 @@ function addDeposit() {
 </div>
 EOT;
 }
-
 
 function addUser() {
     echo <<<EOT
@@ -171,25 +171,10 @@ function loginUser() {
 
 EOT;
 }
-function letterHead() {
+
+function webheader($user) {
     global $house;
     echo <<<EOT
-<div id="menu">
-  <ul>
-      <li id="title"><a href="index.php">PlainHouse <span class="mini">- {$house['name']}</span></a></span></li>
-      <li><a href="login.php">Bejelentkezés</a></li>
-      <li><a href="logout.php">Logout</a></li>                
-      <li><a href="deposits.php">Deposits</a></li>                
-      <li><a href="session.php">Session check</a></li>                
-  </ul>    
-</div>
-   
-EOT;
-}
-
-function webheader() {
-    global $house;
-echo <<<EOT
     <div class="container">
 	    <div class="row">
 	        <div class="col-md-8">
@@ -204,17 +189,60 @@ echo <<<EOT
 	            <div>
 	                <input type="checkbox" id="toggle" />
 	            </div>
+EOT;
+
+    if (!isset($user)) //nem belépet user
+    {
+        echo <<<EOT
 	            <div>
 	                <label for="toggle" class="toggle" data-open="Menü" data-close="Bezár" onclick></label>
 	                <ul class="menu">
 	                    <li><a href="login.php">Login</a></li>
-	                    <li><a href="addminlogin.php">Admin login</a></li>
+	                    <li><a href="adminlogin.php">Admin login</a></li>
+	                </ul>
+	            </div>
+EOT;
+    }
+    else if ($user == 0) //belépett user
+    {
+        echo <<<EOT
+	            <div>
+	                <label for="toggle" class="toggle" data-open="Menü" data-close="Bezár" onclick></label>
+	                <ul class="menu">
+	                    <li><a href="adminlogin.php">Admin login</a></li>
+	                    <li><a href="logout.php">Logout</a></li>                
+ 	                    <li><a href="session.php">Session check</a></li>
+	                </ul>
+	            </div>
+EOT;
+    }
+    else if ($user == 1) //belépett admin
+    {
+        echo <<<EOT
+	            <div>
+	                <label for="toggle" class="toggle" data-open="Menü" data-close="Bezár" onclick></label>
+	                <ul class="menu">
 	                    <li><a href="logout.php">Logout</a></li>                
 	                    <li><a href="deposits.php">Deposits</a></li>                
 	                    <li><a href="session.php">Session check</a></li>
 	                </ul>
 	            </div>
-	        </div>
+EOT;
+    }
+
+        echo <<<EOT
+                </div>
 	    </div>		
+EOT;
+    }
+
+
+function notLoggedIn () {
+    echo <<<EOT
+
+		<div class="content">
+			<h3>Ön nem jelentkezett be, vagy nincs jogosultsága az oldal megtekintéséhez!</h3>
+                </div>
+    
 EOT;
 }

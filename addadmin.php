@@ -5,6 +5,6 @@ include_once 'db.php';
 include_once 'html.php';
 
 htmlHead($website['title'], $house['name']);
-webheader();
+webheader($_SESSION["admin"]);
 addAdmin();
 htmlEnd();

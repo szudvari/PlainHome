@@ -4,7 +4,7 @@ session_start();
 include_once 'html.php';
 include_once 'config.php';
 htmlHead($website['title'], $house['name']);
-webheader();
+webheader($_SESSION["admin"]);
 echo "<div class=\"content\">";
 if (isset($_SESSION['user']))
 {

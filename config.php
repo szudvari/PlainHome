@@ -9,3 +9,7 @@ $website['title'] = "PlainHome";
 $website['version'] = "v0.0.0 alpha";
 
 $house['name'] = "Pöttyös utca 4.";
+
+if (!isset($_SESSION['admin'])) {
+    $_SESSION['admin'] = NULL;
+}
