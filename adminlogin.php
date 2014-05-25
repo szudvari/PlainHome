@@ -6,7 +6,7 @@ include_once 'config.php';
 include_once 'html.php';
 htmlHead($website['title'], $house['name']);
 webheader ();
-if (($_SESSION['admin']) == 0)
+if (!isset($_SESSION['admin']) || (($_SESSION['admin']) == 0))
 {
     loginUser();
 }

@@ -38,6 +38,10 @@ else if (stripos($_SERVER['HTTP_REFERER'], "/adminlogin.php"))
         $_SESSION['admin'] = getAdminRole($userdata);
         $_SESSION['admin_userid'] = getAdminId($userdata);
         $_SESSION['admin_user'] = $userdata['user'];
+        if (!isset($_SESSION['user'])){
+            $_SESSION['user'] = $userdata['user'];
+        }
+        
         closeDb($con);
         header("Location: admin.php");
     }
