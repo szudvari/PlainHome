@@ -45,6 +45,7 @@ function insertTable($table, $vars, $con) {
         echo mysql_errno() . ": " . mysql_error();
         exit();
     }
+    
 }
 
 function listDeposits() {
@@ -114,6 +115,38 @@ function insertDepoDb($deposit, $con) {
             . "\"{$deposit['garage_area_ratio']}\", \"{$deposit['watermeter']}\", "
             . "\"{$deposit['resident_name']}\")";
     //echo $sql;
+    $res = mysql_query($sql, $con);
+    if (!$res)
+    {
+        echo mysql_errno() . ": " . mysql_error();
+        exit();
+    }
+    $sql = "SELECT (SUM(`area`)+SUM(`garage_area`)) as t_a from deposits";
+    $result = mysql_query($sql);
+    if (!$result) {
+        echo mysql_errno().": ".mysql_error();
+        exit;
+    }
+    while ($row = mysql_fetch_assoc($result)) {
+        $ta = $row['t_a']; 
+    }
+    $sql = "UPDATE `plainhouse`.`fees` SET `dealer` = '$ta' where `multiplier` = '/terület';";
+    $res = mysql_query($sql, $con);
+    if (!$res)
+    {
+        echo mysql_errno() . ": " . mysql_error();
+        exit();
+    }
+    $sql = "SELECT COUNT(`id`) as db from deposits;";
+    $result = mysql_query($sql);
+    if (!$result) {
+        echo mysql_errno().": ".mysql_error();
+        exit;
+    }
+    while ($row = mysql_fetch_assoc($result)) {
+        $db = $row['db'];
+    }
+    $sql = "UPDATE `plainhouse`.`fees` SET `dealer` = '$db' where `multiplier` = '/albetét';";
     $res = mysql_query($sql, $con);
     if (!$res)
     {
@@ -347,6 +380,22 @@ function updateDepoDb($deposit, $con) {
     . "`resident_name` = '{$deposit['resident_name']}' "
     . "WHERE `deposits`.`id` = {$deposit['id']};";
     //echo $sql;
+    $res = mysql_query($sql, $con);
+    if (!$res)
+    {
+        echo mysql_errno() . ": " . mysql_error();
+        exit();
+    }
+    $sql = "SELECT (SUM(`area`)+SUM(`garage_area`)) as t_a from deposits";
+    $result = mysql_query($sql);
+    if (!$result) {
+        echo mysql_errno().": ".mysql_error();
+        exit;
+    }
+    while ($row = mysql_fetch_assoc($result)) {
+        $ta = $row['t_a']; 
+    }
+    $sql = "UPDATE `plainhouse`.`fees` SET `dealer` = '$ta' where `multiplier` = '/terület';";
     $res = mysql_query($sql, $con);
     if (!$res)
     {
