@@ -97,7 +97,7 @@ EOT;
                 echo '<td>' . $value . '</td>';
             }
         }
-        echo "<td><a href=\"#\" target=\"blank\">Módosít</a></td>";
+        echo "<td><a href=\"updatedeposit.php?id=".$row['id']."\" target=\"blank\">Módosít</a></td>";
         echo '</tr>';
         echo '</tbody>';
     }
@@ -280,4 +280,59 @@ function getAdminRole($userdata) {
         $role = $row["role"];
     }
     return $role;
+}
+function getADeposit ($id) {
+    $sql = $sql = "SELECT `id`, `floor`, `door`, `area`, `garage_area`, "
+            . "(`area`+`garage_area`), `residents_no`, `area_ratio`, "
+            . "`garage_area_ratio`, (`area_ratio`+`garage_area_ratio`), "
+            . "`watermeter`, `resident_name` FROM `deposits` WHERE `id`=$id;";
+    $result = mysql_query($sql);
+    if (!$result) {
+        echo mysql_errno().": ".mysql_error();
+        exit;
+    }
+    $table = array();
+    while ($row = mysql_fetch_assoc($result)) {
+        $table[] = $row;
+    }
+    echo '<div class="content"><table id="results">';
+    echo <<<EOT
+<thead>
+<tr>
+   <th> id </th>
+   <th> Emelet </th>
+   <th> Ajtó </th>
+   <th> Lakás terület (nm) </th>
+   <th> Garázs terület (nm) </th>
+   <th> Össz terület (nm) </th>
+   <th> Lakók száma </th>
+   <th> Lakás tulajdoni hányad </th>
+   <th> Garázs tulajdoni hányad </th>
+   <th> Összes tulajdoni hányad </th>
+   <th> Vízóra </th>
+   <th> Lakó neve </th>
+
+</tr>
+</thead>
+   
+EOT;
+    foreach ($table as $row) {
+        echo '<tbody>';
+        echo '<tr>';
+        foreach ($row as $value) {
+            if (is_numeric($value))
+            {
+                echo '<td>' .  str_replace(".",",",round($value, 2)) . '</td>';
+            }
+            else
+            {
+                echo '<td>' . $value . '</td>';
+            }
+        }
+        echo '</tr>';
+        echo '</tbody>';
+    }
+    echo '</table>';
+    echo '</div>';
+    return $row;
 }
