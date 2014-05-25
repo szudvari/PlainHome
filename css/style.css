@@ -462,12 +462,12 @@
 
 		.btn-success {
 		  color: #ffffff;
-		  background-color: #7696b6;
+		  background-color: #336699;
 		  border-color: #3e5974;
 		}
 			.btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active, .open .dropdown-toggle.btn-success {
 			  color: #ffffff;
-			  background-color: #8aa6c0;
+			  background-color: #3870a8;
 			  border-color: #7696b6;
 			}
 			.btn-success:active, .btn-success.active, .open .dropdown-toggle.btn-success {
