@@ -9,11 +9,11 @@ $deposit['area'] = $_POST['area'];
 $deposit['residents'] = $_POST['residents'];
 $deposit['resident_name'] = $_POST['note'];
 $deposit['garage_area'] = $_POST['garage_area'];
-$deposit['area_ratio'] = $_POST['area_ratio'];
-$deposit['garage_area_ratio'] = $_POST['garage_area_ratio'];
+$deposit['area_ratio'] = str_replace(",",".",$_POST['area_ratio']);
+$deposit['garage_area_ratio'] = str_replace(",",".",$_POST['garage_area_ratio']);
 $deposit['watermeter'] = $_POST['watermeter'];
 
-        
+//print_r ($deposit);        
 $con= connectDb();
 insertDepoDb($deposit, $con);
 closeDb($con);

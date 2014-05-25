@@ -90,7 +90,7 @@ EOT;
         foreach ($row as $value) {
             if (is_numeric($value))
             {
-                echo '<td>' . round($value, 2) . '</td>';
+                echo '<td>' .  str_replace(".",",",round($value, 2)) . '</td>';
             }
             else
             {
