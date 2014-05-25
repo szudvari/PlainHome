@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Hoszt: 127.0.0.1
--- Létrehozás ideje: 2014. Máj 24. 22:09
+-- Létrehozás ideje: 2014. Máj 25. 08:07
 -- Szerver verzió: 5.5.32
 -- PHP verzió: 5.4.19
 
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `admin` (
   `username` varchar(75) COLLATE utf8_hungarian_ci NOT NULL,
   `email` varchar(100) COLLATE utf8_hungarian_ci NOT NULL,
   `password` varchar(512) COLLATE utf8_hungarian_ci NOT NULL,
-  `role` int(11) NOT NULL,
+  `role` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci AUTO_INCREMENT=3 ;
 
@@ -42,8 +42,8 @@ CREATE TABLE IF NOT EXISTS `admin` (
 --
 
 INSERT INTO `admin` (`id`, `username`, `email`, `password`, `role`) VALUES
-(1, 'admin', '', '05db4ee4c4ebcb0c19571283be40bdceccb73cd83898519a6ed49c5754fafae46a87e2a14c98aba94f1668633471e149970a7544f93f36ef6bd7eb04f5539517', 0),
-(2, 'szudvari', 'udvarisz@yahoo.com', '5420720b710f7f14d3d6d12c37c23a32032d14e08d6a13f613c775d28c388a31b3245d5458fda2d869153be6c0872118ef078df042f776210db7fdab8c46a5d3', 0);
+(1, 'admin', '', '05db4ee4c4ebcb0c19571283be40bdceccb73cd83898519a6ed49c5754fafae46a87e2a14c98aba94f1668633471e149970a7544f93f36ef6bd7eb04f5539517', 1),
+(2, 'szudvari', 'udvarisz@yahoo.com', '5420720b710f7f14d3d6d12c37c23a32032d14e08d6a13f613c775d28c388a31b3245d5458fda2d869153be6c0872118ef078df042f776210db7fdab8c46a5d3', 1);
 
 -- --------------------------------------------------------
 
