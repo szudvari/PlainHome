@@ -34,8 +34,13 @@ function htmlEnd() {
 		</div>
 		<script src="js/jquery.js"></script>
 		<script src="js/bootstrap.js"></script>
+
 		<script src="js/reside.js"></script>
 		
+
+		<script src="js/plainhome.js"></script>
+		
+
 
 	</body>
 	</html>
@@ -233,6 +238,7 @@ EOT;
 
         echo <<<EOT
                 </div>
+			</div>
 	    </div>		
 EOT;
     }
