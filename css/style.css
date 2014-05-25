@@ -596,7 +596,7 @@
 
 		.nav{ 
 			display: block; 
-			float: right; 
+			float: left; 
 		}
 
 		.nav, .menu, .menu > li, .menu > li > a{ 
