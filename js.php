@@ -15,3 +15,13 @@ function showContent ($areaId, $buttonId) {
 EOT;
 }
 
+function loggedOut () {
+    echo <<<EOT
+     $('element_to_pop_up').bPopup({
+            modalClose: false,
+            opacity: 0.6,
+            positionStyle: 'fixed' 
+        });
+EOT;
+}
+
