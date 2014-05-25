@@ -201,7 +201,7 @@ EOT;
 	            <div>
 	                <label for="toggle" class="toggle" data-open="Menü" data-close="Bezár" onclick></label>
 	                <ul class="menu">
-	                    <li><a href="login.php">Login</a></li>
+	                    <li><a href="login.php"><i class="fa fa-user"></i> Login</a></li>
 	                    <li><a href="adminlogin.php">Admin login</a></li>
 	                </ul>
 	            </div>
