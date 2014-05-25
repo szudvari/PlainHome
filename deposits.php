@@ -10,7 +10,11 @@ htmlHead($website['title'], $house['name']);
 webheader($_SESSION["admin"]);
 if (isset($_GET["succes"]))
 {
-    popUp("Új albetét sikeresen felvéve");
+    popUp("Új albetét sikeresen felvéve.");
+}
+if (isset($_GET["modified"]))
+{
+    popUp("Albetét sikeresen módosítva.");
 }
 if (isset($_SESSION["admin"]) && ($_SESSION["admin"] > 0))
 {

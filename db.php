@@ -113,7 +113,7 @@ function insertDepoDb($deposit, $con) {
             . "\"{$deposit['residents']}\", \"{$deposit['area_ratio']}\", "
             . "\"{$deposit['garage_area_ratio']}\", \"{$deposit['watermeter']}\", "
             . "\"{$deposit['resident_name']}\")";
-    echo $sql;
+    //echo $sql;
     $res = mysql_query($sql, $con);
     if (!$res)
     {
@@ -335,4 +335,22 @@ EOT;
     echo '</table>';
     echo '</div>';
     return $row;
+}
+
+function updateDepoDb($deposit, $con) {
+    $sql = "UPDATE `plainhouse`.`deposits` SET `floor` = '{$deposit['floor']}', "
+    . "`door` = '{$deposit['door']}',`area` = '{$deposit['area']}',"
+    . "`garage_area` = '{$deposit['garage_area']}', `residents_no` = '{$deposit['residents']}',"
+    . "`area_ratio`= '{$deposit['area_ratio']}', "
+    . "`garage_area_ratio`= '{$deposit['garage_area_ratio']}', "
+    . "`watermeter`= '{$deposit['watermeter']}', "
+    . "`resident_name` = '{$deposit['resident_name']}' "
+    . "WHERE `deposits`.`id` = {$deposit['id']};";
+    //echo $sql;
+    $res = mysql_query($sql, $con);
+    if (!$res)
+    {
+        echo mysql_errno() . ": " . mysql_error();
+        exit();
+    }
 }

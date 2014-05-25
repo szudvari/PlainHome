@@ -269,6 +269,7 @@ EOT;
 }
 
 function updateDeposit($depo) {
+    $wm = "";
     if ($depo['watermeter'] != 0)
     {
         $wm = "checked";
@@ -313,7 +314,8 @@ function updateDeposit($depo) {
 
             <div class="form-group">
                 <label for="note">Lakó neve</label>
-                <input type="text" id="note" name="note" class="form-control" value="{$depo['garage_area_ratio']}"></div><br>
+                <input type="text" id="note" name="note" class="form-control" value="{$depo['resident_name']}">
+                <input type="hidden" id="id" name="id" class="form-control" value="{$depo['id']}"></div><br>
 
             <button type="input" name="submit" value="Módosít" class="btn btn-success btn-icon"><i class="fa fa-sign-in"></i>Módosít</button>
 
