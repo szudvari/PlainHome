@@ -12,6 +12,7 @@ function htmlHead($title, $house) {
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>$title - $house</title>
         <script src="http://code.jquery.com/jquery.min.js"></script>
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="css/style.css" type="text/css">
 		<link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
 		<!--[if lt IE 9]>
