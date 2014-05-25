@@ -294,12 +294,6 @@
 		/* ==========================================
 			Forms
 		   ========================================== */
-		#user {
-			padding-left: 20px;
-		}
-		#pass {
-			padding-left: 20px;
-		}
 		.form-control {
 		  display: block;
 		  width: 100%;
@@ -325,6 +319,10 @@
 			}
 
 		.form-group-modal { margin-bottom: 0; }
+
+		input:-webkit-autofill {
+		    -webkit-box-shadow: 0 0 0px 1000px white inset;
+		}
 
 		.input-group-addon {
 		  font-size: 12px;
