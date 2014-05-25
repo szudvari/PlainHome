@@ -15,13 +15,16 @@ function showContent ($areaId, $buttonId) {
 EOT;
 }
 
-function loggedOut () {
+function popUp ($elementId) {
     echo <<<EOT
-     $('element_to_pop_up').bPopup({
+    <script type="text/javascript">
+     $(#$elementId).bPopup({
             modalClose: false,
             opacity: 0.6,
             positionStyle: 'fixed' 
         });
+    </script>
+    
 EOT;
 }
 

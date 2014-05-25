@@ -7,9 +7,11 @@ include_once 'html.php';
 include_once 'config.php';
 
 htmlHead($website['title'], $house['name']);
-loggedOut();
+webheader($_SESSION["admin"]);
+echo '<div id="logout">Sikeresen kijelentkezett!</div>';
+popUp("logout");
 htmlEnd();
-//echo '<p id="logout">Sikeresen kijelentkezett!</p>';
+
 //include 'index.php';
 
 ?>
