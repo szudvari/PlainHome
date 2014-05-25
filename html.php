@@ -201,7 +201,7 @@ EOT;
 	            <div>
 	                <label for="toggle" class="toggle" data-open="Menü" data-close="Bezár" onclick></label>
 	                <ul class="menu">
-	                    <li><a href="login.php"><i class="fa fa-user"></i> Login</a></li>
+	                    <li><a href="login.php"><i class="fa fa-sign-in"></i> Login</a></li>
 	                    <li><a href="adminlogin.php">Admin login</a></li>
 	                </ul>
 	            </div>
@@ -214,7 +214,7 @@ EOT;
 	                <label for="toggle" class="toggle" data-open="Menü" data-close="Bezár" onclick></label>
 	                <ul class="menu">
 	                    <li><a href="adminlogin.php">Admin login</a></li>
-	                    <li><a href="index.php?logout=1">Logout</a></li>                
+	                    <li><a href="index.php?logout=1">Logout <i class="fa fa-sign-out"></i></a></li>                
  	                    <li><a href="session.php">Session check</a></li>
 	                </ul>
 	            </div>
@@ -226,7 +226,7 @@ EOT;
 	            <div>
 	                <label for="toggle" class="toggle" data-open="Menü" data-close="Bezár" onclick></label>
 	                <ul class="menu">
-	                    <li><a href="index.php?logout=1">Logout</a></li>                
+	                    <li><a href="index.php?logout=1">Logout <i class="fa fa-sign-out"></i></a></li>                
 	                    <li><a href="deposits.php">Deposits</a></li>                
 	                    <li><a href="session.php">Session check</a></li>
 	                </ul>
