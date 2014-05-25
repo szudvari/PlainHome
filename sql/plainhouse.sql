@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Hoszt: 127.0.0.1
--- Létrehozás ideje: 2014. Máj 25. 08:07
+-- Létrehozás ideje: 2014. Máj 25. 21:35
 -- Szerver verzió: 5.5.32
 -- PHP verzió: 5.4.19
 
@@ -53,22 +53,29 @@ INSERT INTO `admin` (`id`, `username`, `email`, `password`, `role`) VALUES
 
 CREATE TABLE IF NOT EXISTS `deposits` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `floor` int(11) NOT NULL,
-  `door` int(11) NOT NULL,
+  `floor` varchar(5) COLLATE utf8_hungarian_ci NOT NULL,
+  `door` varchar(4) COLLATE utf8_hungarian_ci NOT NULL,
   `area` double NOT NULL,
+  `garage_area` double NOT NULL DEFAULT '0',
   `residents_no` int(11) NOT NULL,
-  `note` text COLLATE utf8_hungarian_ci NOT NULL,
+  `area_ratio` double NOT NULL,
+  `garage_area_ratio` double NOT NULL DEFAULT '0',
+  `watermeter` tinyint(1) NOT NULL,
+  `resident_name` text COLLATE utf8_hungarian_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci AUTO_INCREMENT=7 ;
 
 --
 -- A tábla adatainak kiíratása `deposits`
 --
 
-INSERT INTO `deposits` (`id`, `floor`, `door`, `area`, `residents_no`, `note`) VALUES
-(1, 0, 0, 50, 2, 'Kis lakás'),
-(2, 0, 1, 55, 1, 'Nagyobb lakás'),
-(3, 0, 0, 0, 0, '');
+INSERT INTO `deposits` (`id`, `floor`, `door`, `area`, `garage_area`, `residents_no`, `area_ratio`, `garage_area_ratio`, `watermeter`, `resident_name`) VALUES
+(1, '1', '1', 91, 18, 3, 3.39, 0.66, 1, 'Döbör István\r\n'),
+(2, '1', '2', 85, 20, 4, 3.16, 0.74, 1, 'Dr Berka István\r\n'),
+(3, '1', '2/A', 72, 0, 3, 2.68, 0, 1, 'Stribik Ágnes\r\n'),
+(4, '1', '3', 72, 0, 3, 2.68, 0, 0, 'Papp Győző'),
+(5, '1', '4', 85, 0, 2, 3.16, 0, 0, 'BM (Hatvani Zsigmond)'),
+(6, '1', '5', 91, 18, 1, 3.39, 0.66, 1, 'Dr Tóth Lászlóné');
 
 -- --------------------------------------------------------
 
