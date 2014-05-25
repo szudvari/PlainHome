@@ -5,6 +5,7 @@ include_once 'functions.php';
 include_once 'db.php';
 include_once 'config.php';
 include_once 'html.php';
+include_once 'js.php';
 
 $userdata['user'] = $_POST['user'];
 $userdata['pass'] = encodePass($_POST['pass']);
@@ -25,7 +26,8 @@ if (stripos($_SERVER['HTTP_REFERER'], "/login.php"))
     else
     {
         htmlHead($website['title'], $house['name']);
-        echo '<p id="notloggedin">Hibás felhasználónév vagy jelszó.</p>';
+        webheader($_SESSION["admin"]);
+        popUp("Hibás felhasnálónév, vagy jelszó!");
         header("Refresh: 3; url={$_SERVER['HTTP_REFERER']}");
         htmlEnd();
     }
@@ -48,7 +50,8 @@ else if (stripos($_SERVER['HTTP_REFERER'], "/adminlogin.php"))
     else
     {
         htmlHead($website['title'], $house['name']);
-        echo '<p id="notloggedin">Hibás felhasználónév vagy jelszó.</p>';
+        webheader($_SESSION["admin"]);
+        popUp("Hibás felhasnálónév, vagy jelszó!");
         header("Refresh: 3; url={$_SERVER['HTTP_REFERER']}");
         htmlEnd();
     }
