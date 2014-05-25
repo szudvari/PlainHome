@@ -187,7 +187,7 @@ function webheader($user) {
 	            </div>
 	        </div>
 	        <div class="col-md-4 userInfo">
-	            <p class="textRight">{$house['name']}</p>
+	            <p class="textRight"><i class="fa fa-home"></i> {$house['name']}</p>
 	        </div>
 	        <div>
 	            <div class="nav">
