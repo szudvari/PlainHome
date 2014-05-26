@@ -741,7 +741,6 @@ function getAllDepo() {
    <th> Vízóra </th>
    <th> Lakó neve </th>
    <th> Közösköltség </th>
-   <th>  </th>
    <th> Részletek </th>
    <th> Módosítás </th>
 </tr>
