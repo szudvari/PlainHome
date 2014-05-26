@@ -49,48 +49,49 @@ function addDeposit() {
     echo <<<EOT
 
 <div class="content">
-    <button id="newdepo" value="Új albetét felvétele" class="btn btn-success btn-icon"><i class="fa fa-sign-in"></i>Új albetét felvétele</button>
+    <button id="newdepo" value="Új albetét felvétele" class="btn btn-success btn-icon"><i class="fa fa-plus"></i>Új albetét felvétele</button>
     <div id="newdeposit">
         <h3>Új albetét felvétele</h3>
-        <form action="adddepo.php" method="post">
-            <div class="form-group">
+    <form id="contactform" action="adddepo.php" method="post">
+        <div class="formcolumn">
+
                 <label for="floor">Emelet</label> 
-                <input type="text" id="floor" name="floor" class="form-control"></div><br>
+                <input type="text" id="floor" name="floor" class="form-control">
 
-            <div class="form-group">
-                <label for="door">Ajtó</label>
-                <input type="text" id="door" name="door" class="form-control"></div><br>
-
-            <div class="form-group">
-                <label for="area">Lakás alapterülete</label>
-                <input type="text" id="area" name="area" class="form-control"></div><br>
             
-            <div class="form-group">
+                <label for="door">Ajtó</label>
+                <input type="text" id="door" name="door" class="form-control">
+
+            
+                <label for="area">Lakás alapterülete</label>
+                <input type="text" id="area" name="area" class="form-control">
+            
+            
                 <label for="garage_area">Garázs alapterülete</label>
-                <input type="text" id="garage_area" name="garage_area" class="form-control"></div><br>
+                <input type="text" id="garage_area" name="garage_area" class="form-control">
 
-            <div class="form-group">
+					<label for="watermeter">Vízóra van</label>
+	                <input type="checkbox" id="watermeter" name="watermeter" class="form-control">
+
+            		</div>
+			        <div class="formcolumn">
                 <label for="residents">Lakók száma</label>
-                <input type="text" id="residents" name="residents" class="form-control"></div><br>
+                <input type="text" id="residents" name="residents" class="form-control">
     
-            <div class="form-group">
+            
                 <label for="area_ratio">Lakás tulajdoni hányad</label>
-                <input type="text" id="area_ratio" name="area_ratio" class="form-control"></div><br>
-    
-            <div class="form-group">
+                <input type="text" id="area_ratio" name="area_ratio" class="form-control">
+
+           
                 <label for="garage_area_ratio">Garázs tulajdoni hányad</label>
-                <input type="text" id="garage_area_ratio" name="garage_area_ratio" class="form-control"></div><br>
-    
-            <div class="form-group">
-                <label for="watermeter">Vízóra van</label>
-                <input type="checkbox" id="watermeter" name="watermeter" class="form-control"></div><br>
-
-            <div class="form-group">
+                <input type="text" id="garage_area_ratio" name="garage_area_ratio" class="form-control">
+            
                 <label for="note">Lakó neve</label>
-                <input type="text" id="note" name="note" class="form-control"></div><br>
-
-            <button type="input" name="submit" value="Hozzáad" class="btn btn-success btn-icon"><i class="fa fa-sign-in"></i>Hozzáad</button>
-
+                <input type="text" id="note" name="note" class="form-control">
+</div>
+<div class="buttons">
+            <button type="input" name="submit" value="Hozzáad" class="btn btn-success btn-icon"><i class="fa fa-plus"></i> Hozzáad</button>
+</div>
         </form>
     </div>
 </div>
@@ -137,7 +138,7 @@ function addUser() {
             <input type="password" id="pass2" name="pass2" class="form-control"></div><br>
 
 
-        <button type="input" name="submit" value="Hozzáad" class="btn btn-success btn-icon"><i class="fa fa-sign-in"></i>Hozzáad</button>
+        <button type="input" name="submit" value="Hozzáad" class="btn btn-success btn-icon"><i class="fa fa-plus"></i>Hozzáad</button>
     </form>
 </div>
 EOT;
