@@ -19,7 +19,7 @@ if (isset($_GET["modified"]))
 if (isset($_SESSION["admin"]) && ($_SESSION["admin"] > 0))
 {
     $con = connectDb();
-    listDeposits();
+    getAllDepo();
     closeDb($con);
 
     if (isset($_SESSION['admin']) && ($_SESSION['admin'] > 0))
