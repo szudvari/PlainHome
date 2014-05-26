@@ -584,3 +584,66 @@ EOT;
     echo '</table>';
     echo '</div>';
 }
+
+function getAllDepo() {
+    $water_cost = $twater_cost = $junk_cost = $electrycity_cost = $gas_cost = $cam_cost = $costs_cost = $lift_cost = $m_water_cost = 0;
+    $watermeter = "van";
+    $sql = "SELECT `floor`, `door`, `area`, `garage_area`, "
+            . "(`area`+`garage_area`) as areasum, `residents_no`, `area_ratio`, "
+            . "`garage_area_ratio`, (`area_ratio`+`garage_area_ratio`) as ratiosum, "
+            . "`watermeter`, `resident_name` FROM `deposits`;";
+    $result1 = mysql_query($sql);
+    if (!$result1)
+    {
+        echo mysql_errno() . ": " . mysql_error();
+        exit;
+    }
+    $deposit = array();
+    $ccosts = array ();
+    $deprows = mysql_num_rows($result1); 
+    while ($row = mysql_fetch_assoc($result1)) {
+        $deposit[] = $row;
+    }
+    $sql = "SELECT * from fees;";
+    $result2 = mysql_query($sql);
+    if (!$result2)
+    {
+        echo mysql_errno() . ": " . mysql_error();
+        exit;
+    }
+    $fees = array();
+    while ($row = mysql_fetch_assoc($result2)) {
+        $fees[] = $row;
+    }
+    $water = $fees[0];
+    $twater = $fees[1];
+    $junk = $fees[2];
+    $electrycity = $fees[3];
+    $gas = $fees[4];
+    $cam = $fees[5];
+    $costs = $fees[6];
+    $lift = $fees[7];
+    
+    for ($i=0; $i<$deprows; $i++) {
+      if ($deposit[$i]['watermeter'] == 0)
+    {
+        $water_cost = round((($water['yearly_amount'] / 12) / $water['dealer']) * $deposit[$i]['residents_no'], 0);
+        $deposit[$i]['watermeter']="nincs";
+    }
+    else {
+        $deposit[$i]['watermeter']="van";
+    }
+    $twater_cost = round((($twater['yearly_amount'] / 12) / $twater['dealer']), 0);
+    $junk_cost = round(((($junk['yearly_amount'] / 12) / $junk['dealer']) * $deposit[$i]['ratiosum']), 0);
+    $electrycity_cost = round(((($electrycity['yearly_amount'] / 12) / $electrycity['dealer']) * $deposit[$i]['ratiosum']), 0);
+    $gas_cost = round(((($gas['yearly_amount'] / 12) / $gas['dealer']) * $deposit[$i]['area']), 0);
+    $cam_cost = round(((($cam['yearly_amount'] / 12) / $cam['dealer']) * $deposit[$i]['ratiosum']), 0);
+    $costs_cost = round(((($costs['yearly_amount'] / 12) / $costs['dealer']) * $deposit[$i]['ratiosum']), 0);
+    $lift_cost = round(((($lift['yearly_amount'] / 12) / $lift['dealer']) * $deposit[$i]['ratiosum']), 0);
+    
+
+    $deposit[$i]["ccost"] = $water_cost + $twater_cost + $junk_cost + $electrycity_cost + $gas_cost +
+            $cam_cost + $costs_cost + $lift_cost;  
+    }
+    print_r($deposit);
+}

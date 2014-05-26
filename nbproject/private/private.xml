@@ -3,12 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/xampp/htdocs/PlainHome/js.php</file>
+            <file>file:/D:/xampp/htdocs/PlainHome/db.php</file>
+            <file>file:/D:/xampp/htdocs/PlainHome/updatedeposit.php</file>
             <file>file:/D:/xampp/htdocs/PlainHome/index.php</file>
-            <file>file:/D:/xampp/htdocs/PlainHome/sandbox.html</file>
-            <file>file:/D:/xampp/htdocs/PlainHome/addadmin.php</file>
-            <file>file:/D:/xampp/htdocs/PlainHome/auth.php</file>
+            <file>file:/D:/xampp/htdocs/PlainHome/deposits.php</file>
+            <file>file:/D:/xampp/htdocs/PlainHome/mydepo.php</file>
+            <file>file:/D:/xampp/htdocs/PlainHome/config.php</file>
+            <file>file:/D:/xampp/htdocs/PlainHome/adddepo.php</file>
             <file>file:/D:/xampp/htdocs/PlainHome/html.php</file>
+            <file>file:/D:/xampp/htdocs/PlainHome/updatedepo.php</file>
         </group>
     </open-files>
 </project-private>
