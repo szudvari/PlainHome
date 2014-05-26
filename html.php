@@ -231,6 +231,7 @@ EOT;
 	                <ul class="menu">
 	                    <li><a href="adminlogin.php">Admin login</a></li>
 	                    <li><a href="index.php?logout=1">Logout <i class="fa fa-sign-out"></i></a></li>                
+ 	                    <li><a href="mydepo.php">Saját adataim</a></li>
  	                    <li><a href="session.php">Session check</a></li>
 	                </ul>
 	            </div>

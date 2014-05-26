@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Hoszt: 127.0.0.1
--- Létrehozás ideje: 2014. Máj 26. 00:03
+-- Létrehozás ideje: 2014. Máj 26. 11:32
 -- Szerver verzió: 5.5.32
 -- PHP verzió: 5.4.19
 
@@ -104,13 +104,13 @@ CREATE TABLE IF NOT EXISTS `fees` (
 --
 
 INSERT INTO `fees` (`id`, `name`, `yearly_amount`, `dealer`, `multiplier`) VALUES
-(1, 'Víz (vízóra nélkül)\r\n', 160000, 4, '/fő'),
+(1, 'Víz (vízóra nélkül)\r\n', 160000, 4, '/4 fő'),
 (2, 'Technikai víz', 22000, 13, '/albetét'),
 (3, 'Szemétszállítás\r\n', 784707, 100, '/tulajdoni hányad'),
 (4, 'Elektromos energia\r\n', 750000, 100, '/tulajdoni hányad'),
 (5, 'Gáz felh., kazán', 8468800, 1177, '/terület'),
-(6, 'Kamera, riasztó', 73152, 100, '/tulajdon hányad'),
-(7, 'Ügyviteli költség', 6000, 100, '/tulajdon hányad'),
+(6, 'Kamera, riasztó', 73152, 100, '/tulajdoni hányad'),
+(7, 'Ügyviteli költség', 6000, 100, '/tulajdoni hányad'),
 (8, 'Lift', 430000, 100, '/tulajdoni hányad');
 
 -- --------------------------------------------------------
