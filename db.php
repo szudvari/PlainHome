@@ -555,7 +555,7 @@ EOT;
 </tr>
 </thead>
 <tr>
-   <th>Megosztás módja</th>
+   <th>Megoszt. módja</th>
     <td> {$water['multiplier']} </td>
    <td> {$twater['multiplier']} </td>
    <td> {$junk['multiplier']}  </td>
@@ -613,7 +613,7 @@ EOT;
     echo "<th> </th>";
     echo "</tr>";
     echo "<tr>";
-    echo "<th>Közösktg</th>";
+    echo "<th>Közösktg.</th>";
     echo "<td>" . number_format($water_cost, 0, ',', ' ') . " Ft/hó</td>";
     echo "<td>" . number_format($twater_cost, 0, ',', ' ') . " Ft/hó</td>";
     echo "<td>" . number_format($junk_cost, 0, ',', ' ') . " Ft/hó</td>";
