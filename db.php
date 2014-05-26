@@ -530,11 +530,14 @@ EOT;
     echo '</tbody>';
 
     echo '</table>';
+    echo '</div>';
+    echo '</div>';
 
     echo <<<EOT
 <hr>
-   <p> </p>
+<div class="content">
 <h3> Közösköltség részletezése </h3>
+
 <table id="results">
 <thead>
 <tr>
@@ -636,6 +639,7 @@ EOT;
     echo '</tbody>';
     echo '</table>';
     echo '</div>';
+
 }
 
 function getAllDepo() {
