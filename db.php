@@ -123,7 +123,7 @@ function insertDepoDb($deposit, $con) {
         echo mysql_errno() . ": " . mysql_error();
         exit();
     }
-    $sql = "SELECT (SUM(`area`)+SUM(`garage_area`)) as t_a from deposits";
+    $sql = "SELECT (SUM(`area`)) as t_a from deposits";
     $result = mysql_query($sql);
     if (!$result)
     {
@@ -392,7 +392,7 @@ function updateDepoDb($deposit, $con) {
         echo mysql_errno() . ": " . mysql_error();
         exit();
     }
-    $sql = "SELECT (SUM(`area`)+SUM(`garage_area`)) as t_a from deposits";
+    $sql = "SELECT (SUM(`area`)) as t_a from deposits";
     $result = mysql_query($sql);
     if (!$result)
     {
@@ -447,6 +447,13 @@ function getMyDepo($id) {
     $cam = $fees[5];
     $costs = $fees[6];
     $lift = $fees[7];
+    $insurance = $fees[8];
+    $bank = $fees[9];
+    $maintenance = $fees[10];
+    $chimney = $fees[11];
+    $cleaning = $fees[12];
+    $renovation = $fees[13];
+    $handling = $fees[14];
     if ($deposit['watermeter'] == 0)
     {
         $water_cost = round((($water['yearly_amount'] / 12) / $water['dealer']) * $deposit['residents_no'], 0);
@@ -466,9 +473,18 @@ function getMyDepo($id) {
     $m_costs_cost = round(((($costs['yearly_amount'] / 12) / $costs['dealer'])), 0);
     $lift_cost = round(((($lift['yearly_amount'] / 12) / $lift['dealer']) * $deposit['ratiosum']), 0);
     $m_lift_cost = round(((($lift['yearly_amount'] / 12) / $lift['dealer'])), 0);
+    $insurance_cost = round(((($insurance['yearly_amount'] / 12) / $insurance['dealer'])), 0);
+    $bank_cost = round(((($bank['yearly_amount'] / 12) / $bank['dealer'])), 0);
+    $maintenance_cost = round(((($maintenance['yearly_amount'] / 12) / $maintenance['dealer'])), 0);
+    $chimney_cost = round(((($chimney['yearly_amount'] / 12) / $chimney['dealer'])), 0);
+    $cleaning_cost = round(((($cleaning['yearly_amount'] / 12) / $cleaning['dealer'])), 0);
+    $renovation_cost = round(((($renovation['yearly_amount'] / 12) / $renovation['dealer'])), 0);
+    $handling_cost = round(((($handling['yearly_amount'] / 12) / $handling['dealer'])), 0);
+
 
     $ccosts = $water_cost + $twater_cost + $junk_cost + $electrycity_cost + $gas_cost +
-            $cam_cost + $costs_cost + $lift_cost;
+                $cam_cost + $costs_cost + $lift_cost + $insurance_cost + $bank_cost + $maintenance_cost +
+                $chimney_cost + $cleaning_cost + $renovation_cost + $handling_cost;
 
 
     echo <<<EOT
@@ -529,6 +545,13 @@ EOT;
    <th> {$cam['name']} </th>
    <th> {$costs['name']} </th>
    <th> {$lift['name']} </th>
+   <th> {$insurance['name']} </th>
+   <th> {$bank['name']} </th>
+   <th> {$maintenance['name']} </th>
+   <th> {$chimney['name']} </th>
+   <th> {$cleaning['name']} </th>
+   <th> {$renovation['name']} </th>
+   <th> {$handling['name']} </th>
    <th>Összesen</th>
 </tr>
 </thead>
@@ -542,6 +565,13 @@ EOT;
    <td> {$cam['multiplier']} </td>
    <td> {$costs['multiplier']} </td>
    <td> {$lift['multiplier']} </td>
+   <td> {$insurance['multiplier']} </td>
+   <td> {$bank['multiplier']} </td>
+   <td> {$maintenance['multiplier']} </td>
+   <td> {$chimney['multiplier']} </td>
+   <td> {$cleaning['multiplier']} </td>
+   <td> {$renovation['multiplier']} </td>
+   <td> {$handling['multiplier']} </td>
    <th> </th>
 </tr>
 EOT;
@@ -555,6 +585,13 @@ EOT;
     echo "<td>" . number_format($cam['yearly_amount'], 0, ',', ' ') . " Ft/év </td>";
     echo "<td>" . number_format($costs['yearly_amount'], 0, ',', ' ') . " Ft/év </td>";
     echo "<td>" . number_format($lift['yearly_amount'], 0, ',', ' ') . " Ft/év </td>";
+    echo "<td>" . number_format($insurance['yearly_amount'], 0, ',', ' ') . " Ft/év </td>";
+    echo "<td>" . number_format($bank['yearly_amount'], 0, ',', ' ') . " Ft/év </td>";
+    echo "<td>" . number_format($maintenance['yearly_amount'], 0, ',', ' ') . " Ft/év </td>";
+    echo "<td>" . number_format($chimney['yearly_amount'], 0, ',', ' ') . " Ft/év </td>";
+    echo "<td>" . number_format($cleaning['yearly_amount'], 0, ',', ' ') . " Ft/év </td>";
+    echo "<td>" . number_format($renovation['yearly_amount'], 0, ',', ' ') . " Ft/év </td>";
+    echo "<td>" . number_format($handling['yearly_amount'], 0, ',', ' ') . " Ft/év </td>";
     echo "<th> </th>";
     echo "</tr>";
     echo "<tr>";
@@ -567,6 +604,13 @@ EOT;
     echo "<td>" . number_format($m_cam_cost, 0, ',', ' ') . " Ft/hó/th</td>";
     echo "<td>" . number_format($m_costs_cost, 0, ',', ' ') . " Ft/hó/th</td>";
     echo "<td>" . number_format($m_lift_cost, 0, ',', ' ') . " Ft/hó/th</td>";
+    echo "<td>" . number_format($insurance_cost, 0, ',', ' ') . " Ft/hó/albetét </td>";
+    echo "<td>" . number_format($bank_cost, 0, ',', ' ') . " Ft/hó/albetét </td>";
+    echo "<td>" . number_format($maintenance_cost, 0, ',', ' ') . " Ft/hó/albetét </td>";
+    echo "<td>" . number_format($chimney_cost, 0, ',', ' ') . " Ft/hó/albetét </td>";
+    echo "<td>" . number_format($cleaning_cost, 0, ',', ' ') . " Ft/hó/albetét </td>";
+    echo "<td>" . number_format($renovation_cost, 0, ',', ' ') . " Ft/hó/albetét </td>";
+    echo "<td>" . number_format($handling_cost, 0, ',', ' ') . " Ft/hó/albetét </td>";
     echo "<th> </th>";
     echo "</tr>";
     echo "<tr>";
@@ -579,6 +623,13 @@ EOT;
     echo "<td>" . number_format($cam_cost, 0, ',', ' ') . " Ft/hó</td>";
     echo "<td>" . number_format($costs_cost, 0, ',', ' ') . " Ft/hó</td>";
     echo "<td>" . number_format($lift_cost, 0, ',', ' ') . " Ft/hó</td>";
+    echo "<td>" . number_format($insurance_cost, 0, ',', ' ') . " Ft/hó </td>";
+    echo "<td>" . number_format($bank_cost, 0, ',', ' ') . " Ft/hó </td>";
+    echo "<td>" . number_format($maintenance_cost, 0, ',', ' ') . " Ft/hó </td>";
+    echo "<td>" . number_format($chimney_cost, 0, ',', ' ') . " Ft/hó </td>";
+    echo "<td>" . number_format($cleaning_cost, 0, ',', ' ') . " Ft/hó </td>";
+    echo "<td>" . number_format($renovation_cost, 0, ',', ' ') . " Ft/hó </td>";
+    echo "<td>" . number_format($handling_cost, 0, ',', ' ') . " Ft/hó </td>";
     echo "<th>" . number_format($ccosts, 0, ',', ' ') . " Ft/hó</th>";
     echo '</tbody>';
     echo '</table>';
@@ -623,7 +674,16 @@ function getAllDepo() {
     $cam = $fees[5];
     $costs = $fees[6];
     $lift = $fees[7];
-
+    $insurance = $fees[8];
+    $bank = $fees[9];
+    $maintenance = $fees[10];
+    $chimney = $fees[11];
+    $cleaning = $fees[12];
+    $renovation = $fees[13];
+    $handling = $fees[14];
+    
+    $sumarea = $sumgarage =  $sumresidents = $sumarearatio = $sumgaragearearatio =
+            $sumallarearatio = 0;
     for ($i = 0; $i < $deprows; $i++) {
         if ($deposit[$i]['watermeter'] == 0)
         {
@@ -641,13 +701,30 @@ function getAllDepo() {
         $cam_cost = round(((($cam['yearly_amount'] / 12) / $cam['dealer']) * $deposit[$i]['ratiosum']), 0);
         $costs_cost = round(((($costs['yearly_amount'] / 12) / $costs['dealer']) * $deposit[$i]['ratiosum']), 0);
         $lift_cost = round(((($lift['yearly_amount'] / 12) / $lift['dealer']) * $deposit[$i]['ratiosum']), 0);
-
+        $insurance_cost = round(((($insurance['yearly_amount'] / 12) / $insurance['dealer'])), 0);
+        $bank_cost = round(((($bank['yearly_amount'] / 12) / $bank['dealer'])), 0);
+        $maintenance_cost = round(((($maintenance['yearly_amount'] / 12) / $maintenance['dealer'])), 0);
+        $chimney_cost = round(((($chimney['yearly_amount'] / 12) / $chimney['dealer'])), 0);
+        $cleaning_cost = round(((($cleaning['yearly_amount'] / 12) / $cleaning['dealer'])), 0);
+        $renovation_cost = round(((($renovation['yearly_amount'] / 12) / $renovation['dealer'])), 0);
+        $handling_cost = round(((($handling['yearly_amount'] / 12) / $handling['dealer'])), 0);
 
         $deposit[$i]["ccost"] = $water_cost + $twater_cost + $junk_cost + $electrycity_cost + $gas_cost +
-                $cam_cost + $costs_cost + $lift_cost;
+                $cam_cost + $costs_cost + $lift_cost + $insurance_cost + $bank_cost + $maintenance_cost +
+                $chimney_cost + $cleaning_cost + $renovation_cost + $handling_cost;
+       $sumarea += $deposit[$i]['area'];
+       $sumgarage += $deposit[$i]['garage_area'];
+       $sumallarea += $deposit[$i]['areasum'];
+       $sumresidents += $deposit[$i]['residents_no'];
+       $sumarearatio += $deposit[$i]['area_ratio'];
+       $sumgaragearearatio += $deposit[$i]['garage_area_ratio'];
+       $sumallarearatio += $deposit[$i]['ratiosum'];
     }
     //print_r($deposit);
     
+    for ($i = 0; $i < $deprows; $i++) {
+        
+    }
     echo '<div class="content"><table id="results">';
     echo <<<EOT
 <thead>
@@ -693,8 +770,25 @@ EOT;
         echo "<td><a href=\"mydepo.php?depositid=" . $row['id'] . "\">Részletek</a></td>";
         echo "<td><a href=\"updatedeposit.php?id=" . $row['id'] . "\" target=\"blank\">Módosít</a></td>";
         echo '</tr>';
-        echo '</tbody>';
+        
     }
+    echo '<tr>';
+    echo '<th colspan=3>Összesen:</th>';
+    echo "<td>".number_format($sumarea, 0, ',', ' ')." m<sup>2</sup></td>";
+    echo "<td>".number_format($sumgarage, 0, ',', ' ')." m<sup>2</sup></td>";
+    echo "<td>".number_format(($sumarea+$sumgarage), 0, ',', ' ')." m<sup>2</sup></td>";
+    echo "<td>$sumresidents fő</td>";
+    echo "<td>".str_replace(".", ",", round($sumarearatio, 2))."</td>";
+    echo "<td>".str_replace(".", ",", round($sumgaragearearatio, 2))."</td>";
+    echo "<td>".str_replace(".", ",", round($sumallarearatio, 2))."</td>";
+    echo '<th></th>';
+    echo '<th></th>';
+    echo '<th></th>';
+    echo '<th></th>';
+    echo '<th></th>';
+    echo '<th></th>';
+    echo '</tr>';
+    echo '</tbody>';
     echo '</table>';
     echo '</div>';
 }
