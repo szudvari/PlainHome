@@ -11,7 +11,8 @@ if (isset($_SESSION['depositid'])){
 $id = $_SESSION['depositid'];
 }
 else if (isset($_GET['depositid']) && ($_SESSION['admin']>0)) {
- $id = $_GET['depositid'];   
+ $id = $_GET['depositid']; 
+ echo '<a href="deposits.php">IDE KELL A GOMB!</a>';
 }
 else {
      notLoggedIn();
