@@ -530,8 +530,7 @@ EOT;
     echo '</tbody>';
     echo '</table>';
     echo <<<EOT
-
-
+<hr>
 <h3> Közösköltség részletezése </h3>
 <table id="results">
 <thead>
@@ -597,24 +596,24 @@ EOT;
     echo "<tr>";
     echo "<th>Egységár</th>";
     echo "<td>" . number_format($m_water_cost, 0, ',', ' ') . " Ft/hó/fő</td>";
-    echo "<td>" . number_format($twater_cost, 0, ',', ' ') . " Ft/hó/albetét</td>";
+    echo "<td>" . number_format($twater_cost, 0, ',', ' ') . " Ft/hó/ albetét</td>";
     echo "<td>" . number_format($m_junk_cost, 0, ',', ' ') . " Ft/hó/th</td>";
     echo "<td>" . number_format($m_electrycity_cost, 0, ',', ' ') . " Ft/hó/th</td>";
     echo "<td>" . number_format($m_gas_cost, 0, ',', ' ') . " Ft/hó/m<sup>2</sup></td>";
     echo "<td>" . number_format($m_cam_cost, 0, ',', ' ') . " Ft/hó/th</td>";
     echo "<td>" . number_format($m_costs_cost, 0, ',', ' ') . " Ft/hó/th</td>";
     echo "<td>" . number_format($m_lift_cost, 0, ',', ' ') . " Ft/hó/th</td>";
-    echo "<td>" . number_format($insurance_cost, 0, ',', ' ') . " Ft/hó/albetét </td>";
-    echo "<td>" . number_format($bank_cost, 0, ',', ' ') . " Ft/hó/albetét </td>";
-    echo "<td>" . number_format($maintenance_cost, 0, ',', ' ') . " Ft/hó/albetét </td>";
-    echo "<td>" . number_format($chimney_cost, 0, ',', ' ') . " Ft/hó/albetét </td>";
-    echo "<td>" . number_format($cleaning_cost, 0, ',', ' ') . " Ft/hó/albetét </td>";
-    echo "<td>" . number_format($renovation_cost, 0, ',', ' ') . " Ft/hó/albetét </td>";
-    echo "<td>" . number_format($handling_cost, 0, ',', ' ') . " Ft/hó/albetét </td>";
+    echo "<td>" . number_format($insurance_cost, 0, ',', ' ') . " Ft/hó/ albetét </td>";
+    echo "<td>" . number_format($bank_cost, 0, ',', ' ') . " Ft/hó/ albetét </td>";
+    echo "<td>" . number_format($maintenance_cost, 0, ',', ' ') . " Ft/hó/ albetét </td>";
+    echo "<td>" . number_format($chimney_cost, 0, ',', ' ') . " Ft/hó/ albetét </td>";
+    echo "<td>" . number_format($cleaning_cost, 0, ',', ' ') . " Ft/hó/ albetét </td>";
+    echo "<td>" . number_format($renovation_cost, 0, ',', ' ') . " Ft/hó/ albetét </td>";
+    echo "<td>" . number_format($handling_cost, 0, ',', ' ') . " Ft/hó/ albetét </td>";
     echo "<th> </th>";
     echo "</tr>";
     echo "<tr>";
-    echo "<th>Közösköltség</th>";
+    echo "<th>Közösktg</th>";
     echo "<td>" . number_format($water_cost, 0, ',', ' ') . " Ft/hó</td>";
     echo "<td>" . number_format($twater_cost, 0, ',', ' ') . " Ft/hó</td>";
     echo "<td>" . number_format($junk_cost, 0, ',', ' ') . " Ft/hó</td>";
