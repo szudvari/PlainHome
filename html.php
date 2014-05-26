@@ -231,7 +231,6 @@ EOT;
 	                <ul class="menu">
 	                    <li><a href="adminlogin.php">Admin login</a></li>
 	                    <li><a href="index.php?logout=1">Logout <i class="fa fa-sign-out"></i></a></li>                
- 	                    <li><a href="mydepo.php">Saját adataim</a></li>
  	                    <li><a href="session.php">Session check</a></li>
 	                </ul>
 	            </div>
@@ -318,7 +317,7 @@ function updateDeposit($depo) {
                 <input type="text" id="note" name="note" class="form-control" value="{$depo['resident_name']}">
                 <input type="hidden" id="id" name="id" class="form-control" value="{$depo['id']}"></div><br>
 
-            <button type="input" name="submit" value="Módosít" class="btn btn-success btn-icon"><i class="fa fa-sign-in"></i>Módosít</button>
+            <button type="input" name="submit" value="Módosít" class="btn btn-success btn-icon"><i class="fa fa-sign-in"></i> Módosít</button>
 
         </form>
     </div>
