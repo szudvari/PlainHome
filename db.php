@@ -465,7 +465,9 @@ function getMyDepo($id) {
     $m_junk_cost = round(((($junk['yearly_amount'] / 12) / $junk['dealer'])), 0);
     $electrycity_cost = round(((($electrycity['yearly_amount'] / 12) / $electrycity['dealer']) * $deposit['ratiosum']), 0);
     $m_electrycity_cost = round(((($electrycity['yearly_amount'] / 12) / $electrycity['dealer'])), 0);
+    if ($deposit['residents_no'] > 0) {
     $gas_cost = round(((($gas['yearly_amount'] / 12) / $gas['dealer']) * $deposit['area']), 0);
+    }
     $m_gas_cost = round(((($gas['yearly_amount'] / 12) / $gas['dealer'])), 0);
     $cam_cost = round(((($cam['yearly_amount'] / 12) / $cam['dealer']) * $deposit['ratiosum']), 0);
     $m_cam_cost = round(((($cam['yearly_amount'] / 12) / $cam['dealer'])), 0);
@@ -690,12 +692,18 @@ function getAllDepo() {
         }
         else
         {
+            $water_cost = 0;
             $deposit[$i]['watermeter'] = "van";
         }
         $twater_cost = round((($twater['yearly_amount'] / 12) / $twater['dealer']), 0);
         $junk_cost = round(((($junk['yearly_amount'] / 12) / $junk['dealer']) * $deposit[$i]['ratiosum']), 0);
         $electrycity_cost = round(((($electrycity['yearly_amount'] / 12) / $electrycity['dealer']) * $deposit[$i]['ratiosum']), 0);
+        if ($deposit[$i]['residents_no'] == 0){
+            $gas_cost = 0;
+        }
+        else {
         $gas_cost = round(((($gas['yearly_amount'] / 12) / $gas['dealer']) * $deposit[$i]['area']), 0);
+        }
         $cam_cost = round(((($cam['yearly_amount'] / 12) / $cam['dealer']) * $deposit[$i]['ratiosum']), 0);
         $costs_cost = round(((($costs['yearly_amount'] / 12) / $costs['dealer']) * $deposit[$i]['ratiosum']), 0);
         $lift_cost = round(((($lift['yearly_amount'] / 12) / $lift['dealer']) * $deposit[$i]['ratiosum']), 0);
@@ -717,12 +725,9 @@ function getAllDepo() {
         $sumgaragearearatio += $deposit[$i]['garage_area_ratio'];
         $sumallarearatio += $deposit[$i]['ratiosum'];
         $sumccost +=$deposit[$i]["ccost"];
-    }
-    //print_r($deposit);
-
-    for ($i = 0; $i < $deprows; $i++) {
         
     }
+   
     echo '<div class="content"><table id="results">';
     echo <<<EOT
 <thead>
