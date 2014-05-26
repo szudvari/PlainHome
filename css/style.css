@@ -806,7 +806,8 @@
 			*/
 			table { 
 				width: 100%; 
-				border-collapse: collapse; 
+				border-collapse: collapse;
+				table-layout: fixed; 
 			}
 			/* Zebra striping */
 			tr:nth-of-type(odd) { 

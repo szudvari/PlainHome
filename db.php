@@ -529,11 +529,9 @@ EOT;
     echo '</tr>';
     echo '</tbody>';
     echo '</table>';
-	echo '</div>';
-	echo '</div>';
     echo <<<EOT
 
-<div class="content">
+
 <h3> Közösköltség részletezése </h3>
 <table id="results">
 <thead>
@@ -635,7 +633,7 @@ EOT;
     echo "<th>" . number_format($ccosts, 0, ',', ' ') . " Ft/hó</th>";
     echo '</tbody>';
     echo '</table>';
-
+	echo '</div>';
 }
 
 function getAllDepo() {
