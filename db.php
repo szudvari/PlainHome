@@ -80,6 +80,7 @@ function listDeposits() {
    <th> Összes tulajdoni hányad </th>
    <th> Vízóra </th>
    <th> Lakó neve </th>
+   <th> Részletek </th>
    <th> Módosítás </th>
 </tr>
 </thead>
@@ -98,6 +99,7 @@ EOT;
                 echo '<td>' . $value . '</td>';
             }
         }
+        echo "<td><a href=\"mydepo.php?depositid=" . $row['id'] . "\">Részletek</a></td>";
         echo "<td><a href=\"updatedeposit.php?id=" . $row['id'] . "\" target=\"blank\">Módosít</a></td>";
         echo '</tr>';
         echo '</tbody>';
