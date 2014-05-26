@@ -483,8 +483,8 @@ function getMyDepo($id) {
 
 
     $ccosts = $water_cost + $twater_cost + $junk_cost + $electrycity_cost + $gas_cost +
-                $cam_cost + $costs_cost + $lift_cost + $insurance_cost + $bank_cost + $maintenance_cost +
-                $chimney_cost + $cleaning_cost + $renovation_cost + $handling_cost;
+            $cam_cost + $costs_cost + $lift_cost + $insurance_cost + $bank_cost + $maintenance_cost +
+            $chimney_cost + $cleaning_cost + $renovation_cost + $handling_cost;
 
 
     echo <<<EOT
@@ -650,7 +650,6 @@ function getAllDepo() {
         exit;
     }
     $deposit = array();
-    $ccosts = array();
     $deprows = mysql_num_rows($result1);
     while ($row = mysql_fetch_assoc($result1)) {
         $deposit[] = $row;
@@ -681,9 +680,8 @@ function getAllDepo() {
     $cleaning = $fees[12];
     $renovation = $fees[13];
     $handling = $fees[14];
-    
-    $sumarea = $sumgarage =  $sumresidents = $sumarearatio = $sumgaragearearatio =
-            $sumallarearatio = 0;
+
+    $sumarea = $sumgarage = $sumresidents = $sumarearatio = $sumgaragearearatio = $sumallarearatio = 0;
     for ($i = 0; $i < $deprows; $i++) {
         if ($deposit[$i]['watermeter'] == 0)
         {
@@ -712,15 +710,15 @@ function getAllDepo() {
         $deposit[$i]["ccost"] = $water_cost + $twater_cost + $junk_cost + $electrycity_cost + $gas_cost +
                 $cam_cost + $costs_cost + $lift_cost + $insurance_cost + $bank_cost + $maintenance_cost +
                 $chimney_cost + $cleaning_cost + $renovation_cost + $handling_cost;
-       $sumarea += $deposit[$i]['area'];
-       $sumgarage += $deposit[$i]['garage_area'];
-       $sumresidents += $deposit[$i]['residents_no'];
-       $sumarearatio += $deposit[$i]['area_ratio'];
-       $sumgaragearearatio += $deposit[$i]['garage_area_ratio'];
-       $sumallarearatio += $deposit[$i]['ratiosum'];
+        $sumarea += $deposit[$i]['area'];
+        $sumgarage += $deposit[$i]['garage_area'];
+        $sumresidents += $deposit[$i]['residents_no'];
+        $sumarearatio += $deposit[$i]['area_ratio'];
+        $sumgaragearearatio += $deposit[$i]['garage_area_ratio'];
+        $sumallarearatio += $deposit[$i]['ratiosum'];
     }
     //print_r($deposit);
-    
+
     for ($i = 0; $i < $deprows; $i++) {
         
     }
@@ -752,14 +750,16 @@ EOT;
         echo '<tr>';
         foreach ($row as $value) {
             if (is_numeric($value))
+            {
                 if ($value > 999)
                 {
-                    echo '<td>' . number_format($value, 0, ',', ' ') . '<td>';
+                    echo '<td>' . number_format($value, 0, ',', ' ') . '</td>';
                 }
                 else
                 {
                     echo '<td>' . str_replace(".", ",", round($value, 2)) . '</td>';
                 }
+            }
             else
             {
                 echo '<td>' . $value . '</td>';
@@ -768,17 +768,16 @@ EOT;
         echo "<td><a href=\"mydepo.php?depositid=" . $row['id'] . "\">Részletek</a></td>";
         echo "<td><a href=\"updatedeposit.php?id=" . $row['id'] . "\" target=\"blank\">Módosít</a></td>";
         echo '</tr>';
-        
     }
     echo '<tr>';
     echo '<th colspan=3>Összesen:</th>';
-    echo "<td>".number_format($sumarea, 0, ',', ' ')." m<sup>2</sup></td>";
-    echo "<td>".number_format($sumgarage, 0, ',', ' ')." m<sup>2</sup></td>";
-    echo "<td>".number_format(($sumarea+$sumgarage), 0, ',', ' ')." m<sup>2</sup></td>";
+    echo "<td>" . number_format($sumarea, 0, ',', ' ') . " m<sup>2</sup></td>";
+    echo "<td>" . number_format($sumgarage, 0, ',', ' ') . " m<sup>2</sup></td>";
+    echo "<td>" . number_format(($sumarea + $sumgarage), 0, ',', ' ') . " m<sup>2</sup></td>";
     echo "<td>$sumresidents fő</td>";
-    echo "<td>".str_replace(".", ",", round($sumarearatio, 2))."</td>";
-    echo "<td>".str_replace(".", ",", round($sumgaragearearatio, 2))."</td>";
-    echo "<td>".str_replace(".", ",", round($sumallarearatio, 2))."</td>";
+    echo "<td>" . str_replace(".", ",", round($sumarearatio, 2)) . "</td>";
+    echo "<td>" . str_replace(".", ",", round($sumgaragearearatio, 2)) . "</td>";
+    echo "<td>" . str_replace(".", ",", round($sumallarearatio, 2)) . "</td>";
     echo '<th></th>';
     echo '<th></th>';
     echo '<th></th>';
