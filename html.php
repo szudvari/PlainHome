@@ -277,51 +277,37 @@ function updateDeposit($depo) {
     }
     echo <<<EOT
 
-<div class="content">
-    
-    <h3>Albetét módosítása</h3>
-        <form action="updatedepo.php" method="post">
-            <div class="form-group">
-                <label for="floor">Emelet</label> 
-                <input type="text" id="floor" name="floor" class="form-control" value="{$depo['floor']}"></div><br>
-
-            <div class="form-group">
-                <label for="door">Ajtó</label>
-                <input type="text" id="door" name="door" class="form-control" value="{$depo['door']}"></div><br>
-
-            <div class="form-group">
-                <label for="area">Lakás alapterülete</label>
-                <input type="text" id="area" name="area" class="form-control" value="{$depo['area']}"></div><br>
-            
-            <div class="form-group">
-                <label for="garage_area">Garázs alapterülete</label>
-                <input type="text" id="garage_area" name="garage_area" class="form-control" value="{$depo['garage_area']}"></div><br>
-
-            <div class="form-group">
-                <label for="residents">Lakók száma</label>
-                <input type="text" id="residents" name="residents" class="form-control" value="{$depo['residents_no']}"></div><br>
-    
-            <div class="form-group">
-                <label for="area_ratio">Lakás tulajdoni hányad</label>
-                <input type="text" id="area_ratio" name="area_ratio" class="form-control" value="{$depo['area_ratio']}"></div><br>
-    
-            <div class="form-group">
-                <label for="garage_area_ratio">Garázs tulajdoni hányad</label>
-                <input type="text" id="garage_area_ratio" name="garage_area_ratio" class="form-control" value="{$depo['garage_area_ratio']}"></div><br>
-    
-            <div class="form-group">
-                <label for="watermeter">Vízóra van</label>
-                <input type="checkbox" id="watermeter" name="watermeter" $wm class="form-control"></div><br>
-
-            <div class="form-group">
-                <label for="note">Lakó neve</label>
-                <input type="text" id="note" name="note" class="form-control" value="{$depo['resident_name']}">
-                <input type="hidden" id="id" name="id" class="form-control" value="{$depo['id']}"></div><br>
-
-            <button type="input" name="submit" value="Módosít" class="btn btn-success btn-icon"><i class="fa fa-sign-in"></i> Módosít</button>
-
-        </form>
-    </div>
-</div>
+		<div class="content">
+		    <h3>Albetét módosítása</h3>
+		    <form id="contactform">
+		        <div class="formcolumn">
+		            <label for="floor">Emelet</label> 
+		            <input type="text" id="floor" name="floor" class="form-control" value="{$depo['floor']}">
+		            <label for="door">Ajtó</label>
+		            <input type="text" id="door" name="door" class="form-control" value="{$depo['door']}">
+		            <label for="area">Lakás alapterülete</label>
+		            <input type="text" id="area" name="area" class="form-control" value="{$depo['area']}">
+		            <label for="garage_area">Garázs alapterülete</label>
+		            <input type="text" id="garage_area" name="garage_area" class="form-control" value="{$depo['garage_area']}">
+		            <label for="watermeter">Vízóra van</label>
+		            <input type="checkbox" id="watermeter" name="watermeter" $wm class="form-control">   
+		        </div>
+		        <div class="formcolumn">
+		            <label for="residents">Lakók száma</label>
+		            <input type="text" id="residents" name="residents" class="form-control" value="{$depo['residents_no']}">
+		            <label for="area_ratio">Lakás tulajdoni hányad</label>
+		            <input type="text" id="area_ratio" name="area_ratio" class="form-control" value="{$depo['area_ratio']}">
+		            <label for="garage_area_ratio">Garázs tulajdoni hányad</label>
+		            <input type="text" id="garage_area_ratio" name="garage_area_ratio" class="form-control" value="{$depo['garage_area_ratio']}">
+		            <label for="note">Lakó neve</label>
+		            <input type="text" id="note" name="note" class="form-control" value="{$depo['resident_name']}">
+		            <input type="hidden" id="id" name="id" class="form-control" value="{$depo['id']}">
+		        </div>
+		        <div class="buttons">
+		            <button type="input" name="submit" value="Módosít" class="btn btn-success btn-icon"><i class="fa fa-refresh"></i> Módosít</button>
+		        </div>
+		    </form>
+		</div>
+		</div>
 EOT;
 }
