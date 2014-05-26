@@ -12,7 +12,11 @@ $id = $_SESSION['depositid'];
 }
 else if (isset($_GET['depositid']) && ($_SESSION['admin']>0)) {
  $id = $_GET['depositid']; 
- echo '<a href="deposits.php">IDE KELL A GOMB!</a>';
+ echo '<div class="buttons btn-back">
+	   <form action="deposits.php">
+	   <button type="input" name="submit" value="Vissza" class="btn btn-success btn-icon"><i class="fa fa-arrow-circle-left"></i>Vissza</button>
+	   </form>
+	   </div>';
 }
 else {
      notLoggedIn();
@@ -22,4 +26,3 @@ $con = connectDb();
 getMyDepo($id);
 closeDb($con);
 htmlEnd();
-

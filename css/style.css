@@ -537,6 +537,10 @@
 			}
 
 		.btn-dd .caret { margin-left: 6px; }
+		
+		.btn-back {
+			margin: 0 0 20px 20px;
+		}
 
 		/* ==========================================
 			Labels
