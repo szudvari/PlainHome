@@ -588,7 +588,7 @@ EOT;
 function getAllDepo() {
     $water_cost = $twater_cost = $junk_cost = $electrycity_cost = $gas_cost = $cam_cost = $costs_cost = $lift_cost = $m_water_cost = 0;
     $watermeter = "van";
-    $sql = "SELECT `floor`, `door`, `area`, `garage_area`, "
+    $sql = "SELECT `id`, `floor`, `door`, `area`, `garage_area`, "
             . "(`area`+`garage_area`) as areasum, `residents_no`, `area_ratio`, "
             . "`garage_area_ratio`, (`area_ratio`+`garage_area_ratio`) as ratiosum, "
             . "`watermeter`, `resident_name` FROM `deposits`;";
@@ -599,8 +599,8 @@ function getAllDepo() {
         exit;
     }
     $deposit = array();
-    $ccosts = array ();
-    $deprows = mysql_num_rows($result1); 
+    $ccosts = array();
+    $deprows = mysql_num_rows($result1);
     while ($row = mysql_fetch_assoc($result1)) {
         $deposit[] = $row;
     }
@@ -623,27 +623,78 @@ function getAllDepo() {
     $cam = $fees[5];
     $costs = $fees[6];
     $lift = $fees[7];
-    
-    for ($i=0; $i<$deprows; $i++) {
-      if ($deposit[$i]['watermeter'] == 0)
-    {
-        $water_cost = round((($water['yearly_amount'] / 12) / $water['dealer']) * $deposit[$i]['residents_no'], 0);
-        $deposit[$i]['watermeter']="nincs";
-    }
-    else {
-        $deposit[$i]['watermeter']="van";
-    }
-    $twater_cost = round((($twater['yearly_amount'] / 12) / $twater['dealer']), 0);
-    $junk_cost = round(((($junk['yearly_amount'] / 12) / $junk['dealer']) * $deposit[$i]['ratiosum']), 0);
-    $electrycity_cost = round(((($electrycity['yearly_amount'] / 12) / $electrycity['dealer']) * $deposit[$i]['ratiosum']), 0);
-    $gas_cost = round(((($gas['yearly_amount'] / 12) / $gas['dealer']) * $deposit[$i]['area']), 0);
-    $cam_cost = round(((($cam['yearly_amount'] / 12) / $cam['dealer']) * $deposit[$i]['ratiosum']), 0);
-    $costs_cost = round(((($costs['yearly_amount'] / 12) / $costs['dealer']) * $deposit[$i]['ratiosum']), 0);
-    $lift_cost = round(((($lift['yearly_amount'] / 12) / $lift['dealer']) * $deposit[$i]['ratiosum']), 0);
-    
 
-    $deposit[$i]["ccost"] = $water_cost + $twater_cost + $junk_cost + $electrycity_cost + $gas_cost +
-            $cam_cost + $costs_cost + $lift_cost;  
+    for ($i = 0; $i < $deprows; $i++) {
+        if ($deposit[$i]['watermeter'] == 0)
+        {
+            $water_cost = round((($water['yearly_amount'] / 12) / $water['dealer']) * $deposit[$i]['residents_no'], 0);
+            $deposit[$i]['watermeter'] = "nincs";
+        }
+        else
+        {
+            $deposit[$i]['watermeter'] = "van";
+        }
+        $twater_cost = round((($twater['yearly_amount'] / 12) / $twater['dealer']), 0);
+        $junk_cost = round(((($junk['yearly_amount'] / 12) / $junk['dealer']) * $deposit[$i]['ratiosum']), 0);
+        $electrycity_cost = round(((($electrycity['yearly_amount'] / 12) / $electrycity['dealer']) * $deposit[$i]['ratiosum']), 0);
+        $gas_cost = round(((($gas['yearly_amount'] / 12) / $gas['dealer']) * $deposit[$i]['area']), 0);
+        $cam_cost = round(((($cam['yearly_amount'] / 12) / $cam['dealer']) * $deposit[$i]['ratiosum']), 0);
+        $costs_cost = round(((($costs['yearly_amount'] / 12) / $costs['dealer']) * $deposit[$i]['ratiosum']), 0);
+        $lift_cost = round(((($lift['yearly_amount'] / 12) / $lift['dealer']) * $deposit[$i]['ratiosum']), 0);
+
+
+        $deposit[$i]["ccost"] = $water_cost + $twater_cost + $junk_cost + $electrycity_cost + $gas_cost +
+                $cam_cost + $costs_cost + $lift_cost;
     }
-    print_r($deposit);
+    //print_r($deposit);
+    
+    echo '<div class="content"><table id="results">';
+    echo <<<EOT
+<thead>
+<tr>
+   <th> id </th>
+   <th> Emelet </th>
+   <th> Ajtó </th>
+   <th> Lakás terület (nm) </th>
+   <th> Garázs terület (nm) </th>
+   <th> Össz terület (nm) </th>
+   <th> Lakók száma </th>
+   <th> Lakás tulajdoni hányad </th>
+   <th> Garázs tulajdoni hányad </th>
+   <th> Összes tulajdoni hányad </th>
+   <th> Vízóra </th>
+   <th> Lakó neve </th>
+   <th> Közösköltség </th>
+   <th>  </th>
+   <th> Részletek </th>
+   <th> Módosítás </th>
+</tr>
+</thead>
+   
+EOT;
+    foreach ($deposit as $row) {
+        echo '<tbody>';
+        echo '<tr>';
+        foreach ($row as $value) {
+            if (is_numeric($value))
+                if ($value > 999)
+                {
+                    echo '<td>' . number_format($value, 0, ',', ' ') . '<td>';
+                }
+                else
+                {
+                    echo '<td>' . str_replace(".", ",", round($value, 2)) . '</td>';
+                }
+            else
+            {
+                echo '<td>' . $value . '</td>';
+            }
+        }
+        echo "<td><a href=\"mydepo.php?depositid=" . $row['id'] . "\">Részletek</a></td>";
+        echo "<td><a href=\"updatedeposit.php?id=" . $row['id'] . "\" target=\"blank\">Módosít</a></td>";
+        echo '</tr>';
+        echo '</tbody>';
+    }
+    echo '</table>';
+    echo '</div>';
 }
