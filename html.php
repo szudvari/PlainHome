@@ -280,7 +280,7 @@ function updateDeposit($depo) {
 
 		<div class="content">
 		    <h3>Albetét módosítása</h3>
-		    <form id="contactform">
+		    <form id="contactform" action="updatedepo.php" method="post">
 		        <div class="formcolumn">
 		            <label for="floor">Emelet</label> 
 		            <input type="text" id="floor" name="floor" class="form-control" value="{$depo['floor']}">

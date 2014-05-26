@@ -12,7 +12,7 @@ if (isset($_SESSION["admin"]) && ($_SESSION["admin"] > 0))
 {
 	echo '<div class="buttons btn-back">
 		   <form action="deposits.php">
-		   <button type="input" name="submit" value="Vissza" class="btn btn-success btn-icon"><i class="fa fa-arrow-circle-left"></i>Vissza</button>
+		   <button type="input" class="btn btn-success btn-icon"><i class="fa fa-arrow-circle-left"></i>Vissza</button>
 		   </form>
 		   </div>';
 $con = connectDb();

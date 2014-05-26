@@ -714,7 +714,6 @@ function getAllDepo() {
                 $chimney_cost + $cleaning_cost + $renovation_cost + $handling_cost;
        $sumarea += $deposit[$i]['area'];
        $sumgarage += $deposit[$i]['garage_area'];
-       $sumallarea += $deposit[$i]['areasum'];
        $sumresidents += $deposit[$i]['residents_no'];
        $sumarearatio += $deposit[$i]['area_ratio'];
        $sumgaragearearatio += $deposit[$i]['garage_area_ratio'];
