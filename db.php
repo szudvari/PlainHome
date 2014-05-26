@@ -123,7 +123,7 @@ function insertDepoDb($deposit, $con) {
         echo mysql_errno() . ": " . mysql_error();
         exit();
     }
-    $sql = "SELECT (SUM(`area`)) as t_a from deposits";
+    $sql = "SELECT (SUM(`area`)-(SELECT SUM(`area`) FROM `deposits` WHERE `residents_no`=0)) as t_a from deposits";
     $result = mysql_query($sql);
     if (!$result)
     {
@@ -392,7 +392,7 @@ function updateDepoDb($deposit, $con) {
         echo mysql_errno() . ": " . mysql_error();
         exit();
     }
-    $sql = "SELECT (SUM(`area`)) as t_a from deposits";
+    $sql = "SELECT (SUM(`area`)-(SELECT SUM(`area`) FROM `deposits` WHERE `residents_no`=0)) as t_a from deposits";
     $result = mysql_query($sql);
     if (!$result)
     {
