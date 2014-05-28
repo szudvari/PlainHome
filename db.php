@@ -529,11 +529,10 @@ EOT;
     echo '</tbody>';
     echo '</table>';
     echo <<<EOT
-<hr>
+<hr />
 <h3 class="success"> Közösköltség részletezése </h3>
-<table id="results">
-<thead>
-<tr>
+<table id="responsiveTableTwo" class="large-only" cellspacing="0">
+<tr align="left">
    <th>Költségek</th>
    <th> {$water['name']} </th>
    <th> {$twater['name']}  </th>
@@ -552,10 +551,10 @@ EOT;
    <th> {$handling['name']} </th>
    <th>Összesen</th>
 </tr>
-</thead>
+<tbody class="table-hover">
 <tr>
-   <th>Megoszt. módja</th>
-    <td> {$water['multiplier']} </td>
+   <td>Megoszt. módja</td>
+   <td> {$water['multiplier']} </td>
    <td> {$twater['multiplier']} </td>
    <td> {$junk['multiplier']}  </td>
    <td> {$electrycity['multiplier']} </td>
@@ -574,7 +573,7 @@ EOT;
 </tr>
 EOT;
     echo "<tr>";
-    echo "<th>Éves díj</th>";
+    echo "<td>Éves díj</td>";
     echo "<td>" . number_format($water['yearly_amount'], 0, ',', ' ') . " Ft/év </td>";
     echo "<td>" . number_format($twater['yearly_amount'], 0, ',', ' ') . " Ft/év </td>";
     echo "<td>" . number_format($junk['yearly_amount'], 0, ',', ' ') . " Ft/év </td>";
@@ -593,7 +592,7 @@ EOT;
     echo "<th> </th>";
     echo "</tr>";
     echo "<tr>";
-    echo "<th>Egységár</th>";
+    echo "<td>Egységár</td>";
     echo "<td>" . number_format($m_water_cost, 0, ',', ' ') . " Ft/hó/fő</td>";
     echo "<td>" . number_format($twater_cost, 0, ',', ' ') . " Ft/hó/alb</td>";
     echo "<td>" . number_format($m_junk_cost, 0, ',', ' ') . " Ft/hó/th</td>";
@@ -612,7 +611,7 @@ EOT;
     echo "<th> </th>";
     echo "</tr>";
     echo "<tr>";
-    echo "<th>Közösktg.</th>";
+    echo "<td>Közösktg.</td>";
     echo "<td>" . number_format($water_cost, 0, ',', ' ') . " Ft/hó</td>";
     echo "<td>" . number_format($twater_cost, 0, ',', ' ') . " Ft/hó</td>";
     echo "<td>" . number_format($junk_cost, 0, ',', ' ') . " Ft/hó</td>";
