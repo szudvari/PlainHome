@@ -15,59 +15,49 @@
                 <script src="js/html5shiv.js"></script>
                 <script src="js/respond.js"></script>
         <![endif]-->
-        <script>
-		$(document).ready(function () {
-			$("input#submit").click(function(){
-				$.ajax({
-					type: "POST",
-					url: "process.php", // 
-					data: $('form.contact').serialize(),
-					success: function(msg){
-						$("#thanks").html(msg)
-						$("#form-content").modal('hide');	
-					},
-					error: function(){
-						alert("failure");
-					}
-				});
-			});
-		});
-    </script>
     </head>
     <body>
-        <div class="container">
-	<div class="well well-large">
-		<h2>Twitter Bootstrap Modal Contact Form Demo</h2>
-		<div id="form-content" class="modal hide fade in" style="display: none;">
-			<div class="modal-header">
-				<a class="close" data-dismiss="modal">×</a>
-				<h3>Send me a message</h3>
-			</div>
-			<div class="modal-body">
-				<form class="contact" name="contact">
-					<label class="label" for="name">Your Name</label><br>
-					<input type="text" name="name" class="input-xlarge"><br>
-					<label class="label" for="email">Your E-mail</label><br>
-					<input type="email" name="email" class="input-xlarge"><br>
-					<label class="label" for="message">Enter a Message</label><br>
-					<textarea name="message" class="input-xlarge"></textarea>
-				</form>
-			</div>
-			<div class="modal-footer">
-				<input class="btn btn-success" type="submit" value="Send!" id="submit">
-				<a href="#" class="btn" data-dismiss="modal">Nah.</a>
-			</div>
-		</div>
-		<div id="thanks"><p><a data-toggle="modal" href="#form-content" class="btn btn-primary btn-large">Modal powers, activate!</a></p></div>
-	</div>
-</div>
+        <div id="content">
+            <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+  Launch demo modal
+</button>
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            $('#popover').popover({
+                html: true,
+                title: function() {
+                    return $("#popover-head").html();
+                },
+                content: function() {
+                    return $("#popover-content").html();
+                }
+            });
+        </script>
         <div class="footer">
             <p class="textCenter">
                 &copy; 2014 <a href="http://webariel.hu" target="_blank">PlainHome Version 0.1a</a></p>
         </div>
 
         <script src="js/jquery.js"></script>
-        
+
         <script src="js/reside.js"></script>
 
 
