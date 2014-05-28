@@ -122,7 +122,12 @@
 		}
 
 		.textCenter { text-align: center; }
-		.textRight { text-align: right; font-size: 1.4em; color: #2581bc}
+		.textRight { 
+			text-align: right; 
+			font-size: 1.4em; 
+			color: #2581bc;
+			margin: 50px 0 0 0;
+			}
 		.paddingLeft { padding-left: 10px; }
 
 		.floatRight { float: right; }
@@ -618,7 +623,8 @@
 
 		.nav{ 
 			display: block; 
-			float: left; 
+			float: left;
+			margin: 10px 0 5px 0; 
 		}
 
 		.nav, .menu, .menu > li, .menu > li > a{ 
