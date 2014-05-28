@@ -64,10 +64,11 @@ function listDeposits() {
     while ($row = mysql_fetch_assoc($result)) {
         $table[] = $row;
     }
-    echo '<div class="content"><table id="results">';
     echo <<<EOT
-<thead>
-<tr>
+'<div class="content">
+<h3 class="success">Izeke</h3>
+<table id="responsiveTable" class="large-only" cellspacing="0">'
+<tr align="left" class="warning">
    <th> id </th>
    <th> Emelet </th>
    <th> Ajtó </th>
@@ -83,11 +84,10 @@ function listDeposits() {
    <th> Részletek </th>
    <th> Módosítás </th>
 </tr>
-</thead>
    
 EOT;
     foreach ($table as $row) {
-        echo '<tbody>';
+        echo '<tbody class="table-hover">';
         echo '<tr>';
         foreach ($row as $value) {
             if (is_numeric($value))
@@ -724,10 +724,11 @@ function getAllDepo() {
         $sumccost +=$deposit[$i]["ccost"];
     }
 
-    echo '<div class="content"><table id="results">';
+    echo '<div class="content">';
     echo <<<EOT
-<thead>
-<tr>
+<h3 class="primary">Albetétek - lista</h3>
+<table id="responsiveTable" class="large-only" cellspacing="0">
+<tr align="left" class="warning">
    <th> id </th>
    <th> Emelet </th>
    <th> Ajtó </th>
@@ -744,11 +745,10 @@ function getAllDepo() {
    <th> Részletek </th>
    <th> Módosítás </th>
 </tr>
-</thead>
    
 EOT;
     foreach ($deposit as $row) {
-        echo '<tbody>';
+        echo '<tbody class="table-hover">';
         echo '<tr>';
         foreach ($row as $value) {
             if (is_numeric($value))
