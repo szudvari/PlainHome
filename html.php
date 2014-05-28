@@ -182,7 +182,7 @@ function loginUser() {
     echo <<<EOT
 
 		<div class="content">
-			<h3>A belépéshez adja meg felhasználónevét és jelszavát.</h3>
+			<h3 class="danger">A belépéshez adja meg felhasználónevét és jelszavát.</h3>
 			<form action="auth.php" method="post" class="padTop">
 			<div class="form-group">
 					<label for="user">Felhasználónév</label>
