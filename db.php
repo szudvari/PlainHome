@@ -726,7 +726,7 @@ function getAllDepo() {
 
     echo '<div class="content">';
     echo <<<EOT
-<h3 class="primary"><i class="fa fa-list"> Albetétek - lista</h3>
+<h3 class="primary">Albetétek - lista</h3>
 <table id="responsiveTable" class="large-only" cellspacing="0">
 <tr align="left" class="primary">
    <th> id </th>
