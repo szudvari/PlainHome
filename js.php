@@ -21,8 +21,8 @@ function popUp ($message) {
                    BootstrapDialog.show({
             message: '$message'
         });
-            </script>
     </script>
+   
     
 EOT;
 }

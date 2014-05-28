@@ -866,12 +866,14 @@ EOT;
             echo "<td><a id=\"alink\" href=\"update_astatus.php?uid={$row['id']}"
             . "&status=0\">Admin jog kiosztása</a></td>";
         }
-        echo "<td><a id=\"alink\" href=\"update_upassword.php?uid={$row['id']}\">"
-        . "Új jelszó megadása</a></td>";
+        echo "<td><a id=\"alink\" href=\"update_upassword.php?uid={$row['id']}"
+            . "&status=0\">Jelszó módosítás</a></td>";
         echo '</tr>';
     }
     echo '</tbody>';
     echo '</table>';
+    
+   
 }
 
 function changeUserSatus($id, $status) {
@@ -930,3 +932,5 @@ function getUserData($id) {
     }
     return $array;
 }
+
+

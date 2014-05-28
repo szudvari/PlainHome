@@ -5,7 +5,7 @@ include_once 'config.php';
 include_once 'db.php';
 include_once 'html.php';
 include_once 'js.php';
-
+@$id= $_POST['id'];
 htmlHead($website['title'], $house['name']);
 webheader($_SESSION);
 
