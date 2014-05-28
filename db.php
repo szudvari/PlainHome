@@ -494,7 +494,7 @@ function getMyDepo($id) {
 <div class="content">
 <h3 class="primary"> Albetét adatai </h3>
 <table id="responsiveTable" class="large-only" cellspacing="0">
-<tr align="left" class="warning">
+<tr align="left" class="primary">
    <th> Emelet </th>
    <th> Ajtó </th>
    <th> Lakás terület (nm) </th>
@@ -627,7 +627,7 @@ EOT;
     echo "<td>" . number_format($cleaning_cost, 0, ',', ' ') . " Ft/hó </td>";
     echo "<td>" . number_format($renovation_cost, 0, ',', ' ') . " Ft/hó </td>";
     echo "<td>" . number_format($handling_cost, 0, ',', ' ') . " Ft/hó </td>";
-    echo "<td class='tdsuccess'>" . number_format($ccosts, 0, ',', ' ') . " Ft/hó</td>";
+    echo "<td class='tdwarning'>" . number_format($ccosts, 0, ',', ' ') . " Ft/hó</td>";
     echo '</tbody>';
     echo '</table>';
     echo '</div>';

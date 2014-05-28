@@ -239,12 +239,12 @@ th {
 }
 
 .primary th {
-    background: #428bca;
+    background: #336699;
     color: #ffffff;
 }
     .sub.primary  {
         font-weight: bold;
-        color: #428bca;
+        color: #336699;
     }
 .success th {
     background: #5cb85c;
@@ -254,19 +254,25 @@ th {
         font-weight: bold;
         color: #5cb85c;
     }
+	.tdsuccess {
+		background: #5cb85c;
+		color: #ffffff;
+	//	border-top: solid 1px #5cb85c;
+	}
 .warning th {
-    background: #336699;
+    background: red;
     color: #ffffff;
 }
-.tdwarning {
+
+.tdprimary {
 	background: #336699;
 	color: #ffffff;
 //	border-top: solid 1px #336699;
 }
-.tdsuccess {
-	background: #5cb85c;
+.tdwarning {
+	background: red;
 	color: #ffffff;
-//	border-top: solid 1px #5cb85c;
+//	border-top: solid 1px red;
 }
     .sub.warning  {
         font-weight: bold;
