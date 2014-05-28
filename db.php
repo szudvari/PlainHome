@@ -511,7 +511,7 @@ function getMyDepo($id) {
 </tr>
    
 EOT;
-    echo '<tbody class="table-hover">';
+    echo '<tbody>';
     echo '<tr>';
     echo "<td>{$deposit['floor']}</td>";
     echo "<td>{$deposit['door']}</td>";
@@ -524,7 +524,7 @@ EOT;
     echo '<td>' . str_replace(".", ",", round($deposit['ratiosum'], 2)) . '</td>';
     echo '<td>' . $watermeter . '</td>';
     echo '<td>' . $deposit['resident_name'] . '</td>';
-    echo "<th>" . number_format($ccosts, 0, ',', ' ') . " Ft/hó</th>";
+    echo "<td class='tdwarning'>" . number_format($ccosts, 0, ',', ' ') . " Ft/hó</td>";
     echo '</tr>';
     echo '</tbody>';
     echo '</table>';
@@ -532,7 +532,7 @@ EOT;
 <hr />
 <h3 class="success"> Közösköltség részletezése </h3>
 <table id="responsiveTableTwo" class="large-only" cellspacing="0">
-<tr align="left">
+<tr align="left" class="success">
    <th>Költségek</th>
    <th> {$water['name']} </th>
    <th> {$twater['name']}  </th>
@@ -551,7 +551,7 @@ EOT;
    <th> {$handling['name']} </th>
    <th>Összesen</th>
 </tr>
-<tbody class="table-hover">
+<tbody>
 <tr>
    <td>Megoszt. módja</td>
    <td> {$water['multiplier']} </td>
@@ -569,7 +569,7 @@ EOT;
    <td> {$cleaning['multiplier']} </td>
    <td> {$renovation['multiplier']} </td>
    <td> {$handling['multiplier']} </td>
-   <th> </th>
+   <td class='tdsuccess'> </td>
 </tr>
 EOT;
     echo "<tr>";
@@ -589,7 +589,7 @@ EOT;
     echo "<td>" . number_format($cleaning['yearly_amount'], 0, ',', ' ') . " Ft/év </td>";
     echo "<td>" . number_format($renovation['yearly_amount'], 0, ',', ' ') . " Ft/év </td>";
     echo "<td>" . number_format($handling['yearly_amount'], 0, ',', ' ') . " Ft/év </td>";
-    echo "<th> </th>";
+    echo "<td class='tdsuccess'> </td>";
     echo "</tr>";
     echo "<tr>";
     echo "<td>Egységár</td>";
@@ -608,7 +608,7 @@ EOT;
     echo "<td>" . number_format($cleaning_cost, 0, ',', ' ') . " Ft/hó/alb </td>";
     echo "<td>" . number_format($renovation_cost, 0, ',', ' ') . " Ft/hó/alb </td>";
     echo "<td>" . number_format($handling_cost, 0, ',', ' ') . " Ft/hó/alb </td>";
-    echo "<th> </th>";
+    echo "<td class='tdsuccess'> </td>";
     echo "</tr>";
     echo "<tr>";
     echo "<td>Közösktg.</td>";
@@ -627,7 +627,7 @@ EOT;
     echo "<td>" . number_format($cleaning_cost, 0, ',', ' ') . " Ft/hó </td>";
     echo "<td>" . number_format($renovation_cost, 0, ',', ' ') . " Ft/hó </td>";
     echo "<td>" . number_format($handling_cost, 0, ',', ' ') . " Ft/hó </td>";
-    echo "<th>" . number_format($ccosts, 0, ',', ' ') . " Ft/hó</th>";
+    echo "<td class='tdsuccess'>" . number_format($ccosts, 0, ',', ' ') . " Ft/hó</td>";
     echo '</tbody>';
     echo '</table>';
     echo '</div>';
@@ -748,7 +748,7 @@ function getAllDepo() {
    
 EOT;
     foreach ($deposit as $row) {
-        echo '<tbody class="table-hover">';
+        echo '<tbody">';
         echo '<tr>';
         foreach ($row as $value) {
             if (is_numeric($value))

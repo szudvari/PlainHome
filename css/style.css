@@ -624,7 +624,7 @@
 		.nav{ 
 			display: block; 
 			float: left;
-			margin: 10px 0 5px 0; 
+			//margin: 5px 0 5px 0; 
 		}
 
 		.nav, .menu, .menu > li, .menu > li > a{ 

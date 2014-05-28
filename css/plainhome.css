@@ -258,6 +258,16 @@ th {
     background: #336699;
     color: #ffffff;
 }
+.tdwarning {
+	background: #336699;
+	color: #ffffff;
+//	border-top: solid 1px #336699;
+}
+.tdsuccess {
+	background: #5cb85c;
+	color: #ffffff;
+//	border-top: solid 1px #5cb85c;
+}
     .sub.warning  {
         font-weight: bold;
         color: #f0ad4e;
