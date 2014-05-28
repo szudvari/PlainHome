@@ -873,3 +873,60 @@ EOT;
     echo '</tbody>';
     echo '</table>';
 }
+
+function changeUserSatus($id, $status) {
+    switch ($status) {
+        case "0":
+            $sql = "UPDATE  `residents` SET  `active` =  '1' WHERE  `residents`.`id` =$id;";
+            break;
+        case "1":
+            $sql = "UPDATE  `residents` SET  `active` =  '0' WHERE  `residents`.`id` =$id;";
+            break;
+    }
+    $res = mysql_query($sql);
+    if (!$res)
+    {
+        die("Hiba:" . mysql_errno() . " - " . mysql_error());
+    }
+}
+
+function changeUserPassword($id, $password) {
+    $sql = "UPDATE  `residents` SET  `password` =  '$password' WHERE  `residents`.`id` =$id;";
+    $res = mysql_query($sql);
+    if (!$res)
+    {
+        die("Hiba:" . mysql_errno() . " - " . mysql_error());
+    }
+    return $res;
+}
+
+function changeAdminSatus($id, $status) {
+    switch ($status) {
+        case "0":
+            $sql = "UPDATE  `residents` SET  `admin` =  '1' WHERE  `residents`.`id` =$id;";
+            break;
+        case "1":
+            $sql = "UPDATE  `residents` SET  `admin` =  '0' WHERE  `residents`.`id` =$id;";
+            break;
+    }
+    $res = mysql_query($sql);
+    if (!$res)
+    {
+        die("Hiba:" . mysql_errno() . " - " . mysql_error());
+    }
+}
+
+function getUserData($id) {
+    mysql_query("set names 'utf8'");
+    mysql_query("set character set 'utf8'");
+    $sql = "SELECT `residents`.`id`,`residents`.`firstname`,`residents`.`lastname`,"
+            . "`residents`.`email`,`residents`.`username`,`deposits`.`floor`,"
+            . "`deposits`.`door` FROM residents LEFT JOIN `deposits` "
+            . "ON `residents`.`depositid` = `deposits`.`id` WHERE `residents`.`id` = $id;";
+    $result = mysql_query($sql);
+    $array = array();
+    while ($row = mysql_fetch_assoc($result)) {
+        $array = $row;
+    }
+    return $array;
+}

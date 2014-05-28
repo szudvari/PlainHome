@@ -9,6 +9,19 @@ include_once 'js.php';
 htmlHead($website['title'], $house['name']);
 webheader($_SESSION["admin"]);
 
+if (isset($_GET["active"]))
+{
+    popUp("Felhasználó státusza sikeresen módosítva");
+}
+if (isset($_GET["admin"]))
+{
+    popUp("Felhasználó admin rangja sikeresen módosítva");
+}
+if (isset($_GET["password"]))
+{
+    popUp("Felhasználó jelszava sikeresen módosítva");
+}
+
 $con = connectDb();
 listResidents();
 closeDb($con);
