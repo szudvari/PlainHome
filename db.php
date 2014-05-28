@@ -465,8 +465,9 @@ function getMyDepo($id) {
     $m_junk_cost = round(((($junk['yearly_amount'] / 12) / $junk['dealer'])), 0);
     $electrycity_cost = round(((($electrycity['yearly_amount'] / 12) / $electrycity['dealer']) * $deposit['ratiosum']), 0);
     $m_electrycity_cost = round(((($electrycity['yearly_amount'] / 12) / $electrycity['dealer'])), 0);
-    if ($deposit['residents_no'] > 0) {
-    $gas_cost = round(((($gas['yearly_amount'] / 12) / $gas['dealer']) * $deposit['area']), 0);
+    if ($deposit['residents_no'] > 0)
+    {
+        $gas_cost = round(((($gas['yearly_amount'] / 12) / $gas['dealer']) * $deposit['area']), 0);
     }
     $m_gas_cost = round(((($gas['yearly_amount'] / 12) / $gas['dealer'])), 0);
     $cam_cost = round(((($cam['yearly_amount'] / 12) / $cam['dealer']) * $deposit['ratiosum']), 0);
@@ -630,7 +631,7 @@ EOT;
     echo "<th>" . number_format($ccosts, 0, ',', ' ') . " Ft/hó</th>";
     echo '</tbody>';
     echo '</table>';
-	echo '</div>';
+    echo '</div>';
 }
 
 function getAllDepo() {
@@ -693,11 +694,13 @@ function getAllDepo() {
         $twater_cost = round((($twater['yearly_amount'] / 12) / $twater['dealer']), 0);
         $junk_cost = round(((($junk['yearly_amount'] / 12) / $junk['dealer']) * $deposit[$i]['ratiosum']), 0);
         $electrycity_cost = round(((($electrycity['yearly_amount'] / 12) / $electrycity['dealer']) * $deposit[$i]['ratiosum']), 0);
-        if ($deposit[$i]['residents_no'] == 0){
+        if ($deposit[$i]['residents_no'] == 0)
+        {
             $gas_cost = 0;
         }
-        else {
-        $gas_cost = round(((($gas['yearly_amount'] / 12) / $gas['dealer']) * $deposit[$i]['area']), 0);
+        else
+        {
+            $gas_cost = round(((($gas['yearly_amount'] / 12) / $gas['dealer']) * $deposit[$i]['area']), 0);
         }
         $cam_cost = round(((($cam['yearly_amount'] / 12) / $cam['dealer']) * $deposit[$i]['ratiosum']), 0);
         $costs_cost = round(((($costs['yearly_amount'] / 12) / $costs['dealer']) * $deposit[$i]['ratiosum']), 0);
@@ -720,9 +723,8 @@ function getAllDepo() {
         $sumgaragearearatio += $deposit[$i]['garage_area_ratio'];
         $sumallarearatio += $deposit[$i]['ratiosum'];
         $sumccost +=$deposit[$i]["ccost"];
-        
     }
-   
+
     echo '<div class="content"><table id="results">';
     echo <<<EOT
 <thead>
@@ -788,71 +790,89 @@ EOT;
     echo '</div>';
 }
 
-function listResidents () {
+function listResidents() {
     mysql_query("set names 'utf8'");
     mysql_query("set character set 'utf8'");
     $sql = "SELECT `residents`.`id`,`residents`.`firstname`,`residents`.`lastname`,"
             . "`residents`.`email`,`residents`.`username`,`deposits`.`floor`,"
-            . "`deposits`.`door`,`residents`.`active`,`residents`.`admin` FROM residents"
-            . "LEFT JOIN `deposits` ON `residents`.`depositid` = `deposits`.`id`;";
-    
-    
-    ////////////////////////////////
-    
+            . "`deposits`.`door`,`residents`.`active`,`residents`.`admin` "
+            . "FROM residents LEFT JOIN `deposits` ON `residents`.`depositid` = `deposits`.`id`";
+
     $result = mysql_query($sql);
     $table = array();
     while ($row = mysql_fetch_assoc($result)) {
         $table[] = $row;
     }
-    echo '<table id="results">';
+    for ($i = 0; ($i < mysql_num_rows($result)); $i++) {
+        if ($table[$i]['active'] == 1)
+        {
+            $table[$i]['active'] = "aktív";
+        }
+        else
+        {
+            $table[$i]['active'] = "nem aktív";
+        }
+        if ($table[$i]['admin'] < 1)
+        {
+            $table[$i]['admin'] = "nem admin";
+        }
+        else
+        {
+            $table[$i]['admin'] = "admin";
+        }
+    }
+    echo '<div class="content">';
+    echo  '<h3 class="primary"> Regisztrált lakók </h3>';
+    echo '<table id="responsiveTable" class="large-only" cellspacing="0">';
     echo <<<EOT
+    <thead>
+    <tr>
    <th> ID </th>
-   <th> Teljes név </th>
-   <th> Login name </th>
-   <th> Aktív </th>
+   <th> Vezetéknév </th>
+   <th> Kresztnév </th>
+   <th> e-mail cím</th>
+   <th> Felhasználónév</th>
+   <th> Emelet </th>
+   <th> Ajtó </th>
+   <th> Aktív </th> 
    <th> Admin </th> 
    <th> Státusz módosítása  </th>
    <th> Admin rang kiosztása  </th>
    <th> Jelszó módosítás </th>
+    </tr>
+    </thead>
 EOT;
+    echo "<tbody>";
     foreach ($table as $row) {
+        
         echo '<tr>';
         foreach ($row as $value) {
-            switch ($value) {
-                case "0": echo
-                    '<td style="background: red; font-weight: bold;">Nem</td>';
-                    break;
-                case "1": echo
-                    '<td style="background: green; font-weight: bold;">Igen</td>';
-                    break;
-                default: echo '<td>' . $value . '</td>';
-                    break;
-            }
+        echo "<td>$value</td>";   
         }
-        if ($row['active'] == 1)
+        if ($row['active'] == "aktív")
         {
             echo "<td><a id=\"alink\" href=\"update_ustatus.php?uid={$row['id']}"
-            . "&status={$row['active']}\">User letiltása</a></td>";
+            . "&status=1\">User letiltása</a></td>";
         }
         else
         {
             echo "<td><a id=\"alink\" href=\"update_ustatus.php?uid={$row['id']}"
-            . "&status={$row['active']}\">User aktiválása</a></td>";
+            . "&status=0\">User aktiválása</a></td>";
         }
-        if ($row['role'] == 1)
+        if ($row['admin'] == "admin")
         {
             echo "<td><a id=\"alink\" href=\"update_astatus.php?uid={$row['id']}"
-            . "&status={$row['role']}\">Admin jog megvonása</a></td>";
+            . "&status=1\">Admin jog megvonása</a></td>";
         }
         else
         {
             echo "<td><a id=\"alink\" href=\"update_astatus.php?uid={$row['id']}"
-            . "&status={$row['role']}\">Admin jog kiosztása</a></td>";
+            . "&status=0\">Admin jog kiosztása</a></td>";
         }
         echo "<td><a id=\"alink\" href=\"update_upassword.php?uid={$row['id']}\">"
         . "Új jelszó megadása</a></td>";
         echo '</tr>';
     }
+    echo '</tbody>';
     echo '</table>';
 }
-

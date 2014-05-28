@@ -251,6 +251,7 @@ EOT;
 	                <ul class="menu">
 	                    <li><a href="index.php?logout=1">Logout <i class="fa fa-sign-out"></i></a></li>                
 	                    <li><a href="deposits.php">Deposits</a></li>                
+	                    <li><a href="allresidents.php">Felhasználók</a></li>                
 	                    <li><a href="session.php">Session check</a></li>
 	                </ul>
 	            </div>
