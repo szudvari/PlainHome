@@ -821,7 +821,7 @@ function listResidents() {
         }
     }
     echo '<div class="content">';
-    echo  '<h3 class="primary"> Regisztrált lakók </h3>';
+    echo  '<h3 class="primary"><i class="fa fa-users"></i> Regisztrált lakók </h3>';
     echo '<table id="responsiveTable" class="large-only" cellspacing="0">';
     echo <<<EOT
    <tr align="left" class="primary">
