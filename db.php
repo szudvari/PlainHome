@@ -594,20 +594,20 @@ EOT;
     echo "<tr>";
     echo "<th>Egységár</th>";
     echo "<td>" . number_format($m_water_cost, 0, ',', ' ') . " Ft/hó/fő</td>";
-    echo "<td>" . number_format($twater_cost, 0, ',', ' ') . " Ft/hó/ albetét</td>";
+    echo "<td>" . number_format($twater_cost, 0, ',', ' ') . " Ft/hó/alb</td>";
     echo "<td>" . number_format($m_junk_cost, 0, ',', ' ') . " Ft/hó/th</td>";
     echo "<td>" . number_format($m_electrycity_cost, 0, ',', ' ') . " Ft/hó/th</td>";
     echo "<td>" . number_format($m_gas_cost, 0, ',', ' ') . " Ft/hó/m<sup>2</sup></td>";
     echo "<td>" . number_format($m_cam_cost, 0, ',', ' ') . " Ft/hó/th</td>";
     echo "<td>" . number_format($m_costs_cost, 0, ',', ' ') . " Ft/hó/th</td>";
     echo "<td>" . number_format($m_lift_cost, 0, ',', ' ') . " Ft/hó/th</td>";
-    echo "<td>" . number_format($insurance_cost, 0, ',', ' ') . " Ft/hó/ albetét </td>";
-    echo "<td>" . number_format($bank_cost, 0, ',', ' ') . " Ft/hó/ albetét </td>";
-    echo "<td>" . number_format($maintenance_cost, 0, ',', ' ') . " Ft/hó/ albetét </td>";
-    echo "<td>" . number_format($chimney_cost, 0, ',', ' ') . " Ft/hó/ albetét </td>";
-    echo "<td>" . number_format($cleaning_cost, 0, ',', ' ') . " Ft/hó/ albetét </td>";
-    echo "<td>" . number_format($renovation_cost, 0, ',', ' ') . " Ft/hó/ albetét </td>";
-    echo "<td>" . number_format($handling_cost, 0, ',', ' ') . " Ft/hó/ albetét </td>";
+    echo "<td>" . number_format($insurance_cost, 0, ',', ' ') . " Ft/hó/alb </td>";
+    echo "<td>" . number_format($bank_cost, 0, ',', ' ') . " Ft/hó/alb </td>";
+    echo "<td>" . number_format($maintenance_cost, 0, ',', ' ') . " Ft/hó/alb </td>";
+    echo "<td>" . number_format($chimney_cost, 0, ',', ' ') . " Ft/hó/alb </td>";
+    echo "<td>" . number_format($cleaning_cost, 0, ',', ' ') . " Ft/hó/alb </td>";
+    echo "<td>" . number_format($renovation_cost, 0, ',', ' ') . " Ft/hó/alb </td>";
+    echo "<td>" . number_format($handling_cost, 0, ',', ' ') . " Ft/hó/alb </td>";
     echo "<th> </th>";
     echo "</tr>";
     echo "<tr>";
@@ -787,3 +787,72 @@ EOT;
     echo '</table>';
     echo '</div>';
 }
+
+function listResidents () {
+    mysql_query("set names 'utf8'");
+    mysql_query("set character set 'utf8'");
+    $sql = "SELECT `residents`.`id`,`residents`.`firstname`,`residents`.`lastname`,"
+            . "`residents`.`email`,`residents`.`username`,`deposits`.`floor`,"
+            . "`deposits`.`door`,`residents`.`active`,`residents`.`admin` FROM residents"
+            . "LEFT JOIN `deposits` ON `residents`.`depositid` = `deposits`.`id`;";
+    
+    
+    ////////////////////////////////
+    
+    $result = mysql_query($sql);
+    $table = array();
+    while ($row = mysql_fetch_assoc($result)) {
+        $table[] = $row;
+    }
+    echo '<table id="results">';
+    echo <<<EOT
+   <th> ID </th>
+   <th> Teljes név </th>
+   <th> Login name </th>
+   <th> Aktív </th>
+   <th> Admin </th> 
+   <th> Státusz módosítása  </th>
+   <th> Admin rang kiosztása  </th>
+   <th> Jelszó módosítás </th>
+EOT;
+    foreach ($table as $row) {
+        echo '<tr>';
+        foreach ($row as $value) {
+            switch ($value) {
+                case "0": echo
+                    '<td style="background: red; font-weight: bold;">Nem</td>';
+                    break;
+                case "1": echo
+                    '<td style="background: green; font-weight: bold;">Igen</td>';
+                    break;
+                default: echo '<td>' . $value . '</td>';
+                    break;
+            }
+        }
+        if ($row['active'] == 1)
+        {
+            echo "<td><a id=\"alink\" href=\"update_ustatus.php?uid={$row['id']}"
+            . "&status={$row['active']}\">User letiltása</a></td>";
+        }
+        else
+        {
+            echo "<td><a id=\"alink\" href=\"update_ustatus.php?uid={$row['id']}"
+            . "&status={$row['active']}\">User aktiválása</a></td>";
+        }
+        if ($row['role'] == 1)
+        {
+            echo "<td><a id=\"alink\" href=\"update_astatus.php?uid={$row['id']}"
+            . "&status={$row['role']}\">Admin jog megvonása</a></td>";
+        }
+        else
+        {
+            echo "<td><a id=\"alink\" href=\"update_astatus.php?uid={$row['id']}"
+            . "&status={$row['role']}\">Admin jog kiosztása</a></td>";
+        }
+        echo "<td><a id=\"alink\" href=\"update_upassword.php?uid={$row['id']}\">"
+        . "Új jelszó megadása</a></td>";
+        echo '</tr>';
+    }
+    echo '</table>';
+}
+
