@@ -18,8 +18,11 @@ function htmlHead($title, $house) {
         <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>     
         
         <link href="css/bootstrap-dialog.css" rel="stylesheet" type="text/css"/>
-        <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-        <link rel="stylesheet" href="css/style.css" type="text/css">
+		<link href="css/bootstrap.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet">
+		<link href="css/plainhome.css" rel="stylesheet">
+		<link href="css/datepicker.css" rel="stylesheet">
+		<link href="css/font-awesome.min.css" rel="stylesheet">
 	<!--[if lt IE 9]>
 		<script src="js/html5shiv.js"></script>
 		<script src="js/respond.js"></script>
@@ -41,6 +44,7 @@ function htmlEnd() {
 		<script src="js/jquery.js"></script>
 		<script src="js/reside.js"></script>
 		<script src="js/plainhome.js"></script>
+		<script type="text/javascript" src="js/stacktable.js"></script>
 	</body>
 	</html>
 EOT;

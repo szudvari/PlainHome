@@ -491,9 +491,8 @@ function getMyDepo($id) {
 
     echo <<<EOT
 <div class="content">
-<h3> Albetét adatai </h3>
-<table id="results">
-<thead>
+<h3 class="primary"> Albetét adatai </h3>
+<table id="responsiveTable" class="large-only" cellspacing="0">
 <tr>
    <th> Emelet </th>
    <th> Ajtó </th>
@@ -509,10 +508,9 @@ function getMyDepo($id) {
    <th>Havi közösköltség</th>
    
 </tr>
-</thead>
    
 EOT;
-    echo '<tbody>';
+    echo '<tbody class="table-hover">';
     echo '<tr>';
     echo "<td>{$deposit['floor']}</td>";
     echo "<td>{$deposit['door']}</td>";
@@ -531,7 +529,7 @@ EOT;
     echo '</table>';
     echo <<<EOT
 <hr>
-<h3> Közösköltség részletezése </h3>
+<h3 class="success"> Közösköltség részletezése </h3>
 <table id="results">
 <thead>
 <tr>
