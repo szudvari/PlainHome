@@ -494,7 +494,7 @@ function getMyDepo($id) {
 <div class="content">
 <h3 class="primary"> Albetét adatai </h3>
 <table id="responsiveTable" class="large-only" cellspacing="0">
-<tr>
+<tr align="left" class="warning">
    <th> Emelet </th>
    <th> Ajtó </th>
    <th> Lakás terület (nm) </th>
