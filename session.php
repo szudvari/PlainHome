@@ -3,8 +3,9 @@
 session_start();
 include_once 'html.php';
 include_once 'config.php';
+
 htmlHead($website['title'], $house['name']);
-webheader($_SESSION["admin"]);
+webheader($_SESSION);
 echo "<div class=\"content\">";
 if (isset($_SESSION['user']))
 {

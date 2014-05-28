@@ -10,7 +10,7 @@ $user = getUserData($id);
 $action = $_SERVER["PHP_SELF"] . "?uid=$id";
 closeDb($con);
 htmlHead($website['title'], $house['name']);
-webheader($_SESSION["admin"]);
+webheader($_SESSION);
 echo <<<EOT
    <div class="content">
    <h3 class="primary"> Jelszó módosítása </h3>

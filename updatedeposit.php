@@ -7,7 +7,7 @@ include_once 'html.php';
 
 $id = $_GET['id'];
 htmlHead($website['title'], $house['name']);
-webheader($_SESSION["admin"]);
+webheader($_SESSION);
 if (isset($_SESSION["admin"]) && ($_SESSION["admin"] > 0))
 {
 	echo '<div class="buttons btn-back">

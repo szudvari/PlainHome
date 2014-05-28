@@ -11,6 +11,9 @@ $userdata['user'] = $_POST['user'];
 $userdata['pass'] = encodePass($_POST['pass']);
 
 $con = connectDb();
+
+ htmlHead($website['title'], $house['name']);
+ webheader($_SESSION);
 if (stripos($_SERVER['HTTP_REFERER'], "/login.php"))
 {
     $login = authUserDb($userdata, $con);
@@ -25,11 +28,8 @@ if (stripos($_SERVER['HTTP_REFERER'], "/login.php"))
     }
     else
     {
-        htmlHead($website['title'], $house['name']);
-        webheader($_SESSION["admin"]);
         popUp("Hibás felhasználónév és/vagy jelszó!");
         header("Refresh: 3; url={$_SERVER['HTTP_REFERER']}");
-        htmlEnd();
     }
 }
 else if (stripos($_SERVER['HTTP_REFERER'], "/adminlogin.php"))
@@ -49,13 +49,12 @@ else if (stripos($_SERVER['HTTP_REFERER'], "/adminlogin.php"))
     }
     else
     {
-        htmlHead($website['title'], $house['name']);
-        webheader($_SESSION["admin"]);
+       
         popUp("Hibás felhasználónév és/vagy jelszó!");
         header("Refresh: 3; url={$_SERVER['HTTP_REFERER']}");
-        htmlEnd();
     }
 }
+htmlEnd();
 
 
 

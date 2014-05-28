@@ -217,7 +217,7 @@ function webheader($user) {
 	            
 EOT;
 
-    if (!isset($user)) //nem belépet user
+    if (!isset($user["user"])) //nem belépet user
     {
         echo <<<EOT
 	            <div>
@@ -229,7 +229,7 @@ EOT;
 	            </div>
 EOT;
     }
-    else if ($user == 0) //belépett user
+    else if (($user["admin"] == 0) && (!(isset($user["admin_userid"])))) //belépett user
     {
         echo <<<EOT
 	            <div>
@@ -243,7 +243,7 @@ EOT;
 	            </div>
 EOT;
     }
-    else if ($user == 1) //belépett admin
+    else if (($user["admin"] == 1) && (!(isset($user["depositid"]))))  //belépett admin
     {
         echo <<<EOT
 	            <div>
@@ -257,16 +257,29 @@ EOT;
 	            </div>
 EOT;
     }
-
+    else if (($user["admin"] == 1) && ((isset($user["depositid"]))))  //user akinek van admin joga
+    {
         echo <<<EOT
+	            <div>
+	                <label for="toggle" class="toggle" data-open="Menü" data-close="Bezár" onclick></label>
+	                <ul class="menu">
+	                    <li><a href="index.php?logout=1">Logout <i class="fa fa-sign-out"></i></a></li>                
+<li><a href="mydepo.php">Saját adataim</a></li>	                   
+   <li><a href="deposits.php">Deposits</a></li>                
+	                    <li><a href="allresidents.php">Felhasználók</a></li>                
+	                    <li><a href="session.php">Session check</a></li>
+	                </ul>
+	            </div>
+EOT;
+    }
+    echo <<<EOT
                 </div>
 			</div>
 	    </div>		
 EOT;
-    }
+}
 
-
-function notLoggedIn () {
+function notLoggedIn() {
     echo <<<EOT
 
 		<div class="content">

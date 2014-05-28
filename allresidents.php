@@ -7,7 +7,7 @@ include_once 'html.php';
 include_once 'js.php';
 
 htmlHead($website['title'], $house['name']);
-webheader($_SESSION["admin"]);
+webheader($_SESSION);
 
 if (isset($_GET["active"]))
 {
