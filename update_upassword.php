@@ -44,7 +44,10 @@ echo <<<EOT
     </tbody>
     </table>
     </form>
-    
+    <div class="buttons">
+    <a href="allresidents.php"><button type="input" class="btn btn-success btn-icon"><i class="fa fa-times"></i>Mégsem</button></a>
+    </div>
+    </div>
 EOT;
 @$pass1 = $_POST["pass1"];
 @$pass2 = $_POST["pass2"];
