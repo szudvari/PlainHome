@@ -824,8 +824,7 @@ function listResidents() {
     echo  '<h3 class="primary"> Regisztrált lakók </h3>';
     echo '<table id="responsiveTable" class="large-only" cellspacing="0">';
     echo <<<EOT
-    <thead>
-    <tr>
+   <tr align="left" class="primary">
    <th> ID </th>
    <th> Vezetéknév </th>
    <th> Kresztnév </th>
@@ -838,8 +837,7 @@ function listResidents() {
    <th> Státusz módosítása  </th>
    <th> Admin rang kiosztása  </th>
    <th> Jelszó módosítás </th>
-    </tr>
-    </thead>
+   </tr>
 EOT;
     echo "<tbody>";
     foreach ($table as $row) {
