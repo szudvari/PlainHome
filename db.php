@@ -728,7 +728,7 @@ function getAllDepo() {
     echo <<<EOT
 <h3 class="primary">Albetétek - lista</h3>
 <table id="responsiveTable" class="large-only" cellspacing="0">
-<tr align="left" class="warning">
+<tr align="left" class="primary">
    <th> id </th>
    <th> Emelet </th>
    <th> Ajtó </th>

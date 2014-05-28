@@ -221,6 +221,14 @@ th {
 	//font-weight: bold;
     border-top: 1px solid #d5d5d5;
 }
+.primaryth{
+	background: #336699;
+	color: #ffffff;
+}
+.warningtr{
+	background: red;
+	color: #ffffff;
+}
 	th:first-of-type { border-left: 1px solid #d5d5d5; }
     th { border-right: 1px solid #d5d5d5; }
 	td, th {
@@ -260,6 +268,10 @@ th {
 	//	border-top: solid 1px #5cb85c;
 	}
 .warning th {
+    background: red;
+    color: #ffffff;
+}
+.warning tr {
     background: red;
     color: #ffffff;
 }
