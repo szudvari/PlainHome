@@ -25,11 +25,13 @@ if (stripos($_SERVER['HTTP_REFERER'], "/login.php"))
         $_SESSION['user'] = $userdata['user'];
         closeDb($con);
         header("Location: index.php");
+		exit ();
     }
     else
     {
         popUp("Hibás felhasználónév és/vagy jelszó!");
         header("Refresh: 3; url={$_SERVER['HTTP_REFERER']}");
+		exit();
     }
 }
 else if (stripos($_SERVER['HTTP_REFERER'], "/adminlogin.php"))
@@ -46,12 +48,14 @@ else if (stripos($_SERVER['HTTP_REFERER'], "/adminlogin.php"))
         
         closeDb($con);
         header("Location: admin.php");
+		exit();
     }
     else
     {
        
         popUp("Hibás felhasználónév és/vagy jelszó!");
         header("Refresh: 3; url={$_SERVER['HTTP_REFERER']}");
+		exit();
     }
 }
 htmlEnd();
