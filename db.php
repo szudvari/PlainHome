@@ -877,7 +877,7 @@ echo <<<EOT
 	<div class="modal fade" id="newPassword" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header modal-info">
+                    <div class="modal-header modal-primary">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
                         <h4 class="modal-title">Jelszócsere</h4><br />
                         <h2>{$row['firstname']} {$row['lastname']}</h2>
