@@ -109,25 +109,24 @@ EOT;
 }
 
 function insertDepoDb($deposit, $con) {
-    $sql = "INSERT INTO  deposits (floor ,door ,area, garage_area, residents_no, "
-            . "area_ratio, garage_area_ratio, watermeter, resident_name) "
+    $sql = "INSERT INTO  deposits (floor ,door ,area, residents_no, "
+            . "area_ratio, resident_name) "
             . "values (\"{$deposit['floor']}\", \"{$deposit['door']}\", "
-            . "\"{$deposit['area']}\", \"{$deposit['garage_area']}\", "
+            . "\"{$deposit['area']}\","
             . "\"{$deposit['residents']}\", \"{$deposit['area_ratio']}\", "
-            . "\"{$deposit['garage_area_ratio']}\", \"{$deposit['watermeter']}\", "
             . "\"{$deposit['resident_name']}\")";
     //echo $sql;
     $res = mysql_query($sql, $con);
     if (!$res)
     {
-        echo mysql_errno() . ": " . mysql_error();
+        echo mysql_errno() . "(insert): " . mysql_error();
         exit();
     }
-    $sql = "SELECT (SUM(`area`)-(SELECT SUM(`area`) FROM `deposits` WHERE `residents_no`=0)) as t_a from deposits";
+    $sql = "SELECT SUM(`deposits`.`area`)as t_a FROM `deposits`;";
     $result = mysql_query($sql);
     if (!$result)
     {
-        echo mysql_errno() . ": " . mysql_error();
+        echo mysql_errno() . "(ta): " . mysql_error();
         exit;
     }
     while ($row = mysql_fetch_assoc($result)) {
@@ -137,10 +136,10 @@ function insertDepoDb($deposit, $con) {
     $res = mysql_query($sql, $con);
     if (!$res)
     {
-        echo mysql_errno() . ": " . mysql_error();
+        echo mysql_errno() . "(db): " . mysql_error();
         exit();
     }
-    $sql = "SELECT COUNT(`id`) as db from deposits;";
+    $sql = "SELECT SUM(`residents_no`) as db from deposits;";
     $result = mysql_query($sql);
     if (!$result)
     {
@@ -150,7 +149,7 @@ function insertDepoDb($deposit, $con) {
     while ($row = mysql_fetch_assoc($result)) {
         $db = $row['db'];
     }
-    $sql = "UPDATE `plainhouse`.`fees` SET `dealer` = '$db' where `multiplier` = '/albetét';";
+    $sql = "UPDATE `plainhouse`.`fees` SET `dealer` = '$db' where `multiplier` = '/fő';";
     $res = mysql_query($sql, $con);
     if (!$res)
     {
@@ -320,10 +319,9 @@ function getAdminRole($userdata) {
 }
 
 function getADeposit($id) {
-    $sql = "SELECT `id`, `floor`, `door`, `area`, `garage_area`, "
-            . "(`area`+`garage_area`), `residents_no`, `area_ratio`, "
-            . "`garage_area_ratio`, (`area_ratio`+`garage_area_ratio`), "
-            . "`watermeter`, `resident_name` FROM `deposits` WHERE `id`=$id;";
+    $sql = "SELECT `id`, `floor`, `door`, `area`, "
+            . "`residents_no`, `area_ratio`, "
+            . "`resident_name` FROM `deposits` WHERE `id`=$id;";
     $result = mysql_query($sql);
     if (!$result)
     {
@@ -342,13 +340,8 @@ function getADeposit($id) {
    <th> Emelet </th>
    <th> Ajtó </th>
    <th> Lakás terület (nm) </th>
-   <th> Garázs terület (nm) </th>
-   <th> Össz terület (nm) </th>
    <th> Lakók száma </th>
    <th> Lakás tulajdoni hányad </th>
-   <th> Garázs tulajdoni hányad </th>
-   <th> Összes tulajdoni hányad </th>
-   <th> Vízóra </th>
    <th> Lakó neve </th>
 
 </tr>
@@ -379,10 +372,8 @@ EOT;
 function updateDepoDb($deposit, $con) {
     $sql = "UPDATE `plainhouse`.`deposits` SET `floor` = '{$deposit['floor']}', "
             . "`door` = '{$deposit['door']}',`area` = '{$deposit['area']}',"
-            . "`garage_area` = '{$deposit['garage_area']}', `residents_no` = '{$deposit['residents']}',"
+            . "`residents_no` = '{$deposit['residents']}',"
             . "`area_ratio`= '{$deposit['area_ratio']}', "
-            . "`garage_area_ratio`= '{$deposit['garage_area_ratio']}', "
-            . "`watermeter`= '{$deposit['watermeter']}', "
             . "`resident_name` = '{$deposit['resident_name']}' "
             . "WHERE `deposits`.`id` = {$deposit['id']};";
     //echo $sql;
@@ -392,7 +383,7 @@ function updateDepoDb($deposit, $con) {
         echo mysql_errno() . ": " . mysql_error();
         exit();
     }
-    $sql = "SELECT (SUM(`area`)-(SELECT SUM(`area`) FROM `deposits` WHERE `residents_no`=0)) as t_a from deposits";
+    $sql = "SELECT SUM(`residents_no`) as db from deposits;";
     $result = mysql_query($sql);
     if (!$result)
     {
@@ -400,9 +391,9 @@ function updateDepoDb($deposit, $con) {
         exit;
     }
     while ($row = mysql_fetch_assoc($result)) {
-        $ta = $row['t_a'];
+        $db = $row['db'];
     }
-    $sql = "UPDATE `plainhouse`.`fees` SET `dealer` = '$ta' where `multiplier` = '/terület';";
+    $sql = "UPDATE `plainhouse`.`fees` SET `dealer` = '$db' where `multiplier` = '/fő';";
     $res = mysql_query($sql, $con);
     if (!$res)
     {
@@ -412,12 +403,9 @@ function updateDepoDb($deposit, $con) {
 }
 
 function getMyDepo($id) {
-    $water_cost = $twater_cost = $junk_cost = $electrycity_cost = $gas_cost = $cam_cost = $costs_cost = $lift_cost = $m_water_cost = 0;
-    $watermeter = "van";
-    $sql = "SELECT `floor`, `door`, `area`, `garage_area`, "
-            . "(`area`+`garage_area`) as areasum, `residents_no`, `area_ratio`, "
-            . "`garage_area_ratio`, (`area_ratio`+`garage_area_ratio`) as ratiosum, "
-            . "`watermeter`, `resident_name` FROM `deposits` WHERE `id`=$id;";
+    $sql = "SELECT `floor`, `door`, `area`,  "
+            . "`residents_no`, `area_ratio`, "
+            . "`resident_name` FROM `deposits` WHERE `id`=$id;";
     $result1 = mysql_query($sql);
     if (!$result1)
     {
@@ -439,55 +427,15 @@ function getMyDepo($id) {
     while ($row = mysql_fetch_assoc($result2)) {
         $fees[] = $row;
     }
-    $water = $fees[0];
-    $twater = $fees[1];
-    $junk = $fees[2];
-    $electrycity = $fees[3];
-    $gas = $fees[4];
-    $cam = $fees[5];
-    $costs = $fees[6];
-    $lift = $fees[7];
-    $insurance = $fees[8];
-    $bank = $fees[9];
-    $maintenance = $fees[10];
-    $chimney = $fees[11];
-    $cleaning = $fees[12];
-    $renovation = $fees[13];
-    $handling = $fees[14];
-    if ($deposit['watermeter'] == 0)
-    {
-        $water_cost = round((($water['yearly_amount'] / 12) / $water['dealer']) * $deposit['residents_no'], 0);
-        $m_water_cost = round((($water['yearly_amount'] / 12) / $water['dealer']), 0);
-        $watermeter = "nincs";
-    }
-    $twater_cost = round((($twater['yearly_amount'] / 12) / $twater['dealer']), 0);
-    $junk_cost = round(((($junk['yearly_amount'] / 12) / $junk['dealer']) * $deposit['ratiosum']), 0);
-    $m_junk_cost = round(((($junk['yearly_amount'] / 12) / $junk['dealer'])), 0);
-    $electrycity_cost = round(((($electrycity['yearly_amount'] / 12) / $electrycity['dealer']) * $deposit['ratiosum']), 0);
-    $m_electrycity_cost = round(((($electrycity['yearly_amount'] / 12) / $electrycity['dealer'])), 0);
-    if ($deposit['residents_no'] > 0)
-    {
-        $gas_cost = round(((($gas['yearly_amount'] / 12) / $gas['dealer']) * $deposit['area']), 0);
-    }
-    $m_gas_cost = round(((($gas['yearly_amount'] / 12) / $gas['dealer'])), 0);
-    $cam_cost = round(((($cam['yearly_amount'] / 12) / $cam['dealer']) * $deposit['ratiosum']), 0);
-    $m_cam_cost = round(((($cam['yearly_amount'] / 12) / $cam['dealer'])), 0);
-    $costs_cost = round(((($costs['yearly_amount'] / 12) / $costs['dealer']) * $deposit['ratiosum']), 0);
-    $m_costs_cost = round(((($costs['yearly_amount'] / 12) / $costs['dealer'])), 0);
-    $lift_cost = round(((($lift['yearly_amount'] / 12) / $lift['dealer']) * $deposit['ratiosum']), 0);
-    $m_lift_cost = round(((($lift['yearly_amount'] / 12) / $lift['dealer'])), 0);
-    $insurance_cost = round(((($insurance['yearly_amount'] / 12) / $insurance['dealer'])), 0);
-    $bank_cost = round(((($bank['yearly_amount'] / 12) / $bank['dealer'])), 0);
-    $maintenance_cost = round(((($maintenance['yearly_amount'] / 12) / $maintenance['dealer'])), 0);
-    $chimney_cost = round(((($chimney['yearly_amount'] / 12) / $chimney['dealer'])), 0);
-    $cleaning_cost = round(((($cleaning['yearly_amount'] / 12) / $cleaning['dealer'])), 0);
-    $renovation_cost = round(((($renovation['yearly_amount'] / 12) / $renovation['dealer'])), 0);
-    $handling_cost = round(((($handling['yearly_amount'] / 12) / $handling['dealer'])), 0);
+    $ccost = $fees[0];
+    $grabage = $fees[1];
+    
+    $sumarea = $sumresidents = $sumarearatio = $sumccost = 0;
+          
+        $ccost_cost = round(($ccost['yearly_amount'] * $deposit['area']), 0);
+        $grabage_cost = round(($grabage['yearly_amount'] * $deposit['residents_no']), 0);
 
-
-    $ccosts = $water_cost + $twater_cost + $junk_cost + $electrycity_cost + $gas_cost +
-            $cam_cost + $costs_cost + $lift_cost + $insurance_cost + $bank_cost + $maintenance_cost +
-            $chimney_cost + $cleaning_cost + $renovation_cost + $handling_cost;
+    $ccosts = $ccost_cost + $grabage_cost;
 
 
     echo <<<EOT
@@ -498,13 +446,8 @@ function getMyDepo($id) {
    <th> Emelet </th>
    <th> Ajtó </th>
    <th> Lakás terület (nm) </th>
-   <th> Garázs terület (nm) </th>
-   <th> Össz terület (nm) </th>
    <th> Lakók száma </th>
    <th> Lakás tulajdoni hányad </th>
-   <th> Garázs tulajdoni hányad </th>
-   <th> Összes tulajdoni hányad </th>
-   <th> Vízóra </th>
    <th> Lakó neve </th>
    <th>Havi közösköltség</th>
    
@@ -516,13 +459,8 @@ EOT;
     echo "<td>{$deposit['floor']}</td>";
     echo "<td>{$deposit['door']}</td>";
     echo '<td>' . str_replace(".", ",", round($deposit['area'], 2)) . ' m<sup>2</sup></td>';
-    echo '<td>' . str_replace(".", ",", round($deposit['garage_area'], 2)) . ' m<sup>2</sup></td>';
-    echo '<td>' . str_replace(".", ",", round($deposit['areasum'], 2)) . ' m<sup>2</sup></td>';
     echo '<td>' . $deposit['residents_no'] . ' fő</td>';
     echo '<td>' . str_replace(".", ",", round($deposit['area_ratio'], 2)) . '</td>';
-    echo '<td>' . str_replace(".", ",", round($deposit['garage_area_ratio'], 2)) . '</td>';
-    echo '<td>' . str_replace(".", ",", round($deposit['ratiosum'], 2)) . '</td>';
-    echo '<td>' . $watermeter . '</td>';
     echo '<td>' . $deposit['resident_name'] . '</td>';
     echo "<td class='tdwarning'>" . number_format($ccosts, 0, ',', ' ') . " Ft/hó</td>";
     echo '</tr>';
@@ -534,99 +472,34 @@ EOT;
 <table id="responsiveTableTwo" class="large-only" cellspacing="0">
 <tr align="left" class="success">
    <th>Költségek</th>
-   <th> {$water['name']} </th>
-   <th> {$twater['name']}  </th>
-   <th> {$junk['name']}  </th>
-   <th> {$electrycity['name']} </th>
-   <th> {$gas['name']} </th>
-   <th> {$cam['name']} </th>
-   <th> {$costs['name']} </th>
-   <th> {$lift['name']} </th>
-   <th> {$insurance['name']} </th>
-   <th> {$bank['name']} </th>
-   <th> {$maintenance['name']} </th>
-   <th> {$chimney['name']} </th>
-   <th> {$cleaning['name']} </th>
-   <th> {$renovation['name']} </th>
-   <th> {$handling['name']} </th>
+   <th> {$ccost['name']} </th>
+   <th> {$grabage['name']}  </th>
    <th>Összesen</th>
 </tr>
 <tbody>
 <tr>
    <td>Megoszt. módja</td>
-   <td> {$water['multiplier']} </td>
-   <td> {$twater['multiplier']} </td>
-   <td> {$junk['multiplier']}  </td>
-   <td> {$electrycity['multiplier']} </td>
-   <td> {$gas['multiplier']} </td>
-   <td> {$cam['multiplier']} </td>
-   <td> {$costs['multiplier']} </td>
-   <td> {$lift['multiplier']} </td>
-   <td> {$insurance['multiplier']} </td>
-   <td> {$bank['multiplier']} </td>
-   <td> {$maintenance['multiplier']} </td>
-   <td> {$chimney['multiplier']} </td>
-   <td> {$cleaning['multiplier']} </td>
-   <td> {$renovation['multiplier']} </td>
-   <td> {$handling['multiplier']} </td>
+   <td> {$ccost['multiplier']} </td>
+   <td> {$grabage['multiplier']} </td>
    <td class='tdsuccess'> </td>
 </tr>
 EOT;
     echo "<tr>";
-    echo "<td>Éves díj</td>";
-    echo "<td>" . number_format($water['yearly_amount'], 0, ',', ' ') . " Ft/év </td>";
-    echo "<td>" . number_format($twater['yearly_amount'], 0, ',', ' ') . " Ft/év </td>";
-    echo "<td>" . number_format($junk['yearly_amount'], 0, ',', ' ') . " Ft/év </td>";
-    echo "<td>" . number_format($electrycity['yearly_amount'], 0, ',', ' ') . " Ft/év </td>";
-    echo "<td>" . number_format($gas['yearly_amount'], 0, ',', ' ') . " Ft/év </td>";
-    echo "<td>" . number_format($cam['yearly_amount'], 0, ',', ' ') . " Ft/év </td>";
-    echo "<td>" . number_format($costs['yearly_amount'], 0, ',', ' ') . " Ft/év </td>";
-    echo "<td>" . number_format($lift['yearly_amount'], 0, ',', ' ') . " Ft/év </td>";
-    echo "<td>" . number_format($insurance['yearly_amount'], 0, ',', ' ') . " Ft/év </td>";
-    echo "<td>" . number_format($bank['yearly_amount'], 0, ',', ' ') . " Ft/év </td>";
-    echo "<td>" . number_format($maintenance['yearly_amount'], 0, ',', ' ') . " Ft/év </td>";
-    echo "<td>" . number_format($chimney['yearly_amount'], 0, ',', ' ') . " Ft/év </td>";
-    echo "<td>" . number_format($cleaning['yearly_amount'], 0, ',', ' ') . " Ft/év </td>";
-    echo "<td>" . number_format($renovation['yearly_amount'], 0, ',', ' ') . " Ft/év </td>";
-    echo "<td>" . number_format($handling['yearly_amount'], 0, ',', ' ') . " Ft/év </td>";
+    echo "<td>Egységár</td>";
+    echo "<td>" . number_format($ccost['yearly_amount'], 0, ',', ' ') . " Ft/m<sup>2</sup> </td>";
+    echo "<td>" . number_format($grabage['yearly_amount'], 0, ',', ' ') . " Ft/fő </td>";
     echo "<td class='tdsuccess'> </td>";
     echo "</tr>";
     echo "<tr>";
-    echo "<td>Egységár</td>";
-    echo "<td>" . number_format($m_water_cost, 0, ',', ' ') . " Ft/hó/fő</td>";
-    echo "<td>" . number_format($twater_cost, 0, ',', ' ') . " Ft/hó/alb</td>";
-    echo "<td>" . number_format($m_junk_cost, 0, ',', ' ') . " Ft/hó/th</td>";
-    echo "<td>" . number_format($m_electrycity_cost, 0, ',', ' ') . " Ft/hó/th</td>";
-    echo "<td>" . number_format($m_gas_cost, 0, ',', ' ') . " Ft/hó/m<sup>2</sup></td>";
-    echo "<td>" . number_format($m_cam_cost, 0, ',', ' ') . " Ft/hó/th</td>";
-    echo "<td>" . number_format($m_costs_cost, 0, ',', ' ') . " Ft/hó/th</td>";
-    echo "<td>" . number_format($m_lift_cost, 0, ',', ' ') . " Ft/hó/th</td>";
-    echo "<td>" . number_format($insurance_cost, 0, ',', ' ') . " Ft/hó/alb </td>";
-    echo "<td>" . number_format($bank_cost, 0, ',', ' ') . " Ft/hó/alb </td>";
-    echo "<td>" . number_format($maintenance_cost, 0, ',', ' ') . " Ft/hó/alb </td>";
-    echo "<td>" . number_format($chimney_cost, 0, ',', ' ') . " Ft/hó/alb </td>";
-    echo "<td>" . number_format($cleaning_cost, 0, ',', ' ') . " Ft/hó/alb </td>";
-    echo "<td>" . number_format($renovation_cost, 0, ',', ' ') . " Ft/hó/alb </td>";
-    echo "<td>" . number_format($handling_cost, 0, ',', ' ') . " Ft/hó/alb </td>";
+      echo "<td>Szorzó</td>";
+    echo '<td>' . str_replace(".", ",", round($deposit['area'], 2)) . ' m<sup>2</sup> </td>';
+    echo '<td>' . $deposit['residents_no'] . ' fő</td>';
     echo "<td class='tdsuccess'> </td>";
     echo "</tr>";
     echo "<tr>";
     echo "<td>Közösktg.</td>";
-    echo "<td>" . number_format($water_cost, 0, ',', ' ') . " Ft/hó</td>";
-    echo "<td>" . number_format($twater_cost, 0, ',', ' ') . " Ft/hó</td>";
-    echo "<td>" . number_format($junk_cost, 0, ',', ' ') . " Ft/hó</td>";
-    echo "<td>" . number_format($electrycity_cost, 0, ',', ' ') . " Ft/hó</td>";
-    echo "<td>" . number_format($gas_cost, 0, ',', ' ') . " Ft/hó</td>";
-    echo "<td>" . number_format($cam_cost, 0, ',', ' ') . " Ft/hó</td>";
-    echo "<td>" . number_format($costs_cost, 0, ',', ' ') . " Ft/hó</td>";
-    echo "<td>" . number_format($lift_cost, 0, ',', ' ') . " Ft/hó</td>";
-    echo "<td>" . number_format($insurance_cost, 0, ',', ' ') . " Ft/hó </td>";
-    echo "<td>" . number_format($bank_cost, 0, ',', ' ') . " Ft/hó </td>";
-    echo "<td>" . number_format($maintenance_cost, 0, ',', ' ') . " Ft/hó </td>";
-    echo "<td>" . number_format($chimney_cost, 0, ',', ' ') . " Ft/hó </td>";
-    echo "<td>" . number_format($cleaning_cost, 0, ',', ' ') . " Ft/hó </td>";
-    echo "<td>" . number_format($renovation_cost, 0, ',', ' ') . " Ft/hó </td>";
-    echo "<td>" . number_format($handling_cost, 0, ',', ' ') . " Ft/hó </td>";
+    echo "<td>" . number_format($ccost_cost, 0, ',', ' ') . " Ft/hó</td>";
+    echo "<td>" . number_format($grabage_cost, 0, ',', ' ') . " Ft/hó</td>";
     echo "<td class='tdwarning'>" . number_format($ccosts, 0, ',', ' ') . " Ft/hó</td>";
     echo '</tbody>';
     echo '</table>';
@@ -634,12 +507,10 @@ EOT;
 }
 
 function getAllDepo() {
-    $water_cost = $twater_cost = $junk_cost = $electrycity_cost = $gas_cost = $cam_cost = $costs_cost = $lift_cost = $m_water_cost = 0;
-    $watermeter = "van";
-    $sql = "SELECT `id`, `floor`, `door`, `area`, `garage_area`, "
-            . "(`area`+`garage_area`) as areasum, `residents_no`, `area_ratio`, "
-            . "`garage_area_ratio`, (`area_ratio`+`garage_area_ratio`) as ratiosum, "
-            . "`watermeter`, `resident_name` FROM `deposits`;";
+    
+    $sql = "SELECT `id`, `floor`, `door`, `area`, "
+            . "`residents_no`, `area_ratio`, "
+            . "`resident_name` FROM `deposits`;";
     $result1 = mysql_query($sql);
     if (!$result1)
     {
@@ -662,65 +533,21 @@ function getAllDepo() {
     while ($row = mysql_fetch_assoc($result2)) {
         $fees[] = $row;
     }
-    $water = $fees[0];
-    $twater = $fees[1];
-    $junk = $fees[2];
-    $electrycity = $fees[3];
-    $gas = $fees[4];
-    $cam = $fees[5];
-    $costs = $fees[6];
-    $lift = $fees[7];
-    $insurance = $fees[8];
-    $bank = $fees[9];
-    $maintenance = $fees[10];
-    $chimney = $fees[11];
-    $cleaning = $fees[12];
-    $renovation = $fees[13];
-    $handling = $fees[14];
+    $ccost = $fees[0];
+    $grabage = $fees[1];
+    
 
-    $sumarea = $sumgarage = $sumresidents = $sumarearatio = $sumgaragearearatio = $sumallarearatio = $sumccost = 0;
+    $sumarea = $sumresidents = $sumarearatio = $sumccost = 0;
     for ($i = 0; $i < $deprows; $i++) {
-        if ($deposit[$i]['watermeter'] == 0)
-        {
-            $water_cost = round((($water['yearly_amount'] / 12) / $water['dealer']) * $deposit[$i]['residents_no'], 0);
-            $deposit[$i]['watermeter'] = "nincs";
-        }
-        else
-        {
-            $water_cost = 0;
-            $deposit[$i]['watermeter'] = "van";
-        }
-        $twater_cost = round((($twater['yearly_amount'] / 12) / $twater['dealer']), 0);
-        $junk_cost = round(((($junk['yearly_amount'] / 12) / $junk['dealer']) * $deposit[$i]['ratiosum']), 0);
-        $electrycity_cost = round(((($electrycity['yearly_amount'] / 12) / $electrycity['dealer']) * $deposit[$i]['ratiosum']), 0);
-        if ($deposit[$i]['residents_no'] == 0)
-        {
-            $gas_cost = 0;
-        }
-        else
-        {
-            $gas_cost = round(((($gas['yearly_amount'] / 12) / $gas['dealer']) * $deposit[$i]['area']), 0);
-        }
-        $cam_cost = round(((($cam['yearly_amount'] / 12) / $cam['dealer']) * $deposit[$i]['ratiosum']), 0);
-        $costs_cost = round(((($costs['yearly_amount'] / 12) / $costs['dealer']) * $deposit[$i]['ratiosum']), 0);
-        $lift_cost = round(((($lift['yearly_amount'] / 12) / $lift['dealer']) * $deposit[$i]['ratiosum']), 0);
-        $insurance_cost = round(((($insurance['yearly_amount'] / 12) / $insurance['dealer'])), 0);
-        $bank_cost = round(((($bank['yearly_amount'] / 12) / $bank['dealer'])), 0);
-        $maintenance_cost = round(((($maintenance['yearly_amount'] / 12) / $maintenance['dealer'])), 0);
-        $chimney_cost = round(((($chimney['yearly_amount'] / 12) / $chimney['dealer'])), 0);
-        $cleaning_cost = round(((($cleaning['yearly_amount'] / 12) / $cleaning['dealer'])), 0);
-        $renovation_cost = round(((($renovation['yearly_amount'] / 12) / $renovation['dealer'])), 0);
-        $handling_cost = round(((($handling['yearly_amount'] / 12) / $handling['dealer'])), 0);
+        
+        $ccost_cost = round(($ccost['yearly_amount'] * $deposit[$i]['area']), 0);
+        $grabage_cost = round(($grabage['yearly_amount'] * $deposit[$i]['residents_no']), 0);
+        
 
-        $deposit[$i]["ccost"] = $water_cost + $twater_cost + $junk_cost + $electrycity_cost + $gas_cost +
-                $cam_cost + $costs_cost + $lift_cost + $insurance_cost + $bank_cost + $maintenance_cost +
-                $chimney_cost + $cleaning_cost + $renovation_cost + $handling_cost;
+        $deposit[$i]["ccost"] = $ccost_cost + $grabage_cost;
         $sumarea += $deposit[$i]['area'];
-        $sumgarage += $deposit[$i]['garage_area'];
         $sumresidents += $deposit[$i]['residents_no'];
         $sumarearatio += $deposit[$i]['area_ratio'];
-        $sumgaragearearatio += $deposit[$i]['garage_area_ratio'];
-        $sumallarearatio += $deposit[$i]['ratiosum'];
         $sumccost +=$deposit[$i]["ccost"];
     }
 
@@ -733,13 +560,8 @@ function getAllDepo() {
    <th> Emelet </th>
    <th> Ajtó </th>
    <th> Lakás terület (nm) </th>
-   <th> Garázs terület (nm) </th>
-   <th> Össz terület (nm) </th>
    <th> Lakók száma </th>
    <th> Lakás tulajdoni hányad </th>
-   <th> Garázs tulajdoni hányad </th>
-   <th> Összes tulajdoni hányad </th>
-   <th> Vízóra </th>
    <th> Lakó neve </th>
    <th> Közösktg. </th>
    <th> Részletek </th>
@@ -772,17 +594,13 @@ EOT;
         echo '</tr>';
     }
     echo '<tr>';
-    echo '<th colspan=3>Összesen:</th>';
+    echo '<td colspan=3>Összesen:</td>';
     echo "<td>" . number_format($sumarea, 0, ',', ' ') . " m<sup>2</sup></td>";
-    echo "<td>" . number_format($sumgarage, 0, ',', ' ') . " m<sup>2</sup></td>";
-    echo "<td>" . number_format(($sumarea + $sumgarage), 0, ',', ' ') . " m<sup>2</sup></td>";
     echo "<td>$sumresidents fő</td>";
-    echo "<td>" . str_replace(".", ",", round($sumarearatio, 2)) . "</td>";
-    echo "<td>" . str_replace(".", ",", round($sumgaragearearatio, 2)) . "</td>";
-    echo "<td>" . str_replace(".", ",", round($sumallarearatio, 2)) . "</td>";
-    echo '<th colspan=2></th>';
+    echo "<td>" . number_format(str_replace(".", ",", round($sumarearatio, 2)), 0, ',', ' ') . "</td>";
+    echo '<td></td>';
     echo "<td>" . number_format($sumccost, 0, ',', ' ') . "</td>";
-    echo '<th colspan=2></th>';
+    echo '<td colspan=2></td>';
     echo '</tr>';
     echo '</tbody>';
     echo '</table>';

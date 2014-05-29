@@ -70,12 +70,7 @@ function addDeposit() {
                 <input type="text" id="area" name="area" class="form-control">
             
             
-                <label for="garage_area">Garázs alapterülete</label>
-                <input type="text" id="garage_area" name="garage_area" class="form-control">
-
-					<label for="watermeter">Vízóra van</label>
-	                <input type="checkbox" id="watermeter" name="watermeter" class="form-control">
-
+                
             		</div>
 			        <div class="formcolumn">
                 <label for="residents">Lakók száma</label>
@@ -85,10 +80,7 @@ function addDeposit() {
                 <label for="area_ratio">Lakás tulajdoni hányad</label>
                 <input type="text" id="area_ratio" name="area_ratio" class="form-control">
 
-           
-                <label for="garage_area_ratio">Garázs tulajdoni hányad</label>
-                <input type="text" id="garage_area_ratio" name="garage_area_ratio" class="form-control">
-            
+                                 
                 <label for="note">Lakó neve</label>
                 <input type="text" id="note" name="note" class="form-control">
 </div>
@@ -104,7 +96,9 @@ EOT;
 function addUser() {
     echo <<<EOT
 <div class="content">
-    <h3>Új felhasználó felvétele</h3>
+    <button id="newuser" value="Új felhasználó felvétele" class="btn btn-success btn-icon"><i class="fa fa-plus"></i>Új felhasználó felvétele</button>
+   <div id="adduser"> 
+   <h3>Új felhasználó felvétele</h3>
 
     <form action="add.php" method="post">
         <div class="form-group">
@@ -143,6 +137,7 @@ function addUser() {
 
         <button type="input" name="submit" value="Hozzáad" class="btn btn-success btn-icon"><i class="fa fa-plus"></i>Hozzáad</button>
     </form>
+</div>
 </div>
 EOT;
 }
@@ -262,9 +257,9 @@ EOT;
 	                <label for="toggle" class="toggle" data-open="Menü" data-close="Bezár" onclick></label>
 	                <ul class="menu">
 	                    <li><a href="index.php?logout=1">Logout <i class="fa fa-sign-out"></i></a></li>                
-<li><a href="mydepo.php">Saját adataim</a></li>	                   
-   <li><a href="deposits.php">Deposits</a></li>                
-	                    <li><a href="allresidents.php">Felhasználók</a></li>                
+                            <li><a href="mydepo.php">Saját adataim</a></li>	                   
+                            <li><a href="deposits.php">Deposits</a></li>                
+	                    <li><a href="allresidents.php">Felhasználók</a></li>
 	                    <li><a href="session.php">Session check</a></li>
 	                </ul>
 	            </div>
@@ -288,11 +283,6 @@ EOT;
 }
 
 function updateDeposit($depo) {
-    $wm = "";
-    if ($depo['watermeter'] != 0)
-    {
-        $wm = "checked";
-    }
     echo <<<EOT
 
 		<div class="content">
@@ -305,18 +295,12 @@ function updateDeposit($depo) {
 		            <input type="text" id="door" name="door" class="form-control" value="{$depo['door']}">
 		            <label for="area">Lakás alapterülete</label>
 		            <input type="text" id="area" name="area" class="form-control" value="{$depo['area']}">
-		            <label for="garage_area">Garázs alapterülete</label>
-		            <input type="text" id="garage_area" name="garage_area" class="form-control" value="{$depo['garage_area']}">
-		            <label for="watermeter">Vízóra van</label>
-		            <input type="checkbox" id="watermeter" name="watermeter" $wm class="form-control">   
 		        </div>
 		        <div class="formcolumn">
 		            <label for="residents">Lakók száma</label>
 		            <input type="text" id="residents" name="residents" class="form-control" value="{$depo['residents_no']}">
 		            <label for="area_ratio">Lakás tulajdoni hányad</label>
 		            <input type="text" id="area_ratio" name="area_ratio" class="form-control" value="{$depo['area_ratio']}">
-		            <label for="garage_area_ratio">Garázs tulajdoni hányad</label>
-		            <input type="text" id="garage_area_ratio" name="garage_area_ratio" class="form-control" value="{$depo['garage_area_ratio']}">
 		            <label for="note">Lakó neve</label>
 		            <input type="text" id="note" name="note" class="form-control" value="{$depo['resident_name']}">
 		            <input type="hidden" id="id" name="id" class="form-control" value="{$depo['id']}">

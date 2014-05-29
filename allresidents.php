@@ -9,6 +9,10 @@ include_once 'js.php';
 htmlHead($website['title'], $house['name']);
 webheader($_SESSION);
 
+if (isset($_GET["newuser"]))
+{
+    popUp("Új felhasználó felvéve");
+}
 if (isset($_GET["active"]))
 {
     popUp("Felhasználó státusza sikeresen módosítva");
@@ -25,5 +29,6 @@ if (isset($_GET["password"]))
 $con = connectDb();
 listResidents();
 closeDb($con);
-
+addUser();
+showContent("adduser", "newuser");
 htmlEnd();

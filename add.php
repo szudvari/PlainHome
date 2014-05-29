@@ -23,7 +23,7 @@ webheader($_SESSION);
     {
         insertTable("residents", $userdata, $con);
         closeDb($con);
-        echo '<p id="logout"> Felhasználó felvéve.</p>';
+        header("Location: allresidents.php?newuser=1");
         //header("Refresh: 2; url=useradmin.php");
         
     }
