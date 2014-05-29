@@ -909,8 +909,7 @@ EOT;
 	    echo '</tbody>';
 	    echo '</table>';
 		
-    
-   
+  
 }
 
 function changeUserSatus($id, $status) {
