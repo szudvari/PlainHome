@@ -886,7 +886,7 @@ echo <<<EOT
 				<div class="modal-body">
 					<div class="form-group">
                                             <div class="form-group">
-                                                            <input type="hidden" value="{$row['id']} name="id">
+                                                <input type="hidden" value="{$row['id']} name="id">
 						<label for="password1">Új jelszó</label>
 						<input type="password" class="form-control" name="pass1" id="password1">
 						<span class="help-block">Adja meg új jelszavát.</span>
