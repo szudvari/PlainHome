@@ -880,7 +880,7 @@ echo <<<EOT
                     <div class="modal-header modal-primary">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
                         <h4 class="modal-title">Jelszócsere</h4><br />
-                        <h2>{$row['firstname']} {$row['lastname']}</h2>
+                        <h4>{$row['firstname']} {$row['lastname']}</h4>
                     </div>
                     <form action="update_upassword.php" method="post">
 				<div class="modal-body">
