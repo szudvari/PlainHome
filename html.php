@@ -16,7 +16,6 @@ function htmlHead($title, $house) {
         <script src="js/bootstrap.js"></script>
         <script src="js/bootstrap-dialog.js" type="text/javascript"></script>
         <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>     
-        
         <link href="css/bootstrap-dialog.css" rel="stylesheet" type="text/css"/>
 		<link href="css/bootstrap.css" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
