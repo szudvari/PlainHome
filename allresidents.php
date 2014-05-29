@@ -21,14 +21,7 @@ if (isset($_GET["password"]))
 {
     popUp("Felhasználó jelszava sikeresen módosítva");
 }
-echo <<<EOT
-   <script type="text/javascript">
-            $(document).on("click", ".open-AddBookDialog", function () {
-     var myBookId = $(this).data('id');
-     $(".modal-body #bookId").val( myBookId );
-});
-</script>
-EOT;
+
 $con = connectDb();
 listResidents();
 closeDb($con);

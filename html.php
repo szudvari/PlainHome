@@ -46,7 +46,6 @@ function htmlEnd() {
 		<script src="js/respond.js"></script>
 		<script src="js/plainhome.js"></script>
 		<script type="text/javascript" src="js/stacktable.js"></script>
-             
 	</body>
 	</html>
 EOT;
