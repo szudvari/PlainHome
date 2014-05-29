@@ -379,13 +379,13 @@ label {
 
 .btn-success {
   color: #ffffff;
-  background-color: #5cb85c;
-  border-color: #4cae4c;
+  background-color: #336699;
+  border-color: #3e5974;
 }
 	.btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active, .open .dropdown-toggle.btn-success {
 	  color: #ffffff;
-	  background-color: #47a447;
-	  border-color: #398439;
+	  background-color: #3870a8;
+	  border-color: #7696b6;
 	}
 	.btn-success:active, .btn-success.active, .open .dropdown-toggle.btn-success {
 	  background-image: none;
@@ -404,7 +404,7 @@ label {
 	.btn-info:active, .btn-info.active, .open .dropdown-toggle.btn-info {
 	  background-image: none;
 	}
-	
+
 .btn-link {
     border-radius: 0 0 0 0;
     color: #2581bc;
@@ -440,6 +440,10 @@ label {
 	}
 
 .btn-dd .caret { margin-left: 6px; }
+
+.btn-back {
+	margin: 0 0 20px 20px;
+}
 
 /* ==========================================
 	Labels

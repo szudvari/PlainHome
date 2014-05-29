@@ -390,180 +390,6 @@
 		    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
 		}
 		
-		
-		/* ==========================================
-			Buttons
-		   ========================================== */
-		.btn {
-		  display: inline-block;
-		  padding: 6px 12px;
-		  margin-bottom: 0;
-		  font-size: 14px;
-		  font-weight: normal;
-		  line-height: 1.428571429;
-		  text-align: center;
-		  white-space: nowrap;
-		  vertical-align: middle;
-		  cursor: pointer;
-		  border: 1px solid transparent;
-		  border-radius: 0;
-		  -webkit-user-select: none;
-		     -moz-user-select: none;
-		      -ms-user-select: none;
-		       -o-user-select: none;
-		          user-select: none;
-		}
-
-		.btn-icon i { margin-right: 6px; }
-		.btn-icon-alt i { margin-left: 6px; }
-
-		.btn-link:hover, .btn-link:focus {
-		  color: #2a6496;
-		  text-decoration: none;
-		  background-color: transparent;
-		}
-
-		.btn-default {
-		  color: #2581bc;
-		  background-color: #fafafa;
-		  border-color: #e7e7e7;
-		}
-			.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open .dropdown-toggle.btn-default {
-			  color: #333333;
-			  background-color: #ebebeb;
-			  border-color: #adadad;
-			}
-			.btn-default:active, .btn-default.active, .open .dropdown-toggle.btn-default {
-			  background-image: none;
-			}
-
-		.btn-primary {
-		  color: #ffffff;
-		  background-color: #428bca;
-		  border-color: #357ebd;
-		}
-			.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
-			  color: #ffffff;
-			  background-color: #3276b1;
-			  border-color: #285e8e;
-			}
-			.btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
-			  background-image: none;
-			}
-
-		.btn-warning {
-		  color: #ffffff;
-		  background-color: #f0ad4e;
-		  border-color: #eea236;
-		}
-			.btn-warning:hover, .btn-warning:focus, .btn-warning:active, .btn-warning.active, .open .dropdown-toggle.btn-warning {
-			  color: #ffffff;
-			  background-color: #ed9c28;
-			  border-color: #d58512;
-			}
-			.btn-warning:active, .btn-warning.active, .open .dropdown-toggle.btn-warning {
-			  background-image: none;
-			}
-
-		.btn-danger {
-		  color: #ffffff;
-		  background-color: #d9534f;
-		  border-color: #d43f3a;
-		}
-			.btn-danger:hover, .btn-danger:focus, .btn-danger:active, .btn-danger.active, .open .dropdown-toggle.btn-danger {
-			  color: #ffffff;
-			  background-color: #d2322d;
-			  border-color: #ac2925;
-			}
-			.btn-danger:active, .btn-danger.active, .open .dropdown-toggle.btn-danger {
-			  background-image: none;
-			}
-
-		.btn-success {
-		  color: #ffffff;
-		  background-color: #336699;
-		  border-color: #3e5974;
-		}
-			.btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active, .open .dropdown-toggle.btn-success {
-			  color: #ffffff;
-			  background-color: #3870a8;
-			  border-color: #7696b6;
-			}
-			.btn-success:active, .btn-success.active, .open .dropdown-toggle.btn-success {
-			  background-image: none;
-			}
-
-		.btn-info {
-		  color: #ffffff;
-		  background-color: #5bc0de;
-		  border-color: #46b8da;
-		}
-			.btn-info:hover, .btn-info:focus, .btn-info:active, .btn-info.active, .open .dropdown-toggle.btn-info {
-			  color: #ffffff;
-			  background-color: #39b3d7;
-			  border-color: #269abc;
-			}
-			.btn-info:active, .btn-info.active, .open .dropdown-toggle.btn-info {
-			  background-image: none;
-			}
-
-		.btn-link {
-		    border-radius: 0 0 0 0;
-		    color: #2581bc;
-		    cursor: pointer;
-			font-size: 13px;
-		    font-weight: normal;
-			padding: 0;
-		}
-			.btn-link:hover, .btn-link:focus {
-			  color: #555555;
-			  text-decoration: none;
-			  background-color: transparent;
-			}
-
-		.btn-lg {
-		  padding: 10px 16px;
-		  font-size: 18px;
-		  line-height: 1.33;
-		  border-radius: 0;
-		}
-
-		.btn-sm, .btn-xs, .btn-form {
-		  padding: 5px 10px;
-		  font-size: 12px;
-		  line-height: 1.5;
-		  border-radius: 0;
-		}
-			.btn-xs { padding: 1px 5px; 	}
-			.btn-form {
-				padding: 0;
-				color: #d9534f;
-				background-color: transparent;
-			}
-
-		.btn-dd .caret { margin-left: 6px; }
-		
-		.btn-back {
-			margin: 0 0 20px 20px;
-		}
-
-		/* ==========================================
-			Labels
-		   ========================================== */
-		.label {
-		  display: inline;
-		  padding: .2em .6em .3em;
-		  font-size: 75%;
-		  font-weight: normal;
-		  line-height: 1;
-		  color: #ffffff;
-		  text-align: center;
-		  white-space: nowrap;
-		  vertical-align: baseline;
-		  border-radius: 0;
-		}
-		
-		
 		/*
 		 * Navigataur: A pure CSS responsive navigation menu
 		 * Author: Mike King (@micjamking)
@@ -725,7 +551,7 @@
 
 
 
-
+/*
 
 			.modal-open {
 			  overflow: hidden;
@@ -886,6 +712,7 @@
 			  color:white;
 			  -webkit-appearance: none;
 			}
+*/
 			
 /*
 2 oszlopos formok
