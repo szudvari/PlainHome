@@ -868,7 +868,7 @@ EOT;
         }
 
  echo <<<EOT
-        <td>Jelszó módosítás</td>
+        <td><a href="update_upassword.php?uid={$row['id']}">Jelszó módosítás</a></td>
 EOT;
 	        echo '</tr>';
 	    }
