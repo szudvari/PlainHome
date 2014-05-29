@@ -20,6 +20,7 @@ function htmlHead($title, $house) {
         <link href="css/bootstrap-dialog.css" rel="stylesheet" type="text/css"/>
 		<link href="css/bootstrap.css" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
+		<link href="css/custom.css" rel="stylesheet">
 		<link href="css/plainhome.css" rel="stylesheet">
 		<link href="css/datepicker.css" rel="stylesheet">
 		<link href="css/font-awesome.min.css" rel="stylesheet">
