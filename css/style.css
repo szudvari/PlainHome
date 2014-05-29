@@ -789,7 +789,7 @@
 		.nav{ 
 			display: block; 
 			float: left;
-			//margin: 5px 0 5px 0; 
+		//	margin: 5px 0 5px 0; 
 		}
 
 		.nav, .menu, .menu > li, .menu > li > a{ 
@@ -826,7 +826,7 @@
 		@media only screen and (max-width: 768px){
 			.menu{
 				background: #FFFFFF;
-				border-top: 1px solid #2581bc;
+				border-top: 1px solid #336699;
 			}
 
 			.menu, .menu > li, .menu > li > a{

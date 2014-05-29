@@ -4,7 +4,7 @@
 body { padding: 20px 30px; }
 
 a {
-	color: #2581bc;
+	color: #336699;
 	text-decoration: none;
 }
 	a:hover {
@@ -44,7 +44,7 @@ img.imgFrame {
 /* ==========================================
 	Header
    ========================================== */
-.navbar { margin-bottom: 30px; }
+//.navbar { margin-bottom: 30px; }
 
 .logo:before, .logo:after {
     content: " ";
