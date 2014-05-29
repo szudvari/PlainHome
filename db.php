@@ -866,12 +866,47 @@ EOT;
             echo "<td><a id=\"alink\" href=\"update_astatus.php?uid={$row['id']}"
             . "&status=0\">Admin jog kiosztása</a></td>";
         }
-        echo "<td><a id=\"alink\" href=\"update_upassword.php?uid={$row['id']}"
-            . "&status=0\">Jelszó módosítás</a></td>";
-        echo '</tr>';
-    }
-    echo '</tbody>';
-    echo '</table>';
+ 	        echo "<td><a data-toggle=\"modal\" href=\"#newPassword\">Jelszó módosítás</a></td>";
+	        echo '</tr>';
+	    }
+	    echo '</tbody>';
+	    echo '</table>';
+		echo <<<EOT
+		            <div class="modal fade" id="newPassword" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		                <div class="modal-dialog">
+		                    <div class="modal-content">
+		                        <div class="modal-header modal-info">
+		                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+		                            <h4 class="modal-title">Jelszócsere</h4><br />
+		                            <h2>{$row['firstname']} {$user['lastname']}</h2>
+		                        </div>
+
+
+		                        <form action="update_upassport.php" method="post">
+							<div class="modal-body">
+								<div class="form-group">
+		                                                <div class="form-group">
+									<label for="password1">Új jelszó</label>
+									<input type="password" class="form-control" name="pass1" id="password1">
+									<span class="help-block">Adja meg új jelszavát.</span>
+								</div>
+								<div class="form-group">
+									<label for="password2">Új jelszó ismét</label>
+									<input type="password" class="form-control" name="pass2" id="password2">
+									<span class="help-block">Kérjük gépelje be újra a választott jelszót. A jelszavaknak egyezniük kell!</span>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<input name="isEmpty" id="isEmpty" value="" type="hidden">
+								<button type="input" name="submit" value="Módosít" class="btn btn-primary btn-icon"><i class="fa fa-check-square-o"></i> Módosít</button>
+								<button type="button" class="btn btn-danger btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
+							</div>
+					</div>
+		                        </form>
+				    </div>
+			        </div>
+		            </div>
+EOT;
     
    
 }
