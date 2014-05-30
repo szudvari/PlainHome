@@ -8,25 +8,22 @@ include_once 'js.php';
 
 htmlHead($website['title'], $house['name']);
 webheader($_SESSION);
-if (isset($_GET["succes"]))
+
+if (isset($_GET["update"]))
 {
-    popUp("Új albetét sikeresen felvéve.");
-}
-if (isset($_GET["modified"]))
-{
-    popUp("Albetét sikeresen módosítva.");
+    popUp("Díjak sikeresen módosítva");
 }
 if ($_SESSION["admin"] > 0)
 {
     $con = connectDb();
-    getAllDepo();
+    $data=getBaseData();
     closeDb($con);
 
     if ($_SESSION['admin'] > 1)
     {
-        addDeposit();
+        updateBaseData($data);
 
-        showContent("newdeposit", "newdepo");
+        showContent("changedata", "updatedata");
     }
 }
 else

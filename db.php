@@ -132,7 +132,7 @@ function insertDepoDb($deposit, $con) {
     while ($row = mysql_fetch_assoc($result)) {
         $ta = $row['t_a'];
     }
-    $sql = "UPDATE `plainhouse`.`fees` SET `dealer` = '$ta' where `multiplier` = '/terület';";
+    $sql = "UPDATE `plainhouse`.`fees` SET `dealer` = '$ta' where `multiplier` = '/terület-egység';";
     $res = mysql_query($sql, $con);
     if (!$res)
     {
@@ -383,6 +383,23 @@ function updateDepoDb($deposit, $con) {
         echo mysql_errno() . ": " . mysql_error();
         exit();
     }
+    $sql = "SELECT SUM(`deposits`.`area`)as t_a FROM `deposits`;";
+    $result = mysql_query($sql);
+    if (!$result)
+    {
+        echo mysql_errno() . "(ta): " . mysql_error();
+        exit;
+    }
+    while ($row = mysql_fetch_assoc($result)) {
+        $ta = $row['t_a'];
+    }
+    $sql = "UPDATE `plainhouse`.`fees` SET `dealer` = '$ta' where `multiplier` = '/terület-egység';";
+    $res = mysql_query($sql, $con);
+    if (!$res)
+    {
+        echo mysql_errno() . "(db): " . mysql_error();
+        exit();
+    }
     $sql = "SELECT SUM(`residents_no`) as db from deposits;";
     $result = mysql_query($sql);
     if (!$result)
@@ -429,11 +446,11 @@ function getMyDepo($id) {
     }
     $ccost = $fees[0];
     $grabage = $fees[1];
-    
+
     $sumarea = $sumresidents = $sumarearatio = $sumccost = 0;
-          
-        $ccost_cost = round(($ccost['yearly_amount'] * $deposit['area']), 0);
-        $grabage_cost = round(($grabage['yearly_amount'] * $deposit['residents_no']), 0);
+
+    $ccost_cost = round(($ccost['yearly_amount'] * $deposit['area']), 0);
+    $grabage_cost = round(($grabage['yearly_amount'] * $deposit['residents_no']), 0);
 
     $ccosts = $ccost_cost + $grabage_cost;
 
@@ -491,7 +508,7 @@ EOT;
     echo "<td class='tdsuccess'> </td>";
     echo "</tr>";
     echo "<tr>";
-      echo "<td>Szorzó</td>";
+    echo "<td>Szorzó</td>";
     echo '<td>' . str_replace(".", ",", round($deposit['area'], 2)) . ' m<sup>2</sup> </td>';
     echo '<td>' . $deposit['residents_no'] . ' fő</td>';
     echo "<td class='tdsuccess'> </td>";
@@ -507,7 +524,7 @@ EOT;
 }
 
 function getAllDepo() {
-    
+
     $sql = "SELECT `id`, `floor`, `door`, `area`, "
             . "`residents_no`, `area_ratio`, "
             . "`resident_name` FROM `deposits`;";
@@ -535,14 +552,14 @@ function getAllDepo() {
     }
     $ccost = $fees[0];
     $grabage = $fees[1];
-    
+
 
     $sumarea = $sumresidents = $sumarearatio = $sumccost = 0;
     for ($i = 0; $i < $deprows; $i++) {
-        
+
         $ccost_cost = round(($ccost['yearly_amount'] * $deposit[$i]['area']), 0);
         $grabage_cost = round(($grabage['yearly_amount'] * $deposit[$i]['residents_no']), 0);
-        
+
 
         $deposit[$i]["ccost"] = $ccost_cost + $grabage_cost;
         $sumarea += $deposit[$i]['area'];
@@ -639,7 +656,7 @@ function listResidents() {
         }
     }
     echo '<div class="content">';
-    echo  '<h3 class="primary"><i class="fa fa-users"></i> Regisztrált lakók </h3>';
+    echo '<h3 class="primary"><i class="fa fa-users"></i> Regisztrált lakók </h3>';
     echo '<table id="responsiveTable" class="large-only" cellspacing="0">';
     echo <<<EOT
    <tr align="left" class="primary">
@@ -659,10 +676,10 @@ function listResidents() {
 EOT;
     echo "<tbody>";
     foreach ($table as $row) {
-        
+
         echo '<tr>';
         foreach ($row as $value) {
-        echo "<td>$value</td>";   
+            echo "<td>$value</td>";
         }
         if ($row['active'] == "aktív")
         {
@@ -685,18 +702,15 @@ EOT;
             . "&status=0\">Admin jog kiosztása</a></td>";
         }
 
- echo <<<EOT
+        echo <<<EOT
         <td><a href="update_upassword.php?uid={$row['id']}">Jelszó módosítás</a></td>
 EOT;
-	        echo '</tr>';
-	    }
+        echo '</tr>';
+    }
 
-	    echo '</tbody>';
-	    echo '</table>';
-}   
-   
-
-
+    echo '</tbody>';
+    echo '</table>';
+}
 
 function changeUserSatus($id, $status) {
     switch ($status) {
@@ -755,4 +769,61 @@ function getUserData($id) {
     return $array;
 }
 
+function getBaseData() {
+    mysql_query("set names 'utf8'");
+    mysql_query("set character set 'utf8'");
+    $sql = "SELECT `name`, `yearly_amount`, `multiplier` from fees;";
+    $result = mysql_query($sql);
+    if (!$result)
+    {
+        die("getBaseData hiba:" . mysql_errno() . " - " . mysql_error());
+    }
+    $array = array();
+    while ($row = mysql_fetch_assoc($result)) {
+        $array[] = $row;
+    }
+    
+    echo '<div class="content">';
+    echo <<<EOT
+<h3 class="primary"><i class="fa fa-book"></i> Alapköltségek </h3>
+<table id="responsiveTable" class="large-only" cellspacing="0">
+<tr align="left" class="primary">
+   <th> Költség típusa </th>
+   <th> Alapdíj </th>
+   <th> Elosztás módja </th>
+</tr>
+EOT;
+foreach ($array as $row) {
 
+        echo '<tr>';
+        foreach ($row as $value) {
+            if (is_numeric($value)){
+            echo "<td>$value Ft</td>";
+            }
+            else {
+            echo "<td>$value </td>";    
+            }
+        }
+        echo '</tr>';
+        
+}
+   echo '</table>';
+   //print_r($array);
+   return $array; 
+}
+
+function updatebase($data){
+
+$sql = "UPDATE `plainhouse`.`fees` SET `yearly_amount` = {$data['ccost']} WHERE `fees`.`id` = 1;";
+$result = mysql_query($sql);
+    if (!$result)
+    {
+        die("update ccost hiba:" . mysql_errno() . " - " . mysql_error());
+    }
+$sql = "UPDATE `plainhouse`.`fees` SET `yearly_amount` = {$data['ccost']} WHERE `fees`.`id` = 1;";
+$result = mysql_query($sql);
+    if (!$result)
+    {
+        die("update grabage cost hiba:" . mysql_errno() . " - " . mysql_error());
+    }
+}

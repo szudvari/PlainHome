@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Hoszt: 127.0.0.1
--- Létrehozás ideje: 2014. Máj 29. 23:23
+-- Létrehozás ideje: 2014. Máj 30. 21:24
 -- Szerver verzió: 5.5.32
 -- PHP verzió: 5.4.19
 
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `admin` (
 --
 
 INSERT INTO `admin` (`id`, `username`, `email`, `password`, `role`) VALUES
-(1, 'admin', '', '05db4ee4c4ebcb0c19571283be40bdceccb73cd83898519a6ed49c5754fafae46a87e2a14c98aba94f1668633471e149970a7544f93f36ef6bd7eb04f5539517', 1),
+(1, 'admin', '', '05db4ee4c4ebcb0c19571283be40bdceccb73cd83898519a6ed49c5754fafae46a87e2a14c98aba94f1668633471e149970a7544f93f36ef6bd7eb04f5539517', 99),
 (2, 'szudvari', 'udvarisz@yahoo.com', '5420720b710f7f14d3d6d12c37c23a32032d14e08d6a13f613c775d28c388a31b3245d5458fda2d869153be6c0872118ef078df042f776210db7fdab8c46a5d3', 1);
 
 -- --------------------------------------------------------
@@ -70,7 +70,7 @@ INSERT INTO `deposits` (`id`, `floor`, `door`, `area`, `residents_no`, `area_rat
 (1, 'fsz.', '1', 52.35, 2, 164, 'JÁVORSZKYNÉ HORVÁTH ILDIKÓ'),
 (2, 'fsz.', '2', 57.56, 1, 180, 'SZAHULCSIK JÓZSEF'),
 (3, 'fsz.', '3', 57.3, 2, 178, 'DUDÁS JÓZSEFNÉ'),
-(4, 'fsz', '4', 57.3, 2, 178, 'RAMASZ TIBOR & TIBORNÉ'),
+(4, 'fsz.', '4', 57.3, 2, 178, 'RAMASZ TIBOR & TIBORNÉ'),
 (5, '1', '5', 57.3, 2, 178, 'Dr. BÚZÁNÉ TÓTH MÁRIA'),
 (6, '1', '6', 35, 1, 109, 'TÓTH IZABELLA'),
 (7, '1', '7', 57.3, 2, 178, 'BARTHA LEVENTE'),
@@ -152,7 +152,7 @@ CREATE TABLE IF NOT EXISTS `fees` (
 --
 
 INSERT INTO `fees` (`id`, `name`, `yearly_amount`, `dealer`, `multiplier`) VALUES
-(1, 'Közösköltség', 125, 821, '/terület'),
+(1, 'Közösköltség', 125, 3205, '/terület-egység'),
 (2, 'Szemétdíj', 1250, 123, '/fő');
 
 -- --------------------------------------------------------

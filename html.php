@@ -224,9 +224,9 @@ EOT;
 	                <label for="toggle" class="toggle" data-open="Menü" data-close="Bezár" onclick></label>
 	                <ul class="menu">
 	                    <li><a href="adminlogin.php">Admin login</a></li>
-	                    <li><a href="index.php?logout=1">Logout <i class="fa fa-sign-out"></i></a></li>                
- 	                    <li><a href="mydepo.php">Saját adataim</a></li>
+	                    <li><a href="mydepo.php">Saját adataim</a></li>
                             <li><a href="session.php">Session check</a></li>
+                            <li><a href="index.php?logout=1">Logout <i class="fa fa-sign-out"></i></a></li>                
 	                </ul>
 	            </div>
 EOT;
@@ -237,10 +237,11 @@ EOT;
 	            <div>
 	                <label for="toggle" class="toggle" data-open="Menü" data-close="Bezár" onclick></label>
 	                <ul class="menu">
-	                    <li><a href="index.php?logout=1">Logout <i class="fa fa-sign-out"></i></a></li>                
-	                    <li><a href="deposits.php">Deposits</a></li>                
-	                    <li><a href="allresidents.php">Felhasználók</a></li>                
-	                    <li><a href="session.php">Session check</a></li>
+	                    <li><a href="deposits.php">Albetétek</a></li>                
+	                    <li><a href="basedata.php">Alapdíjak</a></li>
+	                    <li><a href="allresidents.php">Felhasználók</a></li>
+                            <li><a href="session.php">Session check</a></li>
+                            <li><a href="index.php?logout=1">Logout <i class="fa fa-sign-out"></i></a></li>     
 	                </ul>
 	            </div>
 EOT;
@@ -251,11 +252,13 @@ EOT;
 	            <div>
 	                <label for="toggle" class="toggle" data-open="Menü" data-close="Bezár" onclick></label>
 	                <ul class="menu">
-	                    <li><a href="index.php?logout=1">Logout <i class="fa fa-sign-out"></i></a></li>                
+	                                    
                             <li><a href="mydepo.php">Saját adataim</a></li>	                   
-                            <li><a href="deposits.php">Deposits</a></li>                
-	                    <li><a href="allresidents.php">Felhasználók</a></li>
-	                    <li><a href="session.php">Session check</a></li>
+                            <li><a href="deposits.php">Albetétek</a></li>                
+	                    <li><a href="basedata.php">Alapdíjak</a></li>
+                            <li><a href="allresidents.php">Felhasználók</a></li>
+                            <li><a href="session.php">Session check</a></li>
+                            <li><a href="index.php?logout=1">Logout <i class="fa fa-sign-out"></i></a></li>
 	                </ul>
 	            </div>
 EOT;
@@ -301,11 +304,37 @@ function updateDeposit($depo) {
 		            <input type="hidden" id="id" name="id" class="form-control" value="{$depo['id']}">
 		        </div>
 		        <div class="buttons">
-		            <button type="input" name="submit" value="Módosít" class="btn btn-success btn-icon"><i class="fa fa-refresh"></i> Módosít</button>
+		            <button type="input" name="submit" value="Módosít" class="btn btn-success btn-icon"><i class="fa fa-save"></i> Módosít</button>
 		        </div>
 		    </form>
 		</div>
 		</div>
+                
+EOT;
+}
+
+function updateBaseData($data) {
+    echo <<<EOT
+
+	<div class="content">
+                <button id="updatedata" value="Alapdíjak módosítása" class="btn btn-success btn-icon"><i class="fa fa-refresh"></i>Alapdíjak módosítása</button>
+                <div id="changedata">
+		    <h3>Alapdíjak módosítása</h3>
+		    <form id="contactform" action="update-base.php" method="post">
+		        <div class="formcolumn">
+		            <label for="ccost">{$data[0]["name"]}</label> 
+		            <input type="text" id="ccost" name="ccost" class="form-control" value="{$data[0]["yearly_amount"]}"> Ft{$data[0]["multiplier"]}
+		        </div>
+		        <div class="formcolumn">
+		            <label for="grabage">{$data[1]["name"]}</label>
+		            <input type="text" id="grabage" name="grabage" class="form-control" value="{$data[1]["yearly_amount"]}"> Ft{$data[1]["multiplier"]} 
+		        </div>
+		        <div class="buttons">
+		            <button type="input" name="submit" value="Módosít" class="btn btn-success btn-icon"><i class="fa fa-save"></i> Módosít</button>
+		        </div>
+		    </form>
+		</div>
+	</div>
                 
 EOT;
 }
