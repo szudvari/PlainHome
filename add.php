@@ -7,6 +7,8 @@ include_once 'html.php';
 
 htmlHead($website['title'], $house['name']);
 webheader($_SESSION);
+if ($_SESSION["admin"] > 0)
+{
  $con = connectDb();   
     $pass = $_POST['pass'];
     $pass2 = $_POST['pass2'];
@@ -33,7 +35,10 @@ webheader($_SESSION);
         echo "A jelszó nem egyezik!";
         header("Refresh: 2; url={$_SERVER['HTTP_REFERER']}");
     }
-    
+}
+else {
+     notLoggedIn();
+}
     htmlEnd();
 
 ?>

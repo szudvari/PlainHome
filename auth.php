@@ -14,7 +14,7 @@ $con = connectDb();
 
  htmlHead($website['title'], $house['name']);
  webheader($_SESSION);
-if (stripos($_SERVER['HTTP_REFERER'], "/login.php"))
+ if (stripos($_SERVER['HTTP_REFERER'], "/login.php"))
 {
     $login = authUserDb($userdata, $con);
     if ($login)

@@ -1,17 +1,20 @@
 <?php
+
 session_start();
 include_once 'config.php';
 include_once 'db.php';
 include_once 'html.php';
 
-$id = $_GET["uid"];
-$con = connectDb();
-$user = getUserData($id);
-$action = $_SERVER["PHP_SELF"] . "?uid=$id";
-closeDb($con);
 htmlHead($website['title'], $house['name']);
 webheader($_SESSION);
-echo <<<EOT
+if ($_SESSION["admin"] > 0)
+{
+    $id = $_GET["uid"];
+    $con = connectDb();
+    $user = getUserData($id);
+    $action = $_SERVER["PHP_SELF"] . "?uid=$id";
+    closeDb($con);
+    echo <<<EOT
    <div class="content">
    <h3 class="primary"><i class="fa fa-key"></i> Jelszó módosítása</h3>
    <form method="post" action="$action"> 
@@ -49,21 +52,26 @@ echo <<<EOT
     </div>
     </div>
 EOT;
-@$pass1 = $_POST["pass1"];
-@$pass2 = $_POST["pass2"];
-if ($_SERVER["REQUEST_METHOD"] == "POST")
+    @$pass1 = $_POST["pass1"];
+    @$pass2 = $_POST["pass2"];
+    if ($_SERVER["REQUEST_METHOD"] == "POST")
+    {
+        if ($pass1 != $pass2)
+        {
+            echo '<p id="notloggedin">A két jelszó nem egyezik!</p>';
+        }
+        else
+        {
+            $password = encodePass($pass1);
+            $con = connectDb();
+            changeUserPassword($id, $password, $con);
+            closeDb($con);
+            header("Location:allresidents.php?password=1");
+        }
+    }
+}
+else
 {
-    if ($pass1 != $pass2)
-    {
-        echo '<p id="notloggedin">A két jelszó nem egyezik!</p>';
-    }
-    else
-    {
-        $password = encodePass($pass1);
-        $con = connectDb();
-        changeUserPassword($id, $password, $con);
-        closeDb($con);
-        header("Location:allresidents.php?password=1");
-    }
+    notLoggedIn();
 }
 htmlEnd();

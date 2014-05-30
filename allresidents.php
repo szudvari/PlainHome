@@ -5,7 +5,7 @@ include_once 'config.php';
 include_once 'db.php';
 include_once 'html.php';
 include_once 'js.php';
-@$id= $_POST['id'];
+@$id = $_POST['id'];
 htmlHead($website['title'], $house['name']);
 webheader($_SESSION);
 
@@ -25,10 +25,16 @@ if (isset($_GET["password"]))
 {
     popUp("Felhasználó jelszava sikeresen módosítva");
 }
-
-$con = connectDb();
-listResidents();
-closeDb($con);
-addUser();
-showContent("adduser", "newuser");
+if ($_SESSION["admin"] > 0)
+{
+    $con = connectDb();
+    listResidents();
+    closeDb($con);
+    addUser();
+    showContent("adduser", "newuser");
+}
+else
+{
+    notLoggedIn();
+}
 htmlEnd();
