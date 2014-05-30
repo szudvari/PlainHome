@@ -332,10 +332,11 @@ function getADeposit($id) {
     while ($row = mysql_fetch_assoc($result)) {
         $table[] = $row;
     }
-    echo '<div class="content"><table id="results">';
+    echo '<div class="content">';
     echo <<<EOT
-<thead>
-<tr>
+<h3 class="primary"><i class="fa fa-list"></i> Albetét adatai</h3>
+<table id="responsiveTable" class="large-only" cellspacing="0">
+<tr align="left" class="primary">
    <th> id </th>
    <th> Emelet </th>
    <th> Ajtó </th>
@@ -343,9 +344,8 @@ function getADeposit($id) {
    <th> Lakók száma </th>
    <th> Lakás tulajdoni hányad </th>
    <th> Lakó neve </th>
-
 </tr>
-</thead>
+
    
 EOT;
     foreach ($table as $row) {
