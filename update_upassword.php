@@ -13,7 +13,7 @@ htmlHead($website['title'], $house['name']);
 webheader($_SESSION);
 echo <<<EOT
    <div class="content">
-   <h3 class="primary"> Jelszó módosítása </h3>
+   <h3 class="primary"><i class="fa fa-key"></i> Jelszó módosítása</h3>
    <form method="post" action="$action"> 
    <table id="responsiveTable" class="large-only" cellspacing="0">
     <tr align="left" class="primary">

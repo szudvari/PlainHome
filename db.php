@@ -440,7 +440,7 @@ function getMyDepo($id) {
 
     echo <<<EOT
 <div class="content">
-<h3 class="primary"> Albetét adatai </h3>
+<h3 class="primary"> Albetét adatai</h3>
 <table id="responsiveTable" class="large-only" cellspacing="0">
 <tr align="left" class="primary">
    <th> Emelet </th>
@@ -553,7 +553,7 @@ function getAllDepo() {
 
     echo '<div class="content">';
     echo <<<EOT
-<h3 class="primary">Albetétek - lista</h3>
+<h3 class="primary"><i class="fa fa-list"></i> Albetétek - lista</h3>
 <table id="responsiveTable" class="large-only" cellspacing="0">
 <tr align="left" class="primary">
    <th> id </th>
@@ -594,13 +594,13 @@ EOT;
         echo '</tr>';
     }
     echo '<tr>';
-    echo '<td colspan=3>Összesen:</td>';
-    echo "<td>" . number_format($sumarea, 0, ',', ' ') . " m<sup>2</sup></td>";
-    echo "<td>$sumresidents fő</td>";
-    echo "<td>" . number_format(str_replace(".", ",", round($sumarearatio, 2)), 0, ',', ' ') . "</td>";
-    echo '<td></td>';
-    echo "<td>" . number_format($sumccost, 0, ',', ' ') . "</td>";
-    echo '<td colspan=2></td>';
+    echo '<td class="tdprimary" colspan=3>Összesen:</td>';
+    echo "<td class='tdwarning'>" . number_format($sumarea, 0, ',', ' ') . " m<sup>2</sup></td>";
+    echo "<td class='tdwarning'>$sumresidents fő</td>";
+    echo "<td class='tdwarning'>" . number_format(str_replace(".", ",", round($sumarearatio, 2)), 0, ',', ' ') . "</td>";
+    echo '<td class="tdprimary"></td>';
+    echo "<td class='tdwarning'>" . number_format($sumccost, 0, ',', ' ') . "</td>";
+    echo '<td class="tdprimary" colspan=2></td>';
     echo '</tr>';
     echo '</tbody>';
     echo '</table>';

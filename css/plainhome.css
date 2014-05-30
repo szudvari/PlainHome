@@ -233,8 +233,8 @@ th {
 	th:first-of-type { border-left: 1px solid #d5d5d5; }
     th { border-right: 1px solid #d5d5d5; }
 	td, th {
-		padding: 2px;
-		text-align: center;
+		padding: 4px 2px 4px 6px;
+		text-align: left;
 		font-size: 13px;
 	}
 	td:first-of-type { border-left: 1px solid #d5d5d5; }
@@ -250,6 +250,7 @@ th {
 .primary th {
     background: #336699;
     color: #ffffff;
+	padding: 10px;
 }
     .sub.primary  {
         font-weight: bold;

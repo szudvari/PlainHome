@@ -54,7 +54,7 @@ function addDeposit() {
 <div class="content">
     <button id="newdepo" value="Új albetét felvétele" class="btn btn-success btn-icon"><i class="fa fa-plus"></i>Új albetét felvétele</button>
     <div id="newdeposit">
-        <h3>Új albetét felvétele</h3>
+        <h3 class="primary"><i class="fa fa-plus"></i> Új albetét felvétele</h3>
     <form id="contactform" action="adddepo.php" method="post">
         <div class="formcolumn">
 
@@ -98,44 +98,39 @@ function addUser() {
 <div class="content">
     <button id="newuser" value="Új felhasználó felvétele" class="btn btn-success btn-icon"><i class="fa fa-plus"></i>Új felhasználó felvétele</button>
    <div id="adduser"> 
-   <h3>Új felhasználó felvétele</h3>
+   <h3 class="primary"><i class="fa fa-plus"></i> Új felhasználó felvétele</h3>
 
-    <form action="add.php" method="post">
-        <div class="form-group">
-
+    <form id="contactform" action="add.php" method="post">
+        <div class="formcolumn">
             <label for="firstname">Vezetéknév</label>
-            <input type="text" id="firstname" name="firstname" class="form-control"></div><br>
+            <input type="text" id="firstname" name="firstname" class="form-control">
 
-        <div class="form-group">
             <label for="lastname">Keresztnév</label>
-            <input type="text" id="lastname" name="lastname" class="form-control"></div><br>
-
-        <div class="form-group">
+            <input type="text" id="lastname" name="lastname" class="form-control">
+        
             <label for="email">E-mail</label>
-            <input type="text" id="email" name="email" class="form-control"></div><br>
+            <input type="text" id="email" name="email" class="form-control">
 
-        <div class="form-group">
+        
             <label for="username">Felhasználónév</label>
-            <input type="text" id="username" name="username" class="form-control"></div><br>
-
-        <div class="form-group">
+            <input type="text" id="username" name="username" class="form-control">
+        	</div>
+		<div class="formcolumn">
             <label for="floor">Emelet</label>
-            <input type="text" id="floor" name="floor" class="form-control"></div><br>
+            <input type="text" id="floor" name="floor" class="form-control">
 
-        <div class="form-group">
             <label for="door">Ajtó</label>
-            <input type="text" id="door" name="door" class="form-control"></div><br>
+            <input type="text" id="door" name="door" class="form-control">
 
-        <div class="form-group">
             <label for="pass">Jelszó</label>
-            <input type="password" id="pass" name="pass" class="form-control"></div><br>
+            <input type="password" id="pass" name="pass" class="form-control">
 
-        <div class="form-group">
             <label for="pass2">Jelszó újra</label>
-            <input type="password" id="pass2" name="pass2" class="form-control"></div><br>
-
-
+            <input type="password" id="pass2" name="pass2" class="form-control">
+		</div>
+		<div class="buttons">
         <button type="input" name="submit" value="Hozzáad" class="btn btn-success btn-icon"><i class="fa fa-plus"></i>Hozzáad</button>
+		</div>
     </form>
 </div>
 </div>
