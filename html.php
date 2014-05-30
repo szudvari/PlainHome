@@ -231,7 +231,7 @@ EOT;
 	            </div>
 EOT;
     }
-    else if (($user["admin"] == 1) && (!(isset($user["depositid"]))))  //belépett admin
+    else if (($user["admin"] > 0) && (!(isset($user["depositid"]))))  //belépett admin
     {
         echo <<<EOT
 	            <div>
@@ -245,7 +245,7 @@ EOT;
 	            </div>
 EOT;
     }
-    else if (($user["admin"] == 1) && ((isset($user["depositid"]))))  //user akinek van admin joga
+    else if (($user["admin"] > 0 ) && ((isset($user["depositid"]))))  //user akinek van admin joga
     {
         echo <<<EOT
 	            <div>
@@ -306,5 +306,6 @@ function updateDeposit($depo) {
 		    </form>
 		</div>
 		</div>
+                
 EOT;
 }

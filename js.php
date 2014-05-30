@@ -27,3 +27,17 @@ function popUp ($message) {
 EOT;
 }
 
+function readOnlyUpdateForm ($id) {
+    echo <<<EOT
+<script type="text/javascript">
+    var id = $id;
+            if (id < 2) {
+            $('#floor').prop('readonly', true);
+                    $('#door').prop('readonly', true);
+                    $('#door').prop('readonly', true);
+                    $('#area').prop('readonly', true);
+                    $('#area_ratio').prop('readonly', true);
+            }
+</script>
+EOT;
+}
