@@ -309,6 +309,13 @@ th {
         color: #5bc0de;
     }
 
+.pwarning {
+	font-style: bold;
+	font-size: 1.2em;
+	color: red;
+	padding: 0 0 0 15px;
+}
+
 .stacktable { width: 100%; }
 .st-head-row a { color: #444 !important; }
 .st-head-row.st-head-row-main { font-size: 14px; padding-top: .4em; }

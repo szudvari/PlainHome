@@ -33,7 +33,7 @@ if ($_SESSION["admin"] > 1)
     <td>{$user['username']}</td>
     <td>{$user['email']}</td>
     
-    <td><button type="input" name="submit" value="Töröl" class="btn btn-success btn-icon"><i class="fa fa-times"></i>Töröl</button> Figyelem nem visszavonható!</td>
+    <td><button type="input" name="submit" value="Töröl" class="btn btn-danger btn-icon"><i class="fa fa-times"></i>Töröl</button><span class="pwarning">Figyelem nem visszavonható!</span</td>
     </tr>
     </tbody>
     </table>
