@@ -38,7 +38,7 @@ if ($_SESSION["admin"] > 0)
     <td>{$user['username']}</td>
     <td>{$user['floor']}</td>
     <td>{$user['door']}</td>
-    <td><button type="input" name="submit" value="töröl" class="btn btn-success btn-icon"><i class="fa fa-times"></i>Törlés</button></td>
+    <td><button type="input" name="submit" value="töröl" class="btn btn-danger btn-icon"><i class="fa fa-times"></i>Törlés</button></td>
     </tr>
     </tbody>
     </table>
