@@ -762,6 +762,10 @@ function getUserData($id) {
             . "`deposits`.`door` FROM residents LEFT JOIN `deposits` "
             . "ON `residents`.`depositid` = `deposits`.`id` WHERE `residents`.`id` = $id;";
     $result = mysql_query($sql);
+    if (!$result)
+    {
+        die("getUserData hiba:" . mysql_errno() . " - " . mysql_error());
+    }
     $array = array();
     while ($row = mysql_fetch_assoc($result)) {
         $array = $row;

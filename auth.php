@@ -11,7 +11,6 @@ $userdata['user'] = $_POST['user'];
 $userdata['pass'] = encodePass($_POST['pass']);
 
 $con = connectDb();
-
  htmlHead($website['title'], $house['name']);
  webheader($_SESSION);
  if (stripos($_SERVER['HTTP_REFERER'], "/login.php"))
@@ -24,7 +23,7 @@ $con = connectDb();
         $_SESSION['userid'] = getUserId($userdata);
         $_SESSION['user'] = $userdata['user'];
         closeDb($con);
-        header("Location: index.php");
+        header("Location: index.php?login=1");
         exit();
     }
     else
@@ -58,6 +57,7 @@ else if (stripos($_SERVER['HTTP_REFERER'], "/adminlogin.php"))
     }
 }
 htmlEnd();
+
 
 
 

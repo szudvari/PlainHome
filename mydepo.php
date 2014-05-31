@@ -5,9 +5,13 @@ include_once 'functions.php';
 include_once 'db.php';
 include_once 'config.php';
 include_once 'html.php';
+include_once 'js.php';
 
 htmlHead($website['title'], $house['name']);
 webheader($_SESSION);
+if (isset($_GET['messagesent'])) {
+     popUp("Üzenet sikeresen elküldve");
+}
 if ($_SESSION['admin'] > 0) {
     echo '<div class="buttons btn-back">
 	   <form action="deposits.php">
@@ -28,4 +32,7 @@ else {
 $con = connectDb();
 getMyDepo($id);
 closeDb($con);
+if (isset($_SESSION['depositid'])){
+sendMessage();
+}
 htmlEnd();

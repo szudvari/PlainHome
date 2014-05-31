@@ -339,7 +339,7 @@ function updateBaseData($data) {
 EOT;
 }
 
-function sendMessage ($user) {  
+function sendMessage () {  
     echo <<<EOT
 		<div class="content">
 				<h3 class="info">Kérdése van? Információra van szüksége?</h3>
@@ -358,3 +358,40 @@ function sendMessage ($user) {
 		</div>
 EOT;
 }
+
+function sendMessageNoUser () {  
+    echo <<<EOT
+		<div class="content">
+				<h3 class="info">Kérdése van? Információra van szüksége?</h3>
+		<p class="lead">Küldjön üzenetet!</p>
+		<form action="message.php" method="post" class="padTop">
+                        <div class="form-group">
+				<label for="from">Az Ön e-mail címe</label>
+				<input type="text" class="form-control" name="from" id="from" value="" />
+			</div>			
+                        <div class="form-group">
+				<label for="subject">Tárgy</label>
+				<input type="text" class="form-control" name="subject" id="subject" value="" />
+			</div>
+			<div class="form-group">
+				<label for="comments">Üzenet</label>
+				<textarea class="form-control" name="comments" id="comments" rows="4"></textarea>
+			</div>
+			<button type="input" name="submit" value="uzenetKuldese" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Küldés</button>
+		</form>
+		</div>
+EOT;
+}
+
+function welcomeIndexNoUser () {
+ echo <<<EOT
+		<div class="content">
+				<h3 class="info">Köszöntjük oldalunkon</h3> 
+               <h4>Ön a Társasház - Pöttyös utca 4. oldallára látogatott.<br></h4>
+                   <p class="lead"> 
+                    Ha ön a ház lakója, kérem, jelentkezzen be!<br>
+                    Amennyiben még nincs felhasználóneve, vagy nem tud belépni, küldjön üzenetet!
+                </p>
+                </div>
+EOT;
+}  

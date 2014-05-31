@@ -14,11 +14,18 @@ if (isset($_GET["logout"]))
     popUp("Sikeresen kijelentkezett!");
 }
 webheader($_SESSION);
-if (isset($_SERVER['HTTP_REFERER']))
+
+if (isset($_GET["login"]))
 {
-    if (stripos($_SERVER['HTTP_REFERER'], "/login.php") && isset($_SERVER['user']))
-    {
-        popUp("Sikeresen bejelentkezett mint \"" . $_SESSION['user'] . "\"!");
-    }
+    popUp("Sikeresen bejelentkezett mint \"" . $_SESSION['user'] . "\"!");
 }
+
+
+if (!isset($_SESSION['user']))
+{
+    welcomeIndexNoUser();
+    sendMessageNoUser();
+}
+
+
 htmlEnd();
