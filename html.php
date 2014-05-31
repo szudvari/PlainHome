@@ -140,6 +140,8 @@ EOT;
 function addAdmin() {
     echo <<<EOT
     <div class="content">
+    <button id="newadmin" value="Új admin felvétele" class="btn btn-success btn-icon"><i class="fa fa-plus"></i>Új admin felvétele</button>
+    <div id="addadmin">
     <h3>Új admin felvétele</h3>
     <form action="adda.php" method="post">
         <div class="form-group">
@@ -163,6 +165,7 @@ function addAdmin() {
 
     </form>
 </div>
+    </div>
 EOT;
 }
 

@@ -831,3 +831,84 @@ $result = mysql_query($sql);
         die("update grabage cost hiba:" . mysql_errno() . " - " . mysql_error());
     }
 }
+
+function listAdmins() {
+    mysql_query("set names 'utf8'");
+    mysql_query("set character set 'utf8'");
+    $sql = "SELECT id, username, email, role from admin where id > 1;";
+
+    $result = mysql_query($sql);
+    $table = array();
+    while ($row = mysql_fetch_assoc($result)) {
+        $table[] = $row;
+    }
+    for ($i = 0; ($i < mysql_num_rows($result)); $i++) {
+        if ($table[$i]['role'] == 1)
+        {
+            $table[$i]['role'] = "Közösképviselő";
+        }
+        else
+        {
+            $table[$i]['role'] = "Adminisztrátor";
+        }
+    }
+    echo '<div class="content">';
+    echo '<h3 class="primary"><i class="fa fa-users"></i> Adminisztrátorok </h3>';
+    echo '<table id="responsiveTable" class="large-only" cellspacing="0">';
+    echo <<<EOT
+   <tr align="left" class="primary">
+   <th> ID </th>
+   <th> Username </th>
+   <th> E-mail </th>
+   <th> Szerepkör</th>
+   <th> Jelszó módosítás </th>
+   <th> Szerepkör módosítása </th>
+   <th> Admin törlése </th>
+   </tr>
+EOT;
+    echo "<tbody>";
+    foreach ($table as $row) {
+
+        echo '<tr>';
+        foreach ($row as $value) {
+            echo "<td>$value</td>";
+        }
+        echo <<<EOT
+      
+        <td><a href="update_apassword.php?uid={$row['id']}">Jelszó módosítás</a></td>
+EOT;
+        if ($row['role'] == "Közösképviselő")
+        {
+            echo "<td><a id=\"alink\" href=\"update_arole.php?uid={$row['id']}"
+            . "&status=0\">Szerepkör módosítása</a></td>";
+        }
+        else
+        {
+            echo "<td><a id=\"alink\" href=\"update_arole.php?uid={$row['id']}"
+            . "&status=1\">Szerepkör módosítása</a></td>";
+        }
+        
+        echo "<td><a href=\"killadmin.php?uid={$row['id']}\">Admin törlése</a></td>";
+
+        echo '</tr>';
+    }
+
+    echo '</tbody>';
+    echo '</table>';
+}
+
+function changeAdminRole($id, $status) {
+    switch ($status) {
+        case "0":
+            $sql = "UPDATE  `admin` SET  `role` =  '99' WHERE  `admin`.`id` =$id;";
+            break;
+        case "1":
+            $sql = "UPDATE  `admin` SET  `role` =  '1' WHERE  `admin`.`id` =$id;";
+            break;
+    }
+    $res = mysql_query($sql);
+    if (!$res)
+    {
+        die("Hiba:" . mysql_errno() . " - " . mysql_error());
+    }
+}
