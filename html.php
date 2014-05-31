@@ -341,10 +341,20 @@ EOT;
 
 function sendMessage ($user) {  
     echo <<<EOT
-  <form method="post" action="message.php">
-  Subject: <input type="text" name="subject"><br>
-  Message: <textarea rows="10" cols="40" name="message"></textarea><br>
-  <input type="submit" name="submit" value="Üzenet küldése">
-  </form>
+		<div class="content">
+				<h3 class="info">Kérdése van? Információra van szüksége?</h3>
+		<p class="lead">Küldjön üzenetet!</p>
+		<form action="message.php" method="post" class="padTop">
+			<div class="form-group">
+				<label for="subject">Tárgy</label>
+				<input type="text" class="form-control" name="subject" id="subject" value="" />
+			</div>
+			<div class="form-group">
+				<label for="comments">Üzenet</label>
+				<textarea class="form-control" name="comments" id="comments" rows="4"></textarea>
+			</div>
+			<button type="input" name="submit" value="contactRequest" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Küldés</button>
+		</form>
+		</div>
 EOT;
 }
