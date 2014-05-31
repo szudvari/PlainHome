@@ -633,32 +633,38 @@ function listResidents() {
             . "FROM residents LEFT JOIN `deposits` ON `residents`.`depositid` = `deposits`.`id`";
 
     $result = mysql_query($sql);
-    $table = array();
-    while ($row = mysql_fetch_assoc($result)) {
-        $table[] = $row;
+    if (!$result)
+    {
+        die("listResidents hiba:" . mysql_errno() . " - " . mysql_error());
     }
-    for ($i = 0; ($i < mysql_num_rows($result)); $i++) {
-        if ($table[$i]['active'] == 1)
-        {
-            $table[$i]['active'] = "aktív";
+    if (mysql_num_rows($result) != 0)
+    {
+        $table = array();
+        while ($row = mysql_fetch_assoc($result)) {
+            $table[] = $row;
         }
-        else
-        {
-            $table[$i]['active'] = "nem aktív";
+        for ($i = 0; ($i < mysql_num_rows($result)); $i++) {
+            if ($table[$i]['active'] == 1)
+            {
+                $table[$i]['active'] = "aktív";
+            }
+            else
+            {
+                $table[$i]['active'] = "nem aktív";
+            }
+            if ($table[$i]['admin'] < 1)
+            {
+                $table[$i]['admin'] = "nem admin";
+            }
+            else
+            {
+                $table[$i]['admin'] = "admin";
+            }
         }
-        if ($table[$i]['admin'] < 1)
-        {
-            $table[$i]['admin'] = "nem admin";
-        }
-        else
-        {
-            $table[$i]['admin'] = "admin";
-        }
-    }
-    echo '<div class="content">';
-    echo '<h3 class="primary"><i class="fa fa-users"></i> Regisztrált lakók </h3>';
-    echo '<table id="responsiveTable" class="large-only" cellspacing="0">';
-    echo <<<EOT
+        echo '<div class="content">';
+        echo '<h3 class="primary"><i class="fa fa-users"></i> Regisztrált lakók </h3>';
+        echo '<table id="responsiveTable" class="large-only" cellspacing="0">';
+        echo <<<EOT
    <tr align="left" class="primary">
    <th> ID </th>
    <th> Vezetéknév </th>
@@ -674,42 +680,47 @@ function listResidents() {
    <th> Jelszó módosítás </th>
    </tr>
 EOT;
-    echo "<tbody>";
-    foreach ($table as $row) {
+        echo "<tbody>";
+        foreach ($table as $row) {
 
-        echo '<tr>';
-        foreach ($row as $value) {
-            echo "<td>$value</td>";
-        }
-        if ($row['active'] == "aktív")
-        {
-            echo "<td><a id=\"alink\" href=\"update_ustatus.php?uid={$row['id']}"
-            . "&status=1\">User letiltása</a></td>";
-        }
-        else
-        {
-            echo "<td><a id=\"alink\" href=\"update_ustatus.php?uid={$row['id']}"
-            . "&status=0\">User aktiválása</a></td>";
-        }
-        if ($row['admin'] == "admin")
-        {
-            echo "<td><a id=\"alink\" href=\"update_astatus.php?uid={$row['id']}"
-            . "&status=1\">Admin jog megvonása</a></td>";
-        }
-        else
-        {
-            echo "<td><a id=\"alink\" href=\"update_astatus.php?uid={$row['id']}"
-            . "&status=0\">Admin jog kiosztása</a></td>";
-        }
+            echo '<tr>';
+            foreach ($row as $value) {
+                echo "<td>$value</td>";
+            }
+            if ($row['active'] == "aktív")
+            {
+                echo "<td><a id=\"alink\" href=\"update_ustatus.php?uid={$row['id']}"
+                . "&status=1\">User letiltása</a></td>";
+            }
+            else
+            {
+                echo "<td><a id=\"alink\" href=\"update_ustatus.php?uid={$row['id']}"
+                . "&status=0\">User aktiválása</a></td>";
+            }
+            if ($row['admin'] == "admin")
+            {
+                echo "<td><a id=\"alink\" href=\"update_astatus.php?uid={$row['id']}"
+                . "&status=1\">Admin jog megvonása</a></td>";
+            }
+            else
+            {
+                echo "<td><a id=\"alink\" href=\"update_astatus.php?uid={$row['id']}"
+                . "&status=0\">Admin jog kiosztása</a></td>";
+            }
 
-        echo <<<EOT
+            echo <<<EOT
         <td><a href="update_upassword.php?uid={$row['id']}">Jelszó módosítás</a></td>
 EOT;
-        echo '</tr>';
-    }
+            echo '</tr>';
+        }
 
-    echo '</tbody>';
-    echo '</table>';
+        echo '</tbody>';
+        echo '</table>';
+    }
+    else
+    {
+        echo 'Még nem vett fel lakókat. Vegyen fel egyet!';
+    }
 }
 
 function changeUserSatus($id, $status) {
@@ -786,7 +797,7 @@ function getBaseData() {
     while ($row = mysql_fetch_assoc($result)) {
         $array[] = $row;
     }
-    
+
     echo '<div class="content">';
     echo <<<EOT
 <h3 class="primary"><i class="fa fa-book"></i> Alapköltségek </h3>
@@ -797,35 +808,36 @@ function getBaseData() {
    <th> Elosztás módja </th>
 </tr>
 EOT;
-foreach ($array as $row) {
+    foreach ($array as $row) {
 
         echo '<tr>';
         foreach ($row as $value) {
-            if (is_numeric($value)){
-            echo "<td>$value Ft</td>";
+            if (is_numeric($value))
+            {
+                echo "<td>$value Ft</td>";
             }
-            else {
-            echo "<td>$value </td>";    
+            else
+            {
+                echo "<td>$value </td>";
             }
         }
         echo '</tr>';
-        
-}
-   echo '</table>';
-   //print_r($array);
-   return $array; 
+    }
+    echo '</table>';
+    //print_r($array);
+    return $array;
 }
 
-function updatebase($data){
+function updatebase($data) {
 
-$sql = "UPDATE `plainhouse`.`fees` SET `yearly_amount` = {$data['ccost']} WHERE `fees`.`id` = 1;";
-$result = mysql_query($sql);
+    $sql = "UPDATE `plainhouse`.`fees` SET `yearly_amount` = {$data['ccost']} WHERE `fees`.`id` = 1;";
+    $result = mysql_query($sql);
     if (!$result)
     {
         die("update ccost hiba:" . mysql_errno() . " - " . mysql_error());
     }
-$sql = "UPDATE `plainhouse`.`fees` SET `yearly_amount` = {$data['ccost']} WHERE `fees`.`id` = 1;";
-$result = mysql_query($sql);
+    $sql = "UPDATE `plainhouse`.`fees` SET `yearly_amount` = {$data['ccost']} WHERE `fees`.`id` = 1;";
+    $result = mysql_query($sql);
     if (!$result)
     {
         die("update grabage cost hiba:" . mysql_errno() . " - " . mysql_error());
@@ -838,24 +850,30 @@ function listAdmins() {
     $sql = "SELECT id, username, email, role from admin where id > 1;";
 
     $result = mysql_query($sql);
-    $table = array();
-    while ($row = mysql_fetch_assoc($result)) {
-        $table[] = $row;
+    if (!$result)
+    {
+        die("listAdmins hiba:" . mysql_errno() . " - " . mysql_error());
     }
-    for ($i = 0; ($i < mysql_num_rows($result)); $i++) {
-        if ($table[$i]['role'] == 1)
-        {
-            $table[$i]['role'] = "Közösképviselő";
+    if (mysql_num_rows($result) != 0)
+    {
+        $table = array();
+        while ($row = mysql_fetch_assoc($result)) {
+            $table[] = $row;
         }
-        else
-        {
-            $table[$i]['role'] = "Adminisztrátor";
+        for ($i = 0; ($i < mysql_num_rows($result)); $i++) {
+            if ($table[$i]['role'] == 1)
+            {
+                $table[$i]['role'] = "Közösképviselő";
+            }
+            else
+            {
+                $table[$i]['role'] = "Adminisztrátor";
+            }
         }
-    }
-    echo '<div class="content">';
-    echo '<h3 class="primary"><i class="fa fa-users"></i> Adminisztrátorok </h3>';
-    echo '<table id="responsiveTable" class="large-only" cellspacing="0">';
-    echo <<<EOT
+        echo '<div class="content">';
+        echo '<h3 class="primary"><i class="fa fa-users"></i> Adminisztrátorok </h3>';
+        echo '<table id="responsiveTable" class="large-only" cellspacing="0">';
+        echo <<<EOT
    <tr align="left" class="primary">
    <th> ID </th>
    <th> Username </th>
@@ -866,35 +884,40 @@ function listAdmins() {
    <th> Admin törlése </th>
    </tr>
 EOT;
-    echo "<tbody>";
-    foreach ($table as $row) {
+        echo "<tbody>";
+        foreach ($table as $row) {
 
-        echo '<tr>';
-        foreach ($row as $value) {
-            echo "<td>$value</td>";
-        }
-        echo <<<EOT
+            echo '<tr>';
+            foreach ($row as $value) {
+                echo "<td>$value</td>";
+            }
+            echo <<<EOT
       
         <td><a href="update_apassword.php?uid={$row['id']}">Jelszó módosítás</a></td>
 EOT;
-        if ($row['role'] == "Közösképviselő")
-        {
-            echo "<td><a id=\"alink\" href=\"update_arole.php?uid={$row['id']}"
-            . "&status=0\">Szerepkör módosítása</a></td>";
-        }
-        else
-        {
-            echo "<td><a id=\"alink\" href=\"update_arole.php?uid={$row['id']}"
-            . "&status=1\">Szerepkör módosítása</a></td>";
-        }
-        
-        echo "<td><a href=\"killadmin.php?uid={$row['id']}\">Admin törlése</a></td>";
+            if ($row['role'] == "Közösképviselő")
+            {
+                echo "<td><a id=\"alink\" href=\"update_arole.php?uid={$row['id']}"
+                . "&status=0\">Szerepkör módosítása</a></td>";
+            }
+            else
+            {
+                echo "<td><a id=\"alink\" href=\"update_arole.php?uid={$row['id']}"
+                . "&status=1\">Szerepkör módosítása</a></td>";
+            }
 
-        echo '</tr>';
+            echo "<td><a href=\"killadmin.php?uid={$row['id']}\">Admin törlése</a></td>";
+
+            echo '</tr>';
+        }
+
+        echo '</tbody>';
+        echo '</table>';
     }
-
-    echo '</tbody>';
-    echo '</table>';
+    else
+    {
+        echo 'Nincsenek adminisztrátorok. Vegyen fel egyet!';
+    }
 }
 
 function changeAdminRole($id, $status) {
@@ -912,6 +935,7 @@ function changeAdminRole($id, $status) {
         die("Hiba:" . mysql_errno() . " - " . mysql_error());
     }
 }
+
 function changeAdminPassword($id, $password) {
     $sql = "UPDATE  `admin` SET  `password` =  '$password' WHERE  `admin`.`id` =$id;";
     $res = mysql_query($sql);
@@ -938,7 +962,8 @@ function getAdminData($id) {
     }
     return $table;
 }
-function killadmin ($id) {
+
+function killadmin($id) {
     $sql = "DELETE from admin where id=$id;";
     $result = mysql_query($sql);
     if (!$result)
