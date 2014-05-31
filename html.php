@@ -354,8 +354,8 @@ function sendMessage () {
 				<input type="text" class="form-control" name="subject" id="subject" value="" />
 			</div>
 			<div class="form-group">
-				<label for="comments">Üzenet</label>
-				<textarea class="form-control" name="comments" id="comments" rows="4"></textarea>
+				<label for="comment">Üzenet</label>
+				<textarea class="form-control" name="comment" id="comment" rows="4"></textarea>
 			</div>
 			<button type="input" name="submit" value="uzenetKuldese" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Küldés</button>
 		</form>
@@ -378,8 +378,8 @@ function sendMessageNoUser () {
 				<input type="text" class="form-control" name="subject" id="subject" value="" />
 			</div>
 			<div class="form-group">
-				<label for="comments">Üzenet</label>
-				<textarea class="form-control" name="comments" id="comments" rows="4"></textarea>
+				<label for="comment">Üzenet</label>
+				<textarea class="form-control" name="comment" id="comment" rows="4"></textarea>
 			</div>
 			<button type="input" name="submit" value="uzenetKuldese" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Küldés</button>
 		</form>

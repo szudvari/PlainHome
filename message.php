@@ -25,15 +25,11 @@ else
     $from = $user['email'];
 }
 $subject = $_POST["subject"];
-$message = $_POST["message"];
+$message = $_POST["comment"];
 // message lines should not exceed 70 characters (PHP rule), so wrap it
 $message = wordwrap($message, 70);
 // send mail
 $mail = mail($house['infomail'], $subject, $message, "From: $from\n");
-if ($mail){
-header("Location: $_SERVER[HTTP_REFERER]?messagesent=1");
-}
-else {
-    die("Hiba");
-}
+//echo $message;
+
 htmlEnd();
