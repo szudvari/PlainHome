@@ -353,7 +353,7 @@ function sendMessage ($user) {
 				<label for="comments">Üzenet</label>
 				<textarea class="form-control" name="comments" id="comments" rows="4"></textarea>
 			</div>
-			<button type="input" name="submit" value="contactRequest" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Küldés</button>
+			<button type="input" name="submit" value="uzenetKuldese" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Küldés</button>
 		</form>
 		</div>
 EOT;
