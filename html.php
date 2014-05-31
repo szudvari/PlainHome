@@ -338,3 +338,13 @@ function updateBaseData($data) {
                 
 EOT;
 }
+
+function sendMessage ($user) {  
+    echo <<<EOT
+  <form method="post" action="message.php">
+  Subject: <input type="text" name="subject"><br>
+  Message: <textarea rows="10" cols="40" name="message"></textarea><br>
+  <input type="submit" name="submit" value="Üzenet küldése">
+  </form>
+EOT;
+}
