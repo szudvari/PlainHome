@@ -20,11 +20,17 @@ if ($_SESSION["admin"] > 0)
     $userdata['username'] = $_POST['username'];
     $userdata['depositid'] = getDepositId($floor, $door);
     $userdata['password'] = encodePass($pass);
+    $user['pass'] = $pass;
+    $user['firstname'] = $userdata['firstname'];
+    $user['lastname'] = $userdata['lastname'];
+    $user['username'] = $userdata['username'];
+    $user['email'] = $userdata['email'];
 
     if ($pass == $pass2)
     {
         insertTable("residents", $userdata, $con);
         closeDb($con);
+        sendMessageToNewUser($user);
         header("Location: allresidents.php?newuser=1");
         //header("Refresh: 2; url=useradmin.php");
         

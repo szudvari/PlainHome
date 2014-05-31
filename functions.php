@@ -40,3 +40,23 @@ function spamcheck($field) {
     return FALSE;
   }
 }
+function sendMessageToNewUser ($user) {
+global $house;
+    $message = <<<EOT
+Kedves {$user['firstname']} {$user['lastname']}!
+    
+Üdvözöljük a {$house['name']} társasház online rendeszerében!
+
+Belépés után tájékozódhat a házat érintő általános ügyekről, aktuális közösköltségéről.
+
+Az ön felhasználóneve: {$user['username']}
+Az ön jelszava: {$user['pass']}
+
+Belépéshez, kérem, látogasson el a {$house['webpage']} weboldalra!
+EOT;
+
+$subject = "PlainHouse regisztráció -". $house['name'];
+$from = $house['infomail'];
+
+mail($user['email'], $subject, $message, "From: $from\n");
+}

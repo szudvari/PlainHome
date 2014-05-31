@@ -11,7 +11,7 @@ webheader($_SESSION);
 
 if (isset($_GET["newuser"]))
 {
-    popUp("Új felhasználó felvéve");
+    popUp("Új felhasználó felvéve, értesítő e-mail kiküldve.");
 }
 if (isset($_GET["active"]))
 {
