@@ -11,6 +11,18 @@ if (isset($_GET["admin"]))
 {
     popUp("Felhasználó admin rangja sikeresen módosítva");
 }
+if (isset($_GET["password"]))
+{
+    popUp("Adminisztrátor jelszava sikeresen módosítva");
+}
+if (isset($_GET["kill"]))
+{
+    popUp("Adminisztrátor sikeresen törölve");
+}
+if (isset($_GET["new"]))
+{
+    popUp("Adminisztrátor sikeresen felvéve");
+}
 if ($_SESSION["admin"] > 1)
 {
     $con = connectDb();

@@ -912,3 +912,37 @@ function changeAdminRole($id, $status) {
         die("Hiba:" . mysql_errno() . " - " . mysql_error());
     }
 }
+function changeAdminPassword($id, $password) {
+    $sql = "UPDATE  `admin` SET  `password` =  '$password' WHERE  `admin`.`id` =$id;";
+    $res = mysql_query($sql);
+    if (!$res)
+    {
+        die("Hiba:" . mysql_errno() . " - " . mysql_error());
+    }
+    return $res;
+}
+
+function getAdminData($id) {
+    mysql_query("set names 'utf8'");
+    mysql_query("set character set 'utf8'");
+    $sql = "SELECT id, username, email, role from admin where id = $id;";
+
+    $result = mysql_query($sql);
+    if (!$result)
+    {
+        die("Hiba:" . mysql_errno() . " - " . mysql_error());
+    }
+    $table = array();
+    while ($row = mysql_fetch_assoc($result)) {
+        $table = $row;
+    }
+    return $table;
+}
+function killadmin ($id) {
+    $sql = "DELETE from admin where id=$id;";
+    $result = mysql_query($sql);
+    if (!$result)
+    {
+        die("Hiba:" . mysql_errno() . " - " . mysql_error());
+    }
+}

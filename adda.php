@@ -20,8 +20,7 @@ if ($_SESSION["admin"] > 0)
     {
         insertTable("admin", $userdata, $con);
         closeDb($con);
-        echo '<p id="logout"> Felhasználó felvéve.</p>';
-        //header("Refresh: 2; url=useradmin.php");
+        header("Location: listadmin.php?new=1");
         
     }
     else

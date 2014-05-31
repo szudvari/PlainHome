@@ -243,6 +243,7 @@ EOT;
 	                    <li><a href="deposits.php">Albetétek</a></li>                
 	                    <li><a href="basedata.php">Alapdíjak</a></li>
 	                    <li><a href="allresidents.php">Felhasználók</a></li>
+	                    <li><a href="listadmin.php">Adminisztrátorok</a></li>
                             <li><a href="session.php">Session check</a></li>
                             <li><a href="index.php?logout=1">Logout <i class="fa fa-sign-out"></i></a></li>     
 	                </ul>
