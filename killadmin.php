@@ -45,7 +45,7 @@ if ($_SESSION["admin"] > 1)
 EOT;
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $con = connectDb();
-        killadmin($id);
+        killAdmin($id);
         closeDb($con);
         header("Location:listadmin.php?kill=1");
     }
