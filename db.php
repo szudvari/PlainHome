@@ -583,6 +583,7 @@ function getAllDepo() {
    <th> Közösktg. </th>
    <th> Részletek </th>
    <th> Módosítás </th>
+     
 </tr>
    
 EOT;
@@ -678,6 +679,7 @@ function listResidents() {
    <th> Státusz módosítása  </th>
    <th> Admin rang kiosztása  </th>
    <th> Jelszó módosítás </th>
+   <th> Törlés</th>
    </tr>
 EOT;
         echo "<tbody>";
@@ -710,6 +712,7 @@ EOT;
 
             echo <<<EOT
         <td><a href="update_upassword.php?uid={$row['id']}">Jelszó módosítás</a></td>
+        <td><a href="killuser.php?uid={$row['id']}">Lakó törlése</a></td>
 EOT;
             echo '</tr>';
         }
@@ -969,5 +972,14 @@ function killAdmin($id) {
     if (!$result)
     {
         die("killAdmin Hiba:" . mysql_errno() . " - " . mysql_error());
+    }
+}
+
+function killUser($id) {
+    $sql = "DELETE from residents where id=$id;";
+    $result = mysql_query($sql);
+    if (!$result)
+    {
+        die("killUser Hiba:" . mysql_errno() . " - " . mysql_error());
     }
 }

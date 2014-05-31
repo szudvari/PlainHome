@@ -25,6 +25,10 @@ if (isset($_GET["password"]))
 {
     popUp("Felhasználó jelszava sikeresen módosítva");
 }
+if (isset($_GET["kill"]))
+{
+    popUp("Felhasználó törölve");
+}
 if ($_SESSION["admin"] > 0)
 {
     $con = connectDb();
