@@ -963,11 +963,11 @@ function getAdminData($id) {
     return $table;
 }
 
-function killadmin($id) {
+function killAdmin($id) {
     $sql = "DELETE from admin where id=$id;";
     $result = mysql_query($sql);
     if (!$result)
     {
-        die("Hiba:" . mysql_errno() . " - " . mysql_error());
+        die("killAdmin Hiba:" . mysql_errno() . " - " . mysql_error());
     }
 }
