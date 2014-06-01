@@ -40,8 +40,6 @@ closeDb($con);
 hideArea("mydepobutton");
 hideArea("ccostbutton");
 if (isset($_SESSION['depositid'])){
-sendMessage();
-showContent("message", "messagebutton");
-changePassword($_SESSION['userid']);
+
 }
 htmlEnd();

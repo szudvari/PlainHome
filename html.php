@@ -353,7 +353,7 @@ EOT;
 
 function sendMessage () {  
     echo <<<EOT
-		<div class="content">
+
 		<a data-toggle="modal" href="#newMsg" class="btn btn-success btn-icon floatLeft"><i class="fa fa-envelope"></i> Üzenet küldése</a>
 		<!-- -- Uj uzenet Modal -- -->
 		<div class="modal fade" id="newMsg" tabindex="-1" role="dialog" aria-hidden="true">
@@ -384,7 +384,7 @@ function sendMessage () {
 				</div>
 			</div>
 		</div>		
-	</div>
+
 EOT;
 }
 
@@ -427,8 +427,7 @@ EOT;
 }
 
 function welcomeIndexUser ($user, $ccost) {
-    $date = date("Y.m.d");
-    $cost = number_format($ccost, 0, ',', ' '); 
+    $date = date("Y.m.d"); 
  echo <<<EOT
     
 <div class="content">
@@ -439,12 +438,12 @@ function welcomeIndexUser ($user, $ccost) {
 		<p class="lead welcomeMsg">A "Saját adataim" menülinkre kattintva, megtekintheti részletes adatait és megváltoztathatja belépési jelszavát!</p>
 	</div>
 	<div class="col-md-6">
-		<div class="alertMsg success"><i class="fa fa-info-circle"></i> Az Ön havi közösköltsége: <span class="floatLeft">$cost Ft</span></div>
+		<div class="alertMsg success"><i class="fa fa-info-circle"></i> Az Ön havi közösköltsége: <span class="floatLeft">$ccost Ft</span></div>
 		<div class="panel panel-info">
 		<div class="panel-heading">
 		<h3 class="panel-title"><i class="fa fa-warning"></i> Havi fizetési kötelezettség<span class="floatRight">$date </span></h3>
 		</div>
-		<div class="panel-body">Minden hónap 10. napjáig legyen szives befizetését rendezni!</div>
+		<div class="panel-body">Minden hónap 10. napjáig legyen szives rendezni!</div>
 		</div>
 		</div>
 	</div>
@@ -453,10 +452,10 @@ EOT;
 
 function changePassword($id) {
     echo <<<EOT
-    <div class="content">
+
         <div class="buttons">
             <a href="update_upassword.php?uid=$id"><button class="btn btn-success btn-icon"><i class="fa fa-refresh"></i> Belépési jelszó módosítása</button></a>
         </div>
-    </div>
+
 EOT;
 }

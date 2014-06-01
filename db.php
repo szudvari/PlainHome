@@ -537,14 +537,21 @@ EOT;
     echo "<td class='tdsuccess'> </td>";
     echo "</tr>";
     echo "<tr>";
-    echo "<td>Közöskköltség</td>";
+    echo "<td>Közösköltség</td>";
     echo "<td>" . number_format($ccost_cost, 0, ',', ' ') . " Ft/hó</td>";
     echo "<td>" . number_format($grabage_cost, 0, ',', ' ') . " Ft/hó</td>";
     echo "<td class='tdwarning'>" . number_format($ccosts, 0, ',', ' ') . " Ft/hó</td>";
     echo '</tbody>';
     echo '</table>';
     echo '</div>';
+	echo '<hr />';
+    echo '<div>';	
+	sendMessage();
+	echo '<span style="text-align:right;">';
+	changePassword($_SESSION['userid']);
+	echo '</span>';
     echo '</div>';
+
 }
 
 
