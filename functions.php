@@ -45,7 +45,7 @@ global $house;
     $message = <<<EOT
 Kedves {$user['firstname']} {$user['lastname']}!
     
-Üdvözöljük a {$house['name']} társasház online rendeszerében!
+Üdvözöljük a {$house['name']} társasház online rendszerében!
 
 Belépés után tájékozódhat a házat érintő általános ügyekről, aktuális közösköltségéről.
 
