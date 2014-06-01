@@ -23,11 +23,12 @@ if ($_SESSION['admin'] > 0) {
 	   </form>
 	   </div>';
 }
-if (isset($_SESSION['depositid'])){
-$id = $_SESSION['depositid'];
-}
-else if (isset($_GET['depositid']) && ($_SESSION['admin']>0)) {
+
+if (isset($_GET['depositid']) && ($_SESSION['admin']>0)) {
  $id = $_GET['depositid']; 
+}
+else if (isset($_SESSION['depositid']) && !isset($_GET['depositid'])){
+$id = $_SESSION['depositid'];
 }
 else {
      notLoggedIn();
