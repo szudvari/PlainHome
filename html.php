@@ -442,7 +442,7 @@ function welcomeIndexUser ($user, $ccost) {
 		<div class="panel-heading">
 		<h3 class="panel-title"><i class="fa fa-warning"></i> Havi fizetési kötelezettség<span class="floatRight">$date </span></h3>
 		</div>
-		<div class="panel-body">Minden hónap 10. napjáig legyenszives rendezni!</div>
+		<div class="panel-body">Minden hónap 10. napjáig legyen szives rendezni!</div>
 		</div>
 		</div>
 	</div>
