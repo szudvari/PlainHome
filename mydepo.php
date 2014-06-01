@@ -36,8 +36,11 @@ else {
 $con = connectDb();
 getMyDepo($id);
 closeDb($con);
+hideArea("mydepobutton");
+hideArea("ccostbutton");
 if (isset($_SESSION['depositid'])){
-changePassword($_SESSION['userid']);
 sendMessage();
+showContent("message", "messagebutton");
+changePassword($_SESSION['userid']);
 }
 htmlEnd();

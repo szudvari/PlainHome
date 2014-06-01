@@ -41,3 +41,12 @@ function readOnlyUpdateForm ($id) {
 </script>
 EOT;
 }
+
+function hideArea ($areaId) {
+echo <<<EOT
+    <script type="text/javascript">
+            $("#$areaId").hide();
+    </script>
+EOT;
+}
+ 

@@ -28,13 +28,22 @@ if (!isset($_SESSION['user']))
     welcomeIndexNoUser();
     sendMessageNoUser();
 }
-
 else if (isset($_SESSION['depositid']))
 {
-	welcomeIndexUser();
-	$con = connectDb();
-	getMyDepo($_SESSION['depositid']);
-	closeDb($con);
+    $id = $_SESSION['userid'];
+    $con = connectDb();
+    $user = getUserData($id);
+    $ccost = getCcost($_SESSION['depositid']);
+    welcomeIndexUser($user, $ccost);
+    getMyDepo($_SESSION['depositid']);
+    showContent("mydepo", "mydepobutton");
+    showContent("ccost", "ccostbutton");
+    closeDb($con);
+    echo "<hr>";
+    sendMessage();
+    showContent("message", "messagebutton");
+    echo "<hr>";
+    changePassword($_SESSION['userid']);
 }
 htmlEnd();
 ?>

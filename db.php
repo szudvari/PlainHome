@@ -370,6 +370,7 @@ EOT;
 }
 
 function updateDepoDb($deposit, $con) {
+    
     $sql = "UPDATE `plainhouse`.`deposits` SET `floor` = '{$deposit['floor']}', "
             . "`door` = '{$deposit['door']}',`area` = '{$deposit['area']}',"
             . "`residents_no` = '{$deposit['residents']}',"
@@ -420,6 +421,7 @@ function updateDepoDb($deposit, $con) {
 }
 
 function getMyDepo($id) {
+    global $_SESSION;
     $sql = "SELECT `floor`, `door`, `area`,  "
             . "`residents_no`, `area_ratio`, "
             . "`resident_name` FROM `deposits` WHERE `id`=$id;";
@@ -447,7 +449,7 @@ function getMyDepo($id) {
     $ccost = $fees[0];
     $grabage = $fees[1];
 
-    $sumarea = $sumresidents = $sumarearatio = $sumccost = 0;
+    $sumccost = 0;
 
     $ccost_cost = round(($ccost['yearly_amount'] * $deposit['area']), 0);
     $grabage_cost = round(($grabage['yearly_amount'] * $deposit['residents_no']), 0);
@@ -457,6 +459,17 @@ function getMyDepo($id) {
 
     echo <<<EOT
 <div class="content">
+EOT;
+    if (isset($_SESSION['depositid'])) {
+        echo <<<EOT
+    <button id="mydepobutton" value="showdepo" class="btn btn-success btn-icon"><i class="fa fa-eye"></i>Albetét részletei</button>
+EOT;
+    }
+
+    
+    echo <<<EOT
+   <div id="mydepo">
+        
 <h3 class="primary"> Albetét adatai</h3>
 <table id="responsiveTable" class="large-only" cellspacing="0">
 <tr align="left" class="primary">
@@ -484,7 +497,16 @@ EOT;
     echo '</tbody>';
     echo '</table>';
     echo <<<EOT
+    </div>
 <hr />
+EOT;
+    if (isset($_SESSION['depositid'])) {
+        echo <<<EOT
+    <button id="ccostbutton" value="showccost" class="btn btn-success btn-icon"><i class="fa fa-eye"></i>Közösköltség részletei</button>
+EOT;
+    }
+    echo <<<EOT
+    <div id="ccost">
 <h3 class="success"> Közösköltség részletezése </h3>
 <table id="responsiveTableTwo" class="large-only" cellspacing="0">
 <tr align="left" class="success">
@@ -495,7 +517,7 @@ EOT;
 </tr>
 <tbody>
 <tr>
-   <td>Megoszt. módja</td>
+   <td>Megosztás módja</td>
    <td> {$ccost['multiplier']} </td>
    <td> {$grabage['multiplier']} </td>
    <td class='tdsuccess'> </td>
@@ -514,14 +536,17 @@ EOT;
     echo "<td class='tdsuccess'> </td>";
     echo "</tr>";
     echo "<tr>";
-    echo "<td>Közösktg.</td>";
+    echo "<td>Közöskköltség</td>";
     echo "<td>" . number_format($ccost_cost, 0, ',', ' ') . " Ft/hó</td>";
     echo "<td>" . number_format($grabage_cost, 0, ',', ' ') . " Ft/hó</td>";
     echo "<td class='tdwarning'>" . number_format($ccosts, 0, ',', ' ') . " Ft/hó</td>";
     echo '</tbody>';
     echo '</table>';
     echo '</div>';
+    echo '</div>';
 }
+
+
 
 function getAllDepo() {
 
@@ -983,4 +1008,42 @@ function killUser($id) {
     {
         die("killUser Hiba:" . mysql_errno() . " - " . mysql_error());
     }
+}
+
+function getCcost($id) {
+    $sql = "SELECT `floor`, `door`, `area`,  "
+            . "`residents_no`, `area_ratio`, "
+            . "`resident_name` FROM `deposits` WHERE `id`=$id;";
+    $result1 = mysql_query($sql);
+    if (!$result1)
+    {
+        echo mysql_errno() . ": " . mysql_error();
+        exit;
+    }
+    $deposit = array();
+    while ($row = mysql_fetch_assoc($result1)) {
+        $deposit = $row;
+    }
+    $sql = "SELECT * from fees;";
+    $result2 = mysql_query($sql);
+    if (!$result2)
+    {
+        echo mysql_errno() . ": " . mysql_error();
+        exit;
+    }
+    $fees = array();
+    while ($row = mysql_fetch_assoc($result2)) {
+        $fees[] = $row;
+    }
+    $ccost = $fees[0];
+    $grabage = $fees[1];
+
+    $sumccost = 0;
+
+    $ccost_cost = round(($ccost['yearly_amount'] * $deposit['area']), 0);
+    $grabage_cost = round(($grabage['yearly_amount'] * $deposit['residents_no']), 0);
+
+    $ccosts = $ccost_cost + $grabage_cost;
+
+    return $ccosts;
 }

@@ -353,6 +353,8 @@ EOT;
 function sendMessage () {  
     echo <<<EOT
 		<div class="content">
+                <button id="messagebutton" value="UzenetKuldese" class="btn btn-success btn-icon"><i class="fa fa-envelope"></i>Üzenet küldése</button>
+                <div id="message">
 				<h3 class="info">Kérdése van? Információra van szüksége?</h3>
 		<p class="lead">Küldjön üzenetet!</p>
 		<form action="message.php" method="post" class="padTop">
@@ -366,6 +368,7 @@ function sendMessage () {
 			</div>
 			<button type="input" name="submit" value="uzenetKuldese" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Küldés</button>
 		</form>
+		</div>
 		</div>
 EOT;
 }
@@ -407,22 +410,24 @@ function welcomeIndexNoUser () {
 EOT;
 }
 
-function welcomeIndexUser () {
+function welcomeIndexUser ($user, $ccost) {
+    $date = date("Y.m.d"); 
  echo <<<EOT
+    
 <div class="content">
 		<div class="row">
 	<div class="col-md-6">
 		<img alt="Tenant Avatar" src="pics/user_avatar.png" class="avatar" />
-		<p class="lead welcomeMsg">Üdvözöljük egyéni oldalán kedves (ide kell betenned a user nevet)!</p>
+		<p class="lead welcomeMsg">Üdvözöljük egyéni oldalán {$user['firstname']} {$user['lastname']}!</p>
 		<p>Megtekintheti részletes bla, bla, bla</p>
 	</div>
 	<div class="col-md-6">
-		<div class="alertMsg success"><i class="fa fa-info-circle"></i> Az Ön havi közösköltsége: ide jon a kod</div>
+		<div class="alertMsg success"><i class="fa fa-info-circle"></i> Az Ön havi közösköltsége: <span class="floatRight">$ccost Ft</span></div>
 		<div class="panel panel-info">
 		<div class="panel-heading">
-		<h3 class="panel-title"><i class="fa fa-warning"></i> Havi fizetési kötelezettség<span class="floatRight"> ide az aktualis rendszer datum johet</span></h3>
+		<h3 class="panel-title"><i class="fa fa-warning"></i> Havi fizetési kötelezettség<span class="floatRight">$date </span></h3>
 		</div>
-		<div class="panel-body">Minden hónap x. legyenszives rendezni</div>
+		<div class="panel-body">Minden hónap 10. napjáig legyenszives rendezni!</div>
 		</div>
 		</div>
 	</div>
