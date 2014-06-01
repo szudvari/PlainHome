@@ -52,7 +52,7 @@ function addDeposit() {
     echo <<<EOT
 
 <div class="content">
-    <button id="newdepo" value="Új albetét felvétele" class="btn btn-success btn-icon"><i class="fa fa-plus"></i>Új albetét felvétele</button>
+    <button id="newdepo" value="ujAlbetetFelvetele" class="btn btn-success btn-icon"><i class="fa fa-plus"></i>Új albetét felvétele</button>
     <div id="newdeposit">
         <h3 class="primary"><i class="fa fa-plus"></i> Új albetét felvétele</h3>
     <form id="contactform" action="adddepo.php" method="post">
@@ -85,7 +85,7 @@ function addDeposit() {
                 <input type="text" id="note" name="note" class="form-control">
 </div>
 <div class="buttons">
-            <button type="input" name="submit" value="Hozzáad" class="btn btn-success btn-icon"><i class="fa fa-plus"></i> Hozzáad</button>
+            <button type="input" name="submit" value="Hozzaad" class="btn btn-success btn-icon"><i class="fa fa-plus"></i> Hozzáad</button>
 </div>
         </form>
     </div>
@@ -96,7 +96,7 @@ EOT;
 function addUser() {
     echo <<<EOT
 <div class="content">
-    <button id="newuser" value="Új felhasználó felvétele" class="btn btn-success btn-icon"><i class="fa fa-plus"></i>Új felhasználó felvétele</button>
+    <button id="newuser" value="UjFelhasznaloFelvetele" class="btn btn-success btn-icon"><i class="fa fa-plus"></i>Új felhasználó felvétele</button>
    <div id="adduser"> 
    <h3 class="primary"><i class="fa fa-plus"></i> Új felhasználó felvétele</h3>
 
@@ -129,7 +129,7 @@ function addUser() {
             <input type="password" id="pass2" name="pass2" class="form-control">
 		</div>
 		<div class="buttons">
-        <button type="input" name="submit" value="Hozzáad" class="btn btn-success btn-icon"><i class="fa fa-plus"></i>Hozzáad</button>
+        <button type="input" name="submit" value="Hozzaad" class="btn btn-success btn-icon"><i class="fa fa-plus"></i>Hozzáad</button>
 		</div>
     </form>
 </div>
@@ -140,7 +140,7 @@ EOT;
 function addAdmin() {
     echo <<<EOT
     <div class="content">
-    <button id="newadmin" value="Új admin felvétele" class="btn btn-success btn-icon"><i class="fa fa-plus"></i>Új admin felvétele</button>
+    <button id="newadmin" value="UjAdminFelvetele" class="btn btn-success btn-icon"><i class="fa fa-plus"></i>Új admin felvétele</button>
     <div id="addadmin">
     <h3>Új admin felvétele</h3>
     <form action="adda.php" method="post">
@@ -161,7 +161,7 @@ function addAdmin() {
             <input type="password" id="pass2" name="pass2" class="form-control"></div><br>
 
 
-        <button type="input" name="submit" value="Hozzáad" class="btn btn-success btn-icon"><i class="fa fa-sign-in"></i>Hozzáad</button>
+        <button type="input" name="submit" value="Hozzaad" class="btn btn-success btn-icon"><i class="fa fa-sign-in"></i>Hozzáad</button>
 
     </form>
 </div>
@@ -183,7 +183,7 @@ function loginUser() {
 					<label for="pass">Jelszó</label>
 					<input type="password" id="pass" name="pass" class="form-control">
 			</div><br>
-			<button type="input" name="submit" value="Belépés" class="btn btn-success btn-icon"><i class="fa fa-sign-in"></i>Belépés</button>
+			<button type="input" name="submit" value="Belepes" class="btn btn-success btn-icon"><i class="fa fa-sign-in"></i>Belépés</button>
 			</form>
 
 EOT;
@@ -306,7 +306,7 @@ function updateDeposit($depo) {
 		            <input type="hidden" id="id" name="id" class="form-control" value="{$depo['id']}">
 		        </div>
 		        <div class="buttons">
-		            <button type="input" name="submit" value="Módosít" class="btn btn-success btn-icon"><i class="fa fa-save"></i> Módosít</button>
+		            <button type="input" name="submit" value="Modosit" class="btn btn-success btn-icon"><i class="fa fa-save"></i> Módosít</button>
 		        </div>
 		    </form>
 		</div>
@@ -319,7 +319,7 @@ function updateBaseData($data) {
     echo <<<EOT
 
 	<div class="content">
-                <button id="updatedata" value="Alapdíjak módosítása" class="btn btn-success btn-icon"><i class="fa fa-refresh"></i>Alapdíjak módosítása</button>
+                <button id="updatedata" value="alapdijakModositasa" class="btn btn-success btn-icon"><i class="fa fa-refresh"></i>Alapdíjak módosítása</button>
                 <div id="changedata">
 		    <h3>Alapdíjak módosítása</h3>
 		    <form id="contactform" action="update-base.php" method="post">
@@ -332,7 +332,7 @@ function updateBaseData($data) {
 		            <input type="text" id="grabage" name="grabage" class="form-control" value="{$data[1]["yearly_amount"]}"> Ft{$data[1]["multiplier"]} 
 		        </div>
 		        <div class="buttons">
-		            <button type="input" name="submit" value="Módosít" class="btn btn-success btn-icon"><i class="fa fa-save"></i> Módosít</button>
+		            <button type="input" name="submit" value="Modosit" class="btn btn-success btn-icon"><i class="fa fa-save"></i> Módosít</button>
 		        </div>
 		    </form>
 		</div>
