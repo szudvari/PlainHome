@@ -409,9 +409,23 @@ EOT;
 
 function welcomeIndexUser () {
  echo <<<EOT
-		<div class="content">
-				<h3>Üdvözöljük!</h3>
-        </div>
+<div class="content">
+		<div class="row">
+	<div class="col-md-6">
+		<img alt="Tenant Avatar" src="pics/user_avatar.png" class="avatar" />
+		<p class="lead welcomeMsg">Üdvözöljük egyéni oldalán kedves (ide kell betenned a user nevet)!</p>
+		<p>Megtekintheti részletes bla, bla, bla</p>
+	</div>
+	<div class="col-md-6">
+		<div class="alertMsg success"><i class="fa fa-info-circle"></i> Az Ön havi közösköltsége: ide jon a kod</div>
+		<div class="panel panel-info">
+		<div class="panel-heading">
+		<h3 class="panel-title"><i class="fa fa-warning"></i> Havi fizetési kötelezettség<span class="floatRight"> ide az aktualis rendszer datum johet</span></h3>
+		</div>
+		<div class="panel-body">Minden hónap x. legyenszives rendezni</div>
+		</div>
+		</div>
+	</div>
 EOT;
 }  
 
