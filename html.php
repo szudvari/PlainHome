@@ -419,7 +419,7 @@ function welcomeIndexUser ($user, $ccost) {
 	<div class="col-md-6">
 		<img alt="Tenant Avatar" src="pics/user_avatar.png" class="avatar" />
 		<p class="lead welcomeMsg">Üdvözöljük egyéni oldalán {$user['firstname']} {$user['lastname']}!</p>
-		<p>Megtekintheti részletes bla, bla, bla</p>
+		<p class="lead welcomeMsg">A "Saját adataim" menülinkre kattintva, megtekintheti részletes adatait.</p>
 	</div>
 	<div class="col-md-6">
 		<div class="alertMsg success"><i class="fa fa-info-circle"></i> Az Ön havi közösköltsége: <span class="floatLeft">$ccost Ft</span></div>
