@@ -29,11 +29,11 @@ if (!isset($_SESSION['user']))
     sendMessageNoUser();
 }
 
-if (isset($_SESSION['user']))
+else if (isset($_SESSION['depositid']))
 {
 	welcomeIndexUser();
 	$con = connectDb();
-	getMyDepo($id);
+	getMyDepo($_SESSION['depositid']);
 	closeDb($con);
 }
 htmlEnd();

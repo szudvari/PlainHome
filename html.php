@@ -401,7 +401,7 @@ EOT;
 function welcomeIndexUser () {
  echo <<<EOT
 		<div class="content">
-				<h3 class="primary">Albetét adatai</h3>
+				<h3>Üdvözöljük!</h3>
         </div>
 EOT;
 }  
