@@ -396,4 +396,12 @@ function welcomeIndexNoUser () {
                 </p>
                 </div>
 EOT;
+}
+
+function welcomeIndexUser () {
+ echo <<<EOT
+		<div class="content">
+				<h3 class="primary">Albetét adatai</h3>
+        </div>
+EOT;
 }  
