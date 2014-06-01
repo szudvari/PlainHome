@@ -6,7 +6,7 @@ $db['pass'] = "root";
 $db['charset'] = "utf8";
 
 $website['title'] = "PlainHouse";
-$website['version'] = "v0.0.0 alpha";
+$website['version'] = "0.1a";
 
 $house['name'] = "Pöttyös utca 4.";
 $house['infomail'] = "szudvari@gmail.com";
