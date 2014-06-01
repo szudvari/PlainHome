@@ -333,9 +333,12 @@ function updateBaseData($data) {
 		        </div>
 		        <div class="buttons">
 		            <button type="input" name="submit" value="Modosit" class="btn btn-success btn-icon"><i class="fa fa-save"></i> Módosít</button>
-		        </div>
+                        </div>
 		    </form>
-		</div>
+                        <div class="buttons">
+                            <a href="basedata.php?noupdate=1"><button class="btn btn-success btn-icon"><i class="fa fa-times"></i> Mégsem</button></a>
+                        </div>
+                    </div>
 	</div>
                 
 EOT;
