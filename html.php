@@ -389,10 +389,10 @@ function welcomeIndexNoUser () {
  echo <<<EOT
 		<div class="content">
 				<h3 class="info">Köszöntjük oldalunkon</h3> 
-               <h4>Ön a Társasház - Pöttyös utca 4. oldallára látogatott.<br></h4>
+               <h4>Ön a Társasház - Pöttyös utca 4. oldalára látogatott.<br></h4>
                    <p class="lead"> 
                     Ha ön a ház lakója, kérem, jelentkezzen be!<br>
-                    Amennyiben még nincs felhasználóneve, vagy nem tud belépni, küldjön üzenetet!
+                    Amennyiben még nincs felhasználóneve vagy nem tud belépni, küldjön üzenetet!
                 </p>
                 </div>
 EOT;
