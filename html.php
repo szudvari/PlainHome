@@ -398,10 +398,11 @@ EOT;
 }
 
 function welcomeIndexNoUser () {
+	global $house;
  echo <<<EOT
 		<div class="content">
 				<h3 class="info">Köszöntjük oldalunkon</h3> 
-               <h4>Ön a Társasház - Pöttyös utca 4. oldalára látogatott.<br></h4>
+               <h4>Ön a Társasház - {$house['name']} oldalára látogatott.<br></h4>
                    <p class="lead"> 
                     Ha Ön a ház lakója, kérem, jelentkezzen be!<br>
                     Amennyiben még nincs felhasználóneve vagy nem tud belépni, küldjön üzenetet!
