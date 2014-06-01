@@ -25,7 +25,14 @@ else
     closeDb($con);
     $from = $user['email'];
 }
-$url = $_SERVER['HTTP_REFERER']."?messagesent=1";
+if (stripos($_SERVER['HTTP_REFERER'], "/mydepo.php"))
+{
+   $url = "mydepo.php?messagesent=1"; 
+}
+else
+{
+   $url = "index.php?messagesent=1"; 
+}
 $subject = $_POST["subject"];
 $message = $_POST["comment"];
 // message lines should not exceed 70 characters (PHP rule), so wrap it
