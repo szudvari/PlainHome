@@ -35,15 +35,10 @@ else if (isset($_SESSION['depositid']))
     $user = getUserData($id);
     $ccost = getCcost($_SESSION['depositid']);
     welcomeIndexUser($user, $ccost);
-    getMyDepo($_SESSION['depositid']);
-    showContent("mydepo", "mydepobutton");
-    showContent("ccost", "ccostbutton");
-    closeDb($con);
-    echo "<hr>";
+
     sendMessage();
     showContent("message", "messagebutton");
-    echo "<hr>";
-    changePassword($_SESSION['userid']);
+
 }
 htmlEnd();
 ?>
