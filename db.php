@@ -631,7 +631,8 @@ function listResidents() {
     $sql = "SELECT `residents`.`id`,`residents`.`firstname`,`residents`.`lastname`,"
             . "`residents`.`email`,`residents`.`username`,`deposits`.`floor`,"
             . "`deposits`.`door`,`residents`.`active`,`residents`.`admin` "
-            . "FROM residents LEFT JOIN `deposits` ON `residents`.`depositid` = `deposits`.`id`";
+            . "FROM residents LEFT JOIN `deposits` ON `residents`.`depositid` = `deposits`.`id` "
+            . "order by `deposits`.`floor`, `deposits`.`door`";
 
     $result = mysql_query($sql);
     if (!$result)
