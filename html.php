@@ -220,7 +220,7 @@ EOT;
 	            <div>
 	                <label for="toggle" class="toggle" data-open="Menü" data-close="Bezár" onclick></label>
 	                <ul class="menu">
-	                    <li><a href="login.php"><i class="fa fa-sign-in"></i> Login</a></li>
+	                    <li><a href="login.php"><i class="fa fa-sign-in"></i> Belépés</a></li>
 	                </ul>
 	            </div>
 EOT;
@@ -233,7 +233,7 @@ EOT;
 	                <ul class="menu">
 	                    <li><a href="mydepo.php">Saját adataim</a></li>
                             <li><a href="session.php">Session check</a></li>
-                            <li><a href="index.php?logout=1">Logout <i class="fa fa-sign-out"></i></a></li>                
+                            <li><a href="index.php?logout=1">Kilépés <i class="fa fa-sign-out"></i></a></li>                
 	                </ul>
 	            </div>
 EOT;
@@ -249,7 +249,7 @@ EOT;
 	                    <li><a href="allresidents.php">Felhasználók</a></li>
 	                    <li><a href="listadmin.php">Adminisztrátorok</a></li>
                             <li><a href="session.php">Session check</a></li>
-                            <li><a href="index.php?logout=1">Logout <i class="fa fa-sign-out"></i></a></li>     
+                            <li><a href="index.php?logout=1">Kilépés <i class="fa fa-sign-out"></i></a></li>     
 	                </ul>
 	            </div>
 EOT;
@@ -266,7 +266,7 @@ EOT;
 	                    <li><a href="basedata.php">Alapdíjak</a></li>
                             <li><a href="allresidents.php">Felhasználók</a></li>
                             <li><a href="session.php">Session check</a></li>
-                            <li><a href="index.php?logout=1">Logout <i class="fa fa-sign-out"></i></a></li>
+                            <li><a href="index.php?logout=1">Kilépés <i class="fa fa-sign-out"></i></a></li>
 	                </ul>
 	            </div>
 EOT;
