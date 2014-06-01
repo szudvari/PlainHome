@@ -422,7 +422,7 @@ function welcomeIndexUser ($user, $ccost) {
 		<p>Megtekintheti részletes bla, bla, bla</p>
 	</div>
 	<div class="col-md-6">
-		<div class="alertMsg success"><i class="fa fa-info-circle"></i> Az Ön havi közösköltsége: <span class="floatRight">$ccost Ft</span></div>
+		<div class="alertMsg success"><i class="fa fa-info-circle"></i> Az Ön havi közösköltsége: <span class="floatLeft">$ccost Ft</span></div>
 		<div class="panel panel-info">
 		<div class="panel-heading">
 		<h3 class="panel-title"><i class="fa fa-warning"></i> Havi fizetési kötelezettség<span class="floatRight">$date </span></h3>
