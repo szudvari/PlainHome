@@ -1,25 +1,23 @@
 <?php
-// display form if user has not clicked submit
-if (!isset($_POST["submit"])) {
-?>
-  <form method="post" action="<?php echo $_SERVER["PHP_SELF"];?>">
-  From: <input type="text" name="from"><br>
-  Subject: <input type="text" name="subject"><br>
-  Message: <textarea rows="10" cols="40" name="message"></textarea><br>
-  <input type="submit" name="submit" value="Submit Feedback">
-  </form>
-  <?php 
-} else {    // the user has submitted the form
-  // Check if the "from" input field is filled out
-  if (isset($_POST["from"])) {
-    $from = $_POST["from"]; // sender
-    $subject = $_POST["subject"];
-    $message = $_POST["message"];
-    // message lines should not exceed 70 characters (PHP rule), so wrap it
-    $message = wordwrap($message, 70);
-    // send mail
-    mail("webmaster@example.com",$subject,$message,"From: $from\n");
-    echo "Thank you for sending us feedback";
-  }
+session_start();
+
+include_once 'functions.php';
+include_once 'db.php';
+include_once 'config.php';
+include_once 'html.php';
+include_once 'js.php';
+
+htmlHead($website['title'], $house['name']);
+
+$con = connectDb();
+$ccost = getCcost($_SESSION['depositid']);
+closeDb($con);
+
+function round_up_to_nearest_n($int, $n) {
+    return round($int / $n) * $n;
 }
-?>
+echo round_up_to_nearest_n(9676, 50);
+
+//$ccost = (round($ccost/100))*100;
+//
+//echo $ccost;
