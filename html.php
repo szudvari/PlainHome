@@ -426,7 +426,8 @@ EOT;
 }
 
 function welcomeIndexUser ($user, $ccost) {
-    $date = date("Y.m.d"); 
+    $date = date("Y.m.d");
+    $cost = number_format($ccost, 0, ',', ' '); 
  echo <<<EOT
     
 <div class="content">
@@ -437,7 +438,7 @@ function welcomeIndexUser ($user, $ccost) {
 		<p class="lead welcomeMsg">A "Saját adataim" menülinkre kattintva, megtekintheti részletes adatait és megváltoztathatja belépési jelszavát!</p>
 	</div>
 	<div class="col-md-6">
-		<div class="alertMsg success"><i class="fa fa-info-circle"></i> Az Ön havi közösköltsége: <span class="floatLeft">$ccost Ft</span></div>
+		<div class="alertMsg success"><i class="fa fa-info-circle"></i> Az Ön havi közösköltsége: <span class="floatLeft">$cost Ft</span></div>
 		<div class="panel panel-info">
 		<div class="panel-heading">
 		<h3 class="panel-title"><i class="fa fa-warning"></i> Havi fizetési kötelezettség<span class="floatRight">$date </span></h3>
