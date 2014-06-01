@@ -353,7 +353,6 @@ EOT;
 function sendMessage () {  
     echo <<<EOT
 		<div class="content">
-		<div class="alertMsg success"><span><i class='fa fa-check-square-o'></i></span> Üzenetét továbbítottuk!<a class="alert-close" href="#">x</a></div>
 		<a data-toggle="modal" href="#newMsg" class="btn btn-success btn-icon floatLeft"><i class="fa fa-envelope"></i> Üzenet küldése</a>
 		<!-- -- Uj uzenet Modal -- -->
 		<div class="modal fade" id="newMsg" tabindex="-1" role="dialog" aria-hidden="true">
