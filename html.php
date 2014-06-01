@@ -33,11 +33,12 @@ EOT;
 }
 
 function htmlEnd() {
+    global $website;
     echo <<<EOT
 			</div>
 			<div class="footer">
 				<p class="textCenter">
-					&copy; 2014 <a href="http://webariel.hu" target="_blank">PlainHome Version 0.1a</a></p>
+                                        &copy; 2014 <a href="http://webariel.hu" target="_blank">PlainHouse Version {$website['version']}</a></p>
 			</div>
 		</div>
 		<script src="js/jquery.js"></script>
