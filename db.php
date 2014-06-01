@@ -451,7 +451,8 @@ function getMyDepo($id) {
 
     $sumccost = 0;
 
-    $ccost_cost = round(($ccost['yearly_amount'] * $deposit['area']), 0);
+    $ccost_base = round(($ccost['yearly_amount'] * $deposit['area']), 0);
+    $ccost_cost = round_to_nearest_n($ccost_base, 50);
     $grabage_cost = round(($grabage['yearly_amount'] * $deposit['residents_no']), 0);
 
     $ccosts = $ccost_cost + $grabage_cost;
@@ -582,7 +583,8 @@ function getAllDepo() {
     $sumarea = $sumresidents = $sumarearatio = $sumccost = 0;
     for ($i = 0; $i < $deprows; $i++) {
 
-        $ccost_cost = round(($ccost['yearly_amount'] * $deposit[$i]['area']), 0);
+        $ccost_base = round(($ccost['yearly_amount'] * $deposit[$i]['area']), 0);
+        $ccost_cost = round_to_nearest_n($ccost_base, 50);
         $grabage_cost = round(($grabage['yearly_amount'] * $deposit[$i]['residents_no']), 0);
 
 
@@ -1040,7 +1042,8 @@ function getCcost($id) {
 
     $sumccost = 0;
 
-    $ccost_cost = round(($ccost['yearly_amount'] * $deposit['area']), 0);
+    $ccost_base = round(($ccost['yearly_amount'] * $deposit['area']), 0);
+    $ccost_cost = round_to_nearest_n($ccost_base, 50);
     $grabage_cost = round(($grabage['yearly_amount'] * $deposit['residents_no']), 0);
 
     $ccosts = $ccost_cost + $grabage_cost;
