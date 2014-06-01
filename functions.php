@@ -52,6 +52,8 @@ Belépés után tájékozódhat a házat érintő általános ügyekről, aktuá
 Az ön felhasználóneve: {$user['username']}
 Az ön jelszava: {$user['pass']}
 
+Jelszavát belépés után a "Saját adataim" menüpontban tudja megváltoztatni!
+
 Belépéshez, kérem, látogasson el a {$house['webpage']} weboldalra!
 EOT;
 
@@ -59,4 +61,15 @@ $subject = "PlainHouse regisztráció -". $house['name'];
 $from = $house['infomail'];
 
 mail($user['email'], $subject, $message, "From: $from\n");
+}
+
+function randomPassword() {
+    $alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
+    $pass = array(); //remember to declare $pass as an array
+    $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+    for ($i = 0; $i < 8; $i++) {
+        $n = rand(0, $alphaLength);
+        $pass[] = $alphabet[$n];
+    }
+    return implode($pass); //turn the array into a string
 }

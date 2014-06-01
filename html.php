@@ -94,6 +94,7 @@ EOT;
 }
 
 function addUser() {
+    $pass = randomPassword();
     echo <<<EOT
 <div class="content">
     <button id="newuser" value="UjFelhasznaloFelvetele" class="btn btn-success btn-icon"><i class="fa fa-plus"></i>Új felhasználó felvétele</button>
@@ -123,21 +124,24 @@ function addUser() {
             <input type="text" id="door" name="door" class="form-control">
 
             <label for="pass">Jelszó</label>
-            <input type="password" id="pass" name="pass" class="form-control">
+            <input type="password" id="pass" name="pass" value="$pass" class="form-control">
 
             <label for="pass2">Jelszó újra</label>
-            <input type="password" id="pass2" name="pass2" class="form-control">
+            <input type="password" id="pass2" name="pass2" value="$pass" class="form-control">
 		</div>
 		<div class="buttons">
         <button type="input" name="submit" value="Hozzaad" class="btn btn-success btn-icon"><i class="fa fa-plus"></i>Hozzáad</button>
 		</div>
     </form>
+            Az új felhasználó automatikusan generált jelszava (többször nem jelenik meg):  <span class="pwarning">$pass</span><br>
+            Ha szeretné megváltoztatni, írja át a jelszó mezőkben!
 </div>
 </div>
 EOT;
 }
 
 function addAdmin() {
+    $pass = randomPassword();
     echo <<<EOT
     <div class="content">
     <button id="newadmin" value="UjAdminFelvetele" class="btn btn-success btn-icon"><i class="fa fa-plus"></i>Új admin felvétele</button>
@@ -154,16 +158,18 @@ function addAdmin() {
 
         <div class="form-group">
             <label for="pass">Jelszó</label>
-            <input type="password" id="pass" name="pass" class="form-control"></div><br>
+            <input type="password" id="pass" name="pass" value="$pass" class="form-control"></div><br>
 
         <div class="form-group">
             <label for="pass2">Jelszó újra</label>
-            <input type="password" id="pass2" name="pass2" class="form-control"></div><br>
-
+            <input type="password" id="pass2" name="pass2" value="$pass" class="form-control"></div><br>
+            
 
         <button type="input" name="submit" value="Hozzaad" class="btn btn-success btn-icon"><i class="fa fa-sign-in"></i>Hozzáad</button>
 
     </form>
+            Az új admin automatikusan generált jelszava (többször nem jelenik meg):<span class="pwarning"> $pass</span>
+            Ha szeretné megváltoztatni, írja át a jelszó mezőkben!
 </div>
     </div>
 EOT;
