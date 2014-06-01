@@ -12,6 +12,10 @@ webheader($_SESSION);
 if (isset($_GET['messagesent'])) {
      popUp("Üzenet sikeresen elküldve");
 }
+if (isset($_GET["password"]))
+{
+    popUp("Jelszavát sikeresen megváltoztatta!");
+}
 if ($_SESSION['admin'] > 0) {
     echo '<div class="buttons btn-back">
 	   <form action="deposits.php">
@@ -33,6 +37,7 @@ $con = connectDb();
 getMyDepo($id);
 closeDb($con);
 if (isset($_SESSION['depositid'])){
+changePassword($_SESSION['userid']);
 sendMessage();
 }
 htmlEnd();

@@ -405,3 +405,13 @@ function welcomeIndexUser () {
         </div>
 EOT;
 }  
+
+function changePassword($id) {
+    echo <<<EOT
+    <div class="content">
+        <div class="buttons">
+            <a href="update_upassword.php?uid=$id"><button class="btn btn-success btn-icon"><i class="fa fa-refresh"></i> Belépési jelszó módosítása</button></a>
+        </div>
+    </div>
+EOT;
+}

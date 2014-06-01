@@ -7,7 +7,7 @@ include_once 'html.php';
 
 htmlHead($website['title'], $house['name']);
 webheader($_SESSION);
-if ($_SESSION["admin"] > 0)
+if (($_SESSION["admin"] > 0) || ($_SESSION["userid"] == $_GET["uid"]))
 {
     $id = $_GET["uid"];
     $con = connectDb();
@@ -48,7 +48,14 @@ if ($_SESSION["admin"] > 0)
     </table>
     </form>
     <div class="buttons">
-    <a href="allresidents.php"><button type="input" class="btn btn-success btn-icon"><i class="fa fa-times"></i>Mégsem</button></a>
+EOT;
+    if ($_SESSION["admin"]>0) {
+    echo '<a href="allresidents.php"><button type="input" class="btn btn-success btn-icon"><i class="fa fa-times"></i>Mégsem</button></a>';
+    }
+    else {
+    echo '<a href="mydepo.php"><button type="input" class="btn btn-success btn-icon"><i class="fa fa-times"></i>Mégsem</button></a>';    
+    }
+    echo <<<EOT
     </div>
     </div>
 EOT;
@@ -66,7 +73,12 @@ EOT;
             $con = connectDb();
             changeUserPassword($id, $password, $con);
             closeDb($con);
+            if ($_SESSION["admin"]>0) {
             header("Location:allresidents.php?password=1");
+            }
+            else {
+            header("Location:mydepo.php?password=1");    
+            }
         }
     }
 }
