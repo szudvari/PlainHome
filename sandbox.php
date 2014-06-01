@@ -1,7 +1,7 @@
 <?php
 // display form if user has not clicked submit
 if (!isset($_POST["submit"])) {
-  ?>
+?>
   <form method="post" action="<?php echo $_SERVER["PHP_SELF"];?>">
   From: <input type="text" name="from"><br>
   Subject: <input type="text" name="subject"><br>

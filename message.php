@@ -16,6 +16,7 @@ if (isset($_POST["from"]))
       echo "Invalid input";
     }
     $from = $_POST["from"]; // sender
+    
 }
 else
 {
@@ -24,6 +25,7 @@ else
     closeDb($con);
     $from = $user['email'];
 }
+$url = $_SERVER['HTTP_REFERER']."?messagesent=1";
 $subject = $_POST["subject"];
 $message = $_POST["comment"];
 // message lines should not exceed 70 characters (PHP rule), so wrap it
@@ -31,5 +33,7 @@ $message = wordwrap($message, 70);
 // send mail
 $mail = mail($house['infomail'], $subject, $message, "From: $from\n");
 //echo $message;
+
+header("Location:$url");
 
 htmlEnd();

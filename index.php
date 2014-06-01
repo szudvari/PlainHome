@@ -22,6 +22,9 @@ if (isset($_GET["login"]))
     popUp("Sikeresen bejelentkezett mint \"" . $_SESSION['user'] . "\"!");
 }
 
+if (isset($_GET['messagesent'])) {
+     popUp("Üzenet sikeresen elküldve");
+}
 
 if (!isset($_SESSION['user']))
 {
