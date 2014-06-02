@@ -12,10 +12,11 @@ function htmlHead($title, $house) {
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link href="favicon.ico" rel="icon" type="image/x-icon" />
         <title>$title - $house</title>
-        <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script src="js/jquery.js"></script>
         <script src="js/bootstrap.js"></script>
         <script src="js/bootstrap-dialog.js" type="text/javascript"></script>
-        <script src="js/jquery.form-validator.js" type="text/javascript"></script>
+        <script src="js/plainhome.js" type="text/javascript"></script>
+        <script src="js/form-validator.js" type="text/javascript"></script>
         <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>     
         <link href="css/bootstrap-dialog.css" rel="stylesheet" type="text/css"/>
 		<link href="css/bootstrap.css" rel="stylesheet">
@@ -42,9 +43,7 @@ function htmlEnd() {
                                         &copy; 2014 <a href="http://webariel.hu" target="_blank">PlainHouse Version {$website['version']}</a></p>
 			</div>
 		</div>
-		<script src="js/jquery.js"></script>
-		<script src="js/plainhome.js"></script>
-		<script type="text/javascript" src="js/stacktable.js"></script>
+		<script src="js/stacktable.js" type="text/javascript"></script>
 	</body>
 	</html>
 EOT;
