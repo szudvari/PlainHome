@@ -50,14 +50,10 @@ echo <<<EOT
 EOT;
 }
 
-function validateForm ($form) {
+function validateForm () {
     echo <<<EOT
-     <script>
-     $.validate({
-   onSuccess : function() {
-       $('form#$form').submit();
-            }
-   });
-    </script>
+<script>
+    $.validate();
+</script>
 EOT;
 }
