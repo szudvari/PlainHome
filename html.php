@@ -15,6 +15,7 @@ function htmlHead($title, $house) {
         <script src="http://code.jquery.com/jquery.min.js"></script>
         <script src="js/bootstrap.js"></script>
         <script src="js/bootstrap-dialog.js" type="text/javascript"></script>
+        <script src="js/jquery.form-validator.js" type="text/javascript"></script>
         <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>     
         <link href="css/bootstrap-dialog.css" rel="stylesheet" type="text/css"/>
 		<link href="css/bootstrap.css" rel="stylesheet">

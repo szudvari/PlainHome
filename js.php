@@ -49,4 +49,15 @@ echo <<<EOT
     </script>
 EOT;
 }
- 
+
+function validateForm ($form) {
+    echo <<<EOT
+     <script>
+     $.validate({
+   onSuccess : function() {
+       $('form#$form').submit();
+            }
+   });
+    </script>
+EOT;
+}
