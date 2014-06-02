@@ -556,7 +556,7 @@
 			}
 
 		.panel-primary {
-		  border-color: #357ebd;
+		  border-color: #336699;
 		}
 			.panel-primary > .panel-heading {
 			  color: #ffffff;
@@ -628,12 +628,12 @@
 			}
 
 		.panel-info {
-		  border-color: #46b8da;
+		  border-color: #336699;
 		}
 			.panel-info > .panel-heading {
 			  color: #ffffff;
-			  background-color: #5bc0de;
-			  border-color: #46b8da;
+			  background-color: #336699;
+			  border-color: #19687f;
 			}
 			.panel-info > .panel-heading > .panel-title {
 			  color: #ffffff;
