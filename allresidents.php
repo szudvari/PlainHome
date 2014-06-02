@@ -41,4 +41,5 @@ else
 {
     notLoggedIn();
 }
+validateForm();
 htmlEnd();

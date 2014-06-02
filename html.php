@@ -107,27 +107,27 @@ function addUser() {
     <form id="contactform" action="add.php" method="post">
         <div class="formcolumn">
             <label for="firstname">Vezetéknév</label>
-            <input type="text" id="firstname" name="firstname" class="form-control">
+            <input type="text" id="firstname" name="firstname" class="form-control" data-validation="required">
 
             <label for="lastname">Keresztnév</label>
-            <input type="text" id="lastname" name="lastname" class="form-control">
+            <input type="text" id="lastname" name="lastname" class="form-control" data-validation="required">
         
             <label for="email">E-mail</label>
             <input type="text" id="email" name="email" class="form-control">
 
         
             <label for="username">Felhasználónév</label>
-            <input type="text" id="username" name="username" class="form-control">
+            <input type="text" id="username" name="username" class="form-control" data-validation="required">
         	</div>
 		<div class="formcolumn">
             <label for="floor">Emelet</label>
-            <input type="text" id="floor" name="floor" class="form-control">
+            <input type="text" id="floor" name="floor" class="form-control" data-validation="required">
 
             <label for="door">Ajtó</label>
-            <input type="text" id="door" name="door" class="form-control">
+            <input type="text" id="door" name="door" class="form-control" data-validation="required">
 
             <label for="pass">Jelszó</label>
-            <input type="password" id="pass" name="pass" value="$pass" class="form-control">
+            <input type="password" id="pass" name="pass" value="$pass" class="form-control" data-validation="required">
 
             <label for="pass2">Jelszó újra</label>
             <input type="password" id="pass2" name="pass2" value="$pass" class="form-control">
