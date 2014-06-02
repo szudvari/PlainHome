@@ -453,6 +453,6 @@ EOT;
 
 function changePassword($id) {
     echo <<<EOT
-<a href="update_upassword.php?uid=$id"><button class="btn btn-success btn-icon floatRight"><i class="fa fa-refresh"></i> Belépési jelszó módosítása</button></a>
+<a href="update_upassword.php?uid=$id"><button class="btn btn-success btn-icon floatRight"><i class="fa fa-refresh"></i> Jelszó módosítása</button></a>
 EOT;
 }
