@@ -34,13 +34,16 @@ if ($_SESSION["admin"] > 1)
     <td>{$user['id']}</td>
     <td>{$user['username']}</td>
     <td>{$user['email']}</td>
-    <td><input type="password" name="pass1"></td>
-    <td><input type="password" name="pass2"></td>
+    <td><input type="password" name="pass1" data-validation="required"></td>
+    <td><input type="password" name="pass2" data-validation="required"></td>
     <td><button type="input" name="submit" value="módosít" class="btn btn-success btn-icon"><i class="fa fa-refresh"></i>Módosít</button></td>
     </tr>
     </tbody>
     </table>
     </form>
+EOT;
+    validateForm ();
+echo <<<EOT
     <div class="buttons">
     <a href="listadmin.php"><button type="input" class="btn btn-success btn-icon"><i class="fa fa-times"></i>Mégsem</button></a>
     </div>
