@@ -198,6 +198,7 @@ EOT;
 
 function webheader($user) {
     global $house;
+//	global $user;
     echo <<<EOT
     <div class="container">
 	    <div class="row">
@@ -234,7 +235,7 @@ EOT;
 	                <ul class="menu">
 	                    <li><a href="mydepo.php">Saját adataim</a></li>
                             <li><a href="session.php">Session check</a></li>
-                            <li><a href="index.php?logout=1">Kilépés <i class="fa fa-sign-out"></i></a></li>                
+                            <li><a data-toggle="modal" href="#signOut">Kilépés <i class="fa fa-sign-out"></i></a></li>                
 	                </ul>
 	            </div>
 EOT;
@@ -250,7 +251,7 @@ EOT;
 	                    <li><a href="allresidents.php">Felhasználók</a></li>
 	                    <li><a href="listadmin.php">Adminisztrátorok</a></li>
                             <li><a href="session.php">Session check</a></li>
-                            <li><a href="index.php?logout=1">Kilépés <i class="fa fa-sign-out"></i></a></li>     
+                            <li><a data-toggle="modal" href="#signOut">Kilépés <i class="fa fa-sign-out"></i></a></li>     
 	                </ul>
 	            </div>
 EOT;
@@ -267,7 +268,7 @@ EOT;
 	                    <li><a href="basedata.php">Alapdíjak</a></li>
                             <li><a href="allresidents.php">Felhasználók</a></li>
                             <li><a href="session.php">Session check</a></li>
-                            <li><a href="index.php?logout=1">Kilépés <i class="fa fa-sign-out"></i></a></li>
+                            <li><a data-toggle="modal" href="#signOut">Kilépés <i class="fa fa-sign-out"></i></a></li>
 	                </ul>
 	            </div>
 EOT;
@@ -275,7 +276,22 @@ EOT;
     echo <<<EOT
                 </div>
 			</div>
-	    </div>		
+	    </div>
+		<!-- -- KILEPES MODAL -- -->
+		<div class="modal fade" id="signOut" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-body">
+						<p class="lead">Biztosan ki akar lépni?</p>
+					</div>
+					<div class="modal-footer">
+						<a href="index.php?logout=1" class="btn btn-success btn-icon-alt">Kilépés <i class="fa fa-sign-out"></i></a>
+						<button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
 EOT;
 }
 
