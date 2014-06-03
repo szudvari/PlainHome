@@ -45,7 +45,7 @@ if (($_SESSION["admin"] > 0) || ($_SESSION["userid"] == $_GET["uid"]))
     <td>{$user['door']}</td>
     <td><input type="password" name="pass1" data-validation="required" /></td>
     <td><input type="password" name="pass2" data-validation="required" /></td>
-    <td>    <button type="input" name="submit" value="módosít" class="btn btn-success btn-icon"><i class="fa fa-refresh"></i>Módosít</button></td>
+    <td>    <button type="input" name="submit" value="módosít" class="btn btn-success btn-icon"><i class="fa fa-refresh"></i>Módosít</button>   </td>
     </tr>
     </tbody>
     </table>
