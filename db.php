@@ -541,6 +541,7 @@ EOT;
 }
 
 function getAllDepo() {
+    $year = date('Y');
 
     $sql = "SELECT `id`, `floor`, `door`, `area`, "
             . "`residents_no`, `area_ratio`, "
@@ -567,7 +568,7 @@ function getAllDepo() {
     while ($row = mysql_fetch_assoc($result2)) {
         $fees[] = $row;
     }
-    $sql = "SELECT * from deposit_balance";
+    $sql = "SELECT * from deposit_balance where year=$year";
     $result3 = mysql_query($sql);
     if (!$result3)
     {
@@ -1080,18 +1081,25 @@ function getCurrentBalance($id) {
 }
 
 function insertPayment($data, $user) {
+    global $db;
+    $year = date('Y');
     $oldbalance = getCurrentBalance($data['id']);
     $newbalance = $oldbalance + $data['payment'];
+    echo $oldbalance;
+    echo "<br>";
+    echo $newbalance;
+    echo "<br>";
     $sql = "INSERT INTO payment (`deposit_id`, `date`, `amount`, `user`) "
             . "VALUES ({$data['id']}, CURDATE(), {$data['payment']}, '$user')";
-    echo $sql;
+    //echo $sql;
     $result = mysql_query($sql);
     if (!$result)
     {
         die("insertIntoPayment hiba:" . mysql_errno() . " - " . mysql_error());
     }
-    $sql = "UPDATE `plainhouse`.`deposit_balance` SET `actual_balance` = $newbalance "
-            . "WHERE `deposit_balance`.`id` = {$data['id']};";
+    $sql = "UPDATE `{$db['name']}`.`deposit_balance` SET `actual_balance` = '$newbalance' "
+            . "WHERE `deposit_balance`.`deposit_id` = {$data['id']} AND `year` = $year";
+            //echo $sql;
     $result = mysql_query($sql);
     if (!$result)
     {
@@ -1181,4 +1189,44 @@ EOT;
         echo '</div>';
     }
     echo '<hr/>';
+}
+
+function lastYear() {
+    $sql = "SELECT max(`year`) as year FROM `deposit_balance`";
+    $result = mysql_query($sql);
+    if (!$result)
+    {
+        die("lastYear hiba:" . mysql_errno() . " - " . mysql_error());
+    }
+    while ($row = mysql_fetch_assoc($result)) {
+        $year = $row["year"];
+    }
+    return $year;
+}
+
+function startNewYear($lastyear) {
+    $newyear = $lastyear+1;
+    $sql = "SELECT * FROM `deposit_balance` where year=$lastyear";
+    $result = mysql_query($sql);
+    if (!$result)
+    {
+        die("allDepositBalance hiba:" . mysql_errno() . " - " . mysql_error());
+    }
+    while ($row = mysql_fetch_assoc($result)) {
+        $balances[] = $row;
+    }
+    
+    $balrows = mysql_num_rows($result);
+    for ($i = 0; $i < $balrows; $i++) {
+        $ccost = getCcost($balances[$i]['deposit_id']);
+        $req_payment = $ccost * 12;
+        $balance = $balances[$i]['actual_balance'] - $req_payment;
+        $sql = "INSERT INTO deposit_balance (`deposit_id`, `year`, `opening_balance`, `actual_balance`)"
+                . "VALUES ({$balances[$i]['deposit_id']}, $newyear, $balance, $balance)";
+        $result = mysql_query($sql);
+        if (!$result)
+        {
+            die("insertDepositBalance hiba:" . mysql_errno() . " - " . mysql_error());
+        }
+    }
 }
