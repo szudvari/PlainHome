@@ -1,4 +1,5 @@
 <?php
+
 include_once 'db.php';
 include_once 'config.php';
 
@@ -31,17 +32,21 @@ function encodePass($clearPass) {
 }
 
 function spamcheck($field) {
-  // Sanitize e-mail address
-  $field=filter_var($field, FILTER_SANITIZE_EMAIL);
-  // Validate e-mail address
-  if(filter_var($field, FILTER_VALIDATE_EMAIL)) {
-    return TRUE;
-  } else {
-    return FALSE;
-  }
+    // Sanitize e-mail address
+    $field = filter_var($field, FILTER_SANITIZE_EMAIL);
+    // Validate e-mail address
+    if (filter_var($field, FILTER_VALIDATE_EMAIL))
+    {
+        return TRUE;
+    }
+    else
+    {
+        return FALSE;
+    }
 }
-function sendMessageToNewUser ($user) {
-global $house;
+
+function sendMessageToNewUser($user) {
+    global $house;
     $message = <<<EOT
 Kedves {$user['firstname']} {$user['lastname']}!
     
@@ -57,10 +62,10 @@ Jelszavát belépés után a "Saját adataim" menüpontban tudja megváltoztatni
 Belépéshez, kérem, látogasson el a {$house['webpage']} weboldalra!
 EOT;
 
-$subject = "PlainHouse regisztráció -". $house['name'];
-$from = $house['infomail'];
+    $subject = "PlainHouse regisztráció -" . $house['name'];
+    $from = $house['infomail'];
 
-mail($user['email'], $subject, $message, "From: $from\n");
+    mail($user['email'], $subject, $message, "From: $from\n");
 }
 
 function randomPassword() {
@@ -78,18 +83,18 @@ function round_to_nearest_n($int, $n) {
     return round($int / $n) * $n;
 }
 
-function getActualBalance ($ccost, $closing_balance) {
+function getActualBalance($ccost, $actual_balance) {
     global $house;
-    if (date('d')<$house['payment_day']) {
-     $month = date('m')-1;   
+    if (date('d') < $house['payment_day'])
+    {
+        $month = date('m') - 1;
     }
-    else {
-    $month = date('m');
+    else
+    {
+        $month = date('m');
     }
     $req_payment = $ccost * $month;
-    
-    $balance = $closing_balance - $req_payment;
+
+    $balance = $actual_balance - $req_payment;
     return $balance;
 }
-    
-  
