@@ -370,7 +370,7 @@ EOT;
 }
 
 function updateDepoDb($deposit, $con) {
-    
+
     $sql = "UPDATE `plainhouse`.`deposits` SET `floor` = '{$deposit['floor']}', "
             . "`door` = '{$deposit['door']}',`area` = '{$deposit['area']}',"
             . "`residents_no` = '{$deposit['residents']}',"
@@ -461,13 +461,14 @@ function getMyDepo($id) {
     echo <<<EOT
 <div class="content">
 EOT;
-    if (isset($_SESSION['depositid'])) {
+    if (isset($_SESSION['depositid']))
+    {
         echo <<<EOT
     <button id="mydepobutton" value="showdepo" class="btn btn-success btn-icon"><i class="fa fa-eye"></i>Albetét részletei</button>
 EOT;
     }
 
-    
+
     echo <<<EOT
    <div id="mydepo">
         
@@ -501,7 +502,8 @@ EOT;
     </div>
 <hr />
 EOT;
-    if (isset($_SESSION['depositid'])) {
+    if (isset($_SESSION['depositid']))
+    {
         echo <<<EOT
     <button id="ccostbutton" value="showccost" class="btn btn-success btn-icon"><i class="fa fa-eye"></i>Közösköltség részletei</button>
 EOT;
@@ -544,17 +546,14 @@ EOT;
     echo '</tbody>';
     echo '</table>';
     echo '</div>';
-	echo '<hr />';
-    echo '<div>';	
-	sendMessage();
-	echo '<span style="text-align:right;">';
-	changePassword($_SESSION['userid']);
-	echo '</span>';
+    echo '<hr />';
+    echo '<div>';
+    sendMessage();
+    echo '<span style="text-align:right;">';
+    changePassword($_SESSION['userid']);
+    echo '</span>';
     echo '</div>';
-
 }
-
-
 
 function getAllDepo() {
 
@@ -1056,4 +1055,43 @@ function getCcost($id) {
     $ccosts = $ccost_cost + $grabage_cost;
 
     return $ccosts;
+}
+
+function getCurrentBalance($id) {
+    $year = date("Y");
+    $sql = "SELECT `actual_balance` FROM `deposit_balance` WHERE `deposit_id` = '$id' AND `year` = '$year'";
+    $result = mysql_query($sql);
+    if (!$result)
+    {
+        die("getCurrentBalance hiba:" . mysql_errno() . " - " . mysql_error());
+    }
+    if (mysql_num_rows($result) == 0)
+    {
+        echo "Hiba! Nincs ilyen albetét az aktuális évben!";
+        exit;
+    }
+    while ($row = mysql_fetch_assoc($result)) {
+        $balance = $row["actual_balance"];
+    }
+    return $balance;
+}
+
+function insertPayment ($data, $user) {
+    $oldbalance = getCurrentBalance($data['id']);
+    $newbalance = $oldbalance + $data['payment'];
+    $sql = "INSERT INTO payment (`deposit_id`, `date`, `amount`, `user`) "
+            . "VALUES ({$data['id']}, CURDATE(), {$data['payment']}, '$user')";
+    echo $sql;
+    $result = mysql_query($sql);
+    if (!$result)
+    {
+        die("insertIntoPayment hiba:" . mysql_errno() . " - " . mysql_error());
+    }
+    $sql = "UPDATE `plainhouse`.`deposit_balance` SET `actual_balance` = $newbalance "
+            . "WHERE `deposit_balance`.`id` = {$data['id']};";
+    $result = mysql_query($sql);
+    if (!$result)
+    {
+        die("updateCurrentBalance hiba:" . mysql_errno() . " - " . mysql_error());
+    }
 }

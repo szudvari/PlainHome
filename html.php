@@ -308,14 +308,14 @@ EOT;
 }
 
 function updateDeposit($depo) {
-    echo <<<EOT
+        echo <<<EOT
 
-		<div class="content">
-		    <h3>Albetét módosítása</h3>
-		    <form id="contactform" action="updatedepo.php" method="post">
-		        <div class="formcolumn">
-		            <label for="floor">Emelet</label> 
-		            <input type="text" id="floor" name="floor" class="form-control" value="{$depo['floor']}">
+                    <div class="content">
+                        <h3>Albetét módosítása</h3>
+                        <form id="contactform" action="updatedepo.php" method="post">
+                            <div class="formcolumn">
+                                <label for="floor">Emelet</label> 
+                                <input type="text" id="floor" name="floor" class="form-control" value="{$depo['floor']}">
 		            <label for="door">Ajtó</label>
 		            <input type="text" id="door" name="door" class="form-control" value="{$depo['door']}">
 		            <label for="area">Lakás alapterülete</label>
@@ -369,7 +369,7 @@ function updateBaseData($data) {
 EOT;
 }
 
-function sendMessage () {  
+function sendMessage() {
     echo <<<EOT
 
 		<a data-toggle="modal" href="#newMsg" class="btn btn-success btn-icon floatLeft"><i class="fa fa-envelope"></i> Üzenet küldése</a>
@@ -406,7 +406,7 @@ function sendMessage () {
 EOT;
 }
 
-function sendMessageNoUser () {  
+function sendMessageNoUser() {
     echo <<<EOT
 		<div class="content">
 				<h3 class="info">Kérdése van? Információra van szüksége?</h3>
@@ -430,9 +430,9 @@ function sendMessageNoUser () {
 EOT;
 }
 
-function welcomeIndexNoUser () {
-	global $house;
- echo <<<EOT
+function welcomeIndexNoUser() {
+    global $house;
+    echo <<<EOT
 		<div class="content">
 				<h3 class="info">Köszöntjük oldalunkon</h3> 
                <h4>Ön a "Társasház - {$house['name']}" - weboldalára látogatott.<br></h4>
@@ -444,10 +444,18 @@ function welcomeIndexNoUser () {
 EOT;
 }
 
-function welcomeIndexUser ($user, $ccost) {
-    $date = date("Y.m.d"); 
-    $cost = number_format($ccost, 0, ',', ' '); 
- echo <<<EOT
+function welcomeIndexUser($user, $ccost, $balance) {
+    global $house;
+    $date = date("Y.m.d");
+    $cost = number_format($ccost, 0, ',', ' ');
+    if ($balance < 0) {
+        $abalance = $balance * -1;
+    }
+    else {
+        $abalance = $balance;
+    }
+    $abalance = number_format($abalance, 0, ',', ' ');
+    echo <<<EOT
     
 <div class="content">
 		<div class="row">
@@ -457,20 +465,51 @@ function welcomeIndexUser ($user, $ccost) {
 		<p class="lead welcomeMsg">A "Saját adataim" menülinkre kattintva, megtekintheti részletes adatait és megváltoztathatja belépési jelszavát!</p>
 	</div>
 	<div class="col-md-6">
-		<div class="alertMsg success"><i class="fa fa-info-circle"></i> Az Ön havi közösköltsége: <span class="floatLeft">$cost Ft</span></div>
+EOT;
+    if ($balance < 0)
+    {
+        echo <<<EOT
+                <div class="alertMsg warning"><i class="fa fa-warning"></i> Az Ön közösköltségének aktuális egyenlege: <span class="floatLeft">$abalance Ft elmaradás</span></div>
+EOT;
+    }
+    else
+    {
+        echo <<<EOT
+                <div class="alertMsg success"><i class="fa fa-info-circle"></i> Az Ön közösköltségének aktuális egyenlege: <span class="floatLeft">$abalance Ft túlfizetés</span></div> 
+EOT;
+    }
+    echo <<<EOT
+                <div class="alertMsg success"><i class="fa fa-info-circle"></i> Az Ön havi közösköltsége: <span class="floatLeft">$cost Ft</span></div>
 		<div class="panel panel-info">
 		<div class="panel-heading">
 		<h3 class="panel-title"><i class="fa fa-warning"></i> Havi fizetési kötelezettség<span class="floatRight">$date </span></h3>
 		</div>
-		<div class="panel-body">Minden hónap 10. napjáig legyen szives befizetését rendezni!</div>
+		<div class="panel-body">Minden hónap {$house['payment_day']}. napjáig legyen szives befizetését rendezni!</div>
 		</div>
 		</div>
 	</div>
 EOT;
-}  
+}
 
 function changePassword($id) {
     echo <<<EOT
 <a href="update_upassword.php?uid=$id"><button class="btn btn-success btn-icon floatRight"><i class="fa fa-refresh"></i> Jelszó módosítása</button></a>
+EOT;
+}
+
+function newPayment ($id) {
+          echo <<<EOT
+
+                    <div class="content">
+                        <h3>Befizetés rögzítése</h3>
+                        <form id="contactform" action="insertpayment.php" method="post">
+                            <div class="formcolumn">
+                                <label for="payment">Összeg</label> 
+                                <input type="text" id="payment" name="payment" class="form-control">
+                                <input type="hidden" id="did" name="did" value="$id">
+    </div>
+		        <div class="buttons">
+		            <button type="input" name="submit" value="Felvesz" class="btn btn-success btn-icon"><i class="fa fa-dollar"></i> Befizetés rögzítése</button>
+		        </div>
 EOT;
 }

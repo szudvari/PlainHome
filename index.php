@@ -37,7 +37,9 @@ else if (isset($_SESSION['depositid']))
     $con = connectDb();
     $user = getUserData($id);
     $ccost = getCcost($_SESSION['depositid']);
-    welcomeIndexUser($user, $ccost);
+    $closing_balance = getCurrentBalance($_SESSION['depositid']);
+    $balance = getActualBalance($ccost, $closing_balance);
+    welcomeIndexUser($user, $ccost, $balance);
 
     sendMessage();
     showContent("message", "messagebutton");

@@ -11,6 +11,7 @@ $website['version'] = "0.1a";
 $house['name'] = "Pöttyös utca 4.";
 $house['infomail'] = "szudvari@gmail.com";
 $house['webpage'] = "http://users.ininet.hu/plainhouse";
+$house['payment_day'] = 10;
 
 if (!isset($_SESSION['admin'])) {
     $_SESSION['admin'] = NULL;

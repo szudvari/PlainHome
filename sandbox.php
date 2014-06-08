@@ -9,15 +9,11 @@ include_once 'js.php';
 
 htmlHead($website['title'], $house['name']);
 
-$con = connectDb();
-$ccost = getCcost($_SESSION['depositid']);
-closeDb($con);
+    $id = $_SESSION['userid'];
+    $con = connectDb();
+    $user = getUserData($id);
+    $ccost = getCcost($_SESSION['depositid']);
+    $closing_balance = getCurrentBalance($_SESSION['depositid']);
+    getActualBalance ($ccost, $closing_balance);
+    $balance = 0; // JAVÍTANI!
 
-function round_up_to_nearest_n($int, $n) {
-    return round($int / $n) * $n;
-}
-echo round_up_to_nearest_n(9676, 50);
-
-//$ccost = (round($ccost/100))*100;
-//
-//echo $ccost;
