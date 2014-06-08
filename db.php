@@ -1100,6 +1100,7 @@ function insertPayment($data, $user) {
 }
 
 function getMyPayments($id) {
+    global $db;
     $ccost = getCcost($id);
     $closing_balance = getCurrentBalance($id);
     $balance = getActualBalance($ccost, $closing_balance);
@@ -1112,10 +1113,11 @@ function getMyPayments($id) {
         $abalance = $balance;
     }
     $abalance = number_format($abalance, 0, ',', ' ');
-    $sql = "SELECT `deposits`.`floor`,`deposits`.`door`,`payment`.`date`,`payment`.`amount` FROM deposits\n"
-            . "LEFT JOIN `plainhouse`.`payment` ON `deposits`.`id` = `payment`.`deposit_id` \n"
-            . "WHERE `deposits`.`id` = $id \n"
+    $sql = "SELECT `deposits`.`floor`,`deposits`.`door`,`payment`.`date`,`payment`.`amount` FROM deposits "
+            . "LEFT JOIN `{$db['name']}`.`payment` ON `deposits`.`id` = `payment`.`deposit_id` "
+            . "WHERE `deposits`.`id` = $id "
             . "ORDER BY `payment`.`date` DESC;";
+    //echo $sql;
     $result = mysql_query($sql);
     if (!$result)
     {
