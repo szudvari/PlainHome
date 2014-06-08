@@ -18,7 +18,7 @@ if ($_SESSION["admin"] > 0)
     insertPayment ($deposit, $_SESSION['user']);
     closeDb($con);
 
-    header("Location:deposits.php?modified=1");
+    header("Location:deposits.php?payed=1");
 }
 else
 {

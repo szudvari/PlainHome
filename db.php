@@ -1,5 +1,7 @@
 <?php
 
+include_once 'functions.php';
+
 function connectDb() {
     global $db;
     $con = mysql_connect($db['host'], $db['user'], $db['pass']);
@@ -460,17 +462,7 @@ function getMyDepo($id) {
 
     echo <<<EOT
 <div class="content">
-EOT;
-    if (isset($_SESSION['depositid']))
-    {
-        echo <<<EOT
-    <button id="mydepobutton" value="showdepo" class="btn btn-success btn-icon"><i class="fa fa-eye"></i>Albetét részletei</button>
-EOT;
-    }
-
-
-    echo <<<EOT
-   <div id="mydepo">
+<div id="mydepo">
         
 <h3 class="primary"> Albetét adatai</h3>
 <table id="responsiveTable" class="large-only" cellspacing="0">
@@ -501,15 +493,7 @@ EOT;
     echo <<<EOT
     </div>
 <hr />
-EOT;
-    if (isset($_SESSION['depositid']))
-    {
-        echo <<<EOT
-    <button id="ccostbutton" value="showccost" class="btn btn-success btn-icon"><i class="fa fa-eye"></i>Közösköltség részletei</button>
-EOT;
-    }
-    echo <<<EOT
-    <div id="ccost">
+<div id="ccost">
 <h3 class="success"> Közösköltség részletezése </h3>
 <table id="responsiveTableTwo" class="large-only" cellspacing="0">
 <tr align="left" class="success">
@@ -548,6 +532,7 @@ EOT;
     echo '</div>';
     echo '<hr />';
     echo '<div>';
+    getMyPayments($id);
     sendMessage();
     echo '<span style="text-align:right;">';
     changePassword($_SESSION['userid']);
@@ -582,11 +567,23 @@ function getAllDepo() {
     while ($row = mysql_fetch_assoc($result2)) {
         $fees[] = $row;
     }
+    $sql = "SELECT * from deposit_balance";
+    $result3 = mysql_query($sql);
+    if (!$result3)
+    {
+        echo mysql_errno() . ": " . mysql_error();
+        exit;
+    }
+    $balance = array();
+    while ($row = mysql_fetch_assoc($result3)) {
+        $balance[] = $row;
+    }
     $ccost = $fees[0];
     $grabage = $fees[1];
 
 
-    $sumarea = $sumresidents = $sumarearatio = $sumccost = 0;
+
+    $sumarea = $sumresidents = $sumarearatio = $sumccost = $sumbalance = 0;
     for ($i = 0; $i < $deprows; $i++) {
 
         $ccost_base = round(($ccost['yearly_amount'] * $deposit[$i]['area']), 0);
@@ -595,10 +592,12 @@ function getAllDepo() {
 
 
         $deposit[$i]["ccost"] = $ccost_cost + $grabage_cost;
+        $deposit[$i]["balance"] = getActualBalance($deposit[$i]["ccost"], $balance[$i]['actual_balance']);
         $sumarea += $deposit[$i]['area'];
         $sumresidents += $deposit[$i]['residents_no'];
         $sumarearatio += $deposit[$i]['area_ratio'];
         $sumccost +=$deposit[$i]["ccost"];
+        $sumbalance += $deposit[$i]["balance"];
     }
 
     echo '<div class="content">';
@@ -611,10 +610,12 @@ function getAllDepo() {
    <th> Ajtó </th>
    <th> Lakás terület (nm) </th>
    <th> Lakók száma </th>
-   <th> Lakás tulajdoni hányad </th>
+   <th> Lakás th </th>
    <th> Lakó neve </th>
    <th> Közösktg. </th>
+   <th> Egyenleg </th>
    <th> Részletek </th>
+   <th> Befizetés </th>
    <th> Módosítás </th>
      
 </tr>
@@ -626,7 +627,7 @@ EOT;
         foreach ($row as $value) {
             if (is_numeric($value))
             {
-                if ($value > 999)
+                if (($value > 999) || ($value < 0))
                 {
                     echo '<td>' . number_format($value, 0, ',', ' ') . '</td>';
                 }
@@ -641,6 +642,7 @@ EOT;
             }
         }
         echo "<td><a href=\"mydepo.php?depositid=" . $row['id'] . "\">Részletek</a></td>";
+        echo "<td><a href=\"payment.php?id=" . $row['id'] . "\">Új befizetés</a></td>";
         echo "<td><a href=\"updatedeposit.php?id=" . $row['id'] . "\" target=\"blank\">Módosít</a></td>";
         echo '</tr>';
     }
@@ -651,7 +653,8 @@ EOT;
     echo "<td class='tdwarning'>" . number_format(str_replace(".", ",", round($sumarearatio, 2)), 0, ',', ' ') . "</td>";
     echo '<td class="tdprimary"></td>';
     echo "<td class='tdwarning'>" . number_format($sumccost, 0, ',', ' ') . "</td>";
-    echo '<td class="tdprimary" colspan=2></td>';
+    echo "<td class='tdwarning'>" . number_format($sumbalance, 0, ',', ' ') . "</td>";
+    echo '<td class="tdprimary" colspan=3></td>';
     echo '</tr>';
     echo '</tbody>';
     echo '</table>';
@@ -1076,7 +1079,7 @@ function getCurrentBalance($id) {
     return $balance;
 }
 
-function insertPayment ($data, $user) {
+function insertPayment($data, $user) {
     $oldbalance = getCurrentBalance($data['id']);
     $newbalance = $oldbalance + $data['payment'];
     $sql = "INSERT INTO payment (`deposit_id`, `date`, `amount`, `user`) "
@@ -1094,4 +1097,86 @@ function insertPayment ($data, $user) {
     {
         die("updateCurrentBalance hiba:" . mysql_errno() . " - " . mysql_error());
     }
+}
+
+function getMyPayments($id) {
+    $ccost = getCcost($id);
+    $closing_balance = getCurrentBalance($id);
+    $balance = getActualBalance($ccost, $closing_balance);
+    if ($balance < 0)
+    {
+        $abalance = $balance * -1;
+    }
+    else
+    {
+        $abalance = $balance;
+    }
+    $abalance = number_format($abalance, 0, ',', ' ');
+    $sql = "SELECT `deposits`.`floor`,`deposits`.`door`,`payment`.`date`,`payment`.`amount` FROM deposits\n"
+            . "LEFT JOIN `plainhouse`.`payment` ON `deposits`.`id` = `payment`.`deposit_id` \n"
+            . "WHERE `deposits`.`id` = $id \n"
+            . "ORDER BY `payment`.`date` DESC;";
+    $result = mysql_query($sql);
+    if (!$result)
+    {
+        die("getMyPayment hiba:" . mysql_errno() . " - " . mysql_error());
+    }
+
+    while ($row = mysql_fetch_assoc($result)) {
+        $table[] = $row;
+    }
+
+
+    if ($balance < 0)
+    {
+        echo <<<EOT
+                <div class="alertMsg warning"><i class="fa fa-warning"></i> Az Ön közösköltségének aktuális egyenlege: <span class="floatLeft">$abalance Ft elmaradás</span></div>
+EOT;
+    }
+    else
+    {
+        echo <<<EOT
+                <div class="alertMsg success"><i class="fa fa-info-circle"></i> Az Ön közösköltségének aktuális egyenlege: <span class="floatLeft">$abalance Ft túlfizetés</span></div> 
+EOT;
+    }
+    if ($table[0]['date'] == NULL)
+    {
+        echo "Önnek nincs lekönyvelt befizetése.<br>"
+        . "Felhívjuk figyelmét, hogy a befizetések azok beérkezése után 3-5 nappal kerülnek könyvelésre!";
+        exit;
+    }
+    else
+    {
+        echo '<button id="pays" value="Befizetesek" class="btn btn-success btn-icon"><i class="fa fa-bars"></i>Befizetések részletesen</button>';
+        echo '<div id=payments>';
+        echo '<h3 class="primary"><i class="fa fa-dollar"></i> Könyvelt befizetések </h3>';
+        echo '<table id="responsiveTable" class="large-only" cellspacing="0">';
+        echo <<<EOT
+   <tr align="left" class="primary">
+   <th> Emelet </th>
+   <th> Ajtó </th>
+   <th> Befizetés dátuma</th>
+   <th> Befizetés összege</th>
+   </tr>
+EOT;
+        echo "<tbody>";
+        foreach ($table as $row) {
+
+            echo '<tr>';
+            echo "<td>{$row['floor']}</td>";
+            echo "<td>{$row['door']}</td>";
+            echo "<td>{$row['date']}</td>";
+            echo "<td>" . number_format($row['amount'], 0, ',', ' ') . " Ft</td>";
+
+
+
+            echo '</tr>';
+        }
+
+        echo '</tbody>';
+        echo '</table>';
+        echo '<p>Felhívjuk figyelmét, hogy a befizetések azok beérkezése után 3-5 nappal kerülnek könyvelésre!</p>';
+        echo '</div>';
+    }
+    echo '<hr/>';
 }

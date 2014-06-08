@@ -37,8 +37,7 @@ else {
 $con = connectDb();
 getMyDepo($id);
 closeDb($con);
-hideArea("mydepobutton");
-hideArea("ccostbutton");
+showContent ("payments", "pays");
 if (isset($_SESSION['depositid'])){
 
 }

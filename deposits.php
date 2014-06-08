@@ -16,6 +16,10 @@ if (isset($_GET["modified"]))
 {
     popUp("Albetét sikeresen módosítva.");
 }
+if (isset($_GET["payed"]))
+{
+    popUp("Befizetés rögzítve.");
+}
 if ($_SESSION["admin"] > 0)
 {
     $con = connectDb();
