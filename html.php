@@ -531,7 +531,7 @@ function uploadFile () {
 							<div class="form-group">
 		                        <label for="file">File név</label>
 								<input type="file" class="form-control" name="file" id="file" value="" />
-								<span class="help-block">Válassza ki a feltölteni kívánt file-t!</span>
+								<span class="help-block">Válassza ki a feltölteni kívánt file-t! "gif", "jpeg", "jpg", "png", "pdf" fileok feltöltésére van lehetőség.</span>
 		                    </div>
 				</div>
 						<div class="modal-footer">

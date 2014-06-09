@@ -634,7 +634,7 @@ EOT;
                 }
                 else
                 {
-                    echo '<td>' . str_replace(".", ",", round($value, 2)) . '</td>';
+                    echo '<td style="text-align:right;">' . str_replace(".", ",", round($value, 2)) . '</td>';
                 }
             }
             else
