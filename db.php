@@ -1261,3 +1261,60 @@ function listDocuments() {
         echo "</div>";
     }
 }
+
+function insertBoardMessage($msg) {
+    if ($msg['valid_till'] != NULL )
+    {
+        $sql = "INSERT into board (`creation_date`, `title`, `text`, `valid_till`) "
+                . "VALUES (CURDATE(), '{$msg['title']}', '{$msg['text']}', '{$msg['valid_till']}');";
+    }
+    else
+    {
+        $sql = "INSERT into board (`creation_date`, `title`, `text`) "
+                . "VALUES (CURDATE(), '{$msg['title']}', '{$msg['text']}');";
+    }
+    $result = mysql_query($sql);
+    if (!$result)
+    {
+        die("insertBoardMessage hiba:" . mysql_errno() . " - " . mysql_error());
+    }
+}
+
+function getAllBoardMessages() {
+    $sql = "SELECT * from board;";
+    $result = mysql_query($sql);
+    if (!$result)
+    {
+        die("listDocuments hiba:" . mysql_errno() . " - " . mysql_error());
+    }
+    while ($row = mysql_fetch_assoc($result)) {
+        $msg[] = $row;
+    }
+    if (mysql_num_rows($result) != 0)
+    {
+        echo '<div class="content">';
+        echo '<h3 class="primary"><i class="fa fa-file-pdf-o"></i> Fontos dokumentumok </h3>';
+        echo <<<EOT
+        <table id="responsiveTable" class="large-only" cellspacing="0">
+            <tr align="left" class="primary">
+                <th> id </th>
+                <th> Feltöltés ideje </th>
+                <th> Cím </th>
+                <th> Törzs (nm) </th>
+                <th> Érvényességi idő </th>
+                <th> Érvényes </th>
+            </tr>
+            <tbody>
+EOT;
+        foreach ($msg as $row) {
+            echo '<tr>';
+            foreach ($row as $value) {
+                echo "<td>$value</td>";
+            }
+            echo '</tr>';
+        }
+        echo "</tbody>";
+        echo "</table>";
+        echo "</div>";
+    }
+}

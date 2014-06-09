@@ -613,7 +613,7 @@ function newBoardMessage () {
                     </div>
                     <div class="form-group">
                         <label for="text">Üzenet</label>
-                        <input type="text" class="form-control" name="text" id="text" value="" data-validation="required">
+                        <textarea rows="6" cols="50" class="form-control" name="text" id="text" data-validation="required"></textarea>
                         <span class="help-block">Az hír törzse</span>
                     </div>
                     <div class="form-group">
