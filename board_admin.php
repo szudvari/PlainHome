@@ -9,9 +9,9 @@ include_once 'js.php';
 htmlHead($website['title'], $house['name']);
 webheader($_SESSION);
 
-if (isset($_GET["del"]))
+if (isset($_GET["change"]))
 {
-    popUp("File törölve");
+    popUp("Hír státusza megváltozott");
 }
 
 if (isset($_GET["new"]))

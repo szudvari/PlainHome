@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Hoszt: 127.0.0.1
--- Létrehozás ideje: 2014. Jún 09. 11:51
+-- Létrehozás ideje: 2014. Jún 09. 14:44
 -- Szerver verzió: 5.5.32
 -- PHP verzió: 5.4.19
 
@@ -44,6 +44,29 @@ CREATE TABLE IF NOT EXISTS `admin` (
 INSERT INTO `admin` (`id`, `username`, `email`, `password`, `role`) VALUES
 (1, 'admin', '', '05db4ee4c4ebcb0c19571283be40bdceccb73cd83898519a6ed49c5754fafae46a87e2a14c98aba94f1668633471e149970a7544f93f36ef6bd7eb04f5539517', 99),
 (2, 'szudvari', 'udvarisz@yahoo.com', '5420720b710f7f14d3d6d12c37c23a32032d14e08d6a13f613c775d28c388a31b3245d5458fda2d869153be6c0872118ef078df042f776210db7fdab8c46a5d3', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `board`
+--
+
+CREATE TABLE IF NOT EXISTS `board` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `creation_date` date NOT NULL,
+  `title` varchar(250) COLLATE utf8_hungarian_ci NOT NULL,
+  `text` text COLLATE utf8_hungarian_ci NOT NULL,
+  `valid_till` date NOT NULL DEFAULT '2099-12-31',
+  `valid` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci AUTO_INCREMENT=2 ;
+
+--
+-- A tábla adatainak kiíratása `board`
+--
+
+INSERT INTO `board` (`id`, `creation_date`, `title`, `text`, `valid_till`, `valid`) VALUES
+(1, '2000-01-01', 'Gratulálunk!', 'Az Ön társasházában a PlainHouse társasházkezelő rendszer működik, A program segítségével nyomon követheti befizetéseit, közösköltségének alakulását, illetve tájékozódhat a társasházat érintő legfrissebb hírekről.  ', '2099-12-31', 1);
 
 -- --------------------------------------------------------
 
@@ -230,15 +253,7 @@ CREATE TABLE IF NOT EXISTS `documents` (
   `shortname` varchar(100) COLLATE utf8_hungarian_ci NOT NULL,
   `description` text COLLATE utf8_hungarian_ci,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci AUTO_INCREMENT=6 ;
-
---
--- A tábla adatainak kiíratása `documents`
---
-
-INSERT INTO `documents` (`id`, `name`, `shortname`, `description`) VALUES
-(4, 'lion-ajcsi-bontas-100x150.jpg', 'A Zoroszlán ajándékot bont', 'Mert kíváncsi'),
-(5, 'Eleon.pdf', 'Eleon', '');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 

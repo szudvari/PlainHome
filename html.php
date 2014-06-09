@@ -250,6 +250,7 @@ EOT;
 	                <ul class="menu">
 	                    <li><a href="deposits.php">Albetétek</a></li>                
 	                    <li><a href="basedata.php">Alapdíjak</a></li>
+	                    <li><a href="board_admin.php">Üzenőfal</a></li>
 	                    <li><a href="documents.php">Dokumentumok</a></li>
 	                    <li><a href="allresidents.php">Felhasználók</a></li>
 	                    <li><a href="listadmin.php">Adminisztrátorok</a></li>
@@ -269,6 +270,7 @@ EOT;
                             <li><a href="mydepo.php">Saját adataim</a></li>	                   
                             <li><a href="deposits.php">Albetétek</a></li>                
 	                    <li><a href="basedata.php">Alapdíjak</a></li>
+                            <li><a href="board_admin.php">Üzenőfal</a></li>
                             <li><a href="documents.php">Dokumentumok</a></li>
                             <li><a href="allresidents.php">Felhasználók</a></li>
                             <li><a href="session.php">Session check</a></li>
@@ -448,6 +450,7 @@ EOT;
 
 function welcomeIndexUser($user, $ccost, $balance) {
     global $house;
+    $msg = getLatestBoardMessage();
     $date = date("Y.m.d");
     $cost = number_format($ccost, 0, ',', ' ');
     if ($balance < 0) {
@@ -466,16 +469,16 @@ function welcomeIndexUser($user, $ccost, $balance) {
 		<p class="lead welcomeMsg">Üdvözöljük egyéni oldalán {$user['firstname']} {$user['lastname']}!</p>
 		<p class="lead welcomeMsg">A "Saját adataim" menülinkre kattintva, megtekintheti részletes adatait és megváltoztathatja belépési jelszavát!</p>
 EOT;
-if ($uzenet == true)
+if ($msg)
 {
 	echo <<<EOT
 		<div class="panel panel-info">
 		<div class="panel-heading">
-		<h3 class="panel-title"><i class="fa fa-bullhorn"></i> Üzenőfal</h3>
+		<h3 class="panel-title"><i class="fa fa-bullhorn"></i> Legfrisebb hír</h3>
 		</div>
-		<div class="panel-body"><p>Cím<span style="float: right">datum</span></p>
-		<p>törzs</p>
-		<p><button type="button"><i class=""></i>Meg tobb uzenet</button></p>
+                <div class="panel-body"><p>{$msg['title']}<span style="float: right">{$msg['creation_date']}</span></p>
+		<p>{$msg['text']}</p>
+		<p><button type="button"><i class=""></i>További hírek</button></p>
 		</div>
 		</div>
 EOT;

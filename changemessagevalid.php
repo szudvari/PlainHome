@@ -8,14 +8,14 @@ include_once 'html.php';
 ob_start();
 htmlHead($website['title'], $house['name']);
 webheader($_SESSION);
-if ($_SESSION["admin"] > 1)
+if ($_SESSION["admin"] > 0)
 {
-    $act = $_GET["uid"];
-    $status = $_GET["status"];
+    $id = $_GET["id"];
+    $act = $_GET["act"];
     $con = connectDb();
-    changeAdminRole($id, $status);
+    changeMsgStatus($id, $act);
     closeDb($con);
-    header("Location:listadmin.php?admin=1");
+    header("Location:board_admin.php?change=1");
 }
 else
 {
