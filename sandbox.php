@@ -10,7 +10,7 @@ include_once 'js.php';
 htmlHead($website['title'], $house['name']);
 webheader($_SESSION);
 
-newBoardMessage();
+getActualBalance("125","1");
 
 
 htmlEnd();

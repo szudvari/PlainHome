@@ -593,7 +593,7 @@ function getAllDepo() {
 
 
         $deposit[$i]["ccost"] = $ccost_cost + $grabage_cost;
-        $deposit[$i]["balance"] = getActualBalance($deposit[$i]["ccost"], $balance[$i]['actual_balance']);
+        $deposit[$i]["balance"] = getActualBalance($balance[$i]['actual_balance'], $deposit[$i]["id"]);
         $sumarea += $deposit[$i]['area'];
         $sumresidents += $deposit[$i]['residents_no'];
         $sumarearatio += $deposit[$i]['area_ratio'];
@@ -1109,9 +1109,8 @@ function insertPayment($data, $user) {
 
 function getMyPayments($id) {
     global $db;
-    $ccost = getCcost($id);
     $closing_balance = getCurrentBalance($id);
-    $balance = getActualBalance($ccost, $closing_balance);
+    $balance = getActualBalance($closing_balance, $id);
     if ($balance < 0)
     {
         $abalance = $balance * -1;
@@ -1153,7 +1152,6 @@ EOT;
     {
         echo "Önnek nincs lekönyvelt befizetése.<br>"
         . "Felhívjuk figyelmét, hogy a befizetések azok beérkezése után 3-5 nappal kerülnek könyvelésre!";
-        
     }
     else
     {
@@ -1351,10 +1349,10 @@ function getLatestBoardMessage() {
     while ($row = mysql_fetch_assoc($result)) {
         $msg = $row;
     }
-    if (mysql_num_rows($result)!=0){
-     return $msg;   
+    if (mysql_num_rows($result) != 0)
+    {
+        return $msg;
     }
-    
 }
 
 function changeMsgStatus($id, $act) {
@@ -1373,9 +1371,9 @@ function changeMsgStatus($id, $act) {
     }
 }
 
-function allBoardMessage () {
+function allBoardMessage() {
     $sql = "SELECT * FROM `board`  WHERE `valid` = 1 AND (`valid_till`> CURDATE()) ORDER BY `id` DESC";
-     $result = mysql_query($sql);
+    $result = mysql_query($sql);
     if (!$result)
     {
         die("allBoardMessage hiba:" . mysql_errno() . " - " . mysql_error());
@@ -1392,11 +1390,36 @@ function allBoardMessage () {
 		<h3 class="panel-title"><i class="fa fa-bullhorn"></i> Legfrisebb hírek</h3>
 		</div>
 EOT;
-	
+
         foreach ($msg as $row) {
             echo "<div class='panel-body'><p>{$row['title']}<span style='float: right'>{$row['creation_date']}</span></p>
 		<p>{$row['text']}</p></div><hr />";
         }
         echo "</div>";
     }
+}
+
+function getActualBalance($actual_balance, $id) {
+    $year = date('Y');
+    $con = connectDb();
+    $sql = "SELECT ccost from ccost WHERE `deposit_id`=$id and `year`=$year ";
+    //echo $sql;
+    $result = mysql_query($sql);
+    if (!$result)
+    {
+        die("getCcost hiba:" . mysql_errno() . " - " . mysql_error());
+    }
+    $ccost = array();
+    while ($row = mysql_fetch_assoc($result)) {
+        $ccost[] = $row;
+    }
+    //print_r($ccost);
+    $req_payment = 0;
+    for ($i = 0; ($i < mysql_num_rows($result)); $i++) {
+        $req_payment += $ccost[$i]['ccost'];
+    }
+
+
+    $balance = $actual_balance - $req_payment;
+    return $balance;
 }

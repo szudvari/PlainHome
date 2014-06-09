@@ -83,22 +83,6 @@ function round_to_nearest_n($int, $n) {
     return round($int / $n) * $n;
 }
 
-function getActualBalance($ccost, $actual_balance) {
-    global $house;
-    if (date('d') < $house['payment_day'])
-    {
-        $month = date('m') - 1;
-    }
-    else
-    {
-        $month = date('m');
-    }
-    $req_payment = $ccost * $month;
-
-    $balance = $actual_balance - $req_payment;
-    return $balance;
-}
-
 function filesInDirectory ($dir) {
 $files = array_diff(scandir($dir), array('..', '.'));
 return $files;

@@ -38,7 +38,7 @@ else if (isset($_SESSION['depositid']))
     $user = getUserData($id);
     $ccost = getCcost($_SESSION['depositid']);
     $closing_balance = getCurrentBalance($_SESSION['depositid']);
-    $balance = getActualBalance($ccost, $closing_balance);
+    $balance = getActualBalance($closing_balance, $_SESSION['depositid']);
     welcomeIndexUser($user, $ccost, $balance);
     listDocuments();
     closeDb($con);
