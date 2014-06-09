@@ -465,6 +465,13 @@ function welcomeIndexUser($user, $ccost, $balance) {
 		<img alt="Tenant Avatar" src="pics/user_avatar.png" class="avatar" />
 		<p class="lead welcomeMsg">Üdvözöljük egyéni oldalán {$user['firstname']} {$user['lastname']}!</p>
 		<p class="lead welcomeMsg">A "Saját adataim" menülinkre kattintva, megtekintheti részletes adatait és megváltoztathatja belépési jelszavát!</p>
+		<div class="panel panel-info">
+		<div class="panel-heading">
+		<h3 class="panel-title"><i class="fa fa-bullhorn"></i> Üzenőfal</h3>
+		</div>
+		<div class="panel-body">Uzenofal - Holnap kozgyules gyere el Donec sodales sagittis magna. Nam adipiscing. Donec sodales sagittis magna. Nam adipiscing.
+		<p>Holnap kozgyules gyere el Donec sodales sagittis magna. Nam adipiscing. Donec sodales sagittis magna. Nam adipiscing.</p></div>
+		</div>
 	</div>
 	<div class="col-md-6">
 EOT;
