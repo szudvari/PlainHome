@@ -1395,7 +1395,7 @@ EOT;
 	
         foreach ($msg as $row) {
             echo "<div class='panel-body'><p>{$row['title']}<span style='float: right'>{$row['creation_date']}</span></p>
-		<p>{$row['text']}</p></div><hr style='width: 50%' />";
+		<p>{$row['text']}</p></div><hr />";
         }
         echo "</div>";
     }
