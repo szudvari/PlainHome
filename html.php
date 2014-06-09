@@ -574,7 +574,7 @@ EOT;
     foreach ($files as $row) {
         echo '<tr>';
         echo "<td>$row</td>";
-        echo "<td><a href=\"./documents/$row\">Megnéz</td>";
+        echo "<td><a href=\"./documents/$row\" target='_blank'>Megnéz</td>";
         echo "<td><a href=\"delfile.php?file=$row\">Törlés</a></td>";
         echo '</tr>';
     }
