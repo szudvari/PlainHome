@@ -502,7 +502,7 @@ function newPayment ($id) {
 
                     <div class="content">
                         <h3>Befizetés rögzítése</h3>
-                        <form id="contactform" action="insertpayment.php" method="post">
+                        <form id="paymentform" action="insertpayment.php" method="post">
                             <div class="formcolumn">
                                 <label for="payment">Összeg</label> 
                                 <input type="text" id="payment" name="payment" class="form-control">
@@ -511,5 +511,37 @@ function newPayment ($id) {
 		        <div class="buttons">
 		            <button type="input" name="submit" value="Felvesz" class="btn btn-success btn-icon"><i class="fa fa-dollar"></i> Befizetés rögzítése</button>
 		        </div>
+EOT;
+}
+
+function uploadFile () {
+ echo <<<EOT
+
+		<a data-toggle="modal" href="#uploadFile" class="btn btn-success btn-icon floatLeft"><i class="fa fa-upload"></i> File feltöltése</a>
+		<!-- -- Filefeltoltes Modal -- -->
+		<div class="modal fade" id="uploadFile" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-primary">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+						<h4 class="modal-title">Új file feltöltése</h4>
+					</div>
+					<form action="upload_file.php" method="post" enctype="multipart/form-data">
+						<div class="modal-body">
+							<div class="form-group">
+		                        <label for="file">File név</label>
+								<input type="file" class="form-control" name="file" id="file" value="" />
+								<span class="help-block">Válassza ki a feltölteni kívánt file-t!</span>
+		                    </div>
+				</div>
+						<div class="modal-footer">
+							<button type="input" name="submit" value="uploadFile" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Feltöltés</button>
+							<button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>		
+
 EOT;
 }

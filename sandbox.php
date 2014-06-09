@@ -8,12 +8,10 @@ include_once 'html.php';
 include_once 'js.php';
 
 htmlHead($website['title'], $house['name']);
+webheader($_SESSION);
 
-    $id = $_SESSION['userid'];
-    $con = connectDb();
-    $user = getUserData($id);
-    $ccost = getCcost($_SESSION['depositid']);
-    $closing_balance = getCurrentBalance($_SESSION['depositid']);
-    getActualBalance ($ccost, $closing_balance);
-    $balance = 0; // JAVÍTANI!
+uploadFile();
+
+
+htmlEnd();
 
