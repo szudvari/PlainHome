@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Hoszt: 127.0.0.1
--- Létrehozás ideje: 2014. Jún 09. 14:44
+-- Létrehozás ideje: 2014. Jún 09. 15:42
 -- Szerver verzió: 5.5.32
 -- PHP verzió: 5.4.19
 
@@ -59,14 +59,15 @@ CREATE TABLE IF NOT EXISTS `board` (
   `valid_till` date NOT NULL DEFAULT '2099-12-31',
   `valid` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci AUTO_INCREMENT=3 ;
 
 --
 -- A tábla adatainak kiíratása `board`
 --
 
 INSERT INTO `board` (`id`, `creation_date`, `title`, `text`, `valid_till`, `valid`) VALUES
-(1, '2000-01-01', 'Gratulálunk!', 'Az Ön társasházában a PlainHouse társasházkezelő rendszer működik, A program segítségével nyomon követheti befizetéseit, közösköltségének alakulását, illetve tájékozódhat a társasházat érintő legfrissebb hírekről.  ', '2099-12-31', 1);
+(1, '2000-01-01', 'Gratulálunk!', 'Az Ön társasházában a PlainHouse társasházkezelő rendszer működik. A program segítségével nyomon követheti befizetéseit, közösköltségének alakulását, illetve tájékozódhat a társasházat érintő legfrissebb hírekről.  ', '2099-12-31', 1),
+(2, '2014-06-09', 'Gratulálunk 2!', 'Az Ön társasházában a PlainHouse társasházkezelő rendszer működik. A program segítségével nyomon követheti befizetéseit, közösköltségének alakulását, illetve tájékozódhat a társasházat érintő legfrissebb hírekről.', '2099-12-31', 1);
 
 -- --------------------------------------------------------
 
@@ -253,7 +254,7 @@ CREATE TABLE IF NOT EXISTS `documents` (
   `shortname` varchar(100) COLLATE utf8_hungarian_ci NOT NULL,
   `description` text COLLATE utf8_hungarian_ci,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -289,6 +290,7 @@ CREATE TABLE IF NOT EXISTS `payment` (
   `deposit_id` int(11) NOT NULL,
   `date` date NOT NULL,
   `amount` int(11) NOT NULL,
+  `account_date` date NOT NULL,
   `user` varchar(75) COLLATE utf8_hungarian_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `deposit_id` (`deposit_id`)

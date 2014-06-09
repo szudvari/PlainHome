@@ -12,6 +12,7 @@ if ($_SESSION["admin"] > 0)
 {
     $deposit['id'] = $_POST['did'];
     $deposit['payment'] = $_POST['payment'];
+    $deposit['account_date'] = $_POST['account_date'];
     
 //print_r($deposit);
     $con = connectDb();

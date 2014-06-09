@@ -1085,13 +1085,13 @@ function insertPayment($data, $user) {
     $year = date('Y');
     $oldbalance = getCurrentBalance($data['id']);
     $newbalance = $oldbalance + $data['payment'];
-    echo $oldbalance;
+//    echo $oldbalance;
+//    echo "<br>";
+//    echo $newbalance;
     echo "<br>";
-    echo $newbalance;
-    echo "<br>";
-    $sql = "INSERT INTO payment (`deposit_id`, `date`, `amount`, `user`) "
-            . "VALUES ({$data['id']}, CURDATE(), {$data['payment']}, '$user')";
-    //echo $sql;
+    $sql = "INSERT INTO payment (`deposit_id`, `date`, `amount`, `user`, `account_date`) "
+            . "VALUES ({$data['id']}, CURDATE(), {$data['payment']}, '$user', '{$data['account_date']}')";
+//    echo $sql;
     $result = mysql_query($sql);
     if (!$result)
     {
@@ -1121,7 +1121,7 @@ function getMyPayments($id) {
         $abalance = $balance;
     }
     $abalance = number_format($abalance, 0, ',', ' ');
-    $sql = "SELECT `deposits`.`floor`,`deposits`.`door`,`payment`.`date`,`payment`.`amount` FROM deposits "
+    $sql = "SELECT `deposits`.`floor`,`deposits`.`door`,`payment`.`account_date`,`payment`.`amount` FROM deposits "
             . "LEFT JOIN `{$db['name']}`.`payment` ON `deposits`.`id` = `payment`.`deposit_id` "
             . "WHERE `deposits`.`id` = $id "
             . "ORDER BY `payment`.`date` DESC;";
@@ -1149,11 +1149,11 @@ EOT;
                 <div class="alertMsg success"><i class="fa fa-info-circle"></i> Az Ön közösköltségének aktuális egyenlege: <span class="floatLeft">$abalance Ft túlfizetés</span></div> 
 EOT;
     }
-    if ($table[0]['date'] == NULL)
+    if ($table[0]['account_date'] == NULL)
     {
         echo "Önnek nincs lekönyvelt befizetése.<br>"
         . "Felhívjuk figyelmét, hogy a befizetések azok beérkezése után 3-5 nappal kerülnek könyvelésre!";
-        exit;
+        
     }
     else
     {
@@ -1165,7 +1165,7 @@ EOT;
    <tr align="left" class="primary">
    <th> Emelet </th>
    <th> Ajtó </th>
-   <th> Befizetés dátuma</th>
+   <th> Könyvelés dátuma</th>
    <th> Befizetés összege</th>
    </tr>
 EOT;
@@ -1175,7 +1175,7 @@ EOT;
             echo '<tr>';
             echo "<td>{$row['floor']}</td>";
             echo "<td>{$row['door']}</td>";
-            echo "<td>{$row['date']}</td>";
+            echo "<td>{$row['account_date']}</td>";
             echo "<td>" . number_format($row['amount'], 0, ',', ' ') . " Ft</td>";
 
 
@@ -1370,5 +1370,33 @@ function changeMsgStatus($id, $act) {
     if (!$res)
     {
         die("Hiba:" . mysql_errno() . " - " . mysql_error());
+    }
+}
+
+function allBoardMessage () {
+    $sql = "SELECT * FROM `board`  WHERE `valid` = 1 AND (`valid_till`> CURDATE()) ORDER BY `id` DESC";
+     $result = mysql_query($sql);
+    if (!$result)
+    {
+        die("allBoardMessage hiba:" . mysql_errno() . " - " . mysql_error());
+    }
+    while ($row = mysql_fetch_assoc($result)) {
+        $msg[] = $row;
+    }
+    if (mysql_num_rows($result) != 0)
+    {
+        echo '<div class="content">';
+        echo <<<EOT
+        <div class="panel panel-info">
+		<div class="panel-heading">
+		<h3 class="panel-title"><i class="fa fa-bullhorn"></i> Legfrisebb hírek</h3>
+		</div>
+EOT;
+	
+        foreach ($msg as $row) {
+            echo "<div class='panel-body'><p>{$row['title']}<span style='float: right'>{$row['creation_date']}</span></p>
+		<p>{$row['text']}</p></div><hr />";
+        }
+        echo "</div>";
     }
 }

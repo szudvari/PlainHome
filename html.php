@@ -478,7 +478,7 @@ if ($msg)
 		</div>
                 <div class="panel-body"><p>{$msg['title']}<span style="float: right">{$msg['creation_date']}</span></p>
 		<p>{$msg['text']}</p>
-		<p><button type="button"><i class=""></i>További hírek</button></p>
+		<p><a href="board.php"><button type="button"><i class=""></i>További hírek</button></a></p>
 		</div>
 		</div>
 EOT;
@@ -527,7 +527,12 @@ function newPayment ($id) {
                         <form id="paymentform" action="insertpayment.php" method="post">
                             <div class="formcolumn">
                                 <label for="payment">Összeg</label> 
-                                <input type="text" id="payment" name="payment" class="form-control">
+                                <input type="text" id="payment" name="payment" class="form-control" data-validation="required">
+                                
+    </div>
+                  <div class="formcolumn">
+                                <label for="account_date">Könyvelés dátuma</label> 
+                                <input type="date" id="account_date" name="account_date" class="form-control" data-validation="required">
                                 <input type="hidden" id="did" name="did" value="$id">
     </div>
 		        <div class="buttons">

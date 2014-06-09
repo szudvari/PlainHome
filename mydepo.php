@@ -38,7 +38,4 @@ $con = connectDb();
 getMyDepo($id);
 closeDb($con);
 showContent ("payments", "pays");
-if (isset($_SESSION['depositid'])){
-
-}
 htmlEnd();
