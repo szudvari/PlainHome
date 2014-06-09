@@ -469,8 +469,10 @@ function welcomeIndexUser($user, $ccost, $balance) {
 		<div class="panel-heading">
 		<h3 class="panel-title"><i class="fa fa-bullhorn"></i> Üzenőfal</h3>
 		</div>
-		<div class="panel-body">Uzenofal - Holnap kozgyules gyere el Donec sodales sagittis magna. Nam adipiscing. Donec sodales sagittis magna. Nam adipiscing.
-		<p>Holnap kozgyules gyere el Donec sodales sagittis magna. Nam adipiscing. Donec sodales sagittis magna. Nam adipiscing.</p></div>
+		<div class="panel-body"><p>Cím<span style="float: right">datum</span></p>
+		<p>törzs</p>
+		<p><button type="button"><i class=""></i>Meg tobb uzenet</button></p>
+		</div>
 		</div>
 	</div>
 	<div class="col-md-6">
