@@ -1387,7 +1387,7 @@ function allBoardMessage () {
     {
         echo '<div class="content">';
         echo <<<EOT
-        <div class="panel panel-info">
+        <div class="panel panel-primary">
 		<div class="panel-heading">
 		<h3 class="panel-title"><i class="fa fa-bullhorn"></i> Legfrisebb hírek</h3>
 		</div>
@@ -1395,7 +1395,7 @@ EOT;
 	
         foreach ($msg as $row) {
             echo "<div class='panel-body'><p>{$row['title']}<span style='float: right'>{$row['creation_date']}</span></p>
-		<p>{$row['text']}</p></div><hr />";
+		<p>{$row['text']}</p></div><hr style='width: 50%' />";
         }
         echo "</div>";
     }
