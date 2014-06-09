@@ -532,12 +532,12 @@ function uploadFile () {
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="file">File név</label>
-                        <input type="file" class="form-control" name="file" id="file" value="" />
+                        <input type="file" class="form-control" name="file" id="file" value="" data-validation="required">
                         <span class="help-block">Válassza ki a feltölteni kívánt file-t! "gif", "jpeg", "jpg", "png", "pdf" fileok feltöltésére van lehetőség.</span>
                     </div>
                     <div class="form-group">
                         <label for="shortname">Dokumentum neve</label>
-                        <input type="text" class="form-control" name="shortname" id="shortname" value="" />
+                        <input type="text" class="form-control" name="shortname" id="shortname" value="" data-validation="required">
                         <span class="help-block">A dokumentum neve (amit a felhasználók látnak).</span>
                     </div>
                     <div class="form-group">

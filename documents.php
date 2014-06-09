@@ -27,3 +27,5 @@ else
 {
     notLoggedIn();
 }
+validateForm();
+htmlEnd();
