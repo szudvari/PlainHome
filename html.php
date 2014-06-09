@@ -250,6 +250,7 @@ EOT;
 	                <ul class="menu">
 	                    <li><a href="deposits.php">Albetétek</a></li>                
 	                    <li><a href="basedata.php">Alapdíjak</a></li>
+	                    <li><a href="documents.php">Dokumentumok</a></li>
 	                    <li><a href="allresidents.php">Felhasználók</a></li>
 	                    <li><a href="listadmin.php">Adminisztrátorok</a></li>
                         <li><a href="session.php">Session check</a></li>
@@ -267,7 +268,8 @@ EOT;
 	                                    
                             <li><a href="mydepo.php">Saját adataim</a></li>	                   
                             <li><a href="deposits.php">Albetétek</a></li>                
-	                    	<li><a href="basedata.php">Alapdíjak</a></li>
+	                    <li><a href="basedata.php">Alapdíjak</a></li>
+                            <li><a href="documents.php">Dokumentumok</a></li>
                             <li><a href="allresidents.php">Felhasználók</a></li>
                             <li><a href="session.php">Session check</a></li>
                             <li><a data-toggle="modal" href="#signOut">Kilépés <i class="fa fa-sign-out"></i></a></li>
@@ -544,4 +546,31 @@ function uploadFile () {
 		</div>		
 
 EOT;
+}
+
+function documents () {
+    $files = filesInDirectory("documents");
+     echo <<<EOT
+     <div class="content">
+                     <h3>Feltöltött dokumentumok</h3>
+    <table id="responsiveTable" class="large-only" cellspacing="0">
+<tr align="left" class="primary">
+   <th> File név </th>
+   <th> Megnéz </th>
+   <th> Törlés </th>
+</tr>
+<tbody">  
+EOT;
+    foreach ($files as $row) {
+        echo '<tr>';
+        echo "<td>$row</td>";
+        echo "<td><a href=\"./documents/$row\">Megnéz</td>";
+        echo "<td><a href=\"delfile.php?file=$row\">Törlés</a></td>";
+        echo '</tr>';
+    }
+    echo '</tbody>';
+    echo '</table>';
+    echo '</div>';
+
+    
 }

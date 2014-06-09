@@ -98,3 +98,15 @@ function getActualBalance($ccost, $actual_balance) {
     $balance = $actual_balance - $req_payment;
     return $balance;
 }
+
+function filesInDirectory ($dir) {
+$files = array_diff(scandir($dir), array('..', '.'));
+return $files;
+}
+
+function deleteFile ($file) {
+   if (!unlink($file))
+  {
+  echo ("Error deleting $file");
+  }
+}
