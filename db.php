@@ -1253,7 +1253,7 @@ function listDocuments() {
     if (mysql_num_rows($result) != 0)
     {
         echo '<div class="content">';
-        echo '<h3 class="primary"><i class="fa fa-file-pdf-o"></i> Elérhető dokumentumok </h3>';
+        echo '<h3 class="primary"><i class="fa fa-file-pdf-o"></i> Fontos dokumentumok </h3>';
         foreach ($docs as $row) {
             echo "<h4><a href=\"./documents/{$row['name']}\" target=\"_blank\">{$row['shortname']}</a><br>"
             . "<span class=\"help-block\">{$row['description']}</span></h4>";
