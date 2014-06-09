@@ -630,7 +630,7 @@ EOT;
             {
                 if (($value > 999) || ($value < 0))
                 {
-                    echo '<td>' . number_format($value, 0, ',', ' ') . '</td>';
+                    echo '<td style="text-align:right;">' . number_format($value, 0, ',', ' ') . '</td>';
                 }
                 else
                 {
@@ -653,8 +653,8 @@ EOT;
     echo "<td class='tdwarning'>$sumresidents fő</td>";
     echo "<td class='tdwarning'>" . number_format(str_replace(".", ",", round($sumarearatio, 2)), 0, ',', ' ') . "</td>";
     echo '<td class="tdprimary"></td>';
-    echo "<td class='tdwarning'>" . number_format($sumccost, 0, ',', ' ') . "</td>";
-    echo "<td class='tdwarning'>" . number_format($sumbalance, 0, ',', ' ') . "</td>";
+    echo "<td class='tdwarning' style='text-align:right;'>" . number_format($sumccost, 0, ',', ' ') . "</td>";
+    echo "<td class='tdwarning' style='text-align:right;'>" . number_format($sumbalance, 0, ',', ' ') . "</td>";
     echo '<td class="tdprimary" colspan=3></td>';
     echo '</tr>';
     echo '</tbody>';
