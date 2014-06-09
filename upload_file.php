@@ -39,6 +39,7 @@ if ($_SESSION["admin"] > 0)
     else
     {
         echo "<div id='content'>Nem megfelelő formátumú, vagy méretű file</div>";
+        exit();
     }
 }
 else
