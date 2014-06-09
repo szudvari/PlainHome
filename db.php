@@ -649,9 +649,9 @@ EOT;
     }
     echo '<tr>';
     echo '<td class="tdprimary" colspan=3>Összesen:</td>';
-    echo "<td class='tdwarning' style='text-align:right;>" . number_format($sumarea, 0, ',', ' ') . " m<sup>2</sup></td>";
-    echo "<td class='tdwarning' style='text-align:right;>$sumresidents fő</td>";
-    echo "<td class='tdwarning' style='text-align:right;>" . number_format(str_replace(".", ",", round($sumarearatio, 2)), 0, ',', ' ') . "</td>";
+    echo "<td class='tdwarning' style='text-align:right;'>" . number_format($sumarea, 0, ',', ' ') . " m<sup>2</sup></td>";
+    echo "<td class='tdwarning' style='text-align:right;'>$sumresidents fő</td>";
+    echo "<td class='tdwarning' style='text-align:right;'>" . number_format(str_replace(".", ",", round($sumarearatio, 2)), 0, ',', ' ') . "</td>";
     echo '<td class="tdprimary"></td>';
     echo "<td class='tdwarning' style='text-align:right;'>" . number_format($sumccost, 0, ',', ' ') . "</td>";
     echo "<td class='tdwarning' style='text-align:right;'>" . number_format($sumbalance, 0, ',', ' ') . "</td>";
