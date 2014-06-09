@@ -472,13 +472,13 @@ EOT;
 if ($msg)
 {
 	echo <<<EOT
-		<div class="panel panel-info">
+		<div class="panel panel-primary">
 		<div class="panel-heading">
 		<h3 class="panel-title"><i class="fa fa-bullhorn"></i> Legfrisebb hír</h3>
 		</div>
                 <div class="panel-body"><p>{$msg['title']}<span style="float: right">{$msg['creation_date']}</span></p>
 		<p>{$msg['text']}</p>
-		<p><a href="board.php"><button type="button"><i class=""></i>További hírek</button></a></p>
+		<p><a href="board.php"><button type="button" class="btn btn-info"><i class=""></i>További hírek</button></a></p>
 		</div>
 		</div>
 EOT;
