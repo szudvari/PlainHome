@@ -552,7 +552,7 @@ function documents () {
     $files = filesInDirectory("documents");
      echo <<<EOT
      <div class="content">
-                     <h3>Feltöltött dokumentumok</h3>
+                     <h3 class="primary"><i class="fa fa-file-pdf-o"></i> Feltöltött dokumentumok</h3>
     <table id="responsiveTable" class="large-only" cellspacing="0">
 <tr align="left" class="primary">
    <th> File név </th>
