@@ -10,8 +10,9 @@ include_once 'js.php';
 htmlHead($website['title'], $house['name']);
 webheader($_SESSION);
 
-documents();
-uploadFile();
+$con = connectDb();
+listDocuments();
+closeDb($con);
 
 
 htmlEnd();

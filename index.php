@@ -40,6 +40,8 @@ else if (isset($_SESSION['depositid']))
     $closing_balance = getCurrentBalance($_SESSION['depositid']);
     $balance = getActualBalance($ccost, $closing_balance);
     welcomeIndexUser($user, $ccost, $balance);
+    listDocuments();
+    closeDb($con);
 
     sendMessage();
     showContent("message", "messagebutton");

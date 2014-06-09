@@ -13,6 +13,9 @@ webheader($_SESSION);
 
 if ($_SESSION["admin"] > 0)
 {
+    $file['name']=$_FILES["file"]["name"];
+    $file['shortname']=$_POST["shortname"];
+    $file['description']=$_POST["description"];
     $allowedExts = array("gif", "jpeg", "jpg", "png", "pdf");
     $temp = explode(".", $_FILES["file"]["name"]);
     $extension = end($temp);
@@ -21,24 +24,27 @@ if ($_SESSION["admin"] > 0)
     {
         if ($_FILES["file"]["error"] > 0)
         {
-            echo "<div id='content'>Return Code: " . $_FILES["file"]["error"] . "<br></div>";
+            echo "<div class='content'>Return Code: " . $_FILES["file"]["error"] . "<br></div>";
         }
         else
         {
             if (file_exists("documents/" . $_FILES["file"]["name"]))
             {
-                echo "<div id='content'>".$_FILES["file"]["name"] . " már létezik.</div> ";
+                echo "<div class='content'>".$_FILES["file"]["name"] . " már létezik.</div> ";
             }
             else
             {
                 move_uploaded_file($_FILES["file"]["tmp_name"], "documents/" . $_FILES["file"]["name"]);
+                $con = connectDb();
+                insertTable("documents", $file, $con);
+                closeDb($con);
                 header("Location:documents.php?new=1");
             }
         }
     }
     else
     {
-        echo "<div id='content'>Nem megfelelő formátumú, vagy méretű file</div>";
+        echo "<div class='content'>Nem megfelelő formátumú, vagy méretű file</div>";
         exit();
     }
 }

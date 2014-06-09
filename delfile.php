@@ -14,6 +14,10 @@ webheader($_SESSION);
 if ($_SESSION["admin"] > 0)
 {
     $file = "./documents/" . $_GET['file'];
+    $filename = $_GET['file'];
+    $con = connectDb();
+    deleteFileFromDb($filename);
+    closeDb($con);
     deleteFile($file);
     header("location:documents.php?del=1");
 }

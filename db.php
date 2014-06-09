@@ -1230,3 +1230,32 @@ function startNewYear($lastyear) {
         }
     }
 }
+
+function deleteFileFromDb ($file) {
+    $sql="DELETE from documents WHERE `name`='$file'";
+     $result = mysql_query($sql);
+    if (!$result)
+    {
+        die("deleteFileFromDb hiba:" . mysql_errno() . " - " . mysql_error());
+    }
+}
+
+function listDocuments () {
+    $sql="SELECT `name`, `shortname`, `description` FROM documents";
+     $result = mysql_query($sql);
+    if (!$result)
+    {
+        die("listDocuments hiba:" . mysql_errno() . " - " . mysql_error());
+    }
+    while ($row = mysql_fetch_assoc($result)) {
+        $docs[] = $row;
+    }
+    
+    echo '<div class="content">';
+        echo '<h3 class="primary"><i class="fa fa-file-pdf-o"></i> Elérhető dokumentumok </h3>';
+        foreach ($docs as $row) {
+            echo "<h4><a href=\"./documents/{$row['name']}\" target=\"_blank\">{$row['shortname']}</a><br>"
+            . "<span class=\"help-block\">{$row['description']}</span></h4>";
+            
+        }
+}
