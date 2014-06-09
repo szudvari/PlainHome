@@ -584,3 +584,45 @@ EOT;
 
     
 }
+
+function newBoardMessage () {
+ echo <<<EOT
+
+<a data-toggle="modal" href="#newBMsg" class="btn btn-success btn-icon floatLeft"><i class="fa fa-upload"></i> Új hír feltöltése</a>
+<!-- -- Filefeltoltes Modal -- -->
+<div class="modal fade" id="newBMsg" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header modal-primary">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+                <h4 class="modal-title">Új hír</h4>
+            </div>
+            <form action="new_boardmessage.php" method="post">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="title">Cím</label>
+                        <input type="text" class="form-control" name="title" id="title" value="" data-validation="required">
+                        <span class="help-block">A hír címe</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="text">Üzenet</label>
+                        <input type="text" class="form-control" name="text" id="text" value="" data-validation="required">
+                        <span class="help-block">Az hír törzse</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="valid_till">Érvényesség</label>
+                        <input type="date" class="form-control" name="valid_till" id="valid_till" value="" />
+                        <span class="help-block">Az üzenet eddig érvényes. Hagyja üresen, ha nem korátozott az érvényességi idő. </span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="input" name="submit" value="uploadFile" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Feltöltés</button>
+                    <button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>		
+
+EOT;
+}

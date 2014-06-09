@@ -10,9 +10,7 @@ include_once 'js.php';
 htmlHead($website['title'], $house['name']);
 webheader($_SESSION);
 
-$con = connectDb();
-listDocuments();
-closeDb($con);
+newBoardMessage();
 
 
 htmlEnd();
