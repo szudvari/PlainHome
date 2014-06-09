@@ -1099,7 +1099,7 @@ function insertPayment($data, $user) {
     }
     $sql = "UPDATE `{$db['name']}`.`deposit_balance` SET `actual_balance` = '$newbalance' "
             . "WHERE `deposit_balance`.`deposit_id` = {$data['id']} AND `year` = $year";
-            //echo $sql;
+    //echo $sql;
     $result = mysql_query($sql);
     if (!$result)
     {
@@ -1205,7 +1205,7 @@ function lastYear() {
 }
 
 function startNewYear($lastyear) {
-    $newyear = $lastyear+1;
+    $newyear = $lastyear + 1;
     $sql = "SELECT * FROM `deposit_balance` where year=$lastyear";
     $result = mysql_query($sql);
     if (!$result)
@@ -1215,7 +1215,7 @@ function startNewYear($lastyear) {
     while ($row = mysql_fetch_assoc($result)) {
         $balances[] = $row;
     }
-    
+
     $balrows = mysql_num_rows($result);
     for ($i = 0; $i < $balrows; $i++) {
         $ccost = getCcost($balances[$i]['deposit_id']);
@@ -1231,18 +1231,18 @@ function startNewYear($lastyear) {
     }
 }
 
-function deleteFileFromDb ($file) {
-    $sql="DELETE from documents WHERE `name`='$file'";
-     $result = mysql_query($sql);
+function deleteFileFromDb($file) {
+    $sql = "DELETE from documents WHERE `name`='$file'";
+    $result = mysql_query($sql);
     if (!$result)
     {
         die("deleteFileFromDb hiba:" . mysql_errno() . " - " . mysql_error());
     }
 }
 
-function listDocuments () {
-    $sql="SELECT `name`, `shortname`, `description` FROM documents";
-     $result = mysql_query($sql);
+function listDocuments() {
+    $sql = "SELECT `name`, `shortname`, `description` FROM documents";
+    $result = mysql_query($sql);
     if (!$result)
     {
         die("listDocuments hiba:" . mysql_errno() . " - " . mysql_error());
@@ -1250,12 +1250,13 @@ function listDocuments () {
     while ($row = mysql_fetch_assoc($result)) {
         $docs[] = $row;
     }
-    
-    echo '<div class="content">';
+    if (mysql_num_rows($result) != 0)
+    {
+        echo '<div class="content">';
         echo '<h3 class="primary"><i class="fa fa-file-pdf-o"></i> Elérhető dokumentumok </h3>';
         foreach ($docs as $row) {
             echo "<h4><a href=\"./documents/{$row['name']}\" target=\"_blank\">{$row['shortname']}</a><br>"
-            . "<span class=\"help-block\">{$row['description']}</span></h4>";
-            
+            . "<span class=\"help-block\">{$row['description']}</span></h4></div>";
         }
+    }
 }
