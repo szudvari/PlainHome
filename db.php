@@ -491,10 +491,10 @@ EOT;
     echo '<hr />';
     echo '<div>';
     getMyPayments($id);
-    if (isset($_SESSION['userid'])){ // ha userként lépsz be
-    $user = getUserData($_SESSION['userid']);
-    //print_r($user);
-echo <<<EOT
+    if (isset($_SESSION['userid'])) { // ha userként lépsz be    
+        $user = getUserData($_SESSION['userid']);
+        //print_r($user);
+        echo <<<EOT
 			<div class="content"><div class="row">
 		<div class="col-md-8">
 			<h3 class="primary">Személyes adatok</h3>
@@ -517,10 +517,11 @@ echo <<<EOT
 		</div>
 	</div>
 EOT;
+    } 
+    else 
+    {     //ha adminként lépsz be
+        getMyAllCcost($id);
     }
-else {     //ha adminként lépsz be
-    getMyAllCcost($id);
-}
     echo '</div>';
 }
 
@@ -642,7 +643,7 @@ function listResidents() {
     mysql_query("set character set 'utf8'");
     $sql = "SELECT `residents`.`id`,`residents`.`firstname`,`residents`.`lastname`,"
             . "`residents`.`email`,`residents`.`username`,`deposits`.`floor`,"
-            . "`deposits`.`door`,`residents`.`active`,`residents`.`admin` "
+            . "`deposits`.`door`,`residents`.`active` "
             . "FROM residents LEFT JOIN `deposits` ON `residents`.`depositid` = `deposits`.`id` "
             . "order by `deposits`.`floor`, `deposits`.`door`";
 
@@ -661,11 +662,6 @@ function listResidents() {
             } else {
                 $table[$i]['active'] = "nem aktív";
             }
-            if ($table[$i]['admin'] < 1) {
-                $table[$i]['admin'] = "nem admin";
-            } else {
-                $table[$i]['admin'] = "admin";
-            }
         }
         echo '<div class="content">';
         echo '<h3 class="primary"><i class="fa fa-users"></i> Regisztrált lakók </h3>';
@@ -680,9 +676,7 @@ function listResidents() {
    <th> Emelet </th>
    <th> Ajtó </th>
    <th> Aktív </th> 
-   <th> Admin </th> 
    <th> Státusz módosítása  </th>
-   <th> Admin rang kiosztása  </th>
    <th> Jelszó módosítás </th>
    <th> Törlés</th>
    </tr>
@@ -701,14 +695,7 @@ EOT;
                 echo "<td><a id=\"alink\" href=\"update_ustatus.php?uid={$row['id']}"
                 . "&status=0\">User aktiválása</a></td>";
             }
-            if ($row['admin'] == "admin") {
-                echo "<td><a id=\"alink\" href=\"update_astatus.php?uid={$row['id']}"
-                . "&status=1\">Admin jog megvonása</a></td>";
-            } else {
-                echo "<td><a id=\"alink\" href=\"update_astatus.php?uid={$row['id']}"
-                . "&status=0\">Admin jog kiosztása</a></td>";
-            }
-
+            
             echo <<<EOT
         <td><a href="update_upassword.php?uid={$row['id']}">Jelszó módosítás</a></td>
         <td><a href="killuser.php?uid={$row['id']}">Lakó törlése</a></td>
@@ -1330,7 +1317,7 @@ function getMyAllCcost($id) {
         $ccost[] = $row;
     }
     echo '<button id="ccostabutton" value="Befizetesek" class="btn btn-success btn-icon"><i class="fa fa-money"></i>Közösköltség alakulása </button>';
-        echo '<div id=ccosts>';
+    echo '<div id=ccosts>';
     echo '<h3 class="primary"><i class="fa fa-money"></i> Közösköltség alakulása az utolsó 12 hónapban</h3>';
     echo <<<EOT
         <table id="responsiveTable" class="large-only" cellspacing="0">
