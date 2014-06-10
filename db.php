@@ -382,7 +382,7 @@ function updateDepoDb($deposit, $con) {
 }
 
 function getMyDepo($id) {
-	global $user;
+    global $house;
     global $_SESSION;
     $sql = "SELECT `floor`, `door`, `area`,  "
             . "`residents_no`, `area_ratio`, "
@@ -491,6 +491,9 @@ EOT;
     echo '<hr />';
     echo '<div>';
     getMyPayments($id);
+    if (isset($_SESSION['userid'])){ // ha userként lépsz be
+    $user = getUserData($_SESSION['userid']);
+    //print_r($user);
 echo <<<EOT
 			<div class="content"><div class="row">
 		<div class="col-md-8">
@@ -500,9 +503,8 @@ echo <<<EOT
 			<p class="lead">
 				<img alt="Tenant Avatar" src="pics/user_avatar.png" class="avatar" />
 				{$user['firstname']} {$user['lastname']}<br />
-				{$user['email']}<br />
-				{$user['phone']}</p>
-			<p class="lead">{$user['cim']}</p>
+				{$user['email']}</p>
+			<p class="lead">{$house['name']}</p>
 		</div>
 
 		<div class="col-md-4">
@@ -514,13 +516,11 @@ echo <<<EOT
 	        </div>
 		</div>
 	</div>
-
 EOT;
+    }
+else {     //ha adminként lépsz be
     getMyAllCcost($id);
-    sendMessage();
-    echo '<span style="text-align:right;">';
-    changePassword($_SESSION['userid']);
-    echo '</span>';
+}
     echo '</div>';
 }
 
