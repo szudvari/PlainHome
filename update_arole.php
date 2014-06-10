@@ -10,7 +10,7 @@ htmlHead($website['title'], $house['name']);
 webheader($_SESSION);
 if ($_SESSION["admin"] > 1)
 {
-    $act = $_GET["uid"];
+    $id = $_GET["uid"];
     $status = $_GET["status"];
     $con = connectDb();
     changeAdminRole($id, $status);
