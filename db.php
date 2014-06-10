@@ -551,7 +551,7 @@ EOT;
 			<div class="modal-content">
 				<div class="modal-header modal-primary">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
-					<h4 class="modal-title">Jelszómódosítása</h4>
+					<h4 class="modal-title">Jelszó módosítása</h4>
 				</div>
 				<form action="" method="post">
 					<div class="modal-body">
