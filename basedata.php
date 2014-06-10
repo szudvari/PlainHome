@@ -19,7 +19,7 @@ if ($_SESSION["admin"] > 0)
     $data=getBaseData();
     closeDb($con);
 
-    if ($_SESSION['admin'] > 1)
+    if ($_SESSION['admin'] > 0)
     {
         updateBaseData($data);
 

@@ -23,7 +23,7 @@ if (isset($_GET["new"]))
 {
     popUp("Adminisztrátor sikeresen felvéve");
 }
-if ($_SESSION["admin"] > 1)
+if ($_SESSION["admin"] > 0)
 {
     $con = connectDb();
     listAdmins();

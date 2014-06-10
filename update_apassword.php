@@ -7,7 +7,7 @@ include_once 'html.php';
 ob_start();
 htmlHead($website['title'], $house['name']);
 webheader($_SESSION);
-if ($_SESSION["admin"] > 1) {
+if ($_SESSION["admin"] > 0) {
     $id = $_GET["uid"];
     if ($id != 1) {
         $con = connectDb();
@@ -64,7 +64,7 @@ EOT;
             }
         }
     } else {
-        notLoggedIn();
+        notLoggedIn2();
     }
 } else {
     notLoggedIn();

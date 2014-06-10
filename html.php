@@ -246,8 +246,7 @@ EOT;
 	            <div>
 	                <label for="toggle" class="toggle" data-open="Menü" data-close="Bezár" onclick></label>
 	                <ul class="menu">
-			    <li><a href="index.php">Home</a></li>
-	                    <li><a href="deposits.php">Albetétek</a></li>                
+			    <li><a href="deposits.php">Albetétek</a></li>                
 	                    <li><a href="basedata.php">Alapdíjak</a></li>
 	                    <li><a href="board_admin.php">Üzenőfal</a></li>
 	                    <li><a href="documents.php">Dokumentumok</a></li>
@@ -306,6 +305,18 @@ function notLoggedIn() {
                 </div>
     
 EOT;
+}
+
+function notLoggedIn2() {
+    echo <<<EOT
+
+		<div class="content">
+			<h3>Önnek a kért művelethez nincs jogosultsága!</h3>
+                </div>
+    
+EOT;
+   $url=$_SERVER['HTTP_REFERER'];
+   header("Refresh: 1; url=$url");
 }
 
 function updateDeposit($depo) {

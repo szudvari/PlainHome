@@ -19,7 +19,7 @@ if ($_SESSION["admin"] > 1)
 }
 else
 {
-    notLoggedIn();
+    notLoggedIn2();
 }
 htmlEnd();
 ob_end_flush();

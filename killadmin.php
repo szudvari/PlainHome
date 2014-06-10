@@ -44,6 +44,7 @@ if ($_SESSION["admin"] > 1)
     </div>
 EOT;
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        
         $con = connectDb();
         killAdmin($id);
         closeDb($con);
@@ -51,10 +52,10 @@ EOT;
     }
     }
     else {
-     notLoggedIn();
+     notLoggedIn2();
     }
 }
 else {
-     notLoggedIn();
+     notLoggedIn2();
 }
 htmlEnd();

@@ -45,7 +45,7 @@ else if (stripos($_SERVER['HTTP_REFERER'], "/adminlogin.php"))
         }
         
         closeDb($con);
-        header("Location: admin.php");
+        header("Location: deposits.php");
         exit();
     }
     else
