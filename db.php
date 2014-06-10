@@ -575,12 +575,33 @@ EOT;
 			</div>
 		</div>
 	</div>
+        <!-- -- Kozoskoltseg Modal -- -->
+	<div class="modal fade" id="ktgAlakul" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header modal-primary">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+					<h4 class="modal-title">Közösköltség alakulása az utolsó 12 hónapban</h4>
+				</div>
+				<div class="modal-body">
+EOT;
+                                getMyAllCcost($id);
+echo <<<EOT
+				</div>
+				<div class="modal-footer">
+                                    <button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Bezár</button>
+				</div>
+			</div>
+		</div>
+	</div>
 EOT;
     } 
     else 
     {     //ha adminként lépsz be
+        echo '<h3 class="primary"><i class="fa fa-money"></i> Közösköltség alakulása az utolsó 12 hónapban</h3>';
         getMyAllCcost($id);
     }
+    echo '</div>';
     echo '</div>';
 }
 
@@ -1375,9 +1396,6 @@ function getMyAllCcost($id) {
     while ($row = mysql_fetch_assoc($result)) {
         $ccost[] = $row;
     }
-    echo '<button id="ccostabutton" value="Befizetesek" class="btn btn-success btn-icon"><i class="fa fa-money"></i>Közösköltség alakulása </button>';
-    echo '<div id=ccosts>';
-    echo '<h3 class="primary"><i class="fa fa-money"></i> Közösköltség alakulása az utolsó 12 hónapban</h3>';
     echo <<<EOT
         <table id="responsiveTable" class="large-only" cellspacing="0">
             <tr align="left" class="primary">
@@ -1402,6 +1420,5 @@ EOT;
     }
     echo '</tbody>';
     echo '</table>';
-    echo '</div>';
-    echo '<hr/>';
+
 }
