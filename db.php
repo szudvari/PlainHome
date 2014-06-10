@@ -516,6 +516,35 @@ EOT;
 	        </div>
 		</div>
 	</div>
+	<!-- -- Uj uzenet Modal -- -->
+	<div class="modal fade" id="newMsg" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header modal-primary">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+					<h4 class="modal-title">Kérdése van? Információra van szüksége?</h4>
+				</div>
+				<form action="message.php" method="post">
+					<div class="modal-body">
+						<div class="form-group">
+	                        <label for="subject">Tárgy</label>
+							<input type="text" class="form-control" name="subject" id="subject" value="" />
+							<span class="help-block">Kérjük, adja meg üzenete tárgyát.</span>
+	                    </div>
+						<div class="form-group">
+							<label for="comment">Üzenet</label>
+							<textarea class="form-control" name="comment" id="comment" rows="4"></textarea>
+							<span class="help-block">Kérjük fogalmazza meg röviden, lényegretörően üzenetét. HTML kód nem használható!</span>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="input" name="submit" value="sendMsg" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Küldés</button>
+						<button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 EOT;
     } 
     else 
