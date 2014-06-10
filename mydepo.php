@@ -38,4 +38,5 @@ $con = connectDb();
 getMyDepo($id);
 closeDb($con);
 showContent ("payments", "pays");
+showContent ("ccosts", "ccostabutton");
 htmlEnd();

@@ -10,8 +10,9 @@ include_once 'js.php';
 htmlHead($website['title'], $house['name']);
 webheader($_SESSION);
 
-getActualBalance("125","1");
-
+$con=  connectDb();
+getMyAllCcost ('14');
+closeDb($con);
 
 htmlEnd();
 
