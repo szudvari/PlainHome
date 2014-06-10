@@ -233,6 +233,7 @@ EOT;
 	            <div>
 	                <label for="toggle" class="toggle" data-open="Menü" data-close="Bezár" onclick></label>
 	                <ul class="menu">
+						<li><a href="index.php">Home</a></li>
 	                    <li><a href="mydepo.php">Saját adataim</a></li>
 						<li><a href="#">Dokumentáció</a></li>
 						<li><a href="#">Befizetések</a></li>
@@ -248,6 +249,7 @@ EOT;
 	            <div>
 	                <label for="toggle" class="toggle" data-open="Menü" data-close="Bezár" onclick></label>
 	                <ul class="menu">
+						<li><a href="index.php">Home</a></li>
 	                    <li><a href="deposits.php">Albetétek</a></li>                
 	                    <li><a href="basedata.php">Alapdíjak</a></li>
 	                    <li><a href="board_admin.php">Üzenőfal</a></li>
@@ -266,7 +268,7 @@ EOT;
 	            <div>
 	                <label for="toggle" class="toggle" data-open="Menü" data-close="Bezár" onclick></label>
 	                <ul class="menu">
-	                                    
+	                        <li><a href="index.php">Home</a></li>            
                             <li><a href="mydepo.php">Saját adataim</a></li>	                   
                             <li><a href="deposits.php">Albetétek</a></li>                
 	                    <li><a href="basedata.php">Alapdíjak</a></li>
