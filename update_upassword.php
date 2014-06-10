@@ -10,8 +10,7 @@ ob_start();
 htmlHead($website['title'], $house['name']);
 webheader($_SESSION);
 
-if (($_SESSION["admin"] > 0) || ($_SESSION["userid"] == $_GET["uid"]))
-{
+if (($_SESSION["admin"] > 0) || ($_SESSION["userid"] == $_GET["uid"])) {
     $id = $_GET["uid"];
     $con = connectDb();
     $user = getUserData($id);
@@ -43,8 +42,8 @@ if (($_SESSION["admin"] > 0) || ($_SESSION["userid"] == $_GET["uid"]))
     <td>{$user['username']}</td>
     <td>{$user['floor']}</td>
     <td>{$user['door']}</td>
-    <td><input type="password" name="pass1" data-validation="required" /></td>
-    <td><input type="password" name="pass2" data-validation="required" /></td>
+    <td><input type="password" name="pass1"></td>
+    <td><input type="password" name="pass2"></td>
     <td>    <button type="input" name="submit" value="módosít" class="btn btn-success btn-icon"><i class="fa fa-refresh"></i>Módosít</button>   </td>
     </tr>
     </tbody>
@@ -52,50 +51,47 @@ if (($_SESSION["admin"] > 0) || ($_SESSION["userid"] == $_GET["uid"]))
 
     </form>
 EOT;
-    validateForm ();
+
     echo '<div class="buttons">';
 
-    if ($_SESSION["admin"]>0) {
-    echo '<a href="allresidents.php"><button type="input" class="btn btn-success btn-icon"><i class="fa fa-times"></i>Mégsem</button></a>';
-    }
-    else {
-    echo '<a href="mydepo.php"><button type="input" class="btn btn-success btn-icon"><i class="fa fa-times"></i>Mégsem</button></a>';    
+    if ($_SESSION["admin"] > 0) {
+        echo '<a href="allresidents.php"><button type="input" class="btn btn-success btn-icon"><i class="fa fa-times"></i>Mégsem</button></a>';
+    } else {
+        echo '<a href="mydepo.php"><button type="input" class="btn btn-success btn-icon"><i class="fa fa-times"></i>Mégsem</button></a>';
     }
     echo <<<EOT
     </div>
-    </div>
+    
 
 
 EOT;
 
     @$pass1 = $_POST["pass1"];
     @$pass2 = $_POST["pass2"];
-    if ($_SERVER["REQUEST_METHOD"] == "POST")
-    {
-        if ($pass1 != $pass2)
-        {
-            echo '<p id="notloggedin">A két jelszó nem egyezik!</p>';
-        }
-        else
-        {
-            $password = encodePass($pass1);
-            $con = connectDb();
-            changeUserPassword($id, $password, $con);
-            closeDb($con);
-            if ($_SESSION["admin"]>0) {
-            header("Location:allresidents.php?password=1");
-            exit ();
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if (($pass1=="") || ($pass2=="")) {
+            echo '<p class="warning">Kérem, töltse ki a jelszó mezőket!</p>';
+        } else {
+            if ($pass1 != $pass2) {
+                echo '<p class="warning">A két jelszó nem egyezik!</p>';
+            } else {
+                $password = encodePass($pass1);
+                $con = connectDb();
+                changeUserPassword($id, $password, $con);
+                closeDb($con);
+                if ($_SESSION["admin"] > 0) {
+                    header("Location:allresidents.php?password=1");
+                    exit();
+                } else {
+                    header("Location:mydepo.php?password=1");
+                    exit();
+                }
             }
-            else {
-            header("Location:mydepo.php?password=1");
-            exit ();
-            }
         }
+     echo "</div>";   
     }
-}
-else
-{
+} else {
     notLoggedIn();
 }
 htmlEnd();
-ob_end_flush(); 
+ob_end_flush();
