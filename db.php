@@ -382,6 +382,7 @@ function updateDepoDb($deposit, $con) {
 }
 
 function getMyDepo($id) {
+	global $user;
     global $_SESSION;
     $sql = "SELECT `floor`, `door`, `area`,  "
             . "`residents_no`, `area_ratio`, "
@@ -490,6 +491,31 @@ EOT;
     echo '<hr />';
     echo '<div>';
     getMyPayments($id);
+echo <<<EOT
+			<div class="content"><div class="row">
+		<div class="col-md-8">
+			<h3 class="primary">Személyes adatok</h3>
+
+
+			<p class="lead">
+				<img alt="Tenant Avatar" src="pics/user_avatar.png" class="avatar" />
+				{$user['firstname']} {$user['lastname']}<br />
+				{$user['email']}<br />
+				{$user['phone']}</p>
+			<p class="lead">{$user['cim']}</p>
+		</div>
+
+		<div class="col-md-4">
+	        <div class="list-group">
+				<li class="list-group-item active">Motorház</li>
+				<a data-toggle="modal" href="#ktgAlakul" class="list-group-item">Közösköltség alakulása</a>
+				<a data-toggle="modal" href="#newMsg" class="list-group-item">Üzenet küldése</a>
+				<a data-toggle="modal" href="#editPassword" class="list-group-item">Jelszó módosítása</a>
+	        </div>
+		</div>
+	</div>
+
+EOT;
     getMyAllCcost($id);
     sendMessage();
     echo '<span style="text-align:right;">';
