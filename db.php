@@ -553,16 +553,17 @@ EOT;
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
 					<h4 class="modal-title">Jelszó módosítása</h4>
 				</div>
-				<form action="" method="post">
+				<form action="passwordchange.php" method="post">
 					<div class="modal-body">
 	                    <div class="form-group">
 	                        <label for="pass1">Új jelszó</label>
-	                        <input type="text" class="form-control" name="pass1" id="pass1" value="" />
+	                        <input type="text" class="form-control" name="pass1" id="pass1" value="" data-validation="required"/>
 							<span class="help-block">Új jelszó</span>
 	                    </div>
 						<div class="form-group">
 	                        <label for="pass2">Jelszó megerősítése</label>
-	                        <input type="text" class="form-control" name="pass2" id="pass2" value="" />
+	                        <input type="text" class="form-control" name="pass2" id="pass2" value="" data-validation="required"/>
+                                <input type="hidden" class="form-control" name="id" id="id" value="{$_SESSION['userid']}" />
 							<span class="help-block">Adja meg újra jelszavát. A megadott jelszavaknak egyezniük kell!</span>
 	                    </div>
 					</div>
