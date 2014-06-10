@@ -504,7 +504,7 @@ EOT;
 				<img alt="Tenant Avatar" src="pics/user_avatar.png" class="avatar" />
 				{$user['firstname']} {$user['lastname']}<br />
 				{$user['email']}</p>
-			<p class="lead">{$house['name']}</p>
+                        <p class="lead">{$house['name']}, {$deposit['floor']}/{$deposit['door']} lakás</p>
 		</div>
 
 		<div class="col-md-4">

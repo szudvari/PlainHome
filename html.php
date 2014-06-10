@@ -530,6 +530,7 @@ function newPayment ($id) {
                   <div class="formcolumn">
                                 <label for="account_date">Könyvelés dátuma</label> 
                                 <input type="date" id="account_date" name="account_date" class="form-control" data-validation="required">
+                                <span class="help-block">Kérem, "éééé-hh-nn" vagy "éééé.hh.nn" formátumot használjon!</span>
                                 <input type="hidden" id="did" name="did" value="$id">
     </div>
 		        <div class="buttons">
