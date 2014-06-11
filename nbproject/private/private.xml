@@ -3,14 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/xampp/htdocs/PlainHome/db.php</file>
-            <file>file:/D:/xampp/htdocs/PlainHome/functions.php</file>
-            <file>file:/D:/xampp/htdocs/PlainHome/index.php</file>
-            <file>file:/D:/xampp/htdocs/PlainHome/mydepo.php</file>
-            <file>file:/D:/xampp/htdocs/PlainHome/payment.php</file>
-            <file>file:/D:/xampp/htdocs/PlainHome/html.php</file>
-            <file>file:/D:/xampp/htdocs/PlainHome/insertpayment.php</file>
-            <file>file:/D:/xampp/htdocs/PlainHome/newyear.php</file>
+            <file>file:/C:/Users/Szabolcs/Documents/xampp/htdocs/PlainHome/update_arole.php</file>
+            <file>file:/C:/Users/Szabolcs/Documents/xampp/htdocs/PlainHome/html.php</file>
+            <file>file:/C:/Users/Szabolcs/Documents/xampp/htdocs/PlainHome/basedata.php</file>
+            <file>file:/C:/Users/Szabolcs/Documents/xampp/htdocs/PlainHome/index.php</file>
+            <file>file:/C:/Users/Szabolcs/Documents/xampp/htdocs/PlainHome/update_apassword.php</file>
+            <file>file:/C:/Users/Szabolcs/Documents/xampp/htdocs/PlainHome/listadmin.php</file>
+            <file>file:/C:/Users/Szabolcs/Documents/xampp/htdocs/PlainHome/killadmin.php</file>
+            <file>file:/C:/Users/Szabolcs/Documents/xampp/htdocs/PlainHome/auth.php</file>
         </group>
     </open-files>
 </project-private>

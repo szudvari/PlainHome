@@ -875,7 +875,7 @@ EOT;
         echo '<tr>';
         foreach ($row as $value) {
             if (is_numeric($value)) {
-                echo "<td>$value Ft</td>";
+                echo "<td>".number_format($value, 0, ',', ' ')." Ft</td>";
             } else {
                 echo "<td>$value </td>";
             }
