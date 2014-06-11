@@ -598,7 +598,9 @@ EOT;
     } 
     else 
     {     //ha adminként lépsz be
-        echo '<h3 class="primary"><i class="fa fa-money"></i> Közösköltség alakulása az utolsó 12 hónapban</h3>';
+       echo "<a href=\"payment.php?id=" . $id . "\"><button class='btn btn-success btn-icon'><i class='fa fa-dollar'></i>Új befizetés rögzítése</button></a>"; 
+       echo "<hr />";
+       echo '<h3 class="primary"><i class="fa fa-money"></i> Közösköltség alakulása az utolsó 12 hónapban</h3>';
         getMyAllCcost($id);
     }
     echo '</div>';
