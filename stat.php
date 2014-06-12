@@ -15,5 +15,6 @@ if ($_SESSION["admin"] > 0) {
 } else {
     notLoggedIn();
 }
+validateForm();
 htmlEnd();
 
