@@ -664,16 +664,16 @@ EOT;
 }
 function adminStat () {
     echo <<<EOT
-<div class="col-md-4">
+		<div class="content">
+			<h3 class="info"><i class="fa fa-bar-chart-o"></i> Statisztikák</h3>
 	        <div class="list-group">
-				<li class="list-group-item active">Statisztikák</li>
 				<a data-toggle="modal" href="#yearly" class="list-group-item">Éves kimutatás</a>
-				<a data-toggle="modal" href="#" class="list-group-item">Üzenet küldése</a>
-				<a data-toggle="modal" href="#" class="list-group-item">Jelszó módosítása</a>
+				<a data-toggle="modal" href="#" class="list-group-item">Stat2</a>
+				<a data-toggle="modal" href="#" class="list-group-item">Stat3</a>
 	        </div>
 		</div>
 	</div>
-        <!-- -- Jelszo valtoztatas -- -->
+        <!-- -- Eves kimutatas -- -->
 	<div class="modal fade" id="yearly" tabindex="-1" role="dialog" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -689,7 +689,7 @@ function adminStat () {
 							<span class="help-block">Adja meg az évszámot!</span>
 	                    </div>
                             <div class="modal-footer">
-						<button type="input" name="submit" value="editPassword" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Küldés</button>
+						<button type="input" name="submit" value="editPassword" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Választ</button>
 						<button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
 					</div>
 				</form>
