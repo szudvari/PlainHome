@@ -1482,7 +1482,7 @@ function getAllAccounts($year) {
         $allpayment += $deposit[$i]['payment'];
         $allbalance += $deposit[$i]['balance'];
     }
-     echo '<div class="buttons btn-back">
+    echo '<div class="buttons btn-back">
 	   <form action="stat.php">
 	   <button type="input" name="submit" value="Vissza" ><i class="fa fa-arrow-circle-left"></i>Vissza</button>
 	   </form>
@@ -1519,21 +1519,20 @@ EOT;
             } else {
                 echo '<td>' . $value . '</td>';
             }
-            
         }
-       echo '</tr>';
+        echo '</tr>';
         //print_r($deposit);
     }
-     echo '<tr>';
-        echo '<td class="tdprimary" colspan=4>Összesen:</td>';
-        echo "<td class='tdwarning' style='text-align:right;'>" . number_format($allobalance, 0, ',', ' ') . " Ft</td>";
-        echo "<td class='tdwarning' style='text-align:right;'>" . number_format($allccost, 0, ',', ' ') . " Ft</td>";
-        echo "<td class='tdwarning' style='text-align:right;'>" . number_format($allpayment, 0, ',', ' ') . " Ft</td>";
-        echo "<td class='tdwarning' style='text-align:right;'>" . number_format($allbalance, 0, ',', ' ') . " Ft</td>";
-        echo '</tr>';
-        echo '</tbody>';
-        echo '</table>';
-        echo '</div>';
+    echo '<tr>';
+    echo '<td class="tdprimary" colspan=4>Összesen:</td>';
+    echo "<td class='tdwarning' style='text-align:right;'>" . number_format($allobalance, 0, ',', ' ') . " Ft</td>";
+    echo "<td class='tdwarning' style='text-align:right;'>" . number_format($allccost, 0, ',', ' ') . " Ft</td>";
+    echo "<td class='tdwarning' style='text-align:right;'>" . number_format($allpayment, 0, ',', ' ') . " Ft</td>";
+    echo "<td class='tdwarning' style='text-align:right;'>" . number_format($allbalance, 0, ',', ' ') . " Ft</td>";
+    echo '</tr>';
+    echo '</tbody>';
+    echo '</table>';
+    echo '</div>';
 }
 
 function getAllPayment($id, $year) {
@@ -1555,4 +1554,73 @@ function getAllPayment($id, $year) {
         $all_payment = 0;
     }
     return $all_payment;
+}
+
+function getOneDepoAccount($id, $year) {
+    $sql = "SELECT `id`, `floor`, `door`, "
+            . "`resident_name` FROM `deposits` WHERE id=$id;";
+    $result1 = mysql_query($sql);
+    if (!$result1) {
+        echo mysql_errno() . ": " . mysql_error();
+        exit;
+    }
+    $deprows = mysql_num_rows($result1);
+    while ($row = mysql_fetch_assoc($result1)) {
+        $deposit = $row;
+    }
+
+    $sql = "SELECT * from deposit_balance where year='$year' and deposit_id=$id";
+    $result2 = mysql_query($sql);
+    if (!$result2) {
+        echo mysql_errno() . ": " . mysql_error();
+        exit;
+    }
+    while ($row = mysql_fetch_assoc($result2)) {
+        $balance = $row;
+    }
+    //niytóegyenleg
+    $deposit['opening_balance'] = $balance['opening_balance'];
+    //összes fizetendő
+    $deposit['ccost'] = getAllCcost($id, $year);
+    //összes befizetés
+    $deposit['payment'] = getAllPayment($id, $year);
+    //egyenleg
+    $deposit['balance'] = ($deposit['opening_balance'] - $deposit['ccost']) + $deposit['payment'];
+    //print_r($deposit);
+     echo '<div class="buttons btn-back">
+	   <form action="stat.php">
+	   <button type="input" name="submit" value="Vissza" ><i class="fa fa-arrow-circle-left"></i>Vissza</button>
+	   </form>
+           <button id="printbutton" onclick="window.print();" ><i class="fa fa-print"></i>Nyomtatás</button>
+           </div>';
+    echo '<div class="content">';
+    echo <<<EOT
+<h3 class="primary"><i class="fa fa-list"></i> Éves kimutatás $year. évre</h3>
+<table id="responsiveTable" class="large-only" cellspacing="0">
+<tr align="left" class="primary">
+   <th> id </th>
+   <th> Emelet </th>
+   <th> Ajtó </th>
+   <th> Lakó neve </th>
+   <th> Nyitó egyenleg </th>
+   <th> Előírt közösköltség </th>
+   <th> Befizetések </th>
+   <th> Egyenleg </th>
+
+     
+</tr>
+   
+EOT;
+    echo '<td style="text-align:right;">' . $deposit['id']. '</td>';
+    echo '<td style="text-align:right;">' . $deposit['floor']. '</td>';
+    echo '<td style="text-align:right;">' . $deposit['door']. '</td>';
+    echo '<td style="text-align:right;">' . $deposit['resident_name']. '</td>';
+    echo '<td style="text-align:right;">' . number_format($deposit['opening_balance'], 0, ',', ' ') . '</td>';
+    echo '<td style="text-align:right;">' . number_format($deposit['ccost'], 0, ',', ' ') . '</td>';
+    echo '<td style="text-align:right;">' . number_format($deposit['payment'], 0, ',', ' ') . '</td>';
+    echo '<td style="text-align:right;">' . number_format($deposit['balance'], 0, ',', ' ') . '</td>';
+    echo '</tr>';
+    echo '</tbody>';
+    echo '</table>';
+    echo '</div>';
 }

@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 include_once 'functions.php';
@@ -9,11 +10,9 @@ include_once 'js.php';
 
 htmlHead($website['title'], $house['name']);
 webheader($_SESSION);
-if ($_SESSION["admin"] > 0)
-{
-adminStat();
-}
-else {
+if ($_SESSION["admin"] > 0) {
+    adminStat();
+} else {
     notLoggedIn();
 }
 htmlEnd();
