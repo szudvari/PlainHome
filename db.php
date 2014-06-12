@@ -1463,6 +1463,19 @@ function getAllAccounts($year) {
         echo mysql_errno() . ": " . mysql_error();
         exit;
     }
+    if (mysql_num_rows($result2) == 0) {
+        echo <<<EOT
+        <div class="buttons btn-back">
+	   <form action="stat.php">
+	   <button type="input" name="submit" class="btn btn-success btn-icon value="Vissza" ><i class="fa fa-arrow-circle-left"></i>Vissza</button>
+	   </form>
+        </div>
+        <div class="content">
+        Sajnos nincs $year. évre megjelníthető adat.
+        </div>           
+EOT;
+        exit();
+    }
     $balance = array();
     while ($row = mysql_fetch_assoc($result2)) {
         $balance[] = $row;
@@ -1568,8 +1581,20 @@ function getOneDepoAccount($id, $year) {
         echo mysql_errno() . ": " . mysql_error();
         exit;
     }
-    $deprows = mysql_num_rows($result1);
-    while ($row = mysql_fetch_assoc($result1)) {
+     if (mysql_num_rows($result1) == 0) {
+        echo <<<EOT
+        <div class="buttons btn-back">
+	   <form action="stat.php">
+	   <button type="input" name="submit" class="btn btn-success btn-icon value="Vissza" ><i class="fa fa-arrow-circle-left"></i>Vissza</button>
+	   </form>
+        </div>
+        <div class="content">
+        Sajnos nincs ilyen lakás.
+        </div>           
+EOT;
+        exit();
+    }
+        while ($row = mysql_fetch_assoc($result1)) {
         $deposit = $row;
     }
 
@@ -1578,6 +1603,19 @@ function getOneDepoAccount($id, $year) {
     if (!$result2) {
         echo mysql_errno() . ": " . mysql_error();
         exit;
+    }
+    if (mysql_num_rows($result2) == 0) {
+        echo <<<EOT
+        <div class="buttons btn-back">
+	   <form action="stat.php">
+	   <button type="input" name="submit" class="btn btn-success btn-icon value="Vissza" ><i class="fa fa-arrow-circle-left"></i>Vissza</button>
+	   </form>
+        </div>
+        <div class="content">
+        Sajnos nincs $year. évre megjelníthető adat.
+        </div>           
+EOT;
+        exit();
     }
     while ($row = mysql_fetch_assoc($result2)) {
         $balance = $row;
