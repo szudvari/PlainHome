@@ -11,8 +11,9 @@ htmlHead($website['title'], $house['name']);
 //webheader($_SESSION);
 
 $con=  connectDb();
-getOneDepoAccount(1, 2014);
+$a=getAllCcost(1, 2014);
 closeDb($con);
+print_r($a);
 
 //$year=2013;
 // $nextyear  = date("Y-m-d",mktime(0, 0, 0, 1, 1,$year+1));
