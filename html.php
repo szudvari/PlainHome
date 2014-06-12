@@ -668,7 +668,7 @@ function adminStat () {
 			<h3 class="info"><i class="fa fa-bar-chart-o"></i> Statisztikák</h3>
 	        <div class="list-group">
 				<a data-toggle="modal" href="#yearly" class="list-group-item">Éves kimutatás</a>
-				<a data-toggle="modal" href="#" class="list-group-item">Stat2</a>
+				<a data-toggle="modal" href="#yearlybydepo" class="list-group-item">Éves kimutatás lakásonként</a>
 				<a data-toggle="modal" href="#" class="list-group-item">Stat3</a>
 	        </div>
 		</div>
@@ -696,5 +696,36 @@ function adminStat () {
 			</div>
 		</div>
 	</div>
+    <!-- -- Eves kimutatas lakasonkent-- -->
+<div class="modal fade" id="yearlybydepo" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header modal-primary">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+                <h4 class="modal-title">Éves statisztika</h4>
+            </div>
+            <form action="yearlydepostat.php" method="post">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="year">Melyik évre kíváncsi?</label>
+                        <input type="text" class="form-control" name="year" id="year" value="" data-validation="required"/>
+                        <span class="help-block">Adja meg az évszámot!</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="year">Melyik lakásra kíváncsi</label>
+                        <input type="text" class="form-control" name="floor" id="floor" value="" data-validation="required"/>
+                        <span class="help-block">Adja meg az emeletet!</span>
+                        <input type="text" class="form-control" name="door" id="door" value="" data-validation="required"/>
+                        <span class="help-block">Adja meg az ajtót!</span>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="input" name="submit" value="editPassword" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Választ</button>
+                        <button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
+                    </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
 EOT;
 }
