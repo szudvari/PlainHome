@@ -1700,7 +1700,7 @@ EOT;
    <th> Lakó neve </th>
    <th> Befizetés dátuma </th>
    <th> Befizetett összeg </th>
-   <th> Átkönyvel  </th>
+   <th class="no-print"> Átkönyvel  </th>
   
 </tr>
 EOT;
@@ -1718,7 +1718,7 @@ EOT;
                 echo '<td>' . $value . '</td>';
             }
         }
-        echo "<td><a href='reaccount.php?id={$row['id']}&floor={$row['floor']}&door={$row['door']}&amount={$row['amount']}'>Átkönyvel</a></td>";
+        echo "<td class='no-print'><a href='reaccount.php?id={$row['id']}&floor={$row['floor']}&door={$row['door']}&amount={$row['amount']}'>Átkönyvel</a></td>";
         echo '</tr>';
     }
         echo '</tbody>';
