@@ -1442,7 +1442,8 @@ EOT;
 }
 
 function getAllAccounts($year) {
-
+    global $house;
+    $date = date("Y.m.d");
     $sql = "SELECT `id`, `floor`, `door`, "
             . "`resident_name` FROM `deposits`;";
     $result1 = mysql_query($sql);
@@ -1490,7 +1491,8 @@ function getAllAccounts($year) {
            </div>';
     echo '<div class="content">';
     echo <<<EOT
-<h3 class="primary"><i class="fa fa-list"></i> Éves kimutatás $year. évre</h3>
+<h3 class="primary"><i class="fa fa-list"></i> Éves kimutatás {$house['name']} házra, $year. évre</h3>
+<h4 class="primary"> Készült: $date </h4>
 <table id="responsiveTable" class="large-only" cellspacing="0">
 <tr align="left" class="primary">
    <th> id </th>
@@ -1557,6 +1559,8 @@ function getAllPayment($id, $year) {
 }
 
 function getOneDepoAccount($id, $year) {
+    global $house;
+    $date = date("Y.m.d");
     $sql = "SELECT `id`, `floor`, `door`, "
             . "`resident_name` FROM `deposits` WHERE id=$id;";
     $result1 = mysql_query($sql);
@@ -1595,7 +1599,8 @@ function getOneDepoAccount($id, $year) {
            </div>';
     echo '<div class="content">';
     echo <<<EOT
-<h3 class="primary"><i class="fa fa-list"></i> Éves kimutatás $year. évre</h3>
+<h3 class="primary"><i class="fa fa-list"></i> Éves kimutatás {$house['name']} {$deposit['floor']}/{$deposit['door']} lakására, $year. évre</h3>
+<h4 class="primary"> Készült: $date </h4>
 <table id="responsiveTable" class="large-only" cellspacing="0">
 <tr align="left" class="primary">
    <th> id </th>
