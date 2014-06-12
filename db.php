@@ -1626,16 +1626,13 @@ EOT;
 //egyenleg
     $deposit['balance'] = ($deposit['opening_balance'] - $deposit['ccost']) + $deposit['payment'];
 //print_r($deposit);
-    echo '<div class="buttons btn-back">
-	   <form action="stat.php">
-	   <button type="input" name="submit" value="Vissza" ><i class="fa fa-arrow-circle-left"></i>Vissza</button>
-	   </form>
-           <button id="printbutton" onclick="window.print();" ><i class="fa fa-print"></i>Nyomtatás</button>
-           </div>';
-    echo '<div class="content">';
+    echo '<div class="content" id="section-to-print">';
     echo <<<EOT
-<h3 class="primary"><i class="fa fa-list"></i> Éves kimutatás {$house['name']} {$deposit['floor']}/{$deposit['door']} lakására, $year. évre</h3>
+<h3 class="primary"><i class="fa fa-list"></i> Éves kimutatás a(z) {$house['name']} {$deposit['floor']}/{$deposit['door']} lakására, $year. évre</h3>
 <h4 class="primary"> Készült: $date </h4>
+<div>
+<a href="#" class="btn btn-primary btn-icon no-print" onclick="jQuery.print('#section-to-print')"><i class="fa fa-print"></i> Nyomtatás</a>
+</div>
 <table id="responsiveTable" class="large-only" cellspacing="0">
 <tr align="left" class="primary">
    <th> id </th>
@@ -1679,11 +1676,6 @@ function getAllPaymentTotal($year) {
     }
     if (mysql_num_rows($result) == 0) {
         echo <<<EOT
-        <div class="buttons btn-back">
-	   <form action="stat.php">
-	   <button type="input" name="submit" class="btn btn-success btn-icon value="Vissza" ><i class="fa fa-arrow-circle-left"></i>Vissza</button>
-	   </form>
-        </div>
         <div class="content">
         Sajnos nincs $year. évre megjelníthető adat.
         </div>           
@@ -1693,16 +1685,13 @@ EOT;
     while ($row = mysql_fetch_assoc($result)) {
         $payment[] = $row;
     }
-    echo '<div class="buttons btn-back">
-	   <form action="stat.php">
-	   <button type="input" name="submit" value="Vissza" ><i class="fa fa-arrow-circle-left"></i>Vissza</button>
-	   </form>
-           <button id="printbutton" onclick="window.print();" ><i class="fa fa-print"></i>Nyomtatás</button>
-           </div>';
-    echo '<div class="content">';
+    echo '<div class="content" id="section-to-print">';
     echo <<<EOT
 <h3 class="primary"><i class="fa fa-list"></i> $year évi befizetések listája</h3>
 <h4 class="primary"> Készült: $date </h4>
+<div>
+<a href="#" class="btn btn-primary btn-icon no-print" onclick="jQuery.print('#section-to-print')"><i class="fa fa-print"></i> Nyomtatás</a>
+</div>
 <table id="responsiveTable" class="large-only" cellspacing="0">
 <tr align="left" class="primary">
    <th> ID </th>
