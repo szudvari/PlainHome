@@ -1501,7 +1501,7 @@ EOT;
 <h3 class="primary"><i class="fa fa-list"></i> Éves kimutatás a(z) {$house['name']} szám alatti házra, $year. évre</h3>
 <h4 class="primary"> Készült: $date </h4>
 <div>
-<a href="#" id="section-to-print" class="btn btn-primary btn-icon" onclick="window.print();"><i class="fa fa-print"></i> Nyomtatás</a>
+<a href="#" class="btn btn-primary btn-icon no-print" onclick="jQuery.print('#section-to-print')"><i class="fa fa-print"></i> Nyomtatás</a>
 </div>
 <table id="responsiveTable" class="large-only" cellspacing="0">
 <tr align="left" class="primary">

@@ -17,6 +17,7 @@ function htmlHead($title, $house) {
         <script src="js/bootstrap-dialog.js" type="text/javascript"></script>
         <script src="js/plainhome.js" type="text/javascript"></script>
         <script src="js/form-validator.js" type="text/javascript"></script>
+		<script src="js/print.js" type="text/javascript"></script>
         <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>     
         <link href="css/bootstrap-dialog.css" rel="stylesheet" type="text/css"/>
 		<link href="css/bootstrap.css" rel="stylesheet">
