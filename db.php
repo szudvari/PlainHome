@@ -1496,15 +1496,9 @@ EOT;
         $allpayment += $deposit[$i]['payment'];
         $allbalance += $deposit[$i]['balance'];
     }
-    echo '<div class="buttons btn-back">
-	   <form action="stat.php">
-	   <button type="input" name="submit" value="Vissza" ><i class="fa fa-arrow-circle-left"></i>Vissza</button>
-	   </form>
-           <button id="printbutton" onclick="window.print();" ><i class="fa fa-print"></i>Nyomtatás</button>
-           </div>';
     echo '<div class="content">';
     echo <<<EOT
-<h3 class="primary"><i class="fa fa-list"></i> Éves kimutatás {$house['name']} házra, $year. évre</h3>
+<h3 class="primary"><i class="fa fa-list"></i> Éves kimutatás a(z) {$house['name']} szám alatti házra, $year. évre</h3>
 <h4 class="primary"> Készült: $date </h4>
 <table id="responsiveTable" class="large-only" cellspacing="0">
 <tr align="left" class="primary">
