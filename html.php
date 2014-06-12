@@ -715,6 +715,8 @@ function adminStat () {
                         <label for="year">Melyik lakásra kíváncsi</label>
                         <input type="text" class="form-control" name="floor" id="floor" value="" data-validation="required"/>
                         <span class="help-block">Adja meg az emeletet!</span>
+                     </div>
+                    <div class="form-group">
                         <input type="text" class="form-control" name="door" id="door" value="" data-validation="required"/>
                         <span class="help-block">Adja meg az ajtót!</span>
                     </div>
@@ -727,5 +729,26 @@ function adminStat () {
     </div>
 </div>
 </div>
+EOT;
+}
+
+function reAccountPayment ($id) {
+          echo <<<EOT
+
+                    <div class="content">
+                        <h3>Befizetés átkönyvelése</h3>
+                        <form id="paymentform" action="reaccountpayment.php" method="post">
+                            <div class="formcolumn">
+                                <label for="payment">Emelet</label> 
+                                <input type="text" id="floor" name="floor" class="form-control" data-validation="required">
+                         </div>       
+                         <div class="formcolumn">
+                                <label for="account_date">Ajtó</label> 
+                                <input type="text" id="door" name="door" class="form-control" data-validation="required">
+                                <input type="hidden" id="id" name="id" value="$id">
+    </div>
+		        <div class="buttons">
+		            <button type="input" name="submit" value="Felvesz" class="btn btn-success btn-icon"><i class="fa fa-dollar"></i> Befizetés átkönyvelése</button>
+		        </div>
 EOT;
 }

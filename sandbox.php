@@ -8,12 +8,13 @@ include_once 'html.php';
 include_once 'js.php';
 
 htmlHead($website['title'], $house['name']);
-//webheader($_SESSION);
+webheader($_SESSION);
 
 $con=  connectDb();
-$a=getAllCcost(1, 2014);
+getAllPaymentTotal(2014);
+getHousePayments(2014);
 closeDb($con);
-print_r($a);
+
 
 //$year=2013;
 // $nextyear  = date("Y-m-d",mktime(0, 0, 0, 1, 1,$year+1));

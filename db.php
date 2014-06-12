@@ -110,7 +110,7 @@ function insertDepoDb($deposit, $con) {
             . "\"{$deposit['area']}\","
             . "\"{$deposit['residents']}\", \"{$deposit['area_ratio']}\", "
             . "\"{$deposit['resident_name']}\")";
-    //echo $sql;
+//echo $sql;
     $res = mysql_query($sql, $con);
     if (!$res) {
         echo mysql_errno() . "(insert): " . mysql_error();
@@ -343,7 +343,7 @@ function updateDepoDb($deposit, $con) {
             . "`area_ratio`= '{$deposit['area_ratio']}', "
             . "`resident_name` = '{$deposit['resident_name']}' "
             . "WHERE `deposits`.`id` = {$deposit['id']};";
-    //echo $sql;
+//echo $sql;
     $res = mysql_query($sql, $con);
     if (!$res) {
         echo mysql_errno() . ": " . mysql_error();
@@ -493,7 +493,7 @@ EOT;
     getMyPayments($id);
     if (isset($_SESSION['userid'])) { // ha userként lépsz be    
         $user = getUserData($_SESSION['userid']);
-        //print_r($user);
+//print_r($user);
         echo <<<EOT
 			<div class="content"><div class="row">
 		<div class="col-md-8">
@@ -883,7 +883,7 @@ EOT;
         echo '</tr>';
     }
     echo '</table>';
-    //print_r($array);
+//print_r($array);
     return $array;
 }
 
@@ -1095,7 +1095,7 @@ function insertPayment($data, $user) {
     }
     $sql = "UPDATE `{$db['name']}`.`deposit_balance` SET `actual_balance` = '$newbalance' "
             . "WHERE `deposit_balance`.`deposit_id` = {$data['id']} AND `year` = $year";
-    //echo $sql;
+//echo $sql;
     $result = mysql_query($sql);
     if (!$result) {
         die("updateCurrentBalance hiba:" . mysql_errno() . " - " . mysql_error());
@@ -1116,7 +1116,7 @@ function getMyPayments($id) {
             . "LEFT JOIN `{$db['name']}`.`payment` ON `deposits`.`id` = `payment`.`deposit_id` "
             . "WHERE `deposits`.`id` = $id "
             . "ORDER BY `payment`.`date` DESC;";
-    //echo $sql;
+//echo $sql;
     $result = mysql_query($sql);
     if (!$result) {
         die("getMyPayment hiba:" . mysql_errno() . " - " . mysql_error());
@@ -1365,7 +1365,7 @@ function getActualBalance($actual_balance, $id) {
     $year = date('Y');
     $con = connectDb();
     $sql = "SELECT ccost from ccost WHERE `deposit_id`=$id and `year`=$year ";
-    //echo $sql;
+//echo $sql;
     $result = mysql_query($sql);
     if (!$result) {
         die("getCcost hiba:" . mysql_errno() . " - " . mysql_error());
@@ -1374,7 +1374,7 @@ function getActualBalance($actual_balance, $id) {
     while ($row = mysql_fetch_assoc($result)) {
         $ccost[] = $row;
     }
-    //print_r($ccost);
+//print_r($ccost);
     $req_payment = 0;
     for ($i = 0; ($i < mysql_num_rows($result)); $i++) {
         $req_payment += $ccost[$i]['ccost'];
@@ -1387,7 +1387,7 @@ function getActualBalance($actual_balance, $id) {
 
 function getAllCcost($id, $year) {
     $sql = "SELECT ccost from ccost WHERE `deposit_id`=$id and `year`=$year ";
-    //echo $sql;
+//echo $sql;
     $result = mysql_query($sql);
     if (!$result) {
         die("getAllCcost hiba:" . mysql_errno() . " - " . mysql_error());
@@ -1396,7 +1396,7 @@ function getAllCcost($id, $year) {
     while ($row = mysql_fetch_assoc($result)) {
         $ccost[] = $row;
     }
-    //print_r($ccost);
+//print_r($ccost);
     $all_ccost = 0;
     for ($i = 0; ($i < mysql_num_rows($result)); $i++) {
         $all_ccost += $ccost[$i]['ccost'];
@@ -1483,13 +1483,13 @@ EOT;
     $allobalance = $allccost = $allpayment = $allbalance = 0;
     for ($i = 0; $i < mysql_num_rows($result1); $i++) {
         $id = $deposit[$i]['id'];
-        //nyitó egyenleg
+//nyitó egyenleg
         $deposit[$i]['opening_balance'] = $balance[$i]['opening_balance'];
-        //összes fizetendő
+//összes fizetendő
         $deposit[$i]['ccost'] = getAllCcost($id, $year);
-        //összes befizetés
+//összes befizetés
         $deposit[$i]['payment'] = getAllPayment($id, $year);
-        //egyenleg
+//egyenleg
         $deposit[$i]['balance'] = ($deposit[$i]['opening_balance'] - $deposit[$i]['ccost']) + $deposit[$i]['payment'];
         $allobalance += $deposit[$i]['opening_balance'];
         $allccost += $deposit[$i]['ccost'];
@@ -1531,7 +1531,7 @@ EOT;
             }
         }
         echo '</tr>';
-        //print_r($deposit);
+//print_r($deposit);
     }
     echo '<tr>';
     echo '<td class="tdprimary" colspan=4>Összesen:</td>';
@@ -1576,7 +1576,7 @@ function getOneDepoAccount($id, $year) {
         echo mysql_errno() . ": " . mysql_error();
         exit;
     }
-     if (mysql_num_rows($result1) == 0) {
+    if (mysql_num_rows($result1) == 0) {
         echo <<<EOT
         <div class="buttons btn-back">
 	   <form action="stat.php">
@@ -1589,7 +1589,7 @@ function getOneDepoAccount($id, $year) {
 EOT;
         exit();
     }
-        while ($row = mysql_fetch_assoc($result1)) {
+    while ($row = mysql_fetch_assoc($result1)) {
         $deposit = $row;
     }
 
@@ -1615,16 +1615,16 @@ EOT;
     while ($row = mysql_fetch_assoc($result2)) {
         $balance = $row;
     }
-    //niytóegyenleg
+//niytóegyenleg
     $deposit['opening_balance'] = $balance['opening_balance'];
-    //összes fizetendő
+//összes fizetendő
     $deposit['ccost'] = getAllCcost($id, $year);
-    //összes befizetés
+//összes befizetés
     $deposit['payment'] = getAllPayment($id, $year);
-    //egyenleg
+//egyenleg
     $deposit['balance'] = ($deposit['opening_balance'] - $deposit['ccost']) + $deposit['payment'];
-    //print_r($deposit);
-     echo '<div class="buttons btn-back">
+//print_r($deposit);
+    echo '<div class="buttons btn-back">
 	   <form action="stat.php">
 	   <button type="input" name="submit" value="Vissza" ><i class="fa fa-arrow-circle-left"></i>Vissza</button>
 	   </form>
@@ -1649,10 +1649,10 @@ EOT;
 </tr>
    
 EOT;
-    echo '<td style="text-align:right;">' . $deposit['id']. '</td>';
-    echo '<td style="text-align:right;">' . $deposit['floor']. '</td>';
-    echo '<td style="text-align:right;">' . $deposit['door']. '</td>';
-    echo '<td style="text-align:right;">' . $deposit['resident_name']. '</td>';
+    echo '<td style="text-align:right;">' . $deposit['id'] . '</td>';
+    echo '<td style="text-align:right;">' . $deposit['floor'] . '</td>';
+    echo '<td style="text-align:right;">' . $deposit['door'] . '</td>';
+    echo '<td style="text-align:right;">' . $deposit['resident_name'] . '</td>';
     echo '<td style="text-align:right;">' . number_format($deposit['opening_balance'], 0, ',', ' ') . '</td>';
     echo '<td style="text-align:right;">' . number_format($deposit['ccost'], 0, ',', ' ') . '</td>';
     echo '<td style="text-align:right;">' . number_format($deposit['payment'], 0, ',', ' ') . '</td>';
@@ -1661,4 +1661,179 @@ EOT;
     echo '</tbody>';
     echo '</table>';
     echo '</div>';
+}
+
+function getAllPaymentTotal($year) {
+    $date = date("Y.m.d");
+    $nextyear = date("Y-m-d", mktime(0, 0, 0, 1, 1, $year + 1));
+    $lastyear = date("Y-m-d", mktime(0, 0, 0, 12, 31, $year - 1));
+
+    $sql = "SELECT `payment`.`id`, `deposits`.`floor`,`deposits`.`door`,`deposits`.`resident_name`,`payment`.`account_date`,`payment`.`amount` FROM deposits "
+            . "INNER JOIN `plainhouse`.`payment` ON `deposits`.`id` = `payment`.`deposit_id` WHERE (`account_date` between '$lastyear' AND '$nextyear') ORDER by `account_date` DESC ";
+    $result = mysql_query($sql);
+    if (!$result) {
+        echo mysql_errno() . ": " . mysql_error();
+        exit;
+    }
+    while ($row = mysql_fetch_assoc($result)) {
+        $payment[] = $row;
+    }
+    echo '<div class="buttons btn-back">
+	   <form action="stat.php">
+	   <button type="input" name="submit" value="Vissza" ><i class="fa fa-arrow-circle-left"></i>Vissza</button>
+	   </form>
+           <button id="printbutton" onclick="window.print();" ><i class="fa fa-print"></i>Nyomtatás</button>
+           </div>';
+    echo '<div class="content">';
+    echo <<<EOT
+<h3 class="primary"><i class="fa fa-list"></i> $year évi befizetések listája</h3>
+<h4 class="primary"> Készült: $date </h4>
+<table id="responsiveTable" class="large-only" cellspacing="0">
+<tr align="left" class="primary">
+   <th> ID </th>
+   <th> Emelet </th>
+   <th> Ajtó </th>
+   <th> Lakó neve </th>
+   <th> Befizetés dátuma </th>
+   <th> Befizetett összeg </th>
+   <th> Átkönyvel  </th>
+  
+</tr>
+EOT;
+    foreach ($payment as $row) {
+        echo '<tbody>';
+        echo '<tr>';
+        foreach ($row as $value) {
+            if (is_numeric($value)) {
+                if (($value > 999) || ($value < 0)) {
+                    echo '<td style="text-align:right;">' . number_format($value, 0, ',', ' ') . '</td>';
+                } else {
+                    echo '<td style="text-align:right;">' . str_replace(".", ",", round($value, 2)) . '</td>';
+                }
+            } else {
+                echo '<td>' . $value . '</td>';
+            }
+        }
+        echo "<td><a href='reaccount.php?id={$row['id']}'>Átkönyvel</a></td>";
+        echo '</tr>';
+    }
+        echo '</tbody>';
+        echo '</table>';
+        echo '</div>';
+//print_r($deposit);
+    
+}
+
+function getHousePayments($year) {
+    global $house;
+    $date = date("Y.m.d");
+    $nextyear = date("Y-m-d", mktime(0, 0, 0, 1, 1, $year + 1));
+    $lastyear = date("Y-m-d", mktime(0, 0, 0, 12, 31, $year - 1));
+
+    $sql = $sql = "SELECT `payment`.`id`, `deposits`.`resident_name`,`payment`.`account_date`,`payment`.`amount` FROM deposits "
+            . "INNER JOIN `plainhouse`.`payment` ON `deposits`.`id` = `payment`.`deposit_id` WHERE (`account_date` between '$lastyear' AND '$nextyear') and `deposits`.`id`={$house['deposit_id']} ORDER by `account_date` DESC ";
+    $result = mysql_query($sql);
+    if (!$result) {
+        echo mysql_errno() . ": " . mysql_error();
+        exit;
+    }
+    if (mysql_num_rows($result) == 0) {
+        echo '<div class="content">';
+        echo 'Nincs nem lekönyvelhető befizetés';
+        echo '</div>';
+        exit();
+    } else {
+        while ($row = mysql_fetch_assoc($result)) {
+            $payment[] = $row;
+        }
+        echo <<<EOT
+        <div class="buttons btn-back">
+	   <form action="stat.php">
+	   <button type="input" name="submit" class="btn btn-success value="Vissza" ><i class="fa fa-arrow-circle-left"></i>Vissza</button>
+	   </form>    
+<h3 class="primary"><i class="fa fa-list"></i> $year évi nem lekönyvelhető befizetések listája</h3>
+<h4 class="primary"> Készült: $date </h4>
+<table id="responsiveTable" class="large-only" cellspacing="0">
+<tr align="left" class="primary">
+   <th> ID </th>
+   <th> Társasház </th>
+   <th> Befizetés dátuma </th>
+   <th> Befizetett összeg </th>
+   <th> Átkönyvelés </th>
+  
+</tr>
+EOT;
+        foreach ($payment as $row) {
+            echo '<tbody>';
+            echo '<tr>';
+            foreach ($row as $value) {
+                if (is_numeric($value)) {
+                    if (($value > 999) || ($value < 0)) {
+                        echo '<td style="text-align:right;">' . number_format($value, 0, ',', ' ') . '</td>';
+                    } else {
+                        echo '<td style="text-align:right;">' . str_replace(".", ",", round($value, 2)) . '</td>';
+                    }
+                } else {
+                    echo '<td>' . $value . '</td>';
+                }
+            }
+            echo "<td><a href='reaccount.php?id={$row['id']}'>Átkönyvel</a></td>";
+            echo '</tr>';
+        }
+            echo '</tbody>';
+            echo '</table>';
+            echo '</div>';
+//print_r($deposit);
+        
+    }
+}
+
+function getPaymentData ($id) {
+$sql = "SELECT `payment`.`id`,`payment`.`amount`,`payment`.`account_date` FROM payment where `payment`.`id` = $id";
+$result = mysql_query($sql);
+    if (!$result) {
+        echo mysql_errno() . ": " . mysql_error();
+        exit;
+    }
+    $table = array();
+    while ($row = mysql_fetch_assoc($result)) {
+        $table[] = $row;
+    }
+    echo '<div class="content">';
+    echo <<<EOT
+<h3 class="primary"><i class="fa fa-list"></i> Befizetés adatai</h3>
+<table id="responsiveTable" class="large-only" cellspacing="0">
+<tr align="left" class="primary">
+   <th> id </th>
+   <th> Összeg </th>
+   <th> Könyvelés dátuma </th>
+   
+</tr>
+
+   
+EOT;
+    foreach ($table as $row) {
+        echo '<tbody>';
+        echo '<tr>';
+        foreach ($row as $value) {
+            if (is_numeric($value)) {
+                echo '<td>' . number_format($value, 0, ',', ' ') . '</td>';
+            } else {
+                echo '<td>' . $value . '</td>';
+            }
+        }
+        echo '</tr>';
+        echo '</tbody>';
+    }
+    echo '</table>';
+    echo '</div>';
+}
+
+function changeDepoOnPayment($payment_id, $deposit_id) {
+    $sql = "UPDATE  `payment` SET  `deposit_id` =  '$deposit_id' WHERE  `payment`.`id` =$payment_id;";
+    $res = mysql_query($sql);
+    if (!$res) {
+        die("Hiba:" . mysql_errno() . " - " . mysql_error());
+    }
+    return $res;
 }
