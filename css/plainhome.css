@@ -495,3 +495,20 @@ dt { font-weight: normal; }
 	border: 1px solid #d5d5d5;
     color: #222222;
 }
+
+/* ==========================================
+	Nyomtatas
+   ========================================== */
+ @media print {
+  body * {
+    visibility: hidden;
+  }
+  #section-to-print, #section-to-print * {
+    visibility: visible;
+  }
+  #section-to-print {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}

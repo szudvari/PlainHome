@@ -1496,11 +1496,13 @@ EOT;
         $allpayment += $deposit[$i]['payment'];
         $allbalance += $deposit[$i]['balance'];
     }
-    echo '<div class="content">';
+    echo '<div class="content" id="section-to-print">';
     echo <<<EOT
 <h3 class="primary"><i class="fa fa-list"></i> Éves kimutatás a(z) {$house['name']} szám alatti házra, $year. évre</h3>
 <h4 class="primary"> Készült: $date </h4>
-<div><button id="printbutton" onclick="window.print();" ><i class="fa fa-print"></i> Nyomtatás</button></div>
+<div>
+<a href="#" id="section-to-print" class="btn btn-primary btn-icon" onclick="window.print();"><i class="fa fa-print"></i> Nyomtatás</a>
+</div>
 <table id="responsiveTable" class="large-only" cellspacing="0">
 <tr align="left" class="primary">
    <th> id </th>
