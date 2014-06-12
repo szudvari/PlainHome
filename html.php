@@ -673,7 +673,7 @@ function adminStat () {
 	        </div>
 		</div>
 	</div>
-        <!-- -- Eves kimutatas -- -->
+        <!-- -- Eves kimutatas modal-- -->
 	<div class="modal fade" id="yearly" tabindex="-1" role="dialog" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -696,13 +696,13 @@ function adminStat () {
 			</div>
 		</div>
 	</div>
-    <!-- -- Eves kimutatas lakasonkent-- -->
+    <!-- -- Eves kimutatas lakasonkent modal-- -->
 <div class="modal fade" id="yearlybydepo" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header modal-primary">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
-                <h4 class="modal-title">Éves statisztika</h4>
+                <h4 class="modal-title">Éves statisztika lakásonként</h4>
             </div>
             <form action="yearlydepostat.php" method="post">
                 <div class="modal-body">
