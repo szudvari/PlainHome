@@ -8,7 +8,7 @@ include_once 'html.php';
 include_once 'js.php';
 
 htmlHead($website['title'], $house['name']);
-//webheader($_SESSION);
+webheader($_SESSION);
 if ($_SESSION["admin"] > 0)
 {
 $year = $_POST['year'];
