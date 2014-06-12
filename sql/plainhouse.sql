@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Hoszt: 127.0.0.1
--- Létrehozás ideje: 2014. Jún 09. 20:16
+-- Létrehozás ideje: 2014. Jún 12. 16:17
 -- Szerver verzió: 5.5.32
 -- PHP verzió: 5.4.19
 
@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `board` (
   `valid_till` date NOT NULL DEFAULT '2099-12-31',
   `valid` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci AUTO_INCREMENT=3 ;
 
 --
 -- A tábla adatainak kiíratása `board`
@@ -490,7 +490,7 @@ CREATE TABLE IF NOT EXISTS `deposits` (
   `area_ratio` double NOT NULL,
   `resident_name` text COLLATE utf8_hungarian_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci AUTO_INCREMENT=65 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci AUTO_INCREMENT=66 ;
 
 --
 -- A tábla adatainak kiíratása `deposits`
@@ -560,7 +560,8 @@ INSERT INTO `deposits` (`id`, `floor`, `door`, `area`, `residents_no`, `area_rat
 (61, '10', '61', 57.3, 2, 178, 'BARTOS JÓZSEF'),
 (62, '10', '62', 56.88, 1, 177, 'TAKÁCS MÁRTON'),
 (63, '10', '63', 34.22, 2, 106, 'ANDA PÉTER'),
-(64, '10', '64', 57.3, 1, 178, 'NAGY GYÖRGY JÓZSEF');
+(64, '10', '64', 57.3, 1, 178, 'NAGY GYÖRGY JÓZSEF'),
+(65, '0', '0', 0, 0, 0, 'TÁRSASHÁZ');
 
 -- --------------------------------------------------------
 
@@ -576,7 +577,7 @@ CREATE TABLE IF NOT EXISTS `deposit_balance` (
   `actual_balance` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `deposit_id` (`deposit_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci AUTO_INCREMENT=65 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci AUTO_INCREMENT=66 ;
 
 --
 -- A tábla adatainak kiíratása `deposit_balance`
@@ -646,7 +647,8 @@ INSERT INTO `deposit_balance` (`id`, `deposit_id`, `year`, `opening_balance`, `a
 (61, 61, 2014, -6022, -6022),
 (62, 62, 2014, -19820, -19820),
 (63, 63, 2014, -3416, -3416),
-(64, 64, 2014, -33373, -33373);
+(64, 64, 2014, -33373, -33373),
+(65, 65, 2014, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -660,7 +662,7 @@ CREATE TABLE IF NOT EXISTS `documents` (
   `shortname` varchar(100) COLLATE utf8_hungarian_ci NOT NULL,
   `description` text COLLATE utf8_hungarian_ci,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -721,15 +723,15 @@ CREATE TABLE IF NOT EXISTS `residents` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `deposit_id` (`depositid`),
   UNIQUE KEY `e-mail` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci AUTO_INCREMENT=3 ;
 
 --
 -- A tábla adatainak kiíratása `residents`
 --
 
 INSERT INTO `residents` (`id`, `firstname`, `lastname`, `email`, `username`, `password`, `depositid`, `active`, `admin`) VALUES
-(2, 'Udvari', 'Szabolcs', 'szudvari@gmail.com', 'szudvari', '5420720b710f7f14d3d6d12c37c23a32032d14e08d6a13f613c775d28c388a31b3245d5458fda2d869153be6c0872118ef078df042f776210db7fdab8c46a5d3', 14, 1, 1),
-(4, 'Udvari', 'Szabolcs', 'udvarisz@yahoo.com', 'szby', '5420720b710f7f14d3d6d12c37c23a32032d14e08d6a13f613c775d28c388a31b3245d5458fda2d869153be6c0872118ef078df042f776210db7fdab8c46a5d3', 11, 1, 1);
+(1, 'Udvari', 'Szabolcs', 'szudvari@gmail.com', 'szudvari', '5420720b710f7f14d3d6d12c37c23a32032d14e08d6a13f613c775d28c388a31b3245d5458fda2d869153be6c0872118ef078df042f776210db7fdab8c46a5d3', 14, 1, 0),
+(2, 'Udvari', 'Szabolcs', 'udvarisz@yahoo.com', 'szby', '5420720b710f7f14d3d6d12c37c23a32032d14e08d6a13f613c775d28c388a31b3245d5458fda2d869153be6c0872118ef078df042f776210db7fdab8c46a5d3', 13, 1, 0);
 
 --
 -- Megkötések a kiírt táblákhoz

@@ -1677,6 +1677,19 @@ function getAllPaymentTotal($year) {
         echo mysql_errno() . ": " . mysql_error();
         exit;
     }
+    if (mysql_num_rows($result) == 0) {
+        echo <<<EOT
+        <div class="buttons btn-back">
+	   <form action="stat.php">
+	   <button type="input" name="submit" class="btn btn-success btn-icon value="Vissza" ><i class="fa fa-arrow-circle-left"></i>Vissza</button>
+	   </form>
+        </div>
+        <div class="content">
+        Sajnos nincs $year. évre megjelníthető adat.
+        </div>           
+EOT;
+        exit();
+    }
     while ($row = mysql_fetch_assoc($result)) {
         $payment[] = $row;
     }
@@ -1716,7 +1729,7 @@ EOT;
                 echo '<td>' . $value . '</td>';
             }
         }
-        echo "<td><a href='reaccount.php?id={$row['id']}'>Átkönyvel</a></td>";
+        echo "<td><a href='reaccount.php?id={$row['id']}&floor={$row['floor']}&door={$row['door']}&amount={$row['amount']}'>Átkönyvel</a></td>";
         echo '</tr>';
     }
         echo '</tbody>';
@@ -1791,10 +1804,10 @@ EOT;
 }
 
 function getPaymentData ($id) {
-$sql = "SELECT `payment`.`id`,`payment`.`amount`,`payment`.`account_date` FROM payment where `payment`.`id` = $id";
+$sql = "SELECT `payment`.`id`, `payment`.`deposit_id`, `payment`.`amount`,`payment`.`account_date` FROM payment where `payment`.`id` = $id";
 $result = mysql_query($sql);
     if (!$result) {
-        echo mysql_errno() . ": " . mysql_error();
+        echo "hiba:".mysql_errno() . ": " . mysql_error();
         exit;
     }
     $table = array();
@@ -1807,6 +1820,7 @@ $result = mysql_query($sql);
 <table id="responsiveTable" class="large-only" cellspacing="0">
 <tr align="left" class="primary">
    <th> id </th>
+   <th> lakás id </th>
    <th> Összeg </th>
    <th> Könyvelés dátuma </th>
    
@@ -1831,11 +1845,32 @@ EOT;
     echo '</div>';
 }
 
-function changeDepoOnPayment($payment_id, $deposit_id) {
-    $sql = "UPDATE  `payment` SET  `deposit_id` =  '$deposit_id' WHERE  `payment`.`id` =$payment_id;";
+function changeDepoOnPayment($data) {
+    $sql = "UPDATE  `payment` SET  `deposit_id` =  '{$data['did']}' WHERE  `payment`.`id` ={$data['id']};";
     $res = mysql_query($sql);
     if (!$res) {
         die("Hiba:" . mysql_errno() . " - " . mysql_error());
     }
     return $res;
+}
+
+function changeBalanceByReaccount($data){
+    global $db;
+    $year = date('Y');
+    $oldbalance_old = getCurrentBalance($data['oldid']); // régi lakás egyenlege
+    $oldbalance_new = $oldbalance_old - $data['amount'];
+    $newbalance_old = getCurrentBalance($data['did']); // új lakás egyenlege
+    $newbalance_new = $newbalance_old + $data['amount'];        
+    $sql = "UPDATE `{$db['name']}`.`deposit_balance` SET `actual_balance` = '$oldbalance_new' "
+            . "WHERE `deposit_balance`.`deposit_id` = {$data['oldid']} AND `year` = $year";
+    $result1 = mysql_query($sql);
+    if (!$result1) {
+        die("updateCurrentBalance hiba:" . mysql_errno() . " - " . mysql_error());
+    }
+    $sql = "UPDATE `{$db['name']}`.`deposit_balance` SET `actual_balance` = '$newbalance_new' "
+            . "WHERE `deposit_balance`.`deposit_id` = {$data['did']} AND `year` = $year";
+    $result2 = mysql_query($sql);
+    if (!$result2) {
+        die("updateCurrentBalance hiba:" . mysql_errno() . " - " . mysql_error());
+    }
 }

@@ -783,7 +783,7 @@ function adminStat () {
 EOT;
 }
 
-function reAccountPayment ($id) {
+function reAccountPayment ($id, $payment) {
           echo <<<EOT
 
                     <div class="content">
@@ -797,6 +797,9 @@ function reAccountPayment ($id) {
                                 <label for="account_date">Ajtó</label> 
                                 <input type="text" id="door" name="door" class="form-control" data-validation="required">
                                 <input type="hidden" id="id" name="id" value="$id">
+                                <input type="hidden" id="oldid" name="oldid" value=" {$payment['oldid']}">
+                                <input type="hidden" id="amount" name="amount" value="{$payment['amount']}">
+                                
     </div>
 		        <div class="buttons">
 		            <button type="input" name="submit" value="Felvesz" class="btn btn-success btn-icon"><i class="fa fa-dollar"></i> Befizetés átkönyvelése</button>

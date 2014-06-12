@@ -10,17 +10,20 @@ htmlHead($website['title'], $house['name']);
 webheader($_SESSION);
 if ($_SESSION["admin"] > 0)
 {
-    $id = $_POST['id'];
+    $data['id'] = $_POST['id']; //payment id
+    $data['oldid'] = $_POST['oldid']; //old depoid
+    $data['amount'] = $_POST['amount']; //amount of payment
     $floor= $_POST['floor'];
-     if ($floor == 0) {
+    $door = $_POST['door'];
+     if ($floor == 0 && $door != 0) {
         $floor = "fsz.";
     }
-    $door = $_POST['door'];
     
-//print_r($deposit);
+    
     $con = connectDb();
-    $did= getDepositId($floor, $door);
-    changeDepoOnPayment($id, $did);
+    $data['did']= getDepositId($floor, $door); //new depoid
+    changeBalanceByReaccount($data);
+    changeDepoOnPayment($data);
     closeDb($con);
 
     header("Location:stat.php");
