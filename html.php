@@ -247,6 +247,7 @@ EOT;
 	                <label for="toggle" class="toggle" data-open="Menü" data-close="Bezár" onclick></label>
 	                <ul class="menu">
 			    <li><a href="deposits.php">Albetétek</a></li>                
+	                    <li><a href="stat.php">Statisztikák</a></li>
 	                    <li><a href="basedata.php">Alapdíjak</a></li>
 	                    <li><a href="board_admin.php">Üzenőfal</a></li>
 	                    <li><a href="documents.php">Dokumentumok</a></li>
@@ -266,6 +267,7 @@ EOT;
 	                    <li><a href="index.php">Home</a></li>            
                             <li><a href="mydepo.php">Saját adataim</a></li>	                   
                             <li><a href="deposits.php">Albetétek</a></li>                
+                            <li><a href="stat.php">Statisztikák</a></li>                
 	                    <li><a href="basedata.php">Alapdíjak</a></li>
                             <li><a href="board_admin.php">Üzenőfal</a></li>
                             <li><a href="documents.php">Dokumentumok</a></li>
@@ -658,5 +660,41 @@ function newBoardMessage () {
     </div>
 </div>		
 
+EOT;
+}
+function adminStat () {
+    echo <<<EOT
+<div class="col-md-4">
+	        <div class="list-group">
+				<li class="list-group-item active">Statisztikák</li>
+				<a data-toggle="modal" href="#yearly" class="list-group-item">Éves kimutatás</a>
+				<a data-toggle="modal" href="#" class="list-group-item">Üzenet küldése</a>
+				<a data-toggle="modal" href="#" class="list-group-item">Jelszó módosítása</a>
+	        </div>
+		</div>
+	</div>
+        <!-- -- Jelszo valtoztatas -- -->
+	<div class="modal fade" id="yearly" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header modal-primary">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+					<h4 class="modal-title">Éves statisztika</h4>
+				</div>
+				<form action="yearlystat.php" method="post">
+					<div class="modal-body">
+	                    <div class="form-group">
+	                        <label for="year">Melyik évre kíváncsi?</label>
+	                        <input type="text" class="form-control" name="year" id="year" value="" data-validation="required"/>
+							<span class="help-block">Adja meg az évszámot!</span>
+	                    </div>
+                            <div class="modal-footer">
+						<button type="input" name="submit" value="editPassword" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Küldés</button>
+						<button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 EOT;
 }

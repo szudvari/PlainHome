@@ -9,17 +9,16 @@ include_once 'js.php';
 
 htmlHead($website['title'], $house['name']);
 //webheader($_SESSION);
-
+if ($_SESSION["admin"] > 0)
+{
+$year = $_POST['year'];
 $con=  connectDb();
-getAllAccounts (2014);
+getAllAccounts ($year);
 closeDb($con);
-
-//$year=2013;
-// $nextyear  = date("Y-m-d",mktime(0, 0, 0, 1, 1,$year+1));
-// $lastyear  = date("Y-m-d",mktime(0, 0, 0, 12, 31,$year-1));
-// echo $nextyear;
-// echo "<br>";
-// echo $lastyear;
+}
+ else {
+    notLoggedIn();    
+}
 
 htmlEnd();
 

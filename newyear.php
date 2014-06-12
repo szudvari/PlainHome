@@ -9,7 +9,7 @@ include_once 'js.php';
 ob_start();
 htmlHead($website['title'], $house['name']);
 webheader($_SESSION);
-if ($_SESSION["admin"] > 1)
+if ($_SESSION["admin"] > 0)
 {
     $year = date('Y');
     $month = date('m');

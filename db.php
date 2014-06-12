@@ -585,8 +585,8 @@ EOT;
 				</div>
 				<div class="modal-body">
 EOT;
-                                getMyAllCcost($id);
-echo <<<EOT
+        getMyAllCcost($id);
+        echo <<<EOT
 				</div>
 				<div class="modal-footer">
                                     <button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Bezár</button>
@@ -595,12 +595,10 @@ echo <<<EOT
 		</div>
 	</div>
 EOT;
-    } 
-    else 
-    {     //ha adminként lépsz be
-       echo "<a href=\"payment.php?id=" . $id . "\"><button class='btn btn-success btn-icon'><i class='fa fa-dollar'></i>Új befizetés rögzítése</button></a>"; 
-       echo "<hr />";
-       echo '<h3 class="primary"><i class="fa fa-money"></i> Közösköltség alakulása az utolsó 12 hónapban</h3>';
+    } else {     //ha adminként lépsz be
+        echo "<a href=\"payment.php?id=" . $id . "\"><button class='btn btn-success btn-icon'><i class='fa fa-dollar'></i>Új befizetés rögzítése</button></a>";
+        echo "<hr />";
+        echo '<h3 class="primary"><i class="fa fa-money"></i> Közösköltség alakulása az utolsó 12 hónapban</h3>';
         getMyAllCcost($id);
     }
     echo '</div>';
@@ -777,7 +775,7 @@ EOT;
                 echo "<td><a id=\"alink\" href=\"update_ustatus.php?uid={$row['id']}"
                 . "&status=0\">User aktiválása</a></td>";
             }
-            
+
             echo <<<EOT
         <td><a href="update_upassword.php?uid={$row['id']}">Jelszó módosítás</a></td>
         <td><a href="killuser.php?uid={$row['id']}">Lakó törlése</a></td>
@@ -877,7 +875,7 @@ EOT;
         echo '<tr>';
         foreach ($row as $value) {
             if (is_numeric($value)) {
-                echo "<td>".number_format($value, 0, ',', ' ')." Ft</td>";
+                echo "<td>" . number_format($value, 0, ',', ' ') . " Ft</td>";
             } else {
                 echo "<td>$value </td>";
             }
@@ -1387,6 +1385,25 @@ function getActualBalance($actual_balance, $id) {
     return $balance;
 }
 
+function getAllCcost($id, $year) {
+    $sql = "SELECT ccost from ccost WHERE `deposit_id`=$id and `year`=$year ";
+    //echo $sql;
+    $result = mysql_query($sql);
+    if (!$result) {
+        die("getAllCcost hiba:" . mysql_errno() . " - " . mysql_error());
+    }
+    $ccost = array();
+    while ($row = mysql_fetch_assoc($result)) {
+        $ccost[] = $row;
+    }
+    //print_r($ccost);
+    $all_ccost = 0;
+    for ($i = 0; ($i < mysql_num_rows($result)); $i++) {
+        $all_ccost += $ccost[$i]['ccost'];
+    }
+    return $all_ccost;
+}
+
 function getMyAllCcost($id) {
     $sql = "SELECT `deposits`.`floor`,`deposits`.`door`,`ccost`.`year`,`ccost`.`month`,`ccost`.`ccost` FROM deposits "
             . "LEFT JOIN `plainhouse`.`ccost` ON `deposits`.`id` = `ccost`.`deposit_id` WHERE `deposits`.`id` = $id 
@@ -1422,5 +1439,120 @@ EOT;
     }
     echo '</tbody>';
     echo '</table>';
+}
 
+function getAllAccounts($year) {
+
+    $sql = "SELECT `id`, `floor`, `door`, "
+            . "`resident_name` FROM `deposits`;";
+    $result1 = mysql_query($sql);
+    if (!$result1) {
+        echo mysql_errno() . ": " . mysql_error();
+        exit;
+    }
+    $deposit = array();
+    $deprows = mysql_num_rows($result1);
+    while ($row = mysql_fetch_assoc($result1)) {
+        $deposit[] = $row;
+    }
+
+    $sql = "SELECT * from deposit_balance where year='$year'";
+    $result2 = mysql_query($sql);
+    if (!$result2) {
+        echo mysql_errno() . ": " . mysql_error();
+        exit;
+    }
+    $balance = array();
+    while ($row = mysql_fetch_assoc($result2)) {
+        $balance[] = $row;
+    }
+    $allobalance = $allccost = $allpayment = $allbalance = 0;
+    for ($i = 0; $i < mysql_num_rows($result1); $i++) {
+        $id = $deposit[$i]['id'];
+        //nyitó egyenleg
+        $deposit[$i]['opening_balance'] = $balance[$i]['opening_balance'];
+        //összes fizetendő
+        $deposit[$i]['ccost'] = getAllCcost($id, $year);
+        //összes befizetés
+        $deposit[$i]['payment'] = getAllPayment($id, $year);
+        //egyenleg
+        $deposit[$i]['balance'] = ($deposit[$i]['opening_balance'] - $deposit[$i]['ccost']) + $deposit[$i]['payment'];
+        $allobalance += $deposit[$i]['opening_balance'];
+        $allccost += $deposit[$i]['ccost'];
+        $allpayment += $deposit[$i]['payment'];
+        $allbalance += $deposit[$i]['balance'];
+    }
+     echo '<div class="buttons btn-back">
+	   <form action="stat.php">
+	   <button type="input" name="submit" value="Vissza" ><i class="fa fa-arrow-circle-left"></i>Vissza</button>
+	   </form>
+           <button id="printbutton" onclick="window.print();" ><i class="fa fa-print"></i>Nyomtatás</button>
+           </div>';
+    echo '<div class="content">';
+    echo <<<EOT
+<h3 class="primary"><i class="fa fa-list"></i> Éves kimutatás $year. évre</h3>
+<table id="responsiveTable" class="large-only" cellspacing="0">
+<tr align="left" class="primary">
+   <th> id </th>
+   <th> Emelet </th>
+   <th> Ajtó </th>
+   <th> Lakó neve </th>
+   <th> Nyitó egyenleg </th>
+   <th> Előírt közösköltség </th>
+   <th> Befizetések </th>
+   <th> Egyenleg </th>
+
+     
+</tr>
+   
+EOT;
+    foreach ($deposit as $row) {
+        echo '<tbody>';
+        echo '<tr>';
+        foreach ($row as $value) {
+            if (is_numeric($value)) {
+                if (($value > 999) || ($value < 0)) {
+                    echo '<td style="text-align:right;">' . number_format($value, 0, ',', ' ') . '</td>';
+                } else {
+                    echo '<td style="text-align:right;">' . str_replace(".", ",", round($value, 2)) . '</td>';
+                }
+            } else {
+                echo '<td>' . $value . '</td>';
+            }
+            
+        }
+       echo '</tr>';
+        //print_r($deposit);
+    }
+     echo '<tr>';
+        echo '<td class="tdprimary" colspan=4>Összesen:</td>';
+        echo "<td class='tdwarning' style='text-align:right;'>" . number_format($allobalance, 0, ',', ' ') . " Ft</td>";
+        echo "<td class='tdwarning' style='text-align:right;'>" . number_format($allccost, 0, ',', ' ') . " Ft</td>";
+        echo "<td class='tdwarning' style='text-align:right;'>" . number_format($allpayment, 0, ',', ' ') . " Ft</td>";
+        echo "<td class='tdwarning' style='text-align:right;'>" . number_format($allbalance, 0, ',', ' ') . " Ft</td>";
+        echo '</tr>';
+        echo '</tbody>';
+        echo '</table>';
+        echo '</div>';
+}
+
+function getAllPayment($id, $year) {
+    $nextyear = date("Y-m-d", mktime(0, 0, 0, 1, 1, $year + 1));
+    $lastyear = date("Y-m-d", mktime(0, 0, 0, 12, 31, $year - 1));
+
+    $sql = "SELECT SUM(`amount`) as amount FROM `payment` WHERE (`account_date` between '$lastyear' AND '$nextyear') AND `deposit_id` = $id ";
+    $result3 = mysql_query($sql);
+    if (!$result3) {
+        echo mysql_errno() . ": " . mysql_error();
+        exit;
+    }
+    while ($row = mysql_fetch_assoc($result3)) {
+        $payment = $row;
+    }
+    if ($payment['amount'] != NULL) {
+        $all_payment = $payment['amount'];
+    } else {
+        $all_payment = 0;
+    }
+    return $all_payment;
 }
