@@ -1500,6 +1500,7 @@ EOT;
     echo <<<EOT
 <h3 class="primary"><i class="fa fa-list"></i> Éves kimutatás a(z) {$house['name']} szám alatti házra, $year. évre</h3>
 <h4 class="primary"> Készült: $date </h4>
+<div><button id="printbutton" onclick="window.print();" ><i class="fa fa-print"></i> Nyomtatás</button></div>
 <table id="responsiveTable" class="large-only" cellspacing="0">
 <tr align="left" class="primary">
    <th> id </th>
