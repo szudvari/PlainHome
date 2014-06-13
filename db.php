@@ -1663,12 +1663,13 @@ EOT;
 }
 
 function getAllPaymentTotal($year) {
+    global $db;
     $date = date("Y.m.d");
     $nextyear = date("Y-m-d", mktime(0, 0, 0, 1, 1, $year + 1));
     $lastyear = date("Y-m-d", mktime(0, 0, 0, 12, 31, $year - 1));
 
     $sql = "SELECT `payment`.`id`, `deposits`.`floor`,`deposits`.`door`,`deposits`.`resident_name`,`payment`.`account_date`,`payment`.`amount` FROM deposits "
-            . "INNER JOIN `plainhouse`.`payment` ON `deposits`.`id` = `payment`.`deposit_id` WHERE (`account_date` between '$lastyear' AND '$nextyear') ORDER by `account_date` DESC ";
+            . "INNER JOIN `{$db['name']}`.`payment` ON `deposits`.`id` = `payment`.`deposit_id` WHERE (`account_date` between '$lastyear' AND '$nextyear') ORDER by `account_date` DESC ";
     $result = mysql_query($sql);
     if (!$result) {
         echo mysql_errno() . ": " . mysql_error();
@@ -1729,13 +1730,14 @@ EOT;
 }
 
 function getHousePayments($year) {
+    global $db;
     global $house;
     $date = date("Y.m.d");
     $nextyear = date("Y-m-d", mktime(0, 0, 0, 1, 1, $year + 1));
     $lastyear = date("Y-m-d", mktime(0, 0, 0, 12, 31, $year - 1));
 
     $sql = $sql = "SELECT `payment`.`id`, `deposits`.`resident_name`,`payment`.`account_date`,`payment`.`amount` FROM deposits "
-            . "INNER JOIN `plainhouse`.`payment` ON `deposits`.`id` = `payment`.`deposit_id` WHERE (`account_date` between '$lastyear' AND '$nextyear') and `deposits`.`id`={$house['deposit_id']} ORDER by `account_date` DESC ";
+            . "INNER JOIN `{$db['name']}`.`payment` ON `deposits`.`id` = `payment`.`deposit_id` WHERE (`account_date` between '$lastyear' AND '$nextyear') and `deposits`.`id`={$house['deposit_id']} ORDER by `account_date` DESC ";
     $result = mysql_query($sql);
     if (!$result) {
         echo mysql_errno() . ": " . mysql_error();
@@ -1753,7 +1755,7 @@ function getHousePayments($year) {
         echo <<<EOT
         <div class="buttons btn-back">
 	   <form action="stat.php">
-	   <button type="input" name="submit" class="btn btn-success value="Vissza" ><i class="fa fa-arrow-circle-left"></i>Vissza</button>
+	   <button type="input" name="submit" class="btn btn-success value="Vissza" ><i class="fa fa-arrow-circle-left"></i> Vissza</button>
 	   </form>    
 <h3 class="primary"><i class="fa fa-list"></i> $year évi nem lekönyvelhető befizetések listája</h3>
 <h4 class="primary"> Készült: $date </h4>
