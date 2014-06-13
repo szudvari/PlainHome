@@ -10,7 +10,7 @@ $website['version'] = "1.0";
 
 $house['name'] = "Pöttyös utca 4.";
 $house['infomail'] = "info@pottyos4.hu";
-$house['webpage'] = "http://users.ininet.hu/plainhouse";
+$house['webpage'] = "http://pottyos4.hu";
 $house['payment_day'] = 15;
 $house['deposit_id'] = 65;
 

@@ -1405,8 +1405,9 @@ function getAllCcost($id, $year) {
 }
 
 function getMyAllCcost($id) {
+    global $db;
     $sql = "SELECT `deposits`.`floor`,`deposits`.`door`,`ccost`.`year`,`ccost`.`month`,`ccost`.`ccost` FROM deposits "
-            . "LEFT JOIN `plainhouse`.`ccost` ON `deposits`.`id` = `ccost`.`deposit_id` WHERE `deposits`.`id` = $id 
+            . "LEFT JOIN `{$db['name']}`.`ccost` ON `deposits`.`id` = `ccost`.`deposit_id` WHERE `deposits`.`id` = $id 
         ORDER BY `ccost`.`year` DESC, `ccost`.`month` DESC LIMIT 12";
     $result = mysql_query($sql);
     if (!$result) {
