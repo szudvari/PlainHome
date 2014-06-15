@@ -5,7 +5,11 @@
         <group>
             <file>file:/D:/xampp/htdocs/PlainHome/db.php</file>
             <file>file:/D:/xampp/htdocs/PlainHome/paymentstat.php</file>
+            <file>file:/D:/xampp/htdocs/PlainHome/index.php</file>
             <file>file:/D:/xampp/htdocs/PlainHome/config.php</file>
+            <file>file:/D:/xampp/htdocs/PlainHome/updatedepo.php</file>
+            <file>file:/D:/xampp/htdocs/PlainHome/webariel/login.php</file>
+            <file>file:/D:/xampp/htdocs/PlainHome/adminlogin.php</file>
         </group>
     </open-files>
 </project-private>
