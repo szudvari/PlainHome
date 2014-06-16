@@ -47,5 +47,6 @@ else if (isset($_SESSION['depositid']))
     showContent("message", "messagebutton");
 
 }
+
 htmlEnd();
 ?>

@@ -6,7 +6,7 @@ include_once 'db.php';
 include_once 'config.php';
 include_once 'html.php';
 include_once 'js.php';
-
+ob_start();
 $userdata['user'] = $_POST['user'];
 $userdata['pass'] = encodePass($_POST['pass']);
 
@@ -57,7 +57,7 @@ else if (stripos($_SERVER['HTTP_REFERER'], "/adminlogin.php"))
     }
 }
 htmlEnd();
-
+ob_end_flush();
 
 
 

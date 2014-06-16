@@ -1,15 +1,17 @@
 <?php
+
 session_start();
 include_once 'functions.php';
 include_once 'db.php';
 include_once 'config.php';
 include_once 'html.php';
 
+ob_start();
 htmlHead($website['title'], $house['name']);
 webheader($_SESSION);
 if ($_SESSION["admin"] > 0)
 {
- $con = connectDb();   
+    $con = connectDb();
     $pass = $_POST['pass'];
     $pass2 = $_POST['pass2'];
     $floor = $_POST['floor'];
@@ -33,7 +35,6 @@ if ($_SESSION["admin"] > 0)
         sendMessageToNewUser($user);
         header("Location: allresidents.php?newuser=1");
         //header("Refresh: 2; url=useradmin.php");
-        
     }
     else
     {
@@ -42,9 +43,9 @@ if ($_SESSION["admin"] > 0)
         header("Refresh: 2; url={$_SERVER['HTTP_REFERER']}");
     }
 }
-else {
-     notLoggedIn();
+else
+{
+    notLoggedIn();
 }
-    htmlEnd();
-
-?>
+htmlEnd();
+ob_end_flush();

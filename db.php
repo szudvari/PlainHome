@@ -104,6 +104,7 @@ EOT;
 }
 
 function insertDepoDb($deposit, $con) {
+    global $db;
     $sql = "INSERT INTO  deposits (floor ,door ,area, residents_no, "
             . "area_ratio, resident_name) "
             . "values (\"{$deposit['floor']}\", \"{$deposit['door']}\", "
@@ -125,7 +126,7 @@ function insertDepoDb($deposit, $con) {
     while ($row = mysql_fetch_assoc($result)) {
         $ta = $row['t_a'];
     }
-    $sql = "UPDATE `plainhouse`.`fees` SET `dealer` = '$ta' where `multiplier` = '/terület-egység';";
+    $sql = "UPDATE `{$db['name']}`.`fees` SET `dealer` = '$ta' where `multiplier` = '/terület-egység';";
     $res = mysql_query($sql, $con);
     if (!$res) {
         echo mysql_errno() . "(db): " . mysql_error();
@@ -138,9 +139,9 @@ function insertDepoDb($deposit, $con) {
         exit;
     }
     while ($row = mysql_fetch_assoc($result)) {
-        $db = $row['db'];
+        $dbs = $row['db'];
     }
-    $sql = "UPDATE `plainhouse`.`fees` SET `dealer` = '$db' where `multiplier` = '/fő';";
+    $sql = "UPDATE `{$db['name']}`.`fees` SET `dealer` = '$dbs' where `multiplier` = '/fő';";
     $res = mysql_query($sql, $con);
     if (!$res) {
         echo mysql_errno() . ": " . mysql_error();
@@ -336,8 +337,9 @@ EOT;
 }
 
 function updateDepoDb($deposit, $con) {
+    global $db;
 
-    $sql = "UPDATE `plainhouse`.`deposits` SET `floor` = '{$deposit['floor']}', "
+    $sql = "UPDATE `{$db['name']}`.`deposits` SET `floor` = '{$deposit['floor']}', "
             . "`door` = '{$deposit['door']}',`area` = '{$deposit['area']}',"
             . "`residents_no` = '{$deposit['residents']}',"
             . "`area_ratio`= '{$deposit['area_ratio']}', "
@@ -346,37 +348,37 @@ function updateDepoDb($deposit, $con) {
 //echo $sql;
     $res = mysql_query($sql, $con);
     if (!$res) {
-        echo mysql_errno() . ": " . mysql_error();
+        echo "update deposit hiba -".mysql_errno() . ": " . mysql_error();
         exit();
     }
     $sql = "SELECT SUM(`deposits`.`area`)as t_a FROM `deposits`;";
     $result = mysql_query($sql);
     if (!$result) {
-        echo mysql_errno() . "(ta): " . mysql_error();
+        echo "select sum hiba -".mysql_errno() . "(ta): " . mysql_error();
         exit;
     }
     while ($row = mysql_fetch_assoc($result)) {
         $ta = $row['t_a'];
     }
-    $sql = "UPDATE `plainhouse`.`fees` SET `dealer` = '$ta' where `multiplier` = '/terület-egység';";
+    $sql = "UPDATE `{$db['name']}`.`fees` SET `dealer` = '$ta' where `multiplier` = '/terület-egység';";
     $res = mysql_query($sql, $con);
     if (!$res) {
-        echo mysql_errno() . "(db): " . mysql_error();
+        echo "update dealer -".mysql_errno() . ": " . mysql_error();
         exit();
     }
     $sql = "SELECT SUM(`residents_no`) as db from deposits;";
     $result = mysql_query($sql);
     if (!$result) {
-        echo mysql_errno() . ": " . mysql_error();
+        echo "select sumresidents -".mysql_errno() . ": " . mysql_error();
         exit;
     }
     while ($row = mysql_fetch_assoc($result)) {
-        $db = $row['db'];
+        $dbs = $row['db'];
     }
-    $sql = "UPDATE `plainhouse`.`fees` SET `dealer` = '$db' where `multiplier` = '/fő';";
+    $sql = "UPDATE `{$db['name']}`.`fees` SET `dealer` = '$dbs' where `multiplier` = '/fő';";
     $res = mysql_query($sql, $con);
     if (!$res) {
-        echo mysql_errno() . ": " . mysql_error();
+        echo "update fees -".mysql_errno() . ": " . mysql_error();
         exit();
     }
 }
@@ -888,13 +890,13 @@ EOT;
 }
 
 function updatebase($data) {
-
-    $sql = "UPDATE `plainhouse`.`fees` SET `yearly_amount` = {$data['ccost']} WHERE `fees`.`id` = 1;";
+global $db;
+    $sql = "UPDATE `{$db['name']}`.`fees` SET `yearly_amount` = {$data['ccost']} WHERE `fees`.`id` = 1;";
     $result = mysql_query($sql);
     if (!$result) {
         die("update ccost hiba:" . mysql_errno() . " - " . mysql_error());
     }
-    $sql = "UPDATE `plainhouse`.`fees` SET `yearly_amount` = {$data['ccost']} WHERE `fees`.`id` = 1;";
+    $sql = "UPDATE `{$db['name']}`.`fees` SET `yearly_amount` = {$data['ccost']} WHERE `fees`.`id` = 1;";
     $result = mysql_query($sql);
     if (!$result) {
         die("update grabage cost hiba:" . mysql_errno() . " - " . mysql_error());
@@ -1405,8 +1407,9 @@ function getAllCcost($id, $year) {
 }
 
 function getMyAllCcost($id) {
+    global $db;
     $sql = "SELECT `deposits`.`floor`,`deposits`.`door`,`ccost`.`year`,`ccost`.`month`,`ccost`.`ccost` FROM deposits "
-            . "LEFT JOIN `plainhouse`.`ccost` ON `deposits`.`id` = `ccost`.`deposit_id` WHERE `deposits`.`id` = $id 
+            . "LEFT JOIN `{$db['name']}`.`ccost` ON `deposits`.`id` = `ccost`.`deposit_id` WHERE `deposits`.`id` = $id 
         ORDER BY `ccost`.`year` DESC, `ccost`.`month` DESC LIMIT 12";
     $result = mysql_query($sql);
     if (!$result) {
@@ -1663,12 +1666,13 @@ EOT;
 }
 
 function getAllPaymentTotal($year) {
+    global $db;
     $date = date("Y.m.d");
     $nextyear = date("Y-m-d", mktime(0, 0, 0, 1, 1, $year + 1));
     $lastyear = date("Y-m-d", mktime(0, 0, 0, 12, 31, $year - 1));
 
     $sql = "SELECT `payment`.`id`, `deposits`.`floor`,`deposits`.`door`,`deposits`.`resident_name`,`payment`.`account_date`,`payment`.`amount` FROM deposits "
-            . "INNER JOIN `plainhouse`.`payment` ON `deposits`.`id` = `payment`.`deposit_id` WHERE (`account_date` between '$lastyear' AND '$nextyear') ORDER by `account_date` DESC ";
+            . "INNER JOIN `{$db['name']}`.`payment` ON `deposits`.`id` = `payment`.`deposit_id` WHERE (`account_date` between '$lastyear' AND '$nextyear') ORDER by `account_date` DESC ";
     $result = mysql_query($sql);
     if (!$result) {
         echo mysql_errno() . ": " . mysql_error();
@@ -1729,13 +1733,14 @@ EOT;
 }
 
 function getHousePayments($year) {
+    global $db;
     global $house;
     $date = date("Y.m.d");
     $nextyear = date("Y-m-d", mktime(0, 0, 0, 1, 1, $year + 1));
     $lastyear = date("Y-m-d", mktime(0, 0, 0, 12, 31, $year - 1));
 
     $sql = $sql = "SELECT `payment`.`id`, `deposits`.`resident_name`,`payment`.`account_date`,`payment`.`amount` FROM deposits "
-            . "INNER JOIN `plainhouse`.`payment` ON `deposits`.`id` = `payment`.`deposit_id` WHERE (`account_date` between '$lastyear' AND '$nextyear') and `deposits`.`id`={$house['deposit_id']} ORDER by `account_date` DESC ";
+            . "INNER JOIN `{$db['name']}`.`payment` ON `deposits`.`id` = `payment`.`deposit_id` WHERE (`account_date` between '$lastyear' AND '$nextyear') and `deposits`.`id`={$house['deposit_id']} ORDER by `account_date` DESC ";
     $result = mysql_query($sql);
     if (!$result) {
         echo mysql_errno() . ": " . mysql_error();
@@ -1753,7 +1758,7 @@ function getHousePayments($year) {
         echo <<<EOT
         <div class="buttons btn-back">
 	   <form action="stat.php">
-	   <button type="input" name="submit" class="btn btn-success value="Vissza" ><i class="fa fa-arrow-circle-left"></i>Vissza</button>
+	   <button type="input" name="submit" class="btn btn-success value="Vissza" ><i class="fa fa-arrow-circle-left"></i> Vissza</button>
 	   </form>    
 <h3 class="primary"><i class="fa fa-list"></i> $year évi nem lekönyvelhető befizetések listája</h3>
 <h4 class="primary"> Készült: $date </h4>

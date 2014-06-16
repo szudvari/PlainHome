@@ -6,7 +6,7 @@ include_once 'functions.php';
 include_once 'db.php';
 include_once 'config.php';
 include_once 'html.php';
-
+ob_start();
 htmlHead($website['title'], $house['name']);
 webheader($_SESSION);
 if (isset($_POST["from"]))
@@ -44,3 +44,4 @@ $mail = mail($house['infomail'], $subject, $message, "From: $from\n");
 header("Location:$url");
 
 htmlEnd();
+ob_end_flush();
