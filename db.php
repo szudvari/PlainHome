@@ -1070,8 +1070,8 @@ function getCurrentBalance($id) {
         die("getCurrentBalance hiba:" . mysql_errno() . " - " . mysql_error());
     }
     if (mysql_num_rows($result) == 0) {
-        echo "Hiba! Nincs ilyen albetét az aktuális évben!";
-        exit;
+        echo "<span style='color: red; font-weight: bold;'>Figyelem! Az előző év könyvelése még nem zárult le, addig folyószámla adatai nem pontosak!</span>";
+        //exit;
     }
     while ($row = mysql_fetch_assoc($result)) {
         $balance = $row["actual_balance"];
