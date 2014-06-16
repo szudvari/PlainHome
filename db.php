@@ -1971,7 +1971,7 @@ EOT;
             echo '<tr>';
             foreach ($row as $value) {
                 if (is_numeric($value)) {
-                    if (($value > 999) || ($value < 0)) {
+                    if (($value > 2099) || ($value < 0)) {
                         echo '<td style="text-align:right;">' . number_format($value, 0, ',', ' ') . '</td>';
                     } else {
                         echo '<td style="text-align:right;">' . str_replace(".", ",", round($value, 2)) . '</td>';
