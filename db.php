@@ -1669,8 +1669,8 @@ EOT;
 function getAllPaymentTotal($year) {
     global $db;
     $date = date("Y.m.d");
-    $nextyear = date("Y-m-d", mktime(0, 0, 0, 1, 1, $year + 1));
-    $lastyear = date("Y-m-d", mktime(0, 0, 0, 12, 31, $year - 1));
+    $nextyear = date("Y-m-d", mktime(0, 0, 0, 12, 31, $year));
+    $lastyear = date("Y-m-d", mktime(0, 0, 0, 1, 1, $year));
 
     $sql = "SELECT `payment`.`id`, `deposits`.`floor`,`deposits`.`door`,`deposits`.`resident_name`,`payment`.`account_date`,`payment`.`amount` FROM deposits "
             . "INNER JOIN `{$db['name']}`.`payment` ON `deposits`.`id` = `payment`.`deposit_id` WHERE (`account_date` between '$lastyear' AND '$nextyear') ORDER by `account_date` DESC ";
@@ -1737,8 +1737,8 @@ function getHousePayments($year) {
     global $db;
     global $house;
     $date = date("Y.m.d");
-    $nextyear = date("Y-m-d", mktime(0, 0, 0, 1, 1, $year + 1));
-    $lastyear = date("Y-m-d", mktime(0, 0, 0, 12, 31, $year - 1));
+    $nextyear = date("Y-m-d", mktime(0, 0, 0, 12, 31, $year));
+    $lastyear = date("Y-m-d", mktime(0, 0, 0, 1, 1, $year));
 
     $sql = "SELECT `payment`.`id`, `deposits`.`resident_name`,`payment`.`account_date`,`payment`.`amount` FROM deposits "
             . "INNER JOIN `{$db['name']}`.`payment` ON `deposits`.`id` = `payment`.`deposit_id` WHERE (`account_date` between '$lastyear' AND '$nextyear') and `deposits`.`id`={$house['deposit_id']} ORDER by `account_date` DESC ";
@@ -1873,8 +1873,8 @@ function changeBalanceByReaccount($data){
 function getDepositPayments($year, $id) {
     global $db;
     $date = date("Y.m.d");
-    $nextyear = date("Y-m-d", mktime(0, 0, 0, 1, 1, $year + 1));
-    $lastyear = date("Y-m-d", mktime(0, 0, 0, 12, 31, $year - 1));
+    $nextyear = date("Y-m-d", mktime(0, 0, 0, 12, 31, $year));
+    $lastyear = date("Y-m-d", mktime(0, 0, 0, 1, 1, $year));
 
     $sql = "SELECT `payment`.`id`, `deposits`.`floor`, `deposits`.`door`, `payment`.`account_date`,`payment`.`amount` FROM deposits "
             . "INNER JOIN `{$db['name']}`.`payment` ON `deposits`.`id` = `payment`.`deposit_id` WHERE (`account_date` between '$lastyear' AND '$nextyear') and `deposits`.`id`=$id ORDER by `account_date` DESC ";
