@@ -895,3 +895,35 @@ function updateCcost($ccost) {
                 
 EOT;
 }
+function uploadCSV () {
+ echo <<<EOT
+<div class="content">
+<a data-toggle="modal" href="#uploadFile" class="btn btn-success btn-icon floatLeft"><i class="fa fa-upload"></i> Havi befizetések csoportos feltöltése</a>
+<!-- -- Filefeltoltes Modal -- -->
+<div class="modal fade" id="uploadFile" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header modal-primary">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+                <h4 class="modal-title">Új file feltöltése</h4>
+            </div>
+            <form action="importaccountdata.php" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="file">File név</label>
+                        <input type="file" class="form-control" name="file" id="file" value="" data-validation="required">
+                        <span class="help-block">Válassza ki a feltölteni kívánt file-t! "csv" fileok feltöltésére van lehetőség.</span>
+                    </div>
+                    
+                <div class="modal-footer">
+                    <button type="input" name="submit" value="uploadFile" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Feltöltés</button>
+                    <button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>		
+</div>
+<hr />
+EOT;
+}

@@ -25,7 +25,7 @@ if ($_SESSION["admin"] > 0)
     $con = connectDb();
     getAllDepo();
     closeDb($con);
-
+    uploadCSV ();
     if ($_SESSION['admin'] > 1)
     {
         addDeposit();
