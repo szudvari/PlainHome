@@ -1662,7 +1662,8 @@ EOT;
     echo '</tr>';
     echo '</tbody>';
     echo '</table>';
-    echo '</div>';
+    echo '<hr />';
+    getDepositPayments($year, $id);
 }
 
 function getAllPaymentTotal($year) {
@@ -1739,7 +1740,7 @@ function getHousePayments($year) {
     $nextyear = date("Y-m-d", mktime(0, 0, 0, 1, 1, $year + 1));
     $lastyear = date("Y-m-d", mktime(0, 0, 0, 12, 31, $year - 1));
 
-    $sql = $sql = "SELECT `payment`.`id`, `deposits`.`resident_name`,`payment`.`account_date`,`payment`.`amount` FROM deposits "
+    $sql = "SELECT `payment`.`id`, `deposits`.`resident_name`,`payment`.`account_date`,`payment`.`amount` FROM deposits "
             . "INNER JOIN `{$db['name']}`.`payment` ON `deposits`.`id` = `payment`.`deposit_id` WHERE (`account_date` between '$lastyear' AND '$nextyear') and `deposits`.`id`={$house['deposit_id']} ORDER by `account_date` DESC ";
     $result = mysql_query($sql);
     if (!$result) {
@@ -1866,5 +1867,178 @@ function changeBalanceByReaccount($data){
     $result2 = mysql_query($sql);
     if (!$result2) {
         die("updateCurrentBalance hiba:" . mysql_errno() . " - " . mysql_error());
+    }
+}
+
+function getDepositPayments($year, $id) {
+    global $db;
+    $date = date("Y.m.d");
+    $nextyear = date("Y-m-d", mktime(0, 0, 0, 1, 1, $year + 1));
+    $lastyear = date("Y-m-d", mktime(0, 0, 0, 12, 31, $year - 1));
+
+    $sql = "SELECT `payment`.`id`, `deposits`.`floor`, `deposits`.`door`, `payment`.`account_date`,`payment`.`amount` FROM deposits "
+            . "INNER JOIN `{$db['name']}`.`payment` ON `deposits`.`id` = `payment`.`deposit_id` WHERE (`account_date` between '$lastyear' AND '$nextyear') and `deposits`.`id`=$id ORDER by `account_date` DESC ";
+    $result = mysql_query($sql);
+    if (!$result) {
+        echo mysql_errno() . ": " . mysql_error();
+        exit;
+    }
+    if (mysql_num_rows($result) == 0) {
+        echo '<div class="content">';
+        echo "Nincs könyvelt befizetés $year évre.";
+        echo '</div>';
+        exit();
+    } else {
+        while ($row = mysql_fetch_assoc($result)) {
+            $payment[] = $row;
+        }
+        echo <<<EOT
+
+<h3 class="primary"><i class="fa fa-list"></i> $year évi befizetések listája</h3>
+<h4 class="primary"> Készült: $date </h4>
+<table id="responsiveTable" class="large-only" cellspacing="0">
+<tr align="left" class="primary">
+   <th> Tétel ID </th>
+   <th> Emelet </th>
+   <th> Ajtó </th>
+   <th> Befizetés dátuma </th>
+   <th> Befizetett összeg </th>
+   <th class="no-print"> Átkönyvelés </th>
+  
+</tr>
+EOT;
+        foreach ($payment as $row) {
+            echo '<tbody>';
+            echo '<tr>';
+            foreach ($row as $value) {
+                if (is_numeric($value)) {
+                    if (($value > 999) || ($value < 0)) {
+                        echo '<td style="text-align:right;">' . number_format($value, 0, ',', ' ') . '</td>';
+                    } else {
+                        echo '<td style="text-align:right;">' . str_replace(".", ",", round($value, 2)) . '</td>';
+                    }
+                } else {
+                    echo '<td>' . $value . '</td>';
+                }
+            }
+            echo "<td class='no-print'><a href='reaccount.php?id={$row['id']}'>Átkönyvel</a></td>";
+            echo '</tr>';
+        }
+            echo '</tbody>';
+            echo '</table>';
+            echo '</div>';
+            echo '</div>';
+    }
+}
+
+function getDepositCcost ($id, $year) {
+    global $db;
+    $sql = "SELECT `ccost`.`id`, `deposits`.`floor`,`deposits`.`door`,`ccost`.`year`,`ccost`.`month`,`ccost`.`ccost` FROM deposits "
+    . "LEFT JOIN `{$db['name']}`.`ccost` ON `deposits`.`id` = `ccost`.`deposit_id` where year = '$year' and `deposits`.`id`='$id'";
+    $result = mysql_query($sql);
+    if (!$result) {
+        echo "getCcost hiba - ".mysql_errno() . ": " . mysql_error();
+        exit;
+    }
+    if (mysql_num_rows($result) == 0) {
+        echo '<div class="content">';
+        echo "Nincs könyvelt közösköltség $year évre.";
+        echo '</div>';
+        exit();
+    } else {
+        while ($row = mysql_fetch_assoc($result)) {
+            $ccost[] = $row;
+        }
+       echo <<<EOT
+        <div class="buttons btn-back">
+	   <form action="stat.php">
+	   <button type="input" name="submit" class="btn btn-success value="Vissza" ><i class="fa fa-arrow-circle-left"></i> Vissza</button>
+	   </form>    
+<h3 class="primary"><i class="fa fa-list"></i> $year évi közösköltség alakulása</h3>
+<table id="responsiveTable" class="large-only" cellspacing="0">
+<tr align="left" class="primary">
+   <th> Tétel ID </th>
+   <th> Emelet </th>
+   <th> Ajtó </th>
+   <th> Év </th>
+   <th> Hónap </th>
+   <th> Közösköltség </th>
+   <th> Változtat </th>
+</tr>
+EOT;
+      foreach ($ccost as $row) {
+            echo '<tbody>';
+            echo '<tr>';
+            foreach ($row as $value) {
+                if (is_numeric($value)) {
+                    if (($value > 999) || ($value < 0)) {
+                        echo '<td style="text-align:right;">' . number_format($value, 0, ',', ' ') . '</td>';
+                    } else {
+                        echo '<td style="text-align:right;">' . str_replace(".", ",", round($value, 2)) . '</td>';
+                    }
+                } else {
+                    echo '<td>' . $value . '</td>';
+                }
+            }
+            echo "<td class='no-print'><a href='updateccost.php?id={$row['id']}'>Változtat</a></td>";
+            echo '</tr>';
+        }
+            echo '</tbody>';
+            echo '</table>';
+            echo '</div>';
+    }
+}
+function getACcost($id) {
+    global $db;
+    $sql = "SELECT `ccost`.`id`,`deposits`.`floor`,`deposits`.`door`,`ccost`.`year`,`ccost`.`month`,`ccost`.`ccost` FROM ccost "
+    . "LEFT JOIN `{$db['name']}`.`deposits` ON `ccost`.`deposit_id` = `deposits`.`id` where `ccost`.`id` = $id";
+    $result = mysql_query($sql);
+    if (!$result) {
+        echo mysql_errno() . ": " . mysql_error();
+        exit;
+    }
+    $table = array();
+    while ($row = mysql_fetch_assoc($result)) {
+        $table[] = $row;
+    }
+    echo '<div class="content">';
+    echo <<<EOT
+<h3 class="primary"><i class="fa fa-list"></i> Tétel adatai</h3>
+<table id="responsiveTable" class="large-only" cellspacing="0">
+<tr align="left" class="primary">
+   <th> Tétel ID </th>
+   <th> Emelet </th>
+   <th> Ajtó </th>
+   <th> Év </th>
+   <th> Hónap </th>
+   <th> Közösköltség </th>
+</tr>
+
+   
+EOT;
+    foreach ($table as $row) {
+        echo '<tbody>';
+        echo '<tr>';
+        foreach ($row as $value) {
+            if (is_numeric($value)) {
+                echo '<td>' . str_replace(".", ",", round($value, 2)) . '</td>';
+            } else {
+                echo '<td>' . $value . '</td>';
+            }
+        }
+        echo '</tr>';
+        echo '</tbody>';
+    }
+    echo '</table>';
+    echo '</div>';
+    return $row;
+}
+
+function updateCcostDb($data) {
+global $db;
+    $sql = "UPDATE `{$db['name']}`.`ccost` SET `ccost` = {$data['ccost']} WHERE `ccost`.`id` = {$data['id']};";
+    $result = mysql_query($sql);
+    if (!$result) {
+        die("update ccost hiba:" . mysql_errno() . " - " . mysql_error());
     }
 }

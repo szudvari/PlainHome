@@ -671,7 +671,9 @@ function adminStat () {
 				<a data-toggle="modal" href="#yearly" class="list-group-item">Éves kimutatás</a>
 				<a data-toggle="modal" href="#yearlybydepo" class="list-group-item">Éves kimutatás lakásonként</a>
 				<a data-toggle="modal" href="#payment" class="list-group-item">Befizetések listázása</a>
+				<a data-toggle="modal" href="#depopayment" class="list-group-item">Befizetések listázása lakásonként</a>
 				<a data-toggle="modal" href="#housepayment" class="list-group-item">Nem könyvelhető befizetések listázása</a>
+				<a data-toggle="modal" href="#depoccosts" class="list-group-item">Közösköltség alakulása lakásonként</a>
 	        </div>
 		
 	</div>
@@ -779,7 +781,73 @@ function adminStat () {
         </div>
     </div>
 </div>
-</div>    
+</div>   
+ <!-- -- Befizetesek lakasonkent modal-- -->
+<div class="modal fade" id="depopayment" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header modal-primary">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+                <h4 class="modal-title">Befizetések listázása lakásonként</h4>
+            </div>
+            <form action="depopaymentstat.php" method="post">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="year">Melyik évre kíváncsi?</label>
+                        <input type="text" class="form-control" name="year" id="year" value="" data-validation="required"/>
+                        <span class="help-block">Adja meg az évszámot!</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="year">Melyik lakásra kíváncsi</label>
+                        <input type="text" class="form-control" name="floor" id="floor" value="" data-validation="required"/>
+                        <span class="help-block">Adja meg az emeletet!</span>
+                     </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="door" id="door" value="" data-validation="required"/>
+                        <span class="help-block">Adja meg az ajtót!</span>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="input" name="submit" value="editPassword" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Választ</button>
+                        <button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
+                    </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+<!-- -- Kozoskoltseg lakasonkent modal-- -->
+<div class="modal fade" id="depoccosts" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header modal-primary">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+                <h4 class="modal-title">Közösköltség alakulása lakásonként</h4>
+            </div>
+            <form action="depoccost.php" method="post">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="year">Melyik évre kíváncsi?</label>
+                        <input type="text" class="form-control" name="year" id="year" value="" data-validation="required"/>
+                        <span class="help-block">Adja meg az évszámot!</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="year">Melyik lakásra kíváncsi</label>
+                        <input type="text" class="form-control" name="floor" id="floor" value="" data-validation="required"/>
+                        <span class="help-block">Adja meg az emeletet!</span>
+                     </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="door" id="door" value="" data-validation="required"/>
+                        <span class="help-block">Adja meg az ajtót!</span>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="input" name="submit" value="editPassword" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Választ</button>
+                        <button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
+                    </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
 EOT;
 }
 
@@ -804,5 +872,26 @@ function reAccountPayment ($id, $payment) {
 		        <div class="buttons">
 		            <button type="input" name="submit" value="Felvesz" class="btn btn-success btn-icon"><i class="fa fa-dollar"></i> Befizetés átkönyvelése</button>
 		        </div>
+EOT;
+}
+
+function updateCcost($ccost) {
+        echo <<<EOT
+
+                    <div class="content">
+                        <h3>Közösköltség módosítása</h3>
+                        <form id="contactform" action="update_ccost.php" method="post">
+                            <div class="formcolumn">
+                            <label for="ccost">Közösköltség összege</label>
+		            <input type="text" id="ccost" name="ccost" class="form-control" value="{$ccost['ccost']}">
+		            <input type="hidden" id="id" name="id" class="form-control" value="{$ccost['id']}">
+		        </div>
+		        <div class="buttons">
+		            <button type="input" name="submit" value="Modosit" class="btn btn-success btn-icon"><i class="fa fa-save"></i> Módosít</button>
+		        </div>
+		    </form>
+		</div>
+		</div>
+                
 EOT;
 }

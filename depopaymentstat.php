@@ -18,10 +18,12 @@ if ($_SESSION["admin"] > 0) {
     if ($floor == 0 && $door!=0) {
         $floor = "fsz.";
     }
+    echo "<div class='content'>";
     $con = connectDb();
     $id = getDepositId($floor, $door);
-    getOneDepoAccount($id, $year);
+    getDepositPayments($year, $id);
     closeDb($con);
+
 } else {
     notLoggedIn();
 }

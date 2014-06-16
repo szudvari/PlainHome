@@ -20,7 +20,7 @@ if ($_SESSION["admin"] > 0) {
     }
     $con = connectDb();
     $id = getDepositId($floor, $door);
-    getOneDepoAccount($id, $year);
+    getDepositCcost($id, $year);
     closeDb($con);
 } else {
     notLoggedIn();
