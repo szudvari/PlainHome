@@ -502,7 +502,7 @@ EOT;
     if ($balance < 0)
     {
         echo <<<EOT
-                <div class="alertMsg warning"><i class="fa fa-warning"></i> Az Ön közösköltségének aktuális egyenlege: <span class="floatLeft">$abalance Ft elmaradás</span></div>
+                <div class="alertMsg danger"><i class="fa fa-warning"></i> Az Ön közösköltségének aktuális egyenlege: <span class="floatLeft">$abalance Ft elmaradás</span></div>
 EOT;
     }
     else
@@ -513,14 +513,20 @@ EOT;
     }
     echo <<<EOT
                 <div class="alertMsg success"><i class="fa fa-info-circle"></i> Az Ön havi közösköltsége: <span class="floatLeft">$cost Ft</span></div>
-		<div class="panel panel-info">
-		<div class="panel-heading">
-		<h3 class="panel-title"><i class="fa fa-warning"></i> Havi fizetési kötelezettség<span class="floatRight">$date </span></h3>
-		</div>
-		<div class="panel-body">Minden hónap {$house['payment_day']}. napjáig legyen szives befizetését rendezni!</div>
-		</div>
-		</div>
-	</div>
+                <div class="panel panel-info">
+                <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-warning"></i> Havi fizetési kötelezettség<span class="floatRight">$date </span></h3>
+                </div>
+                <div class="panel-body">Minden hónap {$house['payment_day']}. napjáig legyen szives befizetését rendezni!</div>
+                </div>
+                <div class="panel panel-warning">
+                <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-info-circle"></i> Üzemeltetési bankszámlaszám:<span class="floatRight"></span></h3>
+                </div>
+                <div class="panel-body"> <span style="font-weight:bold;">{$house['bank_account']}</span><br>Kérjük a befizetéseket a fenti bankszámlára teljesíteni!</div>
+                </div>
+                </div>		
+                </div>
 EOT;
 }
 

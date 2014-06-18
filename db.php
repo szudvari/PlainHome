@@ -1551,8 +1551,8 @@ EOT;
 }
 
 function getAllPayment($id, $year) {
-    $nextyear = date("Y-m-d", mktime(0, 0, 0, 1, 1, $year + 1));
-    $lastyear = date("Y-m-d", mktime(0, 0, 0, 12, 31, $year - 1));
+    $nextyear = date("Y-m-d", mktime(0, 0, 0, 12, 31, $year));
+    $lastyear = date("Y-m-d", mktime(0, 0, 0, 1, 1, $year));
 
     $sql = "SELECT SUM(`amount`) as amount FROM `payment` WHERE (`account_date` between '$lastyear' AND '$nextyear') AND `deposit_id` = $id ";
     $result3 = mysql_query($sql);
@@ -1633,6 +1633,7 @@ EOT;
     echo <<<EOT
 <h3 class="primary"><i class="fa fa-list"></i> Éves kimutatás a(z) {$house['name']} {$deposit['floor']}/{$deposit['door']} lakására, $year. évre</h3>
 <h4 class="primary"> Készült: $date </h4>
+
 <div>
 <a href="#" class="btn btn-primary btn-icon no-print" onclick="jQuery.print('#section-to-print')"><i class="fa fa-print"></i> Nyomtatás</a>
 </div>
@@ -1664,6 +1665,14 @@ EOT;
     echo '</table>';
     echo '<hr />';
     getDepositPayments($year, $id);
+    echo <<<EOT
+    <hr/>
+    <h4 class="primary"> Üzemeltetési bankszámlaszám: {$house['bank_account']} </h4>
+    <p>Kérjük a befizetéseket a fenti bankszámlára teljesíteni!</p>
+    <hr/>
+    <p style="font-weight: bold;">Amennyiben naprakészen, online is szeretné követni közösköltsége alakulását, írjon egy üzenetet az {$house['infomail']} e-mail címre!</p>
+    </div>
+EOT;
 }
 
 function getAllPaymentTotal($year) {
@@ -1787,7 +1796,7 @@ EOT;
                     echo '<td>' . $value . '</td>';
                 }
             }
-            echo "<td><a href='reaccount.php?id={$row['id']}'>Átkönyvel</a></td>";
+            echo "<td><a href='reaccount.php?id={$row['id']}&floor=0&door=0&amount={$row['amount']}'>Átkönyvel</a></td>";
             echo '</tr>';
         }
             echo '</tbody>';
@@ -1887,8 +1896,7 @@ function getDepositPayments($year, $id) {
         echo '<div class="content">';
         echo "Nincs könyvelt befizetés $year évre.";
         echo '</div>';
-        exit();
-    } else {
+       } else {
         while ($row = mysql_fetch_assoc($result)) {
             $payment[] = $row;
         }
@@ -1921,13 +1929,13 @@ EOT;
                     echo '<td>' . $value . '</td>';
                 }
             }
-            echo "<td class='no-print'><a href='reaccount.php?id={$row['id']}'>Átkönyvel</a></td>";
+            echo "<td class='no-print'><a href='reaccount.php?id={$row['id']}&floor={$row['floor']}&door={$row['door']}&amount={$row['amount']}'>Átkönyvel</a></td>";
             echo '</tr>';
         }
             echo '</tbody>';
             echo '</table>';
-            echo '</div>';
-            echo '</div>';
+            
+            
     }
 }
 
