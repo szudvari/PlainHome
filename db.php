@@ -677,7 +677,7 @@ function getAllDepo() {
    <th> Lakók száma </th>
    <th class="tool-tip" title="Lakás tulajdoni hányad"> Lakás th </th>
    <th> Lakó neve </th>
-   <th> Közösktg. </th>
+   <th class="tool-tip" title="Közösköltség"> Közösktg. </th>
    <th> Egyenleg </th>
    <th> Részletek </th>
    <th> Befizetés </th>

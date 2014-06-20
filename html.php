@@ -53,7 +53,7 @@ EOT;
 function addDeposit() {
     echo <<<EOT
 
-<div class="content">
+<div class="content_deposits">
     <button id="newdepo" value="ujAlbetetFelvetele" class="btn btn-success btn-icon"><i class="fa fa-plus"></i>Új albetét felvétele</button>
     <div id="newdeposit">
         <h3 class="primary"><i class="fa fa-plus"></i> Új albetét felvétele</h3>
@@ -930,6 +930,6 @@ function uploadCSV () {
     </div>
 </div>		
 </div>
-<hr />
+
 EOT;
 }
