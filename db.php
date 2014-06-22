@@ -2256,15 +2256,16 @@ function updateAllBalance($year) {
     $lastyear = date("Y-m-d", mktime(0, 0, 0, 1, 1, $year));
     $sql = "SELECT COUNT(`id`) as count FROM `deposits`";
     $result = mysql_query($sql);
-        if (!$result)
-        {
-            echo "select deposit number hiba -" . mysql_errno() . ": " . mysql_error();
-            exit;
-        }
-        while ($row = mysql_fetch_assoc($result)) {
-            $depo = $row['count'];
-        
-    for ($i = 1; $i < $depo+1; $i++) {
+    if (!$result)
+    {
+        echo "select deposit number hiba -" . mysql_errno() . ": " . mysql_error();
+        exit;
+    }
+    while ($row = mysql_fetch_assoc($result)) {
+        $depo = $row['count'];
+    }
+
+    for ($i = 1; $i < $depo + 1; $i++) {
         $sql = "SELECT SUM(`amount`) as amount FROM `payment` WHERE `deposit_id`=$i AND (`account_date` between '$lastyear' AND '$nextyear')";
 
         $result = mysql_query($sql);
@@ -2300,17 +2301,18 @@ function updateAllBalance($year) {
         }
     }
 }
-function getLatestpaymentAccDate () {
+
+function getLatestpaymentAccDate() {
     $sql = "SELECT `account_date` FROM `payment` order by `id` DESC LIMIT 1";
     $result = mysql_query($sql);
-        if (!$result)
-        {
-            echo "getPaymenthiba -" . mysql_errno() . ": " . mysql_error();
-            exit;
-        }
+    if (!$result)
+    {
+        echo "getPaymenthiba -" . mysql_errno() . ": " . mysql_error();
+        exit;
+    }
     while ($row = mysql_fetch_assoc($result)) {
         $date = $row["account_date"];
     }
-    $year = substr($date, 0, 4); 
-    return $year;    
+    $year = substr($date, 0, 4);
+    return $year;
 }
