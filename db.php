@@ -2254,8 +2254,17 @@ function updateAllBalance($year) {
     global $db;
     $nextyear = date("Y-m-d", mktime(0, 0, 0, 12, 31, $year));
     $lastyear = date("Y-m-d", mktime(0, 0, 0, 1, 1, $year));
-
-    for ($i = 1; $i < 66; $i++) {
+    $sql = "SELECT COUNT(`id`) as count FROM `deposits`";
+    $result = mysql_query($sql);
+        if (!$result)
+        {
+            echo "select deposit number hiba -" . mysql_errno() . ": " . mysql_error();
+            exit;
+        }
+        while ($row = mysql_fetch_assoc($result)) {
+            $depo = $row['count'];
+        
+    for ($i = 1; $i < $depo+1; $i++) {
         $sql = "SELECT SUM(`amount`) as amount FROM `payment` WHERE `deposit_id`=$i AND (`account_date` between '$lastyear' AND '$nextyear')";
 
         $result = mysql_query($sql);
