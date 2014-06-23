@@ -970,7 +970,7 @@ function updatebase($data) {
     {
         die("update ccost hiba:" . mysql_errno() . " - " . mysql_error());
     }
-    $sql = "UPDATE `{$db['name']}`.`fees` SET `yearly_amount` = {$data['ccost']} WHERE `fees`.`id` = 1;";
+    $sql = "UPDATE `{$db['name']}`.`fees` SET `yearly_amount` = {$data['grabage']} WHERE `fees`.`id` = 2;";
     $result = mysql_query($sql);
     if (!$result)
     {
