@@ -714,9 +714,10 @@ function getAllDepo() {
         $sumbalance += $deposit[$i]["balance"];
     }
 
-    echo '<div class="content">';
+    echo '<div class="content" id="section-to-print">';
     echo <<<EOT
 <h3 class="primary"><i class="fa fa-list"></i> Albetétek - lista</h3>
+<a href="#" class="btn btn-primary btn-icon no-print" onclick="jQuery.print('#section-to-print')"><i class="fa fa-print"></i> Nyomtatás</a>    
 <table id="responsiveTable" class="large-only" cellspacing="0">
 <tr align="left" class="primary">
    <th> id </th>
@@ -728,9 +729,9 @@ function getAllDepo() {
    <th> Lakó neve </th>
    <th class="tool-tip" title="Közösköltség"> Közösktg. </th>
    <th> Egyenleg </th>
-   <th> Részletek </th>
-   <th> Befizetés </th>
-   <th> Módosítás </th>
+   <th class="no-print"> Részletek </th>
+   <th class="no-print"> Befizetés </th>
+   <th class="no-print"> Módosítás </th>
      
 </tr>
    
@@ -755,9 +756,9 @@ EOT;
                 echo '<td>' . $value . '</td>';
             }
         }
-        echo "<td><a href=\"mydepo.php?depositid=" . $row['id'] . "\">Részletek</a></td>";
-        echo "<td><a href=\"payment.php?id=" . $row['id'] . "\">Új befizetés</a></td>";
-        echo "<td><a href=\"updatedeposit.php?id=" . $row['id'] . "\" target=\"blank\">Módosít</a></td>";
+        echo "<td class='no-print'><a href=\"mydepo.php?depositid=" . $row['id'] . "\">Részletek</a></td>";
+        echo "<td class='no-print'><a href=\"payment.php?id=" . $row['id'] . "\">Új befizetés</a></td>";
+        echo "<td class='no-print'><a href=\"updatedeposit.php?id=" . $row['id'] . "\" target=\"blank\">Módosít</a></td>";
         echo '</tr>';
     }
     echo '<tr>';
@@ -768,7 +769,7 @@ EOT;
     echo '<td class="tdprimary"></td>';
     echo "<td class='tdwarning' style='text-align:right;'>" . number_format($sumccost, 0, ',', ' ') . "</td>";
     echo "<td class='tdwarning' style='text-align:right;'>" . number_format($sumbalance, 0, ',', ' ') . "</td>";
-    echo '<td class="tdprimary" colspan=3></td>';
+    echo '<td class="tdprimary no-print"  colspan=3></td>';
     echo '</tr>';
     echo '</tbody>';
     echo '</table>';
