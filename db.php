@@ -6,12 +6,14 @@ function connectDb() {
     global $db;
     $con = mysql_connect($db['host'], $db['user'], $db['pass']);
 
-    if (!$con) {
+    if (!$con)
+    {
         die('Nem tudok kapcsolódni: ' . mysql_error());
     }
     mysql_select_db($db['name'], $con);
     mysql_set_charset($db['charset'], $con);
-    if (!mysql_select_db($db['name'], $con)) {
+    if (!mysql_select_db($db['name'], $con))
+    {
         echo "Az adatbázis nem választható: " . mysql_error();
         exit;
     }
@@ -40,7 +42,8 @@ function insertTable($table, $vars, $con) {
 				(" . $insert_list_values . ")
 		";
     $res = mysql_query($sql, $con);
-    if (!$res) {
+    if (!$res)
+    {
         echo mysql_errno() . ": " . mysql_error();
         exit();
     }
@@ -54,7 +57,8 @@ function listDeposits() {
             . "`garage_area_ratio`, (`area_ratio`+`garage_area_ratio`), "
             . "`watermeter`, `resident_name` FROM `deposits`;";
     $result = mysql_query($sql);
-    if (!$result) {
+    if (!$result)
+    {
         echo mysql_errno() . ": " . mysql_error();
         exit;
     }
@@ -88,9 +92,12 @@ EOT;
         echo '<tbody class="table-hover">';
         echo '<tr>';
         foreach ($row as $value) {
-            if (is_numeric($value)) {
+            if (is_numeric($value))
+            {
                 echo '<td>' . str_replace(".", ",", round($value, 2)) . '</td>';
-            } else {
+            }
+            else
+            {
                 echo '<td>' . $value . '</td>';
             }
         }
@@ -113,13 +120,15 @@ function insertDepoDb($deposit, $con) {
             . "\"{$deposit['resident_name']}\")";
 //echo $sql;
     $res = mysql_query($sql, $con);
-    if (!$res) {
+    if (!$res)
+    {
         echo mysql_errno() . "(insert): " . mysql_error();
         exit();
     }
     $sql = "SELECT SUM(`deposits`.`area`)as t_a FROM `deposits`;";
     $result = mysql_query($sql);
-    if (!$result) {
+    if (!$result)
+    {
         echo mysql_errno() . "(ta): " . mysql_error();
         exit;
     }
@@ -128,13 +137,15 @@ function insertDepoDb($deposit, $con) {
     }
     $sql = "UPDATE `{$db['name']}`.`fees` SET `dealer` = '$ta' where `multiplier` = '/terület-egység';";
     $res = mysql_query($sql, $con);
-    if (!$res) {
+    if (!$res)
+    {
         echo mysql_errno() . "(db): " . mysql_error();
         exit();
     }
     $sql = "SELECT SUM(`residents_no`) as db from deposits;";
     $result = mysql_query($sql);
-    if (!$result) {
+    if (!$result)
+    {
         echo mysql_errno() . ": " . mysql_error();
         exit;
     }
@@ -143,7 +154,8 @@ function insertDepoDb($deposit, $con) {
     }
     $sql = "UPDATE `{$db['name']}`.`fees` SET `dealer` = '$dbs' where `multiplier` = '/fő';";
     $res = mysql_query($sql, $con);
-    if (!$res) {
+    if (!$res)
+    {
         echo mysql_errno() . ": " . mysql_error();
         exit();
     }
@@ -152,12 +164,14 @@ function insertDepoDb($deposit, $con) {
 function getDepositId($floor, $door) {
     $sql = "select id from deposits where floor=\"$floor\" and door=\"$door\";";
     $res = mysql_query($sql);
-    if (!$res) {
+    if (!$res)
+    {
         echo "A ($sql) kérdés futtatása sikertelen: " . mysql_error();
         exit;
     }
 
-    if (mysql_num_rows($res) == 0) {
+    if (mysql_num_rows($res) == 0)
+    {
         echo "Nincs ilyen albetét";
         exit;
     }
@@ -171,14 +185,18 @@ function authUserDb($userdata, $con) {
     $sql = "select username from residents where username=\"{$userdata['user']}\" 
         and password=\"{$userdata['pass']}\" and active=1";
     $res = mysql_query($sql, $con);
-    if (!$res) {
+    if (!$res)
+    {
         echo "A ($sql) kérdés futtatása sikertelen: " . mysql_error();
         exit();
     }
 
-    if (mysql_num_rows($res) == 0) {
+    if (mysql_num_rows($res) == 0)
+    {
         return false;
-    } else {
+    }
+    else
+    {
         return true;
     }
 }
@@ -186,12 +204,14 @@ function authUserDb($userdata, $con) {
 function getUserRole($userdata) {
     $sql = "select admin from residents where username=\"{$userdata['user']}\";";
     $res = mysql_query($sql);
-    if (!$res) {
+    if (!$res)
+    {
         echo "A ($sql) kérdés futtatása sikertelen: " . mysql_error();
         exit;
     }
 
-    if (mysql_num_rows($res) == 0) {
+    if (mysql_num_rows($res) == 0)
+    {
         echo "Nincs ilyen felhasználó";
         exit;
     }
@@ -204,12 +224,14 @@ function getUserRole($userdata) {
 function getUserId($userdata) {
     $sql = "select id from residents where username=\"{$userdata['user']}\";";
     $res = mysql_query($sql);
-    if (!$res) {
+    if (!$res)
+    {
         echo "A ($sql) kérdés futtatása sikertelen: " . mysql_error();
         exit;
     }
 
-    if (mysql_num_rows($res) == 0) {
+    if (mysql_num_rows($res) == 0)
+    {
         echo "Nincs ilyen felhasználó";
         exit;
     }
@@ -222,12 +244,14 @@ function getUserId($userdata) {
 function getUserDepositId($userdata) {
     $sql = "select depositid from residents where username=\"{$userdata['user']}\";";
     $res = mysql_query($sql);
-    if (!$res) {
+    if (!$res)
+    {
         echo "A ($sql) kérdés futtatása sikertelen: " . mysql_error();
         exit;
     }
 
-    if (mysql_num_rows($res) == 0) {
+    if (mysql_num_rows($res) == 0)
+    {
         echo "Nincs ilyen felhasználó";
         exit;
     }
@@ -240,12 +264,14 @@ function getUserDepositId($userdata) {
 function getAdminId($userdata) {
     $sql = "select id from admin where username=\"{$userdata['user']}\";";
     $res = mysql_query($sql);
-    if (!$res) {
+    if (!$res)
+    {
         echo "A ($sql) kérdés futtatása sikertelen: " . mysql_error();
         exit;
     }
 
-    if (mysql_num_rows($res) == 0) {
+    if (mysql_num_rows($res) == 0)
+    {
         echo "Nincs ilyen felhasználó";
         exit;
     }
@@ -259,14 +285,18 @@ function authAdminDb($userdata, $con) {
     $sql = "select username from admin where username=\"{$userdata['user']}\" 
         and password=\"{$userdata['pass']}\"";
     $res = mysql_query($sql, $con);
-    if (!$res) {
+    if (!$res)
+    {
         echo "A ($sql) kérdés futtatása sikertelen: " . mysql_error();
         exit();
     }
 
-    if (mysql_num_rows($res) == 0) {
+    if (mysql_num_rows($res) == 0)
+    {
         return false;
-    } else {
+    }
+    else
+    {
         return true;
     }
 }
@@ -274,12 +304,14 @@ function authAdminDb($userdata, $con) {
 function getAdminRole($userdata) {
     $sql = "select role from admin where username=\"{$userdata['user']}\";";
     $res = mysql_query($sql);
-    if (!$res) {
+    if (!$res)
+    {
         echo "A ($sql) kérdés futtatása sikertelen: " . mysql_error();
         exit;
     }
 
-    if (mysql_num_rows($res) == 0) {
+    if (mysql_num_rows($res) == 0)
+    {
         echo "Nincs ilyen felhasználó";
         exit;
     }
@@ -294,7 +326,8 @@ function getADeposit($id) {
             . "`residents_no`, `area_ratio`, "
             . "`resident_name` FROM `deposits` WHERE `id`=$id;";
     $result = mysql_query($sql);
-    if (!$result) {
+    if (!$result)
+    {
         echo mysql_errno() . ": " . mysql_error();
         exit;
     }
@@ -322,9 +355,12 @@ EOT;
         echo '<tbody>';
         echo '<tr>';
         foreach ($row as $value) {
-            if (is_numeric($value)) {
+            if (is_numeric($value))
+            {
                 echo '<td>' . str_replace(".", ",", round($value, 2)) . '</td>';
-            } else {
+            }
+            else
+            {
                 echo '<td>' . $value . '</td>';
             }
         }
@@ -347,14 +383,16 @@ function updateDepoDb($deposit, $con) {
             . "WHERE `deposits`.`id` = {$deposit['id']};";
 //echo $sql;
     $res = mysql_query($sql, $con);
-    if (!$res) {
-        echo "update deposit hiba -".mysql_errno() . ": " . mysql_error();
+    if (!$res)
+    {
+        echo "update deposit hiba -" . mysql_errno() . ": " . mysql_error();
         exit();
     }
     $sql = "SELECT SUM(`deposits`.`area`)as t_a FROM `deposits`;";
     $result = mysql_query($sql);
-    if (!$result) {
-        echo "select sum hiba -".mysql_errno() . "(ta): " . mysql_error();
+    if (!$result)
+    {
+        echo "select sum hiba -" . mysql_errno() . "(ta): " . mysql_error();
         exit;
     }
     while ($row = mysql_fetch_assoc($result)) {
@@ -362,14 +400,16 @@ function updateDepoDb($deposit, $con) {
     }
     $sql = "UPDATE `{$db['name']}`.`fees` SET `dealer` = '$ta' where `multiplier` = '/terület-egység';";
     $res = mysql_query($sql, $con);
-    if (!$res) {
-        echo "update dealer -".mysql_errno() . ": " . mysql_error();
+    if (!$res)
+    {
+        echo "update dealer -" . mysql_errno() . ": " . mysql_error();
         exit();
     }
     $sql = "SELECT SUM(`residents_no`) as db from deposits;";
     $result = mysql_query($sql);
-    if (!$result) {
-        echo "select sumresidents -".mysql_errno() . ": " . mysql_error();
+    if (!$result)
+    {
+        echo "select sumresidents -" . mysql_errno() . ": " . mysql_error();
         exit;
     }
     while ($row = mysql_fetch_assoc($result)) {
@@ -377,8 +417,9 @@ function updateDepoDb($deposit, $con) {
     }
     $sql = "UPDATE `{$db['name']}`.`fees` SET `dealer` = '$dbs' where `multiplier` = '/fő';";
     $res = mysql_query($sql, $con);
-    if (!$res) {
-        echo "update fees -".mysql_errno() . ": " . mysql_error();
+    if (!$res)
+    {
+        echo "update fees -" . mysql_errno() . ": " . mysql_error();
         exit();
     }
 }
@@ -390,7 +431,8 @@ function getMyDepo($id) {
             . "`residents_no`, `area_ratio`, "
             . "`resident_name` FROM `deposits` WHERE `id`=$id;";
     $result1 = mysql_query($sql);
-    if (!$result1) {
+    if (!$result1)
+    {
         echo mysql_errno() . ": " . mysql_error();
         exit;
     }
@@ -400,7 +442,8 @@ function getMyDepo($id) {
     }
     $sql = "SELECT * from fees;";
     $result2 = mysql_query($sql);
-    if (!$result2) {
+    if (!$result2)
+    {
         echo mysql_errno() . ": " . mysql_error();
         exit;
     }
@@ -493,7 +536,8 @@ EOT;
     echo '<hr />';
     echo '<div>';
     getMyPayments($id);
-    if (isset($_SESSION['userid'])) { // ha userként lépsz be    
+    if (isset($_SESSION['userid']))
+    { // ha userként lépsz be    
         $user = getUserData($_SESSION['userid']);
 //print_r($user);
         echo <<<EOT
@@ -597,7 +641,9 @@ EOT;
 		</div>
 	</div>
 EOT;
-    } else {     //ha adminként lépsz be
+    }
+    else
+    {     //ha adminként lépsz be
         echo "<a href=\"payment.php?id=" . $id . "\"><button class='btn btn-success btn-icon'><i class='fa fa-dollar'></i>Új befizetés rögzítése</button></a>";
         echo "<hr />";
         echo '<h3 class="primary"><i class="fa fa-money"></i> Közösköltség alakulása az utolsó 12 hónapban</h3>';
@@ -614,7 +660,8 @@ function getAllDepo() {
             . "`residents_no`, `area_ratio`, "
             . "`resident_name` FROM `deposits`;";
     $result1 = mysql_query($sql);
-    if (!$result1) {
+    if (!$result1)
+    {
         echo mysql_errno() . ": " . mysql_error();
         exit;
     }
@@ -625,7 +672,8 @@ function getAllDepo() {
     }
     $sql = "SELECT * from fees;";
     $result2 = mysql_query($sql);
-    if (!$result2) {
+    if (!$result2)
+    {
         echo mysql_errno() . ": " . mysql_error();
         exit;
     }
@@ -635,7 +683,8 @@ function getAllDepo() {
     }
     $sql = "SELECT * from deposit_balance where year=$year";
     $result3 = mysql_query($sql);
-    if (!$result3) {
+    if (!$result3)
+    {
         echo mysql_errno() . ": " . mysql_error();
         exit;
     }
@@ -677,7 +726,7 @@ function getAllDepo() {
    <th> Lakók száma </th>
    <th class="tool-tip" title="Lakás tulajdoni hányad"> Lakás th </th>
    <th> Lakó neve </th>
-   <th> Közösktg. </th>
+   <th class="tool-tip" title="Közösköltség"> Közösktg. </th>
    <th> Egyenleg </th>
    <th> Részletek </th>
    <th> Befizetés </th>
@@ -690,13 +739,19 @@ EOT;
         echo '<tbody>';
         echo '<tr>';
         foreach ($row as $value) {
-            if (is_numeric($value)) {
-                if (($value > 999) || ($value < 0)) {
+            if (is_numeric($value))
+            {
+                if (($value > 999) || ($value < 0))
+                {
                     echo '<td style="text-align:right;">' . number_format($value, 0, ',', ' ') . '</td>';
-                } else {
+                }
+                else
+                {
                     echo '<td style="text-align:right;">' . str_replace(".", ",", round($value, 2)) . '</td>';
                 }
-            } else {
+            }
+            else
+            {
                 echo '<td>' . $value . '</td>';
             }
         }
@@ -730,18 +785,23 @@ function listResidents() {
             . "order by `deposits`.`floor`, `deposits`.`door`";
 
     $result = mysql_query($sql);
-    if (!$result) {
+    if (!$result)
+    {
         die("listResidents hiba:" . mysql_errno() . " - " . mysql_error());
     }
-    if (mysql_num_rows($result) != 0) {
+    if (mysql_num_rows($result) != 0)
+    {
         $table = array();
         while ($row = mysql_fetch_assoc($result)) {
             $table[] = $row;
         }
         for ($i = 0; ($i < mysql_num_rows($result)); $i++) {
-            if ($table[$i]['active'] == 1) {
+            if ($table[$i]['active'] == 1)
+            {
                 $table[$i]['active'] = "aktív";
-            } else {
+            }
+            else
+            {
                 $table[$i]['active'] = "nem aktív";
             }
         }
@@ -770,10 +830,13 @@ EOT;
             foreach ($row as $value) {
                 echo "<td>$value</td>";
             }
-            if ($row['active'] == "aktív") {
+            if ($row['active'] == "aktív")
+            {
                 echo "<td><a id=\"alink\" href=\"update_ustatus.php?uid={$row['id']}"
                 . "&status=1\">User letiltása</a></td>";
-            } else {
+            }
+            else
+            {
                 echo "<td><a id=\"alink\" href=\"update_ustatus.php?uid={$row['id']}"
                 . "&status=0\">User aktiválása</a></td>";
             }
@@ -787,7 +850,9 @@ EOT;
 
         echo '</tbody>';
         echo '</table>';
-    } else {
+    }
+    else
+    {
         echo 'Még nem vett fel lakókat. Vegyen fel egyet!';
     }
 }
@@ -802,7 +867,8 @@ function changeUserSatus($id, $status) {
             break;
     }
     $res = mysql_query($sql);
-    if (!$res) {
+    if (!$res)
+    {
         die("Hiba:" . mysql_errno() . " - " . mysql_error());
     }
 }
@@ -810,7 +876,8 @@ function changeUserSatus($id, $status) {
 function changeUserPassword($id, $password) {
     $sql = "UPDATE  `residents` SET  `password` =  '$password' WHERE  `residents`.`id` =$id;";
     $res = mysql_query($sql);
-    if (!$res) {
+    if (!$res)
+    {
         die("Hiba:" . mysql_errno() . " - " . mysql_error());
     }
     return $res;
@@ -826,7 +893,8 @@ function changeAdminSatus($id, $status) {
             break;
     }
     $res = mysql_query($sql);
-    if (!$res) {
+    if (!$res)
+    {
         die("Hiba:" . mysql_errno() . " - " . mysql_error());
     }
 }
@@ -839,7 +907,8 @@ function getUserData($id) {
             . "`deposits`.`door` FROM residents LEFT JOIN `deposits` "
             . "ON `residents`.`depositid` = `deposits`.`id` WHERE `residents`.`id` = $id;";
     $result = mysql_query($sql);
-    if (!$result) {
+    if (!$result)
+    {
         die("getUserData hiba:" . mysql_errno() . " - " . mysql_error());
     }
     $array = array();
@@ -854,7 +923,8 @@ function getBaseData() {
     mysql_query("set character set 'utf8'");
     $sql = "SELECT `name`, `yearly_amount`, `multiplier` from fees;";
     $result = mysql_query($sql);
-    if (!$result) {
+    if (!$result)
+    {
         die("getBaseData hiba:" . mysql_errno() . " - " . mysql_error());
     }
     $array = array();
@@ -876,9 +946,12 @@ EOT;
 
         echo '<tr>';
         foreach ($row as $value) {
-            if (is_numeric($value)) {
+            if (is_numeric($value))
+            {
                 echo "<td>" . number_format($value, 0, ',', ' ') . " Ft</td>";
-            } else {
+            }
+            else
+            {
                 echo "<td>$value </td>";
             }
         }
@@ -890,15 +963,17 @@ EOT;
 }
 
 function updatebase($data) {
-global $db;
+    global $db;
     $sql = "UPDATE `{$db['name']}`.`fees` SET `yearly_amount` = {$data['ccost']} WHERE `fees`.`id` = 1;";
     $result = mysql_query($sql);
-    if (!$result) {
+    if (!$result)
+    {
         die("update ccost hiba:" . mysql_errno() . " - " . mysql_error());
     }
     $sql = "UPDATE `{$db['name']}`.`fees` SET `yearly_amount` = {$data['ccost']} WHERE `fees`.`id` = 1;";
     $result = mysql_query($sql);
-    if (!$result) {
+    if (!$result)
+    {
         die("update grabage cost hiba:" . mysql_errno() . " - " . mysql_error());
     }
 }
@@ -909,18 +984,23 @@ function listAdmins() {
     $sql = "SELECT id, username, email, role from admin where id > 1;";
 
     $result = mysql_query($sql);
-    if (!$result) {
+    if (!$result)
+    {
         die("listAdmins hiba:" . mysql_errno() . " - " . mysql_error());
     }
-    if (mysql_num_rows($result) != 0) {
+    if (mysql_num_rows($result) != 0)
+    {
         $table = array();
         while ($row = mysql_fetch_assoc($result)) {
             $table[] = $row;
         }
         for ($i = 0; ($i < mysql_num_rows($result)); $i++) {
-            if ($table[$i]['role'] == 1) {
+            if ($table[$i]['role'] == 1)
+            {
                 $table[$i]['role'] = "Közösképviselő";
-            } else {
+            }
+            else
+            {
                 $table[$i]['role'] = "Adminisztrátor";
             }
         }
@@ -949,10 +1029,13 @@ EOT;
       
         <td><a href="update_apassword.php?uid={$row['id']}">Jelszó módosítás</a></td>
 EOT;
-            if ($row['role'] == "Közösképviselő") {
+            if ($row['role'] == "Közösképviselő")
+            {
                 echo "<td><a id=\"alink\" href=\"update_arole.php?uid={$row['id']}"
                 . "&status=0\">Szerepkör módosítása</a></td>";
-            } else {
+            }
+            else
+            {
                 echo "<td><a id=\"alink\" href=\"update_arole.php?uid={$row['id']}"
                 . "&status=1\">Szerepkör módosítása</a></td>";
             }
@@ -964,7 +1047,9 @@ EOT;
 
         echo '</tbody>';
         echo '</table>';
-    } else {
+    }
+    else
+    {
         echo 'Nincsenek adminisztrátorok. Vegyen fel egyet!';
     }
 }
@@ -979,7 +1064,8 @@ function changeAdminRole($id, $status) {
             break;
     }
     $res = mysql_query($sql);
-    if (!$res) {
+    if (!$res)
+    {
         die("Hiba:" . mysql_errno() . " - " . mysql_error());
     }
 }
@@ -987,7 +1073,8 @@ function changeAdminRole($id, $status) {
 function changeAdminPassword($id, $password) {
     $sql = "UPDATE  `admin` SET  `password` =  '$password' WHERE  `admin`.`id` =$id;";
     $res = mysql_query($sql);
-    if (!$res) {
+    if (!$res)
+    {
         die("Hiba:" . mysql_errno() . " - " . mysql_error());
     }
     return $res;
@@ -999,7 +1086,8 @@ function getAdminData($id) {
     $sql = "SELECT id, username, email, role from admin where id = $id;";
 
     $result = mysql_query($sql);
-    if (!$result) {
+    if (!$result)
+    {
         die("Hiba:" . mysql_errno() . " - " . mysql_error());
     }
     $table = array();
@@ -1012,7 +1100,8 @@ function getAdminData($id) {
 function killAdmin($id) {
     $sql = "DELETE from admin where id=$id;";
     $result = mysql_query($sql);
-    if (!$result) {
+    if (!$result)
+    {
         die("killAdmin Hiba:" . mysql_errno() . " - " . mysql_error());
     }
 }
@@ -1020,7 +1109,8 @@ function killAdmin($id) {
 function killUser($id) {
     $sql = "DELETE from residents where id=$id;";
     $result = mysql_query($sql);
-    if (!$result) {
+    if (!$result)
+    {
         die("killUser Hiba:" . mysql_errno() . " - " . mysql_error());
     }
 }
@@ -1030,7 +1120,8 @@ function getCcost($id) {
             . "`residents_no`, `area_ratio`, "
             . "`resident_name` FROM `deposits` WHERE `id`=$id;";
     $result1 = mysql_query($sql);
-    if (!$result1) {
+    if (!$result1)
+    {
         echo mysql_errno() . ": " . mysql_error();
         exit;
     }
@@ -1040,7 +1131,8 @@ function getCcost($id) {
     }
     $sql = "SELECT * from fees;";
     $result2 = mysql_query($sql);
-    if (!$result2) {
+    if (!$result2)
+    {
         echo mysql_errno() . ": " . mysql_error();
         exit;
     }
@@ -1066,10 +1158,12 @@ function getCurrentBalance($id) {
     $year = date("Y");
     $sql = "SELECT `actual_balance` FROM `deposit_balance` WHERE `deposit_id` = '$id' AND `year` = '$year'";
     $result = mysql_query($sql);
-    if (!$result) {
+    if (!$result)
+    {
         die("getCurrentBalance hiba:" . mysql_errno() . " - " . mysql_error());
     }
-    if (mysql_num_rows($result) == 0) {
+    if (mysql_num_rows($result) == 0)
+    {
         echo "<span style='color: red; font-weight: bold;'>Figyelem! Az előző év könyvelése még nem zárult le, addig folyószámla adatai nem pontosak!</span>";
         //exit;
     }
@@ -1092,14 +1186,16 @@ function insertPayment($data, $user) {
             . "VALUES ({$data['id']}, CURDATE(), {$data['payment']}, '$user', '{$data['account_date']}')";
 //    echo $sql;
     $result = mysql_query($sql);
-    if (!$result) {
+    if (!$result)
+    {
         die("insertIntoPayment hiba:" . mysql_errno() . " - " . mysql_error());
     }
     $sql = "UPDATE `{$db['name']}`.`deposit_balance` SET `actual_balance` = '$newbalance' "
             . "WHERE `deposit_balance`.`deposit_id` = {$data['id']} AND `year` = $year";
 //echo $sql;
     $result = mysql_query($sql);
-    if (!$result) {
+    if (!$result)
+    {
         die("updateCurrentBalance hiba:" . mysql_errno() . " - " . mysql_error());
     }
 }
@@ -1108,9 +1204,12 @@ function getMyPayments($id) {
     global $db;
     $closing_balance = getCurrentBalance($id);
     $balance = getActualBalance($closing_balance, $id);
-    if ($balance < 0) {
+    if ($balance < 0)
+    {
         $abalance = $balance * -1;
-    } else {
+    }
+    else
+    {
         $abalance = $balance;
     }
     $abalance = number_format($abalance, 0, ',', ' ');
@@ -1120,7 +1219,8 @@ function getMyPayments($id) {
             . "ORDER BY `payment`.`date` DESC;";
 //echo $sql;
     $result = mysql_query($sql);
-    if (!$result) {
+    if (!$result)
+    {
         die("getMyPayment hiba:" . mysql_errno() . " - " . mysql_error());
     }
 
@@ -1129,19 +1229,25 @@ function getMyPayments($id) {
     }
 
 
-    if ($balance < 0) {
+    if ($balance < 0)
+    {
         echo <<<EOT
                 <div class="alertMsg warning"><i class="fa fa-warning"></i> Az Ön közösköltségének aktuális egyenlege: <span class="floatLeft">$abalance Ft elmaradás</span></div>
 EOT;
-    } else {
+    }
+    else
+    {
         echo <<<EOT
                 <div class="alertMsg success"><i class="fa fa-info-circle"></i> Az Ön közösköltségének aktuális egyenlege: <span class="floatLeft">$abalance Ft túlfizetés</span></div> 
 EOT;
     }
-    if ($table[0]['account_date'] == NULL) {
+    if ($table[0]['account_date'] == NULL)
+    {
         echo "Önnek nincs lekönyvelt befizetése.<br>"
         . "Felhívjuk figyelmét, hogy a befizetések azok beérkezése után 3-5 nappal kerülnek könyvelésre!";
-    } else {
+    }
+    else
+    {
         echo '<button id="pays" value="Befizetesek" class="btn btn-success btn-icon"><i class="fa fa-bars"></i>Befizetések részletesen</button>';
         echo '<div id=payments>';
         echo '<h3 class="primary"><i class="fa fa-dollar"></i> Könyvelt befizetések </h3>';
@@ -1179,7 +1285,8 @@ EOT;
 function lastYear() {
     $sql = "SELECT max(`year`) as year FROM `deposit_balance`";
     $result = mysql_query($sql);
-    if (!$result) {
+    if (!$result)
+    {
         die("lastYear hiba:" . mysql_errno() . " - " . mysql_error());
     }
     while ($row = mysql_fetch_assoc($result)) {
@@ -1192,7 +1299,8 @@ function startNewYear($lastyear) {
     $newyear = $lastyear + 1;
     $sql = "SELECT * FROM `deposit_balance` where year=$lastyear";
     $result = mysql_query($sql);
-    if (!$result) {
+    if (!$result)
+    {
         die("allDepositBalance hiba:" . mysql_errno() . " - " . mysql_error());
     }
     while ($row = mysql_fetch_assoc($result)) {
@@ -1207,7 +1315,8 @@ function startNewYear($lastyear) {
         $sql = "INSERT INTO deposit_balance (`deposit_id`, `year`, `opening_balance`, `actual_balance`)"
                 . "VALUES ({$balances[$i]['deposit_id']}, $newyear, $balance, $balance)";
         $result = mysql_query($sql);
-        if (!$result) {
+        if (!$result)
+        {
             die("insertDepositBalance hiba:" . mysql_errno() . " - " . mysql_error());
         }
     }
@@ -1216,7 +1325,8 @@ function startNewYear($lastyear) {
 function deleteFileFromDb($file) {
     $sql = "DELETE from documents WHERE `name`='$file'";
     $result = mysql_query($sql);
-    if (!$result) {
+    if (!$result)
+    {
         die("deleteFileFromDb hiba:" . mysql_errno() . " - " . mysql_error());
     }
 }
@@ -1224,13 +1334,15 @@ function deleteFileFromDb($file) {
 function listDocuments() {
     $sql = "SELECT `name`, `shortname`, `description` FROM documents";
     $result = mysql_query($sql);
-    if (!$result) {
+    if (!$result)
+    {
         die("listDocuments hiba:" . mysql_errno() . " - " . mysql_error());
     }
     while ($row = mysql_fetch_assoc($result)) {
         $docs[] = $row;
     }
-    if (mysql_num_rows($result) != 0) {
+    if (mysql_num_rows($result) != 0)
+    {
         echo '<div class="content">';
         echo '<h3 class="primary"><i class="fa fa-file-pdf-o"></i> Fontos dokumentumok </h3>';
         foreach ($docs as $row) {
@@ -1242,15 +1354,19 @@ function listDocuments() {
 }
 
 function insertBoardMessage($msg) {
-    if ($msg['valid_till'] != NULL) {
+    if ($msg['valid_till'] != NULL)
+    {
         $sql = "INSERT into board (`creation_date`, `title`, `text`, `valid_till`) "
                 . "VALUES (CURDATE(), '{$msg['title']}', '{$msg['text']}', '{$msg['valid_till']}');";
-    } else {
+    }
+    else
+    {
         $sql = "INSERT into board (`creation_date`, `title`, `text`) "
                 . "VALUES (CURDATE(), '{$msg['title']}', '{$msg['text']}');";
     }
     $result = mysql_query($sql);
-    if (!$result) {
+    if (!$result)
+    {
         die("insertBoardMessage hiba:" . mysql_errno() . " - " . mysql_error());
     }
 }
@@ -1258,18 +1374,23 @@ function insertBoardMessage($msg) {
 function getAllBoardMessages() {
     $sql = "SELECT * from board;";
     $result = mysql_query($sql);
-    if (!$result) {
+    if (!$result)
+    {
         die("listDocuments hiba:" . mysql_errno() . " - " . mysql_error());
     }
     while ($row = mysql_fetch_assoc($result)) {
         $msg[] = $row;
     }
 //    print_r($msg);
-    if (mysql_num_rows($result) != 0) {
+    if (mysql_num_rows($result) != 0)
+    {
         for ($i = 0; $i < mysql_num_rows($result); $i++) {
-            if ($msg[$i]['valid'] == 1) {
+            if ($msg[$i]['valid'] == 1)
+            {
                 $msg[$i]['valid'] = "aktív";
-            } else {
+            }
+            else
+            {
                 $msg[$i]['valid'] = "inaktív";
             }
         }
@@ -1295,9 +1416,12 @@ EOT;
             foreach ($row as $value) {
                 echo "<td>$value</td>";
             }
-            if ($row['valid'] == "aktív") {
+            if ($row['valid'] == "aktív")
+            {
                 echo "<td><a href='changemessagevalid.php?act=1&id={$row['id']}'>Inaktiválás</a></td>";
-            } else {
+            }
+            else
+            {
                 echo "<td><a href='changemessagevalid.php?act=0&id={$row['id']}'>Aktiválás</a></td>";
             }
             echo '</tr>';
@@ -1311,13 +1435,15 @@ EOT;
 function getLatestBoardMessage() {
     $sql = "SELECT * FROM `board`  WHERE `valid` = 1 AND (`valid_till`> CURDATE()) ORDER BY `id` DESC LIMIT 1";
     $result = mysql_query($sql);
-    if (!$result) {
+    if (!$result)
+    {
         die("getLatestBoardMessage hiba:" . mysql_errno() . " - " . mysql_error());
     }
     while ($row = mysql_fetch_assoc($result)) {
         $msg = $row;
     }
-    if (mysql_num_rows($result) != 0) {
+    if (mysql_num_rows($result) != 0)
+    {
         return $msg;
     }
 }
@@ -1332,7 +1458,8 @@ function changeMsgStatus($id, $act) {
             break;
     }
     $res = mysql_query($sql);
-    if (!$res) {
+    if (!$res)
+    {
         die("Hiba:" . mysql_errno() . " - " . mysql_error());
     }
 }
@@ -1340,13 +1467,15 @@ function changeMsgStatus($id, $act) {
 function allBoardMessage() {
     $sql = "SELECT * FROM `board`  WHERE `valid` = 1 AND (`valid_till`> CURDATE()) ORDER BY `id` DESC";
     $result = mysql_query($sql);
-    if (!$result) {
+    if (!$result)
+    {
         die("allBoardMessage hiba:" . mysql_errno() . " - " . mysql_error());
     }
     while ($row = mysql_fetch_assoc($result)) {
         $msg[] = $row;
     }
-    if (mysql_num_rows($result) != 0) {
+    if (mysql_num_rows($result) != 0)
+    {
         echo '<div class="content">';
         echo <<<EOT
         <div class="panel panel-primary">
@@ -1369,7 +1498,8 @@ function getActualBalance($actual_balance, $id) {
     $sql = "SELECT ccost from ccost WHERE `deposit_id`=$id and `year`=$year ";
 //echo $sql;
     $result = mysql_query($sql);
-    if (!$result) {
+    if (!$result)
+    {
         die("getCcost hiba:" . mysql_errno() . " - " . mysql_error());
     }
     $ccost = array();
@@ -1391,7 +1521,8 @@ function getAllCcost($id, $year) {
     $sql = "SELECT ccost from ccost WHERE `deposit_id`=$id and `year`=$year ";
 //echo $sql;
     $result = mysql_query($sql);
-    if (!$result) {
+    if (!$result)
+    {
         die("getAllCcost hiba:" . mysql_errno() . " - " . mysql_error());
     }
     $ccost = array();
@@ -1412,7 +1543,8 @@ function getMyAllCcost($id) {
             . "LEFT JOIN `{$db['name']}`.`ccost` ON `deposits`.`id` = `ccost`.`deposit_id` WHERE `deposits`.`id` = $id 
         ORDER BY `ccost`.`year` DESC, `ccost`.`month` DESC LIMIT 12";
     $result = mysql_query($sql);
-    if (!$result) {
+    if (!$result)
+    {
         die("geMyAllCcost hiba:" . mysql_errno() . " - " . mysql_error());
     }
     while ($row = mysql_fetch_assoc($result)) {
@@ -1432,9 +1564,12 @@ EOT;
     foreach ($ccost as $row) {
         echo '<tr>';
         foreach ($row as $value) {
-            if (is_numeric($value) && $value > 2099) {
+            if (is_numeric($value) && $value > 2099)
+            {
                 echo "<td>" . number_format($value, 0, ',', ' ') . " Ft</td>";
-            } else {
+            }
+            else
+            {
                 echo "<td>$value</td>";
             }
         }
@@ -1450,7 +1585,8 @@ function getAllAccounts($year) {
     $sql = "SELECT `id`, `floor`, `door`, "
             . "`resident_name` FROM `deposits`;";
     $result1 = mysql_query($sql);
-    if (!$result1) {
+    if (!$result1)
+    {
         echo mysql_errno() . ": " . mysql_error();
         exit;
     }
@@ -1462,11 +1598,13 @@ function getAllAccounts($year) {
 
     $sql = "SELECT * from deposit_balance where year='$year'";
     $result2 = mysql_query($sql);
-    if (!$result2) {
+    if (!$result2)
+    {
         echo mysql_errno() . ": " . mysql_error();
         exit;
     }
-    if (mysql_num_rows($result2) == 0) {
+    if (mysql_num_rows($result2) == 0)
+    {
         echo <<<EOT
         <div class="buttons btn-back">
 	   <form action="stat.php">
@@ -1525,13 +1663,19 @@ EOT;
         echo '<tbody>';
         echo '<tr>';
         foreach ($row as $value) {
-            if (is_numeric($value)) {
-                if (($value > 999) || ($value < 0)) {
+            if (is_numeric($value))
+            {
+                if (($value > 999) || ($value < 0))
+                {
                     echo '<td style="text-align:right;">' . number_format($value, 0, ',', ' ') . '</td>';
-                } else {
+                }
+                else
+                {
                     echo '<td style="text-align:right;">' . str_replace(".", ",", round($value, 2)) . '</td>';
                 }
-            } else {
+            }
+            else
+            {
                 echo '<td>' . $value . '</td>';
             }
         }
@@ -1551,21 +1695,25 @@ EOT;
 }
 
 function getAllPayment($id, $year) {
-    $nextyear = date("Y-m-d", mktime(0, 0, 0, 1, 1, $year + 1));
-    $lastyear = date("Y-m-d", mktime(0, 0, 0, 12, 31, $year - 1));
+    $nextyear = date("Y-m-d", mktime(0, 0, 0, 12, 31, $year));
+    $lastyear = date("Y-m-d", mktime(0, 0, 0, 1, 1, $year));
 
     $sql = "SELECT SUM(`amount`) as amount FROM `payment` WHERE (`account_date` between '$lastyear' AND '$nextyear') AND `deposit_id` = $id ";
     $result3 = mysql_query($sql);
-    if (!$result3) {
+    if (!$result3)
+    {
         echo mysql_errno() . ": " . mysql_error();
         exit;
     }
     while ($row = mysql_fetch_assoc($result3)) {
         $payment = $row;
     }
-    if ($payment['amount'] != NULL) {
+    if ($payment['amount'] != NULL)
+    {
         $all_payment = $payment['amount'];
-    } else {
+    }
+    else
+    {
         $all_payment = 0;
     }
     return $all_payment;
@@ -1577,11 +1725,13 @@ function getOneDepoAccount($id, $year) {
     $sql = "SELECT `id`, `floor`, `door`, "
             . "`resident_name` FROM `deposits` WHERE id=$id;";
     $result1 = mysql_query($sql);
-    if (!$result1) {
+    if (!$result1)
+    {
         echo mysql_errno() . ": " . mysql_error();
         exit;
     }
-    if (mysql_num_rows($result1) == 0) {
+    if (mysql_num_rows($result1) == 0)
+    {
         echo <<<EOT
         <div class="buttons btn-back">
 	   <form action="stat.php">
@@ -1600,11 +1750,13 @@ EOT;
 
     $sql = "SELECT * from deposit_balance where year='$year' and deposit_id=$id";
     $result2 = mysql_query($sql);
-    if (!$result2) {
+    if (!$result2)
+    {
         echo mysql_errno() . ": " . mysql_error();
         exit;
     }
-    if (mysql_num_rows($result2) == 0) {
+    if (mysql_num_rows($result2) == 0)
+    {
         echo <<<EOT
         <div class="buttons btn-back">
 	   <form action="stat.php">
@@ -1633,6 +1785,7 @@ EOT;
     echo <<<EOT
 <h3 class="primary"><i class="fa fa-list"></i> Éves kimutatás a(z) {$house['name']} {$deposit['floor']}/{$deposit['door']} lakására, $year. évre</h3>
 <h4 class="primary"> Készült: $date </h4>
+
 <div>
 <a href="#" class="btn btn-primary btn-icon no-print" onclick="jQuery.print('#section-to-print')"><i class="fa fa-print"></i> Nyomtatás</a>
 </div>
@@ -1664,22 +1817,32 @@ EOT;
     echo '</table>';
     echo '<hr />';
     getDepositPayments($year, $id);
+    echo <<<EOT
+    <hr/>
+    <h4 class="primary"> Üzemeltetési bankszámlaszám: {$house['bank_account']} </h4>
+    <p>Kérjük a befizetéseket a fenti bankszámlára teljesíteni!</p>
+    <hr/>
+    <p style="font-weight: bold;">Amennyiben naprakészen, online is szeretné követni közösköltsége alakulását, írjon egy üzenetet az {$house['infomail']} e-mail címre!</p>
+    </div>
+EOT;
 }
 
 function getAllPaymentTotal($year) {
     global $db;
     $date = date("Y.m.d");
-    $nextyear = date("Y-m-d", mktime(0, 0, 0, 1, 1, $year + 1));
-    $lastyear = date("Y-m-d", mktime(0, 0, 0, 12, 31, $year - 1));
+    $nextyear = date("Y-m-d", mktime(0, 0, 0, 12, 31, $year));
+    $lastyear = date("Y-m-d", mktime(0, 0, 0, 1, 1, $year));
 
     $sql = "SELECT `payment`.`id`, `deposits`.`floor`,`deposits`.`door`,`deposits`.`resident_name`,`payment`.`account_date`,`payment`.`amount` FROM deposits "
             . "INNER JOIN `{$db['name']}`.`payment` ON `deposits`.`id` = `payment`.`deposit_id` WHERE (`account_date` between '$lastyear' AND '$nextyear') ORDER by `account_date` DESC ";
     $result = mysql_query($sql);
-    if (!$result) {
+    if (!$result)
+    {
         echo mysql_errno() . ": " . mysql_error();
         exit;
     }
-    if (mysql_num_rows($result) == 0) {
+    if (mysql_num_rows($result) == 0)
+    {
         echo <<<EOT
         <div class="content">
         Sajnos nincs $year. évre megjelníthető adat.
@@ -1713,46 +1876,55 @@ EOT;
         echo '<tbody>';
         echo '<tr>';
         foreach ($row as $value) {
-            if (is_numeric($value)) {
-                if (($value > 999) || ($value < 0)) {
+            if (is_numeric($value))
+            {
+                if (($value > 999) || ($value < 0))
+                {
                     echo '<td style="text-align:right;">' . number_format($value, 0, ',', ' ') . '</td>';
-                } else {
+                }
+                else
+                {
                     echo '<td style="text-align:right;">' . str_replace(".", ",", round($value, 2)) . '</td>';
                 }
-            } else {
+            }
+            else
+            {
                 echo '<td>' . $value . '</td>';
             }
         }
         echo "<td class='no-print'><a href='reaccount.php?id={$row['id']}&floor={$row['floor']}&door={$row['door']}&amount={$row['amount']}'>Átkönyvel</a></td>";
         echo '</tr>';
     }
-        echo '</tbody>';
-        echo '</table>';
-        echo '</div>';
+    echo '</tbody>';
+    echo '</table>';
+    echo '</div>';
 //print_r($deposit);
-    
 }
 
 function getHousePayments($year) {
     global $db;
     global $house;
     $date = date("Y.m.d");
-    $nextyear = date("Y-m-d", mktime(0, 0, 0, 1, 1, $year + 1));
-    $lastyear = date("Y-m-d", mktime(0, 0, 0, 12, 31, $year - 1));
+    $nextyear = date("Y-m-d", mktime(0, 0, 0, 12, 31, $year));
+    $lastyear = date("Y-m-d", mktime(0, 0, 0, 1, 1, $year));
 
     $sql = "SELECT `payment`.`id`, `deposits`.`resident_name`,`payment`.`account_date`,`payment`.`amount` FROM deposits "
             . "INNER JOIN `{$db['name']}`.`payment` ON `deposits`.`id` = `payment`.`deposit_id` WHERE (`account_date` between '$lastyear' AND '$nextyear') and `deposits`.`id`={$house['deposit_id']} ORDER by `account_date` DESC ";
     $result = mysql_query($sql);
-    if (!$result) {
+    if (!$result)
+    {
         echo mysql_errno() . ": " . mysql_error();
         exit;
     }
-    if (mysql_num_rows($result) == 0) {
+    if (mysql_num_rows($result) == 0)
+    {
         echo '<div class="content">';
         echo 'Nincs nem lekönyvelhető befizetés';
         echo '</div>';
         exit();
-    } else {
+    }
+    else
+    {
         while ($row = mysql_fetch_assoc($result)) {
             $payment[] = $row;
         }
@@ -1777,32 +1949,38 @@ EOT;
             echo '<tbody>';
             echo '<tr>';
             foreach ($row as $value) {
-                if (is_numeric($value)) {
-                    if (($value > 999) || ($value < 0)) {
+                if (is_numeric($value))
+                {
+                    if (($value > 999) || ($value < 0))
+                    {
                         echo '<td style="text-align:right;">' . number_format($value, 0, ',', ' ') . '</td>';
-                    } else {
+                    }
+                    else
+                    {
                         echo '<td style="text-align:right;">' . str_replace(".", ",", round($value, 2)) . '</td>';
                     }
-                } else {
+                }
+                else
+                {
                     echo '<td>' . $value . '</td>';
                 }
             }
-            echo "<td><a href='reaccount.php?id={$row['id']}'>Átkönyvel</a></td>";
+            echo "<td><a href='reaccount.php?id={$row['id']}&floor=0&door=0&amount={$row['amount']}'>Átkönyvel</a></td>";
             echo '</tr>';
         }
-            echo '</tbody>';
-            echo '</table>';
-            echo '</div>';
+        echo '</tbody>';
+        echo '</table>';
+        echo '</div>';
 //print_r($deposit);
-        
     }
 }
 
-function getPaymentData ($id) {
-$sql = "SELECT `payment`.`id`, `payment`.`deposit_id`, `payment`.`amount`,`payment`.`account_date` FROM payment where `payment`.`id` = $id";
-$result = mysql_query($sql);
-    if (!$result) {
-        echo "hiba:".mysql_errno() . ": " . mysql_error();
+function getPaymentData($id) {
+    $sql = "SELECT `payment`.`id`, `payment`.`deposit_id`, `payment`.`amount`,`payment`.`account_date` FROM payment where `payment`.`id` = $id";
+    $result = mysql_query($sql);
+    if (!$result)
+    {
+        echo "hiba:" . mysql_errno() . ": " . mysql_error();
         exit;
     }
     $table = array();
@@ -1827,9 +2005,12 @@ EOT;
         echo '<tbody>';
         echo '<tr>';
         foreach ($row as $value) {
-            if (is_numeric($value)) {
+            if (is_numeric($value))
+            {
                 echo '<td>' . number_format($value, 0, ',', ' ') . '</td>';
-            } else {
+            }
+            else
+            {
                 echo '<td>' . $value . '</td>';
             }
         }
@@ -1843,29 +2024,32 @@ EOT;
 function changeDepoOnPayment($data) {
     $sql = "UPDATE  `payment` SET  `deposit_id` =  '{$data['did']}' WHERE  `payment`.`id` ={$data['id']};";
     $res = mysql_query($sql);
-    if (!$res) {
+    if (!$res)
+    {
         die("Hiba:" . mysql_errno() . " - " . mysql_error());
     }
     return $res;
 }
 
-function changeBalanceByReaccount($data){
+function changeBalanceByReaccount($data) {
     global $db;
     $year = date('Y');
     $oldbalance_old = getCurrentBalance($data['oldid']); // régi lakás egyenlege
     $oldbalance_new = $oldbalance_old - $data['amount'];
     $newbalance_old = getCurrentBalance($data['did']); // új lakás egyenlege
-    $newbalance_new = $newbalance_old + $data['amount'];        
+    $newbalance_new = $newbalance_old + $data['amount'];
     $sql = "UPDATE `{$db['name']}`.`deposit_balance` SET `actual_balance` = '$oldbalance_new' "
             . "WHERE `deposit_balance`.`deposit_id` = {$data['oldid']} AND `year` = $year";
     $result1 = mysql_query($sql);
-    if (!$result1) {
+    if (!$result1)
+    {
         die("updateCurrentBalance hiba:" . mysql_errno() . " - " . mysql_error());
     }
     $sql = "UPDATE `{$db['name']}`.`deposit_balance` SET `actual_balance` = '$newbalance_new' "
             . "WHERE `deposit_balance`.`deposit_id` = {$data['did']} AND `year` = $year";
     $result2 = mysql_query($sql);
-    if (!$result2) {
+    if (!$result2)
+    {
         die("updateCurrentBalance hiba:" . mysql_errno() . " - " . mysql_error());
     }
 }
@@ -1873,22 +2057,25 @@ function changeBalanceByReaccount($data){
 function getDepositPayments($year, $id) {
     global $db;
     $date = date("Y.m.d");
-    $nextyear = date("Y-m-d", mktime(0, 0, 0, 1, 1, $year + 1));
-    $lastyear = date("Y-m-d", mktime(0, 0, 0, 12, 31, $year - 1));
+    $nextyear = date("Y-m-d", mktime(0, 0, 0, 12, 31, $year));
+    $lastyear = date("Y-m-d", mktime(0, 0, 0, 1, 1, $year));
 
     $sql = "SELECT `payment`.`id`, `deposits`.`floor`, `deposits`.`door`, `payment`.`account_date`,`payment`.`amount` FROM deposits "
             . "INNER JOIN `{$db['name']}`.`payment` ON `deposits`.`id` = `payment`.`deposit_id` WHERE (`account_date` between '$lastyear' AND '$nextyear') and `deposits`.`id`=$id ORDER by `account_date` DESC ";
     $result = mysql_query($sql);
-    if (!$result) {
+    if (!$result)
+    {
         echo mysql_errno() . ": " . mysql_error();
         exit;
     }
-    if (mysql_num_rows($result) == 0) {
+    if (mysql_num_rows($result) == 0)
+    {
         echo '<div class="content">';
         echo "Nincs könyvelt befizetés $year évre.";
         echo '</div>';
-        exit();
-    } else {
+    }
+    else
+    {
         while ($row = mysql_fetch_assoc($result)) {
             $payment[] = $row;
         }
@@ -1911,45 +2098,53 @@ EOT;
             echo '<tbody>';
             echo '<tr>';
             foreach ($row as $value) {
-                if (is_numeric($value)) {
-                    if (($value > 999) || ($value < 0)) {
+                if (is_numeric($value))
+                {
+                    if (($value > 999) || ($value < 0))
+                    {
                         echo '<td style="text-align:right;">' . number_format($value, 0, ',', ' ') . '</td>';
-                    } else {
+                    }
+                    else
+                    {
                         echo '<td style="text-align:right;">' . str_replace(".", ",", round($value, 2)) . '</td>';
                     }
-                } else {
+                }
+                else
+                {
                     echo '<td>' . $value . '</td>';
                 }
             }
-            echo "<td class='no-print'><a href='reaccount.php?id={$row['id']}'>Átkönyvel</a></td>";
+            echo "<td class='no-print'><a href='reaccount.php?id={$row['id']}&floor={$row['floor']}&door={$row['door']}&amount={$row['amount']}'>Átkönyvel</a></td>";
             echo '</tr>';
         }
-            echo '</tbody>';
-            echo '</table>';
-            echo '</div>';
-            echo '</div>';
+        echo '</tbody>';
+        echo '</table>';
     }
 }
 
-function getDepositCcost ($id, $year) {
+function getDepositCcost($id, $year) {
     global $db;
     $sql = "SELECT `ccost`.`id`, `deposits`.`floor`,`deposits`.`door`,`ccost`.`year`,`ccost`.`month`,`ccost`.`ccost` FROM deposits "
-    . "LEFT JOIN `{$db['name']}`.`ccost` ON `deposits`.`id` = `ccost`.`deposit_id` where year = '$year' and `deposits`.`id`='$id'";
+            . "LEFT JOIN `{$db['name']}`.`ccost` ON `deposits`.`id` = `ccost`.`deposit_id` where year = '$year' and `deposits`.`id`='$id'";
     $result = mysql_query($sql);
-    if (!$result) {
-        echo "getCcost hiba - ".mysql_errno() . ": " . mysql_error();
+    if (!$result)
+    {
+        echo "getCcost hiba - " . mysql_errno() . ": " . mysql_error();
         exit;
     }
-    if (mysql_num_rows($result) == 0) {
+    if (mysql_num_rows($result) == 0)
+    {
         echo '<div class="content">';
         echo "Nincs könyvelt közösköltség $year évre.";
         echo '</div>';
         exit();
-    } else {
+    }
+    else
+    {
         while ($row = mysql_fetch_assoc($result)) {
             $ccost[] = $row;
         }
-       echo <<<EOT
+        echo <<<EOT
         <div class="buttons btn-back">
 	   <form action="stat.php">
 	   <button type="input" name="submit" class="btn btn-success value="Vissza" ><i class="fa fa-arrow-circle-left"></i> Vissza</button>
@@ -1966,34 +2161,42 @@ function getDepositCcost ($id, $year) {
    <th> Változtat </th>
 </tr>
 EOT;
-      foreach ($ccost as $row) {
+        foreach ($ccost as $row) {
             echo '<tbody>';
             echo '<tr>';
             foreach ($row as $value) {
-                if (is_numeric($value)) {
-                    if (($value > 999) || ($value < 0)) {
+                if (is_numeric($value))
+                {
+                    if (($value > 2099) || ($value < 0))
+                    {
                         echo '<td style="text-align:right;">' . number_format($value, 0, ',', ' ') . '</td>';
-                    } else {
+                    }
+                    else
+                    {
                         echo '<td style="text-align:right;">' . str_replace(".", ",", round($value, 2)) . '</td>';
                     }
-                } else {
+                }
+                else
+                {
                     echo '<td>' . $value . '</td>';
                 }
             }
             echo "<td class='no-print'><a href='updateccost.php?id={$row['id']}'>Változtat</a></td>";
             echo '</tr>';
         }
-            echo '</tbody>';
-            echo '</table>';
-            echo '</div>';
+        echo '</tbody>';
+        echo '</table>';
+        echo '</div>';
     }
 }
+
 function getACcost($id) {
     global $db;
     $sql = "SELECT `ccost`.`id`,`deposits`.`floor`,`deposits`.`door`,`ccost`.`year`,`ccost`.`month`,`ccost`.`ccost` FROM ccost "
-    . "LEFT JOIN `{$db['name']}`.`deposits` ON `ccost`.`deposit_id` = `deposits`.`id` where `ccost`.`id` = $id";
+            . "LEFT JOIN `{$db['name']}`.`deposits` ON `ccost`.`deposit_id` = `deposits`.`id` where `ccost`.`id` = $id";
     $result = mysql_query($sql);
-    if (!$result) {
+    if (!$result)
+    {
         echo mysql_errno() . ": " . mysql_error();
         exit;
     }
@@ -2020,9 +2223,12 @@ EOT;
         echo '<tbody>';
         echo '<tr>';
         foreach ($row as $value) {
-            if (is_numeric($value)) {
+            if (is_numeric($value))
+            {
                 echo '<td>' . str_replace(".", ",", round($value, 2)) . '</td>';
-            } else {
+            }
+            else
+            {
                 echo '<td>' . $value . '</td>';
             }
         }
@@ -2035,10 +2241,78 @@ EOT;
 }
 
 function updateCcostDb($data) {
-global $db;
+    global $db;
     $sql = "UPDATE `{$db['name']}`.`ccost` SET `ccost` = {$data['ccost']} WHERE `ccost`.`id` = {$data['id']};";
     $result = mysql_query($sql);
-    if (!$result) {
+    if (!$result)
+    {
         die("update ccost hiba:" . mysql_errno() . " - " . mysql_error());
     }
+}
+
+function updateAllBalance($year) {
+    global $db;
+    $nextyear = date("Y-m-d", mktime(0, 0, 0, 12, 31, $year));
+    $lastyear = date("Y-m-d", mktime(0, 0, 0, 1, 1, $year));
+    $sql = "SELECT COUNT(`id`) as count FROM `deposits`";
+    $result = mysql_query($sql);
+    if (!$result)
+    {
+        echo "select deposit number hiba -" . mysql_errno() . ": " . mysql_error();
+        exit;
+    }
+    while ($row = mysql_fetch_assoc($result)) {
+        $depo = $row['count'];
+    }
+
+    for ($i = 1; $i < $depo + 1; $i++) {
+        $sql = "SELECT SUM(`amount`) as amount FROM `payment` WHERE `deposit_id`=$i AND (`account_date` between '$lastyear' AND '$nextyear')";
+
+        $result = mysql_query($sql);
+        if (!$result)
+        {
+            echo "select amount $i hiba -" . mysql_errno() . ": " . mysql_error();
+            exit;
+        }
+        while ($row = mysql_fetch_assoc($result)) {
+            $amount = $row['amount'];
+        }
+        $sql = "SELECT `opening_balance` FROM `deposit_balance` WHERE `deposit_id`=$i AND `year`=$year";
+        $result = mysql_query($sql);
+        if (!$result)
+        {
+            echo "select balance $i hiba -" . mysql_errno() . ": " . mysql_error();
+            exit;
+        }
+        while ($row = mysql_fetch_assoc($result)) {
+            $balance = $row['opening_balance'];
+        }
+        $actual = $balance + $amount;
+        $sql = "UPDATE `{$db['name']}`.`deposit_balance` SET `actual_balance` = $actual WHERE `deposit_balance`.`deposit_id` = $i and `deposit_balance`.`year`=$year;";
+        $result = mysql_query($sql);
+        if (!$result)
+        {
+            echo "update balance $i hiba -" . mysql_errno() . ": " . mysql_error();
+            exit;
+        }
+        else
+        {
+            echo "$i done<br>";
+        }
+    }
+}
+
+function getLatestpaymentAccDate() {
+    $sql = "SELECT `account_date` FROM `payment` order by `id` DESC LIMIT 1";
+    $result = mysql_query($sql);
+    if (!$result)
+    {
+        echo "getPaymenthiba -" . mysql_errno() . ": " . mysql_error();
+        exit;
+    }
+    while ($row = mysql_fetch_assoc($result)) {
+        $date = $row["account_date"];
+    }
+    $year = substr($date, 0, 4);
+    return $year;
 }
