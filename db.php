@@ -1217,7 +1217,7 @@ function getMyPayments($id) {
     $sql = "SELECT `deposits`.`floor`,`deposits`.`door`,`payment`.`account_date`,`payment`.`amount` FROM deposits "
             . "LEFT JOIN `{$db['name']}`.`payment` ON `deposits`.`id` = `payment`.`deposit_id` "
             . "WHERE `deposits`.`id` = $id "
-            . "ORDER BY `payment`.`date` DESC;";
+            . "ORDER BY `payment`.`account_date` DESC LIMIT 25;";
 //echo $sql;
     $result = mysql_query($sql);
     if (!$result)
