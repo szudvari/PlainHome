@@ -94,3 +94,28 @@ function deleteFile ($file) {
   echo ("Error deleting $file");
   }
 }
+
+function sendMessageAfterUpdatePassword($user) {
+    global $house;
+    $message = <<<EOT
+Kedves {$user['firstname']} {$user['lastname']}!
+    
+Belépési jelszava a {$house['name']} társasház online rendszerébe megváltozott!
+
+Ezentúl az alábbi adatokkal tud a PlainHouse - {$house['name']} rendszerébe belépni:
+
+Az ön felhasználóneve: {$user['username']}
+Az ön új jelszava: {$user['pass']}
+   
+Belépés után tájékozódhat a házat érintő általános ügyekről, aktuális közösköltségéről.
+
+Jelszavát belépés után bármikor a "Saját adataim" menüpontban tudja megváltoztatni!
+
+Belépéshez, kérem, látogasson el a {$house['webpage']} weboldalra!
+EOT;
+
+    $subject = "PlainHouse jelszó változtatás -" . $house['name'];
+    $from = $house['infomail'];
+
+    mail($user['email'], $subject, $message, "From: $from\n");
+}
