@@ -2440,7 +2440,8 @@ function getMyAllOcostCurrentYear($id) {
     while ($row = mysql_fetch_assoc($result)) {
         $ocost[] = $row;
     }
-    if ($ocost[0]['ocost']=="") {
+
+    if (mysql_num_rows($result)==0){
         echo "Nincsenek további költségek az albetétre terhelve.";
     }
     else {
