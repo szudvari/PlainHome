@@ -3,16 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/Szabolcs/Documents/xampp/htdocs/PlainHome/insertpayment.php</file>
+            <file>file:/C:/Users/Szabolcs/Documents/xampp/htdocs/PlainHome/add.php</file>
+            <file>file:/C:/Users/Szabolcs/Documents/xampp/htdocs/PlainHome/functions.php</file>
+            <file>file:/C:/Users/Szabolcs/Documents/xampp/htdocs/PlainHome/update_upassword.php</file>
             <file>file:/C:/Users/Szabolcs/Documents/xampp/htdocs/PlainHome/db.php</file>
-=======
-            <file>file:/D:/xampp/htdocs/PlainHome/db.php</file>
-            <file>file:/D:/xampp/htdocs/PlainHome/basedata.php</file>
-            <file>file:/D:/xampp/htdocs/PlainHome/html.php</file>
-            <file>file:/D:/xampp/htdocs/PlainHome/update-base.php</file>
-            <file>file:/D:/xampp/htdocs/PlainHome/yearlystat.php</file>
->>>>>>> origin/master
         </group>
     </open-files>
 </project-private>
