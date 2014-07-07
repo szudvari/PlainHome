@@ -1821,7 +1821,7 @@ EOT;
 
 <div>
 <a href="#" class="btn btn-primary btn-icon no-print" onclick="jQuery.print('#section-to-print')"><i class="fa fa-print"></i> Nyomtatás</a>
-</div>
+</div>    
 <table id="responsiveTable" class="large-only" cellspacing="0">
 <tr align="left" class="primary">
    <th> id </th>
