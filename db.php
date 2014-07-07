@@ -1850,6 +1850,9 @@ EOT;
     echo '</table>';
     echo '<hr />';
     getDepositPayments($year, $id);
+    echo '<hr />';
+    echo '<h3 class="primary"><i class="fa fa-history"></i> Az albetétre terhelt további költségek</h3>';
+    getMyAllOcostCurrentYear($id);
     echo <<<EOT
     <hr/>
     <h4 class="primary"> Üzemeltetési bankszámlaszám: {$house['bank_account']} </h4>
@@ -2377,6 +2380,57 @@ function getMyAllOcost($id) {
     $sql = "SELECT `deposits`.`floor`,`deposits`.`door`,`ocost`.`year`,`ocost`.`month`,`ocost`.`day`,`ocost`.`ocost`, `ocost`.`title` FROM deposits "
             . "LEFT JOIN `{$db['name']}`.`ocost` ON `deposits`.`id` = `ocost`.`deposit_id` WHERE `deposits`.`id` = $id 
         ORDER BY `ocost`.`year` DESC, `ocost`.`month` DESC, `ocost`.`day` DESC";
+    $result = mysql_query($sql);
+    if (!$result)
+    {
+        die("geMyAllOcost hiba:" . mysql_errno() . " - " . mysql_error());
+    }
+    
+    while ($row = mysql_fetch_assoc($result)) {
+        $ocost[] = $row;
+    }
+    if ($ocost[0]['ocost']=="") {
+        echo "Nincsenek további költségek az albetétre terhelve.";
+    }
+    else {
+    echo <<<EOT
+        <table id="responsiveTable" class="large-only" cellspacing="0">
+            <tr align="left" class="primary">
+                <th> Emelet </th>
+                <th> Ajtó </th>
+                <th> Év </th>
+                <th> Hónap </th>
+                <th> Nap </th>
+                <th> Költség</th>
+                <th> Jogcím</th>
+            </tr>
+            <tbody>
+EOT;
+    foreach ($ocost as $row) {
+        echo '<tr>';
+        foreach ($row as $value) {
+            if (is_numeric($value) && $value > 2099)
+            {
+                echo "<td>" . number_format($value, 0, ',', ' ') . " Ft</td>";
+            }
+            else
+            {
+                echo "<td>$value</td>";
+            }
+        }
+        echo '</tr>';
+    }
+    echo '</tbody>';
+    echo '</table>';
+    }
+}
+
+function getMyAllOcostCurrentYear($id) {
+    global $db;
+    $year = date('Y');
+    $sql = "SELECT `deposits`.`floor`,`deposits`.`door`,`ocost`.`year`,`ocost`.`month`,`ocost`.`day`,`ocost`.`ocost`, `ocost`.`title` FROM deposits "
+            . "LEFT JOIN `{$db['name']}`.`ocost` ON `deposits`.`id` = `ocost`.`deposit_id` WHERE `deposits`.`id` = $id AND `ocost`.`year` = $year "
+            . "ORDER BY `ocost`.`year` DESC, `ocost`.`month` DESC, `ocost`.`day` DESC";
     $result = mysql_query($sql);
     if (!$result)
     {
