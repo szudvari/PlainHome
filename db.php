@@ -557,6 +557,7 @@ EOT;
 	        <div class="list-group">
 				<li class="list-group-item active">Motorház</li>
 				<a data-toggle="modal" href="#ktgAlakul" class="list-group-item">Közösköltség alakulása</a>
+				<a data-toggle="modal" href="#otherCost" class="list-group-item">Egyéb költségek listázása</a>
 				<a data-toggle="modal" href="#newMsg" class="list-group-item">Üzenet küldése</a>
 				<a data-toggle="modal" href="#editPassword" class="list-group-item">Jelszó módosítása</a>
 	        </div>
@@ -640,14 +641,38 @@ EOT;
 			</div>
 		</div>
 	</div>
+        <!-- -- Tovabbi koltseg Modal -- -->
+	<div class="modal fade" id="otherCost" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header modal-primary">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+					<h4 class="modal-title">További, az albetétre terhelt költségek</h4>
+				</div>
+				<div class="modal-body">
+EOT;
+        getMyAllOcost($id);
+        echo <<<EOT
+				</div>
+				<div class="modal-footer">
+                                    <button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Bezár</button>
+				</div>
+			</div>
+		</div>
+	</div>
 EOT;
     }
     else
     {     //ha adminként lépsz be
         echo "<a href=\"payment.php?id=" . $id . "\"><button class='btn btn-success btn-icon'><i class='fa fa-dollar'></i>Új befizetés rögzítése</button></a>";
         echo "<hr />";
-        echo '<h3 class="primary"><i class="fa fa-money"></i> Közösköltség alakulása az utolsó 12 hónapban</h3>';
+        echo "<a href=\"ocost.php?id=" . $id . "\"><button class='btn btn-success btn-icon'><i class='fa fa-history'></i>Új költség rögzítése</button></a>";
+        echo "<hr />";
+        echo '<h3 class="primary"><i class="fa fa-dollar"></i> Közösköltség alakulása az utolsó 12 hónapban</h3>';
         getMyAllCcost($id);
+        echo "<hr />";
+        echo '<h3 class="primary"><i class="fa fa-history"></i> További előírt költségek</h3>';
+        getMyAllOcost($id);
     }
     echo '</div>';
     echo '</div>';
@@ -731,6 +756,7 @@ function getAllDepo() {
    <th> Egyenleg </th>
    <th class="no-print"> Részletek </th>
    <th class="no-print"> Befizetés </th>
+   <th class="no-print"> Új költség </th>
    <th class="no-print"> Módosítás </th>
      
 </tr>
@@ -758,6 +784,7 @@ EOT;
         }
         echo "<td class='no-print'><a href=\"mydepo.php?depositid=" . $row['id'] . "\">Részletek</a></td>";
         echo "<td class='no-print'><a href=\"payment.php?id=" . $row['id'] . "\">Új befizetés</a></td>";
+        echo "<td class='no-print'><a href=\"ocost.php?id=" . $row['id'] . "\">Új költség</a></td>";
         echo "<td class='no-print'><a href=\"updatedeposit.php?id=" . $row['id'] . "\" target=\"blank\">Módosít</a></td>";
         echo '</tr>';
     }
@@ -769,7 +796,7 @@ EOT;
     echo '<td class="tdprimary"></td>';
     echo "<td class='tdwarning' style='text-align:right;'>" . number_format($sumccost, 0, ',', ' ') . "</td>";
     echo "<td class='tdwarning' style='text-align:right;'>" . number_format($sumbalance, 0, ',', ' ') . "</td>";
-    echo '<td class="tdprimary no-print"  colspan=3></td>';
+    echo '<td class="tdprimary no-print"  colspan=4></td>';
     echo '</tr>';
     echo '</tbody>';
     echo '</table>';
@@ -1245,7 +1272,7 @@ EOT;
     if ($table[0]['account_date'] == NULL)
     {
         echo "Önnek nincs lekönyvelt befizetése.<br>"
-        . "Felhívjuk figyelmét, hogy a befizetések azok beérkezése után 3-5 nappal kerülnek könyvelésre!";
+        . "Felhívjuk figyelmét, hogy a befizetések azok beérkezése után 5-15 nappal kerülnek könyvelésre!";
     }
     else
     {
@@ -1277,7 +1304,7 @@ EOT;
 
         echo '</tbody>';
         echo '</table>';
-        echo '<p>Felhívjuk figyelmét, hogy a befizetések azok beérkezése után 3-5 nappal kerülnek könyvelésre!</p>';
+        echo '<p>Felhívjuk figyelmét, hogy a befizetések azok beérkezése után 5-15 nappal kerülnek könyvelésre!</p>';
         echo '</div>';
     }
     echo '<hr/>';
@@ -1551,6 +1578,10 @@ function getMyAllCcost($id) {
     while ($row = mysql_fetch_assoc($result)) {
         $ccost[] = $row;
     }
+        if ($ccost[0]['ccost']==0) {
+        echo "Nincsen közösköltség az albetétre terhelve.";
+        }
+        else {
     echo <<<EOT
         <table id="responsiveTable" class="large-only" cellspacing="0">
             <tr align="left" class="primary">
@@ -1578,6 +1609,7 @@ EOT;
     }
     echo '</tbody>';
     echo '</table>';
+        }
 }
 
 function getAllAccounts($year) {
@@ -2316,4 +2348,76 @@ function getLatestpaymentAccDate() {
     }
     $year = substr($date, 0, 4);
     return $year;
+}
+
+function insertOcost($data) {
+    global $db;
+    $year = date('Y');
+    $oldbalance = getCurrentBalance($data['deposit_id']);
+    $newbalance = $oldbalance - $data['ocost'];
+    $sql = "INSERT INTO ocost (`year`, `month`, `day`, `deposit_id`, `ocost`, `title`) "
+            . "VALUES ('{$data['year']}', '{$data['month']}', '{$data['day']}', '{$data['deposit_id']}', '{$data['ocost']}', '{$data['title']}')";
+    echo $sql;
+    $result = mysql_query($sql);
+    if (!$result)
+    {
+        die("insertIntoOcost hiba:" . mysql_errno() . " - " . mysql_error());
+    }
+    $sql = "UPDATE `{$db['name']}`.`deposit_balance` SET `actual_balance` = '$newbalance' "
+            . "WHERE `deposit_balance`.`deposit_id` = {$data['deposit_id']} AND `year` = $year";
+//echo $sql;
+    $result = mysql_query($sql);
+    if (!$result)
+    {
+        die("updateCurrentBalance hiba:" . mysql_errno() . " - " . mysql_error());
+    }
+}
+function getMyAllOcost($id) {
+    global $db;
+    $sql = "SELECT `deposits`.`floor`,`deposits`.`door`,`ocost`.`year`,`ocost`.`month`,`ocost`.`day`,`ocost`.`ocost`, `ocost`.`title` FROM deposits "
+            . "LEFT JOIN `{$db['name']}`.`ocost` ON `deposits`.`id` = `ocost`.`deposit_id` WHERE `deposits`.`id` = $id 
+        ORDER BY `ocost`.`year` DESC, `ocost`.`month` DESC, `ocost`.`day` DESC";
+    $result = mysql_query($sql);
+    if (!$result)
+    {
+        die("geMyAllOcost hiba:" . mysql_errno() . " - " . mysql_error());
+    }
+    
+    while ($row = mysql_fetch_assoc($result)) {
+        $ocost[] = $row;
+    }
+    if ($ocost[0]['ocost']=="") {
+        echo "Nincsenek további költségek az albetétre terhelve.";
+    }
+    else {
+    echo <<<EOT
+        <table id="responsiveTable" class="large-only" cellspacing="0">
+            <tr align="left" class="primary">
+                <th> Emelet </th>
+                <th> Ajtó </th>
+                <th> Év </th>
+                <th> Hónap </th>
+                <th> Nap </th>
+                <th> Költség</th>
+                <th> Jogcím</th>
+            </tr>
+            <tbody>
+EOT;
+    foreach ($ocost as $row) {
+        echo '<tr>';
+        foreach ($row as $value) {
+            if (is_numeric($value) && $value > 2099)
+            {
+                echo "<td>" . number_format($value, 0, ',', ' ') . " Ft</td>";
+            }
+            else
+            {
+                echo "<td>$value</td>";
+            }
+        }
+        echo '</tr>';
+    }
+    echo '</tbody>';
+    echo '</table>';
+    }
 }

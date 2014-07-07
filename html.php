@@ -933,3 +933,31 @@ function uploadCSV () {
 
 EOT;
 }
+function newOcost ($id) {
+          echo <<<EOT
+
+                    <div class="content">
+                        <h3>Előírás rögzítése</h3>
+                        <form id="paymentform" action="insertocost.php" method="post">
+                            <div class="formcolumn">
+                                <label for="cost">Összeg</label> 
+                                <input type="text" id="cost" name="cost" class="form-control" data-validation="required">
+                                
+    </div>
+    <div class="formcolumn">
+                                <label for="title">Jogcím</label> 
+                                <input type="text" id="title" name="title" class="form-control" data-validation="required">
+                                
+    </div>
+    
+                  <div class="formcolumn">
+                                <label for="date">Rögzítés dátuma</label> 
+                                <input type="date" id="date" name="date" class="form-control" data-validation="required">
+                                <span class="help-block">Kérem, "éééé-hh-nn" vagy "éééé.hh.nn" formátumot használjon!</span>
+                                <input type="hidden" id="did" name="did" value="$id">
+    </div>
+		        <div class="buttons">
+	            <button type="input" name="submit" value="Felvesz" class="btn btn-success btn-icon"><i class="fa fa-dollar"></i> Előírás rögzítése</button>
+		        </div>
+EOT;
+}
