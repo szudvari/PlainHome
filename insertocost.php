@@ -18,14 +18,14 @@ if ($_SESSION["admin"] > 0)
     $deposit['month'] = substr($date, 5, 2);
     $deposit['day'] = substr($date, 8, 2);
     
-    print_r ($deposit);
+    //print_r ($deposit);
     
 
     $con = connectDb();
     insertOcost ($deposit);
     closeDb($con);
 
-    //header("Location:deposits.php?saved=1");
+    header("Location:deposits.php?saved=1");
 }
 else
 {
