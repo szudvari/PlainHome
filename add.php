@@ -19,6 +19,7 @@ if ($_SESSION["admin"] > 0)
     $userdata['firstname'] = $_POST['firstname'];
     $userdata['lastname'] = $_POST['lastname'];
     $userdata['email'] = $_POST['email'];
+    $userdata['phone'] = $_POST['phone'];
     $userdata['username'] = $_POST['username'];
     $userdata['depositid'] = getDepositId($floor, $door);
     $userdata['password'] = encodePass($pass);

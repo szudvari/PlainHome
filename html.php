@@ -113,12 +113,15 @@ function addUser() {
         
             <label for="email">E-mail</label>
             <input type="text" id="email" name="email" class="form-control">
-
-        
+    
+            <label for="phone">Telefonszám</label>
+            <input type="text" id="phone" name="phone" class="form-control">
+            </div>
+            
+            <div class="formcolumn">
             <label for="username">Felhasználónév</label>
             <input type="text" id="username" name="username" class="form-control" data-validation="required">
-        	</div>
-		<div class="formcolumn">
+        	
             <label for="floor">Emelet</label>
             <input type="text" id="floor" name="floor" class="form-control" data-validation="required">
 
@@ -377,7 +380,7 @@ function updateBaseData($data) {
 		    </form>
                         <div class="buttons">
                             <a href="basedata.php?noupdate=1"><button class="btn btn-success btn-icon"><i class="fa fa-times"></i> Mégsem</button></a>
-                        </div>
+                        </div>                
                     </div>
 	</div>
                 
@@ -959,5 +962,43 @@ function newOcost ($id) {
 		        <div class="buttons">
 	            <button type="input" name="submit" value="Felvesz" class="btn btn-success btn-icon"><i class="fa fa-dollar"></i> Előírás rögzítése</button>
 		        </div>
+EOT;
+}
+function updateUser($user) {
+    echo <<<EOT
+   <div id="adduser"> 
+       <form id="contactform" action="update_user.php" method="post">
+        <div class="formcolumn">
+            <label for="firstname">Vezetéknév</label>
+            <input type="text" id="firstname" name="firstname" class="form-control" data-validation="required" value="{$user['firstname']}">
+
+            <label for="lastname">Keresztnév</label>
+            <input type="text" id="lastname" name="lastname" class="form-control" data-validation="required" value="{$user['lastname']}">
+            </div>
+            
+            <div class="formcolumn">            
+            <label for="email">E-mail</label>
+            <input type="text" id="email" name="email" class="form-control" value="{$user['email']}">
+    
+            <label for="phone">Telefonszám</label>
+            <input type="text" id="phone" name="phone" class="form-control" value="{$user['phone']}">
+            
+            <label for="username">Felhasználónév</label>
+            <input type="text" id="username" name="username" class="form-control" data-validation="required" value="{$user['username']}">
+            <input type="hidden" id="user_id" name="user_id" value="{$user['id']}">
+        	
+            
+            </div>
+            <div class="buttons">
+                <button type="input" name="submit" value="Hozzaad" class="btn btn-success btn-icon"><i class="fa fa-refresh"></i>Módosít</button>
+            </div>
+    </form>            
+            <div class="buttons">
+                <a href="allresidents.php"><button type="input" class="btn btn-success btn-icon"><i class="fa fa-times"></i>Mégsem</button></a>
+            </div>
+
+            
+</div>
+</div>
 EOT;
 }

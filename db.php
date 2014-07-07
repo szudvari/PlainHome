@@ -493,7 +493,7 @@ EOT;
     echo '<hr />';
     echo '<div>';
     getMyPayments($id);
-    if (isset($_SESSION['userid'])) { 
+    if (isset($_SESSION['userid'])) {
 // ha userként lépsz be    
         $user = getUserData($_SESSION['userid']);
 //print_r($user);
@@ -753,10 +753,10 @@ function listResidents() {
     mysql_query("set names 'utf8'");
     mysql_query("set character set 'utf8'");
     $sql = "SELECT `residents`.`id`,`residents`.`firstname`,`residents`.`lastname`,"
-            . "`residents`.`email`,`residents`.`username`,`deposits`.`floor`,"
+            . "`residents`.`email`, `residents`.`phone`, `residents`.`username`,`deposits`.`floor`,"
             . "`deposits`.`door`,`residents`.`active` "
             . "FROM residents LEFT JOIN `deposits` ON `residents`.`depositid` = `deposits`.`id` "
-            . "order by `deposits`.`floor`, `deposits`.`door`";
+            . "ORDER BY `deposits`.`door` ASC";
 
     $result = mysql_query($sql);
     if (!$result) {
@@ -783,12 +783,14 @@ function listResidents() {
    <th> Vezetéknév </th>
    <th> Kresztnév </th>
    <th> e-mail cím</th>
+   <th> telefonszám</th>
    <th> Felhasználónév</th>
    <th> Emelet </th>
    <th> Ajtó </th>
    <th> Aktív </th> 
    <th> Státusz módosítása  </th>
-   <th> Jelszó módosítás </th>
+   <th> Módosítás </th>
+   <th> Új jelszó </th>
    <th> Törlés</th>
    </tr>
 EOT;
@@ -801,14 +803,15 @@ EOT;
             }
             if ($row['active'] == "aktív") {
                 echo "<td><a id=\"alink\" href=\"update_ustatus.php?uid={$row['id']}"
-                . "&status=1\">User letiltása</a></td>";
+                . "&status=1\">Letiltás</a></td>";
             } else {
                 echo "<td><a id=\"alink\" href=\"update_ustatus.php?uid={$row['id']}"
-                . "&status=0\">User aktiválása</a></td>";
+                . "&status=0\">Aktiválás</a></td>";
             }
 
             echo <<<EOT
-        <td><a href="update_upassword.php?uid={$row['id']}">Jelszó módosítás</a></td>
+        <td><a href="update_udata.php?uid={$row['id']}">Módosítás</a></td>
+        <td><a href="update_upassword.php?uid={$row['id']}">Új jelszó</a></td>
         <td><a href="killuser.php?uid={$row['id']}">Lakó törlése</a></td>
 EOT;
             echo '</tr>';
@@ -2286,4 +2289,18 @@ function getAllOcost($id, $year) {
         $all_ocost += $ocost[$i]['ocost'];
     }
     return $all_ocost;
+}
+
+function updateUserData($userdata) {
+    global $db;
+    $sql = "UPDATE `{$db['name']}`.`residents` SET `firstname` = '{$userdata['firstname']}', "
+            . "`lastname` = '{$userdata['lastname']}',`email` = '{$userdata['email']}',"
+            . "`phone` = '{$userdata['phone']}' "
+            . "WHERE `residents`.`id` = {$userdata['id']};";
+//echo $sql;
+    $res = mysql_query($sql);
+    if (!$res) {
+        echo "update user hiba -" . mysql_errno() . ": " . mysql_error();
+        exit();
+    }
 }

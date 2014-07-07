@@ -29,6 +29,10 @@ if (isset($_GET["kill"]))
 {
     popUp("Felhasználó törölve");
 }
+if (isset($_GET["changeuser"]))
+{
+    popUp("Felhasználó adatai módosítva.");
+}
 if ($_SESSION["admin"] > 0)
 {
     $con = connectDb();

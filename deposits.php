@@ -20,6 +20,10 @@ if (isset($_GET["payed"]))
 {
     popUp("Befizetés rögzítve.");
 }
+if (isset($_GET["saved"]))
+{
+    popUp("Költség rögzítve.");
+}
 if ($_SESSION["admin"] > 0)
 {
     $con = connectDb();

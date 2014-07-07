@@ -27,6 +27,7 @@ if (($_SESSION["admin"] > 0) || ($_SESSION["userid"] == $_GET["uid"])) {
     <th>Vezetéknév</th>
     <th>Keresztnév</th>
     <th>e-mail cím</th>
+    <th>telefonszám</th>
     <th>Felhasználónév</th>
     <th>Emelet</név>
     <th>Ajtó</név>
@@ -40,6 +41,7 @@ if (($_SESSION["admin"] > 0) || ($_SESSION["userid"] == $_GET["uid"])) {
     <td>{$user['firstname']}</td>
     <td>{$user['lastname']}</td>
     <td>{$user['email']}</td>
+    <td>{$user['phone']}</td>
     <td>{$user['username']}</td>
     <td>{$user['floor']}</td>
     <td>{$user['door']}</td>
