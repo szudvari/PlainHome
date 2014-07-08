@@ -37,11 +37,12 @@ EOT;
 
 function htmlEnd() {
     global $website;
+    global $house;
     echo <<<EOT
 			</div>
 			<div class="footer">
 				<p class="textCenter">
-                                        &copy; 2014 <a href="http://webariel.hu" target="_blank">PlainHouse Version {$website['version']}</a></p>
+                                        Powered by <a href="http://webariel.hu?utm_source={$house['name']}&utm_medium=footer&utm_campaign=copyright" target="_blank">WebAriel <img src="./pics/wa_logo.png"></a> - &copy; 2014 <a href="http://webariel.hu?utm_source={$house['name']}&utm_medium=footer&utm_campaign=copyright2" target="_blank">PlainHouse Version {$website['version']}</a></p>
 			</div>
 		</div>
 		<script src="js/stacktable.js" type="text/javascript"></script>
