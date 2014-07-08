@@ -867,7 +867,7 @@ function getUserData($id) {
     mysql_query("set names 'utf8'");
     mysql_query("set character set 'utf8'");
     $sql = "SELECT `residents`.`id`,`residents`.`firstname`,`residents`.`lastname`,"
-            . "`residents`.`email`,`residents`.`username`,`deposits`.`floor`,"
+            . "`residents`.`email`, `residents`.`phone`, `residents`.`username`,`deposits`.`floor`,"
             . "`deposits`.`door` FROM residents LEFT JOIN `deposits` "
             . "ON `residents`.`depositid` = `deposits`.`id` WHERE `residents`.`id` = $id;";
     $result = mysql_query($sql);
