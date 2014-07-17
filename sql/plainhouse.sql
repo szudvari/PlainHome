@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Hoszt: localhost
--- Létrehozás ideje: 2014. Júl 06. 17:29
+-- Létrehozás ideje: 2014. Júl 17. 11:11
 -- Szerver verzió: 5.5.37-cll
 -- PHP verzió: 5.4.23
 
@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `ccost` (
   `ccost` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `deposit_id` (`deposit_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci AUTO_INCREMENT=1171 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci AUTO_INCREMENT=1236 ;
 
 --
 -- A tábla adatainak kiíratása `ccost`
@@ -1257,7 +1257,72 @@ INSERT INTO `ccost` (`id`, `deposit_id`, `year`, `month`, `ccost`) VALUES
 (1167, 62, 2014, 6, 8350),
 (1168, 63, 2014, 6, 6800),
 (1169, 64, 2014, 6, 8400),
-(1170, 65, 2014, 6, 0);
+(1170, 65, 2014, 6, 0),
+(1171, 1, 2014, 7, 10050),
+(1172, 2, 2014, 7, 9750),
+(1173, 3, 2014, 7, 10800),
+(1174, 4, 2014, 7, 10800),
+(1175, 5, 2014, 7, 10800),
+(1176, 6, 2014, 7, 6350),
+(1177, 7, 2014, 7, 10800),
+(1178, 8, 2014, 7, 10750),
+(1179, 9, 2014, 7, 7350),
+(1180, 10, 2014, 7, 11900),
+(1181, 11, 2014, 7, 9700),
+(1182, 12, 2014, 7, 7450),
+(1183, 13, 2014, 7, 11900),
+(1184, 14, 2014, 7, 10750),
+(1185, 15, 2014, 7, 7350),
+(1186, 16, 2014, 7, 10800),
+(1187, 17, 2014, 7, 9700),
+(1188, 18, 2014, 7, 7450),
+(1189, 19, 2014, 7, 10800),
+(1190, 20, 2014, 7, 10750),
+(1191, 21, 2014, 7, 7350),
+(1192, 22, 2014, 7, 10800),
+(1193, 23, 2014, 7, 10800),
+(1194, 24, 2014, 7, 6350),
+(1195, 25, 2014, 7, 9700),
+(1196, 26, 2014, 7, 11850),
+(1197, 27, 2014, 7, 6250),
+(1198, 28, 2014, 7, 10800),
+(1199, 29, 2014, 7, 11900),
+(1200, 30, 2014, 7, 7450),
+(1201, 31, 2014, 7, 11900),
+(1202, 32, 2014, 7, 9650),
+(1203, 33, 2014, 7, 6250),
+(1204, 34, 2014, 7, 9700),
+(1205, 35, 2014, 7, 9700),
+(1206, 36, 2014, 7, 6350),
+(1207, 37, 2014, 7, 9700),
+(1208, 38, 2014, 7, 10750),
+(1209, 39, 2014, 7, 6250),
+(1210, 40, 2014, 7, 10800),
+(1211, 41, 2014, 7, 10800),
+(1212, 42, 2014, 7, 6350),
+(1213, 43, 2014, 7, 11900),
+(1214, 44, 2014, 7, 11850),
+(1215, 45, 2014, 7, 6250),
+(1216, 46, 2014, 7, 11900),
+(1217, 47, 2014, 7, 10800),
+(1218, 48, 2014, 7, 6350),
+(1219, 49, 2014, 7, 10800),
+(1220, 50, 2014, 7, 11850),
+(1221, 51, 2014, 7, 6250),
+(1222, 52, 2014, 7, 9700),
+(1223, 53, 2014, 7, 10800),
+(1224, 54, 2014, 7, 7450),
+(1225, 55, 2014, 7, 10800),
+(1226, 56, 2014, 7, 10750),
+(1227, 57, 2014, 7, 7350),
+(1228, 58, 2014, 7, 10800),
+(1229, 59, 2014, 7, 10800),
+(1230, 60, 2014, 7, 6350),
+(1231, 61, 2014, 7, 10800),
+(1232, 62, 2014, 7, 10750),
+(1233, 63, 2014, 7, 7350),
+(1234, 64, 2014, 7, 9700),
+(1235, 65, 2014, 7, 0);
 
 -- --------------------------------------------------------
 
@@ -1342,7 +1407,7 @@ INSERT INTO `deposits` (`id`, `floor`, `door`, `area`, `residents_no`, `area_rat
 (59, '10', '59', 57.3, 2, 178, 'PINTÉRNÉ L. KLÁRA'),
 (60, '10', '60', 35, 1, 109, 'Dr. SZÉKELYNÉ KORMOS ZSUZSANNA'),
 (61, '10', '61', 57.3, 2, 178, 'BARTOS JÓZSEF'),
-(62, '10', '62', 56.88, 1, 177, 'TAKÁCS MÁRTON'),
+(62, '10', '62', 56.88, 2, 177, 'TAKÁCS MÁRTON'),
 (63, '10', '63', 34.22, 2, 106, 'ANDA PÉTER'),
 (64, '10', '64', 57.3, 1, 178, 'NAGY GYÖRGY JÓZSEF'),
 (65, '0', '0', 0, 0, 0, 'TÁRSASHÁZ');
@@ -1511,7 +1576,7 @@ CREATE TABLE IF NOT EXISTS `documents` (
   `shortname` varchar(100) COLLATE utf8_hungarian_ci NOT NULL,
   `description` text COLLATE utf8_hungarian_ci,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci AUTO_INCREMENT=13 ;
 
 --
 -- A tábla adatainak kiíratása `documents`
@@ -1521,7 +1586,11 @@ INSERT INTO `documents` (`id`, `name`, `shortname`, `description`) VALUES
 (3, 'Alapito okirat modositas.pdf', 'Alapító okirat módosítás', ''),
 (4, 'Alapito okirat.pdf', 'Alapító okirat', ''),
 (5, 'SZMSZ + HÁZIREND tervezet 2014 07 01 kamerával.pdf', 'SzMSz tervezet', 'Szavazásra!'),
-(8, 'Pöttyös u 4  írásbeli szavazólap 2014 07 01.pdf', 'SzMSZ szavazólap', '');
+(8, 'Pöttyös u 4  írásbeli szavazólap 2014 07 01.pdf', 'SzMSZ szavazólap', ''),
+(9, 'Pöttyös u. 4. jkv. -  megválasztó.pdf', 'Megválasztó jegyzőkönyv', ''),
+(10, 'Pöttyös u. 4. jkv. 2012.05.31.pdf', 'Elszámoló - 2012', ''),
+(11, 'Pöttyös u. 4. jkv. 2013.05.31.pdf', 'Elszámoló - 2013', ''),
+(12, 'Pöttyös u. 4. jkv. 2014.06.06.pdf', 'Elszámoló - 2014', '');
 
 -- --------------------------------------------------------
 
@@ -1544,7 +1613,7 @@ CREATE TABLE IF NOT EXISTS `fees` (
 
 INSERT INTO `fees` (`id`, `name`, `yearly_amount`, `dealer`, `multiplier`) VALUES
 (1, 'Közösköltség', 150, 3205, '/terület-egység'),
-(2, 'Szemétdíj', 1100, 115, '/fő');
+(2, 'Szemétdíj', 1100, 116, '/fő');
 
 -- --------------------------------------------------------
 
@@ -1554,7 +1623,7 @@ INSERT INTO `fees` (`id`, `name`, `yearly_amount`, `dealer`, `multiplier`) VALUE
 
 CREATE TABLE IF NOT EXISTS `ocost` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `year` tinyint(4) NOT NULL,
+  `year` int(11) NOT NULL,
   `month` tinyint(4) NOT NULL,
   `day` tinyint(4) NOT NULL,
   `deposit_id` int(11) NOT NULL,
@@ -2519,24 +2588,29 @@ CREATE TABLE IF NOT EXISTS `residents` (
   `firstname` varchar(100) COLLATE utf8_hungarian_ci NOT NULL,
   `lastname` varchar(100) COLLATE utf8_hungarian_ci NOT NULL,
   `email` varchar(100) COLLATE utf8_hungarian_ci NOT NULL,
+  `phone` varchar(255) COLLATE utf8_hungarian_ci DEFAULT NULL,
   `username` varchar(25) COLLATE utf8_hungarian_ci NOT NULL,
   `password` varchar(512) COLLATE utf8_hungarian_ci NOT NULL,
   `depositid` int(11) NOT NULL,
   `active` int(11) NOT NULL DEFAULT '1',
   `admin` int(11) NOT NULL DEFAULT '0',
+  `last_login` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `deposit_id` (`depositid`),
   UNIQUE KEY `e-mail` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci AUTO_INCREMENT=9 ;
 
 --
 -- A tábla adatainak kiíratása `residents`
 --
 
-INSERT INTO `residents` (`id`, `firstname`, `lastname`, `email`, `username`, `password`, `depositid`, `active`, `admin`) VALUES
-(1, 'Udvari', 'József', 'joe956@gmail.com', 'joe956', '207650403485c4fd556b18951a7f820cf8c57b22bd9a9380a93932484483b67a6e1f36fbaa16bb6615aa5c0d0bc7b16b670b8e1caa1b5576e381e40e1576cf1c', 14, 1, 0),
-(2, 'Anda', 'Géza Pál', 'andapali@gmail.com', 'andapali', 'a4a83f41037480c0860718fe1e7cb115fa654972e56f8be37e022de48409100e5eb9238af24ecfe7a3366a609e50d2867d499e965ad76ab7042dac4d84d40300', 63, 1, 0),
-(3, 'Czékman', 'József', 'czekman.jozsef@gmail.com', 'czekman.jozsef', '9ebef961a1cf2bd1c5d3ded1d54ec1f666a5bfdb59288fe1679adb5d1963da3812427ee1bfb8c41e067c94c3654a879428e852e9d41d0da6e22fe06c57c8e3ff', 12, 1, 0);
+INSERT INTO `residents` (`id`, `firstname`, `lastname`, `email`, `phone`, `username`, `password`, `depositid`, `active`, `admin`, `last_login`) VALUES
+(1, 'Udvari', 'József', 'joe956@gmail.com', '30/212-2190', 'joe956', '207650403485c4fd556b18951a7f820cf8c57b22bd9a9380a93932484483b67a6e1f36fbaa16bb6615aa5c0d0bc7b16b670b8e1caa1b5576e381e40e1576cf1c', 14, 1, 0, '2014-07-17 11:02:27'),
+(2, 'Anda', 'Géza Pál', 'andapali@gmail.com', '70/605-6935', 'andapali', 'a4a83f41037480c0860718fe1e7cb115fa654972e56f8be37e022de48409100e5eb9238af24ecfe7a3366a609e50d2867d499e965ad76ab7042dac4d84d40300', 63, 1, 0, '0000-00-00 00:00:00'),
+(3, 'Czékman', 'József', 'czekman.jozsef@gmail.com', '20/526-7663', 'czekman.jozsef', '9ebef961a1cf2bd1c5d3ded1d54ec1f666a5bfdb59288fe1679adb5d1963da3812427ee1bfb8c41e067c94c3654a879428e852e9d41d0da6e22fe06c57c8e3ff', 12, 1, 0, '0000-00-00 00:00:00'),
+(5, 'Dr. Kissné Nyulász', 'Margit', 'csbernadette@gmail.com', '30/248-3184', 'negyedik26', '046f7814d8ab9eb7385bfd6c3fcb00af314e9b3ffdae6ef3edb6afe35f8ba5e2979681f2f3c9dfa28028a8cefcab1e17d83c5fdda4ab9830e06a3467bdb0b049', 26, 1, 0, '0000-00-00 00:00:00'),
+(6, 'Takács', 'Márton', 'takacsmarton84@gmail.com', '30/233-3016', 'takacsmarton', '83a0e2c0026408d4036984c5171b82bdb928a2d8d9cefd1da03a01d39367dd7f8a2218a0b31a3bc94ab2afdbf4401d7f80cca788f8b580310c6f0ae0a4a92907', 62, 1, 0, '0000-00-00 00:00:00'),
+(8, 'Mészárosné Nyulász', 'Anna', 'nyulasz.anna@gmail.com', '30/411-8225', 'Nyulász Anna', '2d1989fb70e16225306d08a8a0143fe189cbe8bcdb678cd0205536d64a260265426da462cbfbafa0b7aba3e3057763e8fc80ec6f95f17d1ed02970d42f6c6f69', 42, 1, 0, '0000-00-00 00:00:00');
 
 --
 -- Megkötések a kiírt táblákhoz

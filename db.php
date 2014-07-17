@@ -754,7 +754,7 @@ function listResidents() {
     mysql_query("set character set 'utf8'");
     $sql = "SELECT `residents`.`id`,`residents`.`firstname`,`residents`.`lastname`,"
             . "`residents`.`email`, `residents`.`phone`, `residents`.`username`,`deposits`.`floor`,"
-            . "`deposits`.`door`,`residents`.`active` "
+            . "`deposits`.`door`,`residents`.`active`, `residents`.`last_login` "
             . "FROM residents LEFT JOIN `deposits` ON `residents`.`depositid` = `deposits`.`id` "
             . "ORDER BY `deposits`.`door` ASC";
 
@@ -788,6 +788,7 @@ function listResidents() {
    <th> Emelet </th>
    <th> Ajtó </th>
    <th> Aktív </th> 
+   <th> Utolsó belépés </th> 
    <th> Státusz módosítása  </th>
    <th> Módosítás </th>
    <th> Új jelszó </th>
@@ -2301,6 +2302,18 @@ function updateUserData($userdata) {
     $res = mysql_query($sql);
     if (!$res) {
         echo "update user hiba -" . mysql_errno() . ": " . mysql_error();
+        exit();
+    }
+}
+
+function updateLastLogin($id) {
+    global $db;
+    $sql = $sql = "UPDATE `{$db['name']}`.`residents` "
+    . "SET `last_login` = NOW() WHERE `residents`.`id` = $id;";
+//echo $sql;
+    $res = mysql_query($sql);
+    if (!$res) {
+        echo "update login hiba -" . mysql_errno() . ": " . mysql_error();
         exit();
     }
 }

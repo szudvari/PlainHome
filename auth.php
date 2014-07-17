@@ -22,6 +22,7 @@ $con = connectDb();
         $_SESSION['admin'] = getUserRole($userdata);
         $_SESSION['userid'] = getUserId($userdata);
         $_SESSION['user'] = $userdata['user'];
+        updateLastLogin($_SESSION['userid']);
         closeDb($con);
         header("Location: index.php?login=1");
         exit();
