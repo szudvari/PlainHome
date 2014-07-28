@@ -780,8 +780,7 @@ function listResidents() {
         echo <<<EOT
    <tr align="left" class="primary">
    <th> ID </th>
-   <th> Vezetéknév </th>
-   <th> Kresztnév </th>
+   <th> Név </th>
    <th> e-mail cím</th>
    <th> telefonszám</th>
    <th> Felhasználónév</th>
@@ -800,8 +799,7 @@ EOT;
 
             echo '<tr>';
             echo '<td>'.$row['id'].'</td>';
-            echo '<td>'.$row['firstname'].'</td>';
-            echo '<td>'.$row['lastname'].'</td>';
+            echo '<td>'.$row['firstname'].' '.$row['lastname'].'</td>';
             sendMessageToUser($row['email'], $row['id']);
             echo '<td>'.$row['phone'].'</td>';
             echo '<td>'.$row['username'].'</td>';

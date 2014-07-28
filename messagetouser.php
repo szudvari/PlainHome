@@ -27,7 +27,7 @@ $mail = mail($email, $subject, $message, "From: {$house['infomail']}\n");
 //echo $message;
 //echo "<br>";
 //echo "From: {$house['infomail']}\n";
-header("Location:$url");
+header("Locati  on:$url");
 }
 else
 {
