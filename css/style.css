@@ -178,7 +178,7 @@
 		/* ==========================================
 			Forms
 		   ========================================== */
-		.form-control {
+		.form-control, input.floor, input.door, input.area, input.area_ratio {
 		  display: block;
 		  width: 100%;
 		  height: 34px;

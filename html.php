@@ -1150,7 +1150,7 @@ function updateDepo($depo, $id) {
 				<div class="modal-content">
 					<div class="modal-header modal-primary">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
-						<h4 class="modal-title">Új befizetés</h4>
+						<h4 class="modal-title">Albetét módosítása</h4>
 					</div>
 					<form action="insertocost.php" method="post">
 						<div class="modal-body">
