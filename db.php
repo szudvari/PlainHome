@@ -731,21 +731,10 @@ EOT;
         echo "<td style='text-align:left;'>" . $row['resident_name'] . "</td>";
         echo "<td style='text-align:right;'>" . number_format($row['ccost'], 0, ',', ' ') . "</td>";
         echo "<td style='text-align:right;'>" . number_format($row['balance'], 0, ',', ' ') . "</td>";
-//        foreach ($row as $value) {
-//            if (is_numeric($value)) {
-//                if (($value > 999) || ($value < 0)) {
-//                    echo '<td style="text-align:right;">' . number_format($value, 0, ',', ' ') . '</td>';
-//                } else {
-//                    echo '<td style="text-align:right;">' . str_replace(".", ",", round($value, 2)) . '</td>';
-//                }
-//            } else {
-//                echo '<td>' . $value . '</td>';
-//            }
-//        }
         echo "<td class='no-print'><a href=\"mydepo.php?depositid=" . $row['id'] . "\">Részletek</a></td>";
         payment($row);
         oCost($row);
-        updateDepo($row, $_SESSION['admin']);
+        updateDepo($row);
         echo '</tr>';
     }
     echo '<tr>';

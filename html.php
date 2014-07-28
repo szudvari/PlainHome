@@ -1140,7 +1140,7 @@ function oCost($deposit) {
 EOT;
 }
 
-function updateDepo($depo, $id) {
+function updateDepo($depo) {
     echo <<<EOT
 
 		<td><a data-toggle="modal" href="#updateDepo-{$depo['id']}">Módosít</a></td>
