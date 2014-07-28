@@ -33,6 +33,10 @@ if (isset($_GET["changeuser"]))
 {
     popUp("Felhasználó adatai módosítva.");
 }
+if (isset($_GET["messagesent"]))
+{
+    popUp("Üzenet elküldve.");
+}
 if ($_SESSION["admin"] > 0)
 {
     $con = connectDb();

@@ -799,9 +799,19 @@ EOT;
         foreach ($table as $row) {
 
             echo '<tr>';
-            foreach ($row as $value) {
-                echo "<td>$value</td>";
-            }
+            echo '<td>'.$row['id'].'</td>';
+            echo '<td>'.$row['firstname'].'</td>';
+            echo '<td>'.$row['lastname'].'</td>';
+            sendMessageToUser($row['email'], $row['id']);
+            echo '<td>'.$row['phone'].'</td>';
+            echo '<td>'.$row['username'].'</td>';
+            echo '<td>'.$row['floor'].'</td>';
+            echo '<td>'.$row['door'].'</td>';
+            echo '<td>'.$row['active'].'</td>';
+            echo '<td>'.$row['last_login'].'</td>';
+//            foreach ($row as $value) {
+//                echo "<td>$value</td>";
+//            }
             if ($row['active'] == "aktív") {
                 echo "<td><a id=\"alink\" href=\"update_ustatus.php?uid={$row['id']}"
                 . "&status=1\">Letiltás</a></td>";
