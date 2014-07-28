@@ -746,9 +746,6 @@ EOT;
         payment($row);
         oCost($row);
         updateDepo($row, $_SESSION['admin']);
-        //echo "<td class='no-print'><a href=\"payment.php?id=" . $row['id'] . "\">Új befizetés</a></td>";
-        //echo "<td class='no-print'><a href=\"ocost.php?id=" . $row['id'] . "\">Új költség</a></td>";
-        //echo "<td class='no-print'><a href=\"updatedeposit.php?id=" . $row['id'] . "\" target=\"blank\">Módosít</a></td>";
         echo '</tr>';
     }
     echo '<tr>';

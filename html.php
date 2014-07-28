@@ -320,38 +320,6 @@ EOT;
     header("Refresh: 1; url=$url");
 }
 
-//function updateDeposit($depo) {
-//        echo <<<EOT
-//
-//                    <div class="content">
-//                        <h3>Albetét módosítása</h3>
-//                        <form id="contactform" action="updatedepo.php" method="post">
-//                            <div class="formcolumn">
-//                                <label for="floor">Emelet</label> 
-//                                <input type="text" id="floor" name="floor" class="form-control" value="{$depo['floor']}">
-//		            <label for="door">Ajtó</label>
-//		            <input type="text" id="door" name="door" class="form-control" value="{$depo['door']}">
-//		            <label for="area">Lakás alapterülete</label>
-//		            <input type="text" id="area" name="area" class="form-control" value="{$depo['area']}">
-//		        </div>
-//		        <div class="formcolumn">
-//		            <label for="residents">Lakók száma</label>
-//		            <input type="text" id="residents" name="residents" class="form-control" value="{$depo['residents_no']}">
-//		            <label for="area_ratio">Lakás tulajdoni hányad</label>
-//		            <input type="text" id="area_ratio" name="area_ratio" class="form-control" value="{$depo['area_ratio']}">
-//		            <label for="note">Lakó neve</label>
-//		            <input type="text" id="note" name="note" class="form-control" value="{$depo['resident_name']}">
-//		            <input type="hidden" id="id" name="id" class="form-control" value="{$depo['id']}">
-//		        </div>
-//		        <div class="buttons">
-//		            <button type="input" name="submit" value="Modosit" class="btn btn-success btn-icon"><i class="fa fa-save"></i> Módosít</button>
-//		        </div>
-//		    </form>
-//		</div>
-//		</div>
-//                
-//EOT;
-//}
 
 function updateBaseData($data) {
     echo <<<EOT
@@ -529,28 +497,6 @@ function changePassword($id) {
 EOT;
 }
 
-//function newPayment ($id) {
-//          echo <<<EOT
-//
-//                    <div class="content">
-//                        <h3>Befizetés rögzítése</h3>
-//                        <form id="paymentform" action="insertpayment.php" method="post">
-//                            <div class="formcolumn">
-//                                <label for="payment">Összeg</label> 
-//                                <input type="text" id="payment" name="payment" class="form-control" data-validation="required">
-//                                
-//    </div>
-//                  <div class="formcolumn">
-//                                <label for="account_date">Könyvelés dátuma</label> 
-//                                <input type="date" id="account_date" name="account_date" class="form-control" data-validation="required">
-//                                <span class="help-block">Kérem, "éééé-hh-nn" vagy "éééé.hh.nn" formátumot használjon!</span>
-//                                <input type="hidden" id="did" name="did" value="$id">
-//    </div>
-//		        <div class="buttons">
-//		            <button type="input" name="submit" value="Felvesz" class="btn btn-success btn-icon"><i class="fa fa-dollar"></i> Befizetés rögzítése</button>
-//		        </div>
-//EOT;
-//}
 
 function uploadFile() {
     echo <<<EOT
@@ -927,34 +873,6 @@ function uploadCSV() {
 EOT;
 }
 
-function newOcost($id) {
-//          echo <<<EOT
-//
-//                    <div class="content">
-//                        <h3>Előírás rögzítése</h3>
-//                        <form id="paymentform" action="insertocost.php" method="post">
-//                            <div class="formcolumn">
-//                                <label for="cost">Összeg</label> 
-//                                <input type="text" id="cost" name="cost" class="form-control" data-validation="required">
-//                                
-//    </div>
-//    <div class="formcolumn">
-//                                <label for="title">Jogcím</label> 
-//                                <input type="text" id="title" name="title" class="form-control" data-validation="required">
-//                                
-//    </div>
-//    
-//                  <div class="formcolumn">
-//                                <label for="date">Rögzítés dátuma</label> 
-//                                <input type="date" id="date" name="date" class="form-control" data-validation="required">
-//                                <span class="help-block">Kérem, "éééé-hh-nn" vagy "éééé.hh.nn" formátumot használjon!</span>
-//                                <input type="hidden" id="did" name="did" value="$id">
-//    </div>
-//		        <div class="buttons">
-//	            <button type="input" name="submit" value="Felvesz" class="btn btn-success btn-icon"><i class="fa fa-dollar"></i> Előírás rögzítése</button>
-//		        </div>
-//EOT;
-}
 
 function sendMessageToUser($email, $id) {
     echo <<<EOT
@@ -1278,5 +1196,5 @@ function updateDepo($depo, $id) {
 		</div>		
 
 EOT;
-   // readOnlyUpdateForm($id);
+
 }
