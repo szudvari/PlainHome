@@ -49,5 +49,5 @@ else
 {
     notLoggedIn();
 }
-validateForm();
+//validateForm();
 htmlEnd();

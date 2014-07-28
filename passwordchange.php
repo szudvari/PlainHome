@@ -16,8 +16,13 @@ if (($_SESSION["admin"] > 0) || ($_SESSION["userid"] == $_POST["id"])) {
 
     if ($pass1 != $pass2) {
         echo '<p class="warning">A két jelszó nem egyezik!</p>';
-        header("Refresh: 2; url=mydepo.php");
-        exit();
+        if ($_SESSION["admin"] > 0) {
+            header("Refresh: 2; url=allresidents.php");
+            exit();
+        } else {
+            header("Refresh: 2; url=mydepo.php");
+            exit();
+        }
     } else {
         $password = encodePass($pass1);
         $con = connectDb();

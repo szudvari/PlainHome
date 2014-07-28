@@ -1,6 +1,7 @@
 <?php
 
 include_once 'functions.php';
+include_once 'js.php';
 
 function connectDb() {
     global $db;
@@ -818,9 +819,10 @@ EOT;
                 . "&status=0\">Aktiválás</a></td>";
             }
             updateUser($row);
+            updatePassword($row);
             echo <<<EOT
         <!--<td><a href="update_udata.php?uid={$row['id']}">Módosítás</a></td-->
-        <td><a href="update_upassword.php?uid={$row['id']}">Új jelszó</a></td>
+        <!--<td><a href="update_upassword.php?uid={$row['id']}">Új jelszó</a></td-->
         <td><a href="killuser.php?uid={$row['id']}">Lakó törlése</a></td>
 EOT;
             echo '</tr>';
@@ -831,6 +833,7 @@ EOT;
     } else {
         echo 'Még nem vett fel lakókat. Vegyen fel egyet!';
     }
+    validateForm();
 }
 
 function changeUserSatus($id, $status) {

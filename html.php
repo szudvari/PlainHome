@@ -965,44 +965,6 @@ function newOcost ($id) {
 		        </div>
 EOT;
 }
-//function updateUser($user) {
-//    echo <<<EOT
-//   <div id="adduser"> 
-//       <form id="contactform" action="update_user.php" method="post">
-//        <div class="formcolumn">
-//            <label for="firstname">Vezetéknév</label>
-//            <input type="text" id="firstname" name="firstname" class="form-control" data-validation="required" value="{$user['firstname']}">
-//
-//            <label for="lastname">Keresztnév</label>
-//            <input type="text" id="lastname" name="lastname" class="form-control" data-validation="required" value="{$user['lastname']}">
-//            </div>
-//            
-//            <div class="formcolumn">            
-//            <label for="email">E-mail</label>
-//            <input type="text" id="email" name="email" class="form-control" value="{$user['email']}">
-//    
-//            <label for="phone">Telefonszám</label>
-//            <input type="text" id="phone" name="phone" class="form-control" value="{$user['phone']}">
-//            
-//            <label for="username">Felhasználónév</label>
-//            <input type="text" id="username" name="username" class="form-control" data-validation="required" value="{$user['username']}">
-//            <input type="hidden" id="user_id" name="user_id" value="{$user['id']}">
-//        	
-//            
-//            </div>
-//            <div class="buttons">
-//                <button type="input" name="submit" value="Hozzaad" class="btn btn-success btn-icon"><i class="fa fa-refresh"></i>Módosít</button>
-//            </div>
-//    </form>            
-//            <div class="buttons">
-//                <a href="allresidents.php"><button type="input" class="btn btn-success btn-icon"><i class="fa fa-times"></i>Mégsem</button></a>
-//            </div>
-//
-//            
-//</div>
-//</div>
-//EOT;
-//}
 
 function sendMessageToUser($email, $id) {
     echo <<<EOT
@@ -1085,6 +1047,50 @@ function updateUser($user) {
 						</div>
 						<div class="modal-footer">
 							<button type="input" name="submit" value="sendMsg" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Küldés</button>
+							<button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>		
+
+EOT;
+}
+
+function updatePassword($user) {
+    echo <<<EOT
+
+		<td><a data-toggle="modal" href="#updatePassword-{$user['id']}">Új jelszó</a></td>
+		<!-- -- Uj uzenet Modal -- -->
+		<div class="modal fade" id="updatePassword-{$user['id']}" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-primary">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+						<h4 class="modal-title">Felhasználó adatainak módosítása</h4>
+					</div>
+					<form action="passwordchange.php" method="post">
+						<div class="modal-body">
+							<div class="form-group">
+		                        <p>{$user['firstname']} {$user['lastname']}</p>
+                                        <p>
+								
+		                    </div>
+				   
+                                        <div class="form-group">
+	                        <label for="pass1">Új jelszó</label>
+	                        <input type="text" class="form-control" name="pass1" id="pass1" value="" data-validation="required"/>
+							<span class="help-block">Új jelszó</span>
+	                    </div>
+						<div class="form-group">
+	                        <label for="pass2">Jelszó megerősítése</label>
+	                        <input type="text" class="form-control" name="pass2" id="pass2" value="" data-validation="required"/>
+                                <input type="hidden" class="form-control" name="id" id="id" value="{$user['id']}" />
+							<span class="help-block">Adja meg újra jelszavát. A megadott jelszavaknak egyezniük kell!</span>
+	                    </div>
+						</div>
+						<div class="modal-footer">
+							<button type="input" name="submit" value="sendMsg" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Módosít</button>
 							<button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
 						</div>
 					</form>
