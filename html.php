@@ -965,44 +965,44 @@ function newOcost ($id) {
 		        </div>
 EOT;
 }
-function updateUser($user) {
-    echo <<<EOT
-   <div id="adduser"> 
-       <form id="contactform" action="update_user.php" method="post">
-        <div class="formcolumn">
-            <label for="firstname">Vezetéknév</label>
-            <input type="text" id="firstname" name="firstname" class="form-control" data-validation="required" value="{$user['firstname']}">
-
-            <label for="lastname">Keresztnév</label>
-            <input type="text" id="lastname" name="lastname" class="form-control" data-validation="required" value="{$user['lastname']}">
-            </div>
-            
-            <div class="formcolumn">            
-            <label for="email">E-mail</label>
-            <input type="text" id="email" name="email" class="form-control" value="{$user['email']}">
-    
-            <label for="phone">Telefonszám</label>
-            <input type="text" id="phone" name="phone" class="form-control" value="{$user['phone']}">
-            
-            <label for="username">Felhasználónév</label>
-            <input type="text" id="username" name="username" class="form-control" data-validation="required" value="{$user['username']}">
-            <input type="hidden" id="user_id" name="user_id" value="{$user['id']}">
-        	
-            
-            </div>
-            <div class="buttons">
-                <button type="input" name="submit" value="Hozzaad" class="btn btn-success btn-icon"><i class="fa fa-refresh"></i>Módosít</button>
-            </div>
-    </form>            
-            <div class="buttons">
-                <a href="allresidents.php"><button type="input" class="btn btn-success btn-icon"><i class="fa fa-times"></i>Mégsem</button></a>
-            </div>
-
-            
-</div>
-</div>
-EOT;
-}
+//function updateUser($user) {
+//    echo <<<EOT
+//   <div id="adduser"> 
+//       <form id="contactform" action="update_user.php" method="post">
+//        <div class="formcolumn">
+//            <label for="firstname">Vezetéknév</label>
+//            <input type="text" id="firstname" name="firstname" class="form-control" data-validation="required" value="{$user['firstname']}">
+//
+//            <label for="lastname">Keresztnév</label>
+//            <input type="text" id="lastname" name="lastname" class="form-control" data-validation="required" value="{$user['lastname']}">
+//            </div>
+//            
+//            <div class="formcolumn">            
+//            <label for="email">E-mail</label>
+//            <input type="text" id="email" name="email" class="form-control" value="{$user['email']}">
+//    
+//            <label for="phone">Telefonszám</label>
+//            <input type="text" id="phone" name="phone" class="form-control" value="{$user['phone']}">
+//            
+//            <label for="username">Felhasználónév</label>
+//            <input type="text" id="username" name="username" class="form-control" data-validation="required" value="{$user['username']}">
+//            <input type="hidden" id="user_id" name="user_id" value="{$user['id']}">
+//        	
+//            
+//            </div>
+//            <div class="buttons">
+//                <button type="input" name="submit" value="Hozzaad" class="btn btn-success btn-icon"><i class="fa fa-refresh"></i>Módosít</button>
+//            </div>
+//    </form>            
+//            <div class="buttons">
+//                <a href="allresidents.php"><button type="input" class="btn btn-success btn-icon"><i class="fa fa-times"></i>Mégsem</button></a>
+//            </div>
+//
+//            
+//</div>
+//</div>
+//EOT;
+//}
 
 function sendMessageToUser($email, $id) {
     echo <<<EOT
@@ -1014,7 +1014,7 @@ function sendMessageToUser($email, $id) {
 				<div class="modal-content">
 					<div class="modal-header modal-primary">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
-						<h4 class="modal-title">Üzenet küldése felhasznákónak</h4>
+						<h4 class="modal-title">Üzenet küldése felhasználónak</h4>
 					</div>
 					<form action="messagetouser.php" method="post">
 						<div class="modal-body">
@@ -1030,6 +1030,58 @@ function sendMessageToUser($email, $id) {
 								<span class="help-block">Kérjük fogalmazza meg röviden, lényegretörően üzenetét. HTML kód nem használható!</span>
 								<span class="alertMsg info">A levelet az alábbi címre postázzuk: $email.</span>
 							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="input" name="submit" value="sendMsg" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Küldés</button>
+							<button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>		
+
+EOT;
+}
+
+function updateUser($user) {
+    echo <<<EOT
+
+		<td><a data-toggle="modal" href="#updateUser-{$user['id']}">Módosítás</a></td>
+		<!-- -- Uj uzenet Modal -- -->
+		<div class="modal fade" id="updateUser-{$user['id']}" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-primary">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+						<h4 class="modal-title">Felhasználó adatainak módosítása</h4>
+					</div>
+					<form action="update_user.php" method="post">
+						<div class="modal-body">
+							<div class="form-group">
+		                        <label for="firstname">Vezetéknév</label>
+								<input type="text" class="form-control" name="firstname" id="firstname" data-validation="required" value="{$user['firstname']}" />
+								
+		                    </div>
+							<div class="form-group">
+		                        <label for="lastname">Keresztnév</label>
+								<input type="text" class="form-control" name="lastname" id="lastname" data-validation="required" value="{$user['lastname']}" />
+								
+		                    </div>
+                                                                <div class="form-group">
+		                        <label for="email">e-mail</label>
+								<input type="text" class="form-control" name="email" id="email" data-validation="required" value="{$user['email']}" />
+								
+		                    </div>
+                                        <div class="form-group">
+		                        <label for="phone">Telefonszám</label>
+								<input type="text" name="phone" class="form-control" id="phone" value="{$user['phone']}" />
+
+		                    </div>      
+                                        <div class="form-group">
+		                        <label for="username">Felhasználónév</label>
+								<input type="text" class="form-control" name="username" id="username" data-validation="required" value="{$user['username']}" />
+								<input type="hidden" id="user_id" name="user_id" value="{$user['id']}">
+		                    </div>
 						</div>
 						<div class="modal-footer">
 							<button type="input" name="submit" value="sendMsg" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Küldés</button>

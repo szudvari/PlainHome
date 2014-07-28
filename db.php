@@ -817,9 +817,9 @@ EOT;
                 echo "<td><a id=\"alink\" href=\"update_ustatus.php?uid={$row['id']}"
                 . "&status=0\">Aktiválás</a></td>";
             }
-
+            updateUser($row);
             echo <<<EOT
-        <td><a href="update_udata.php?uid={$row['id']}">Módosítás</a></td>
+        <!--<td><a href="update_udata.php?uid={$row['id']}">Módosítás</a></td-->
         <td><a href="update_upassword.php?uid={$row['id']}">Új jelszó</a></td>
         <td><a href="killuser.php?uid={$row['id']}">Lakó törlése</a></td>
 EOT;
