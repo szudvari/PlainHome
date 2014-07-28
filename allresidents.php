@@ -7,6 +7,7 @@ include_once 'html.php';
 include_once 'js.php';
 @$id = $_POST['id'];
 htmlHead($website['title'], $house['name']);
+
 webheader($_SESSION);
 
 if (isset($_GET["newuser"]))
@@ -49,5 +50,5 @@ else
 {
     notLoggedIn();
 }
-//validateForm();
+validateForm();
 htmlEnd();

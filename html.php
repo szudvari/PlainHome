@@ -1067,13 +1067,13 @@ function updatePassword($user) {
 				<div class="modal-content">
 					<div class="modal-header modal-primary">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
-						<h4 class="modal-title">Felhasználó adatainak módosítása</h4>
+						<h4 class="modal-title">Felhasználó jelszavának módosítása</h4>
 					</div>
 					<form action="passwordchange.php" method="post">
 						<div class="modal-body">
 							<div class="form-group">
-		                        <p>{$user['firstname']} {$user['lastname']}</p>
-                                        <p>
+                                        <p>{$user['firstname']} {$user['lastname']} - {$user['floor']}. emelet {$user['door']}. ajtó</p>
+                                        
 								
 		                    </div>
 				   
@@ -1086,7 +1086,7 @@ function updatePassword($user) {
 	                        <label for="pass2">Jelszó megerősítése</label>
 	                        <input type="text" class="form-control" name="pass2" id="pass2" value="" data-validation="required"/>
                                 <input type="hidden" class="form-control" name="id" id="id" value="{$user['id']}" />
-							<span class="help-block">Adja meg újra jelszavát. A megadott jelszavaknak egyezniük kell!</span>
+							<span class="help-block">Adja meg újra a jelszót. A megadott jelszavaknak egyezniük kell!</span>
 	                    </div>
 						</div>
 						<div class="modal-footer">
@@ -1100,3 +1100,46 @@ function updatePassword($user) {
 
 EOT;
 }
+
+function kill($user) {
+    echo <<<EOT
+
+		<td><a data-toggle="modal" href="#killUser-{$user['id']}">Lakó törlése</a></td>
+		<!-- -- Uj uzenet Modal -- -->
+		<div class="modal fade" id="killUser-{$user['id']}" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-primary">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+						<h4 class="modal-title">Felhasználó törlése</h4>
+					</div>
+					<form action="killuser.php" method="post">
+						<div class="modal-body">
+							<div class="form-group">
+                                        <p class="lead">Biztosan törli a felhasználót?</p>
+                                        <p>{$user['firstname']} {$user['lastname']} - {$user['floor']}. emelet {$user['door']}. ajtó</p>
+                                        
+								
+		                    </div>
+				   
+                                	<div class="form-group">
+	                        
+                                        <input type="hidden" class="form-control" name="id" id="id" value="{$user['id']}" />
+					<span class="alertMsg danger">Figyelem! A művelet nem visszavonható!</span>
+	                    </div>
+						</div>
+						<div class="modal-footer">
+							<button type="input" name="submit" value="sendMsg" class="btn btn-success btn-icon-alt"><i class="fa fa-times"></i> Töröl</button>
+							<button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>		
+
+EOT;
+}
+
+
+
+

@@ -820,10 +820,9 @@ EOT;
             }
             updateUser($row);
             updatePassword($row);
+            kill($row);
             echo <<<EOT
-        <!--<td><a href="update_udata.php?uid={$row['id']}">Módosítás</a></td-->
-        <!--<td><a href="update_upassword.php?uid={$row['id']}">Új jelszó</a></td-->
-        <td><a href="killuser.php?uid={$row['id']}">Lakó törlése</a></td>
+        <!--td><a href="killuser.php?uid={$row['id']}">Lakó törlése</a></td-->
 EOT;
             echo '</tr>';
         }
@@ -833,7 +832,6 @@ EOT;
     } else {
         echo 'Még nem vett fel lakókat. Vegyen fel egyet!';
     }
-    validateForm();
 }
 
 function changeUserSatus($id, $status) {

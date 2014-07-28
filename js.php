@@ -52,6 +52,7 @@ EOT;
 
 function validateForm () {
     echo <<<EOT
+
 <script>
 	$.validate();
 </script>
