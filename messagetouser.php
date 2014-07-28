@@ -20,14 +20,8 @@ $email = $_POST["email"];
 $message = wordwrap($message, 70);
 // send mail
 $mail = mail($email, $subject, $message, "From: {$house['infomail']}\n");
-//echo $email;
-//echo "<br>";
-//echo $subject;
-//echo "<br>";
-//echo $message;
-//echo "<br>";
-//echo "From: {$house['infomail']}\n";
-header("Locati  on:$url");
+
+header("Location:$url");
 }
 else
 {
