@@ -1028,7 +1028,7 @@ function sendMessageToUser($email, $id) {
 								<textarea class="form-control" name="comment" id="comment" rows="4"></textarea>
                                                                 <input type="hidden" value="$email" id="email" name="email">
 								<span class="help-block">Kérjük fogalmazza meg röviden, lényegretörően üzenetét. HTML kód nem használható!</span>
-								<span class="help-block">A levelet az alábbi címre postázzuk: $email.</span>
+								<span class="alertMsg info">A levelet az alábbi címre postázzuk: $email.</span>
 							</div>
 						</div>
 						<div class="modal-footer">
