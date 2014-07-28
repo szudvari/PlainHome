@@ -17,6 +17,7 @@ EOT;
 
 function popUp ($message) {
     echo <<<EOT
+    
     <script type="text/javascript">
                    BootstrapDialog.show({
             message: '$message'
@@ -29,6 +30,7 @@ EOT;
 
 function readOnlyUpdateForm ($id) {
     echo <<<EOT
+    
 <script type="text/javascript">
     var id = $id;
             if (id < 2) {
@@ -43,6 +45,7 @@ EOT;
 
 function hideArea ($areaId) {
 echo <<<EOT
+    
     <script type="text/javascript">
             $("#$areaId").hide();
     </script>
