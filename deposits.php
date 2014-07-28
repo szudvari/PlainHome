@@ -41,5 +41,6 @@ else
 {
     notLoggedIn();
 }
+readOnlyUpdateForm ($_SESSION['admin']);
 htmlEnd();
 

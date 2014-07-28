@@ -88,6 +88,10 @@ EOT;
     foreach ($table as $row) {
         echo '<tbody class="table-hover">';
         echo '<tr>';
+        echo "<td> {$row['id']} </td>";
+        echo "<td> {$row['floor']} </td>";
+        echo "<td> {$row['door']} </td>";
+        echo "<td> {$row['area']} </td>";
         foreach ($row as $value) {
             if (is_numeric($value)) {
                 echo '<td>' . str_replace(".", ",", round($value, 2)) . '</td>';
@@ -718,21 +722,33 @@ EOT;
     foreach ($deposit as $row) {
         echo '<tbody>';
         echo '<tr>';
-        foreach ($row as $value) {
-            if (is_numeric($value)) {
-                if (($value > 999) || ($value < 0)) {
-                    echo '<td style="text-align:right;">' . number_format($value, 0, ',', ' ') . '</td>';
-                } else {
-                    echo '<td style="text-align:right;">' . str_replace(".", ",", round($value, 2)) . '</td>';
-                }
-            } else {
-                echo '<td>' . $value . '</td>';
-            }
-        }
+        echo "<td style='text-align:right;'> {$row['id']} </td>";
+        echo "<td style='text-align:right;'> {$row['floor']} </td>";
+        echo "<td style='text-align:right;'> {$row['door']} </td>";
+        echo "<td style='text-align:right;'>" . str_replace(".", ",", round($row['area'], 2)) . "</td>";
+        echo "<td style='text-align:right;'>" . str_replace(".", ",", round($row['residents_no'], 2)) . "</td>";
+        echo "<td style='text-align:right;'>" . str_replace(".", ",", round($row['area_ratio'], 2)) . "</td>";
+        echo "<td style='text-align:left;'>" . $row['resident_name'] . "</td>";
+        echo "<td style='text-align:right;'>" . number_format($row['ccost'], 0, ',', ' ') . "</td>";
+        echo "<td style='text-align:right;'>" . number_format($row['balance'], 0, ',', ' ') . "</td>";
+//        foreach ($row as $value) {
+//            if (is_numeric($value)) {
+//                if (($value > 999) || ($value < 0)) {
+//                    echo '<td style="text-align:right;">' . number_format($value, 0, ',', ' ') . '</td>';
+//                } else {
+//                    echo '<td style="text-align:right;">' . str_replace(".", ",", round($value, 2)) . '</td>';
+//                }
+//            } else {
+//                echo '<td>' . $value . '</td>';
+//            }
+//        }
         echo "<td class='no-print'><a href=\"mydepo.php?depositid=" . $row['id'] . "\">Részletek</a></td>";
-        echo "<td class='no-print'><a href=\"payment.php?id=" . $row['id'] . "\">Új befizetés</a></td>";
-        echo "<td class='no-print'><a href=\"ocost.php?id=" . $row['id'] . "\">Új költség</a></td>";
-        echo "<td class='no-print'><a href=\"updatedeposit.php?id=" . $row['id'] . "\" target=\"blank\">Módosít</a></td>";
+        payment($row);
+        oCost($row);
+        updateDepo($row, $_SESSION['admin']);
+        //echo "<td class='no-print'><a href=\"payment.php?id=" . $row['id'] . "\">Új befizetés</a></td>";
+        //echo "<td class='no-print'><a href=\"ocost.php?id=" . $row['id'] . "\">Új költség</a></td>";
+        //echo "<td class='no-print'><a href=\"updatedeposit.php?id=" . $row['id'] . "\" target=\"blank\">Módosít</a></td>";
         echo '</tr>';
     }
     echo '<tr>';
@@ -799,15 +815,15 @@ EOT;
         foreach ($table as $row) {
 
             echo '<tr>';
-            echo '<td>'.$row['id'].'</td>';
-            echo '<td>'.$row['firstname'].' '.$row['lastname'].'</td>';
+            echo '<td>' . $row['id'] . '</td>';
+            echo '<td>' . $row['firstname'] . ' ' . $row['lastname'] . '</td>';
             sendMessageToUser($row['email'], $row['id']);
-            echo '<td>'.$row['phone'].'</td>';
-            echo '<td>'.$row['username'].'</td>';
-            echo '<td>'.$row['floor'].'</td>';
-            echo '<td>'.$row['door'].'</td>';
-            echo '<td>'.$row['active'].'</td>';
-            echo '<td>'.$row['last_login'].'</td>';
+            echo '<td>' . $row['phone'] . '</td>';
+            echo '<td>' . $row['username'] . '</td>';
+            echo '<td>' . $row['floor'] . '</td>';
+            echo '<td>' . $row['door'] . '</td>';
+            echo '<td>' . $row['active'] . '</td>';
+            echo '<td>' . $row['last_login'] . '</td>';
 //            foreach ($row as $value) {
 //                echo "<td>$value</td>";
 //            }
@@ -821,9 +837,6 @@ EOT;
             updateUser($row);
             updatePassword($row);
             kill($row);
-            echo <<<EOT
-        <!--td><a href="killuser.php?uid={$row['id']}">Lakó törlése</a></td-->
-EOT;
             echo '</tr>';
         }
 
@@ -2318,7 +2331,7 @@ function updateUserData($userdata) {
 function updateLastLogin($id) {
     global $db;
     $sql = $sql = "UPDATE `{$db['name']}`.`residents` "
-    . "SET `last_login` = NOW() WHERE `residents`.`id` = $id;";
+            . "SET `last_login` = NOW() WHERE `residents`.`id` = $id;";
 //echo $sql;
     $res = mysql_query($sql);
     if (!$res) {

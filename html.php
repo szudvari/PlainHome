@@ -2,6 +2,7 @@
 
 include_once 'config.php';
 include_once 'functions.php';
+include_once 'js.php';
 
 function htmlHead($title, $house) {
     echo <<<EOT
@@ -221,8 +222,7 @@ function webheader($user) {
 	            
 EOT;
 
-    if (!isset($user["user"])) //nem belépet user
-    {
+    if (!isset($user["user"])) { //nem belépet user
         echo <<<EOT
 	            <div>
 	                <label for="toggle" class="toggle" data-open="Menü" data-close="Bezár" onclick></label>
@@ -231,9 +231,7 @@ EOT;
 	                </ul>
 	            </div>
 EOT;
-    }
-    else if (($user["admin"] == 0) && (!(isset($user["admin_userid"])))) //belépett user
-    {
+    } else if (($user["admin"] == 0) && (!(isset($user["admin_userid"])))) { //belépett user
         echo <<<EOT
 	            <div>
 	                <label for="toggle" class="toggle" data-open="Menü" data-close="Bezár" onclick></label>
@@ -244,9 +242,7 @@ EOT;
 	                </ul>
 	            </div>
 EOT;
-    }
-    else if (($user["admin"] > 0) && (!(isset($user["depositid"]))))  //belépett admin
-    {
+    } else if (($user["admin"] > 0) && (!(isset($user["depositid"])))) {  //belépett admin
         echo <<<EOT
 	            <div>
 	                <label for="toggle" class="toggle" data-open="Menü" data-close="Bezár" onclick></label>
@@ -262,9 +258,7 @@ EOT;
 	                </ul>
 	            </div>
 EOT;
-    }
-    else if (($user["admin"] > 0 ) && ((isset($user["depositid"]))))  //user akinek van admin joga
-    {
+    } else if (($user["admin"] > 0 ) && ((isset($user["depositid"])))) {  //user akinek van admin joga
         echo <<<EOT
 	            <div>
 	                <label for="toggle" class="toggle" data-open="Menü" data-close="Bezár" onclick></label>
@@ -322,42 +316,42 @@ function notLoggedIn2() {
                 </div>
     
 EOT;
-   $url=$_SERVER['HTTP_REFERER'];
-   header("Refresh: 1; url=$url");
+    $url = $_SERVER['HTTP_REFERER'];
+    header("Refresh: 1; url=$url");
 }
 
-function updateDeposit($depo) {
-        echo <<<EOT
-
-                    <div class="content">
-                        <h3>Albetét módosítása</h3>
-                        <form id="contactform" action="updatedepo.php" method="post">
-                            <div class="formcolumn">
-                                <label for="floor">Emelet</label> 
-                                <input type="text" id="floor" name="floor" class="form-control" value="{$depo['floor']}">
-		            <label for="door">Ajtó</label>
-		            <input type="text" id="door" name="door" class="form-control" value="{$depo['door']}">
-		            <label for="area">Lakás alapterülete</label>
-		            <input type="text" id="area" name="area" class="form-control" value="{$depo['area']}">
-		        </div>
-		        <div class="formcolumn">
-		            <label for="residents">Lakók száma</label>
-		            <input type="text" id="residents" name="residents" class="form-control" value="{$depo['residents_no']}">
-		            <label for="area_ratio">Lakás tulajdoni hányad</label>
-		            <input type="text" id="area_ratio" name="area_ratio" class="form-control" value="{$depo['area_ratio']}">
-		            <label for="note">Lakó neve</label>
-		            <input type="text" id="note" name="note" class="form-control" value="{$depo['resident_name']}">
-		            <input type="hidden" id="id" name="id" class="form-control" value="{$depo['id']}">
-		        </div>
-		        <div class="buttons">
-		            <button type="input" name="submit" value="Modosit" class="btn btn-success btn-icon"><i class="fa fa-save"></i> Módosít</button>
-		        </div>
-		    </form>
-		</div>
-		</div>
-                
-EOT;
-}
+//function updateDeposit($depo) {
+//        echo <<<EOT
+//
+//                    <div class="content">
+//                        <h3>Albetét módosítása</h3>
+//                        <form id="contactform" action="updatedepo.php" method="post">
+//                            <div class="formcolumn">
+//                                <label for="floor">Emelet</label> 
+//                                <input type="text" id="floor" name="floor" class="form-control" value="{$depo['floor']}">
+//		            <label for="door">Ajtó</label>
+//		            <input type="text" id="door" name="door" class="form-control" value="{$depo['door']}">
+//		            <label for="area">Lakás alapterülete</label>
+//		            <input type="text" id="area" name="area" class="form-control" value="{$depo['area']}">
+//		        </div>
+//		        <div class="formcolumn">
+//		            <label for="residents">Lakók száma</label>
+//		            <input type="text" id="residents" name="residents" class="form-control" value="{$depo['residents_no']}">
+//		            <label for="area_ratio">Lakás tulajdoni hányad</label>
+//		            <input type="text" id="area_ratio" name="area_ratio" class="form-control" value="{$depo['area_ratio']}">
+//		            <label for="note">Lakó neve</label>
+//		            <input type="text" id="note" name="note" class="form-control" value="{$depo['resident_name']}">
+//		            <input type="hidden" id="id" name="id" class="form-control" value="{$depo['id']}">
+//		        </div>
+//		        <div class="buttons">
+//		            <button type="input" name="submit" value="Modosit" class="btn btn-success btn-icon"><i class="fa fa-save"></i> Módosít</button>
+//		        </div>
+//		    </form>
+//		</div>
+//		</div>
+//                
+//EOT;
+//}
 
 function updateBaseData($data) {
     echo <<<EOT
@@ -470,8 +464,7 @@ function welcomeIndexUser($user, $ccost, $balance) {
     $cost = number_format($ccost, 0, ',', ' ');
     if ($balance < 0) {
         $abalance = $balance * -1;
-    }
-    else {
+    } else {
         $abalance = $balance;
     }
     $abalance = number_format($abalance, 0, ',', ' ');
@@ -484,9 +477,8 @@ function welcomeIndexUser($user, $ccost, $balance) {
 		<p class="lead welcomeMsg">Üdvözöljük egyéni oldalán {$user['firstname']} {$user['lastname']}!</p>
 		<p class="lead welcomeMsg">A "Saját adataim" menülinkre kattintva, megtekintheti részletes adatait és megváltoztathatja belépési jelszavát!</p>
 EOT;
-if ($msg)
-{
-	echo <<<EOT
+    if ($msg) {
+        echo <<<EOT
 		<div class="panel panel-primary">
 		<div class="panel-heading">
 		<h3 class="panel-title"><i class="fa fa-bullhorn"></i> Legfrisebb hír</h3>
@@ -497,20 +489,17 @@ if ($msg)
 		</div>
 		</div>
 EOT;
-}
+    }
 
-echo <<<EOT
+    echo <<<EOT
 	</div>
 	<div class="col-md-6">
 EOT;
-    if ($balance < 0)
-    {
+    if ($balance < 0) {
         echo <<<EOT
                 <div class="alertMsg danger"><i class="fa fa-warning"></i> Az Ön közösköltségének aktuális egyenlege: <span class="floatLeft">$abalance Ft elmaradás</span></div>
 EOT;
-    }
-    else
-    {
+    } else {
         echo <<<EOT
                 <div class="alertMsg success"><i class="fa fa-info-circle"></i> Az Ön közösköltségének aktuális egyenlege: <span class="floatLeft">$abalance Ft túlfizetés</span></div> 
 EOT;
@@ -540,31 +529,31 @@ function changePassword($id) {
 EOT;
 }
 
-function newPayment ($id) {
-          echo <<<EOT
+//function newPayment ($id) {
+//          echo <<<EOT
+//
+//                    <div class="content">
+//                        <h3>Befizetés rögzítése</h3>
+//                        <form id="paymentform" action="insertpayment.php" method="post">
+//                            <div class="formcolumn">
+//                                <label for="payment">Összeg</label> 
+//                                <input type="text" id="payment" name="payment" class="form-control" data-validation="required">
+//                                
+//    </div>
+//                  <div class="formcolumn">
+//                                <label for="account_date">Könyvelés dátuma</label> 
+//                                <input type="date" id="account_date" name="account_date" class="form-control" data-validation="required">
+//                                <span class="help-block">Kérem, "éééé-hh-nn" vagy "éééé.hh.nn" formátumot használjon!</span>
+//                                <input type="hidden" id="did" name="did" value="$id">
+//    </div>
+//		        <div class="buttons">
+//		            <button type="input" name="submit" value="Felvesz" class="btn btn-success btn-icon"><i class="fa fa-dollar"></i> Befizetés rögzítése</button>
+//		        </div>
+//EOT;
+//}
 
-                    <div class="content">
-                        <h3>Befizetés rögzítése</h3>
-                        <form id="paymentform" action="insertpayment.php" method="post">
-                            <div class="formcolumn">
-                                <label for="payment">Összeg</label> 
-                                <input type="text" id="payment" name="payment" class="form-control" data-validation="required">
-                                
-    </div>
-                  <div class="formcolumn">
-                                <label for="account_date">Könyvelés dátuma</label> 
-                                <input type="date" id="account_date" name="account_date" class="form-control" data-validation="required">
-                                <span class="help-block">Kérem, "éééé-hh-nn" vagy "éééé.hh.nn" formátumot használjon!</span>
-                                <input type="hidden" id="did" name="did" value="$id">
-    </div>
-		        <div class="buttons">
-		            <button type="input" name="submit" value="Felvesz" class="btn btn-success btn-icon"><i class="fa fa-dollar"></i> Befizetés rögzítése</button>
-		        </div>
-EOT;
-}
-
-function uploadFile () {
- echo <<<EOT
+function uploadFile() {
+    echo <<<EOT
 
 <a data-toggle="modal" href="#uploadFile" class="btn btn-success btn-icon floatLeft"><i class="fa fa-upload"></i> File feltöltése</a>
 <!-- -- Filefeltoltes Modal -- -->
@@ -605,9 +594,9 @@ function uploadFile () {
 EOT;
 }
 
-function documents () {
+function documents() {
     $files = filesInDirectory("documents");
-     echo <<<EOT
+    echo <<<EOT
      <div class="content">
                      <h3 class="primary"><i class="fa fa-file-pdf-o"></i> Feltöltött dokumentumok</h3>
     <table id="responsiveTable" class="large-only" cellspacing="0">
@@ -628,12 +617,10 @@ EOT;
     echo '</tbody>';
     echo '</table>';
     echo '</div>';
-
-    
 }
 
-function newBoardMessage () {
- echo <<<EOT
+function newBoardMessage() {
+    echo <<<EOT
 
 <a data-toggle="modal" href="#newBMsg" class="btn btn-success btn-icon floatLeft"><i class="fa fa-upload"></i> Új hír feltöltése</a>
 <!-- -- Filefeltoltes Modal -- -->
@@ -673,7 +660,8 @@ function newBoardMessage () {
 
 EOT;
 }
-function adminStat () {
+
+function adminStat() {
     echo <<<EOT
 		<div class="content">
 			<h3 class="info"><i class="fa fa-bar-chart-o"></i> Statisztikák</h3>
@@ -861,8 +849,8 @@ function adminStat () {
 EOT;
 }
 
-function reAccountPayment ($id, $payment) {
-          echo <<<EOT
+function reAccountPayment($id, $payment) {
+    echo <<<EOT
 
                     <div class="content">
                         <h3>Befizetés átkönyvelése</h3>
@@ -886,7 +874,7 @@ EOT;
 }
 
 function updateCcost($ccost) {
-        echo <<<EOT
+    echo <<<EOT
 
                     <div class="content">
                         <h3>Közösköltség módosítása</h3>
@@ -905,8 +893,9 @@ function updateCcost($ccost) {
                 
 EOT;
 }
-function uploadCSV () {
- echo <<<EOT
+
+function uploadCSV() {
+    echo <<<EOT
 <div class="content">
 <a data-toggle="modal" href="#uploadFile" class="btn btn-success btn-icon floatLeft"><i class="fa fa-upload"></i> Havi befizetések csoportos feltöltése</a>
 <!-- -- Filefeltoltes Modal -- -->
@@ -937,33 +926,34 @@ function uploadCSV () {
 
 EOT;
 }
-function newOcost ($id) {
-          echo <<<EOT
 
-                    <div class="content">
-                        <h3>Előírás rögzítése</h3>
-                        <form id="paymentform" action="insertocost.php" method="post">
-                            <div class="formcolumn">
-                                <label for="cost">Összeg</label> 
-                                <input type="text" id="cost" name="cost" class="form-control" data-validation="required">
-                                
-    </div>
-    <div class="formcolumn">
-                                <label for="title">Jogcím</label> 
-                                <input type="text" id="title" name="title" class="form-control" data-validation="required">
-                                
-    </div>
-    
-                  <div class="formcolumn">
-                                <label for="date">Rögzítés dátuma</label> 
-                                <input type="date" id="date" name="date" class="form-control" data-validation="required">
-                                <span class="help-block">Kérem, "éééé-hh-nn" vagy "éééé.hh.nn" formátumot használjon!</span>
-                                <input type="hidden" id="did" name="did" value="$id">
-    </div>
-		        <div class="buttons">
-	            <button type="input" name="submit" value="Felvesz" class="btn btn-success btn-icon"><i class="fa fa-dollar"></i> Előírás rögzítése</button>
-		        </div>
-EOT;
+function newOcost($id) {
+//          echo <<<EOT
+//
+//                    <div class="content">
+//                        <h3>Előírás rögzítése</h3>
+//                        <form id="paymentform" action="insertocost.php" method="post">
+//                            <div class="formcolumn">
+//                                <label for="cost">Összeg</label> 
+//                                <input type="text" id="cost" name="cost" class="form-control" data-validation="required">
+//                                
+//    </div>
+//    <div class="formcolumn">
+//                                <label for="title">Jogcím</label> 
+//                                <input type="text" id="title" name="title" class="form-control" data-validation="required">
+//                                
+//    </div>
+//    
+//                  <div class="formcolumn">
+//                                <label for="date">Rögzítés dátuma</label> 
+//                                <input type="date" id="date" name="date" class="form-control" data-validation="required">
+//                                <span class="help-block">Kérem, "éééé-hh-nn" vagy "éééé.hh.nn" formátumot használjon!</span>
+//                                <input type="hidden" id="did" name="did" value="$id">
+//    </div>
+//		        <div class="buttons">
+//	            <button type="input" name="submit" value="Felvesz" class="btn btn-success btn-icon"><i class="fa fa-dollar"></i> Előírás rögzítése</button>
+//		        </div>
+//EOT;
 }
 
 function sendMessageToUser($email, $id) {
@@ -1111,7 +1101,7 @@ function kill($user) {
 				<div class="modal-content">
 					<div class="modal-header modal-primary">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
-						<h4 class="modal-title">Felhasználó törlése</h4>
+						<h4 class="modal-title">Felhasználó törl</h4>
 					</div>
 					<form action="killuser.php" method="post">
 						<div class="modal-body">
@@ -1140,6 +1130,153 @@ function kill($user) {
 EOT;
 }
 
+function payment($deposit) {
+    echo <<<EOT
 
+		<td><a data-toggle="modal" href="#newPayment-{$deposit['id']}">Új befizetés</a></td>
+		<!-- -- Uj befizetes Modal -- -->
+		<div class="modal fade" id="newPayment-{$deposit['id']}" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-primary">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+						<h4 class="modal-title">Új befizetés</h4>
+					</div>
+					<form action="insertpayment.php" method="post">
+						<div class="modal-body">
+							<div class="form-group">
+                                        <p>{$deposit['floor']} / {$deposit['door']}. ajtó</p>
+                                        
+								
+		                    </div>
+				   
+                                        <div class="form-group">
+	                        <label for="payment">Összeg</label> 
+                              <input type="text" id="payment" name="payment" class="form-control" data-validation="required">
+							<span class="help-block">Befizetés összege</span>
+	                    </div>
+						<div class="form-group">
+	                        <label for="account_date">Könyvelés dátuma</label> 
+                                <input type="date" id="account_date" name="account_date" class="form-control" data-validation="required">
+                              <input type="hidden" id="did" name="did" value="{$deposit['id']}">
+							<span class="help-block">Kérem, "éééé-hh-nn" vagy "éééé.hh.nn" formátumot használjon!</span>
+	                    </div>
+						</div>
+						<div class="modal-footer">
+							<button type="input" name="submit" value="sendMsg" class="btn btn-success btn-icon"><i class="fa fa-dollar"></i> Befizetés rögzítése</button>
+							<button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>		
 
+EOT;
+}
 
+function oCost($deposit) {
+    echo <<<EOT
+
+		<td><a data-toggle="modal" href="#newOCost-{$deposit['id']}">Új költség</a></td>
+		<!-- -- Uj befizetes Modal -- -->
+		<div class="modal fade" id="newOCost-{$deposit['id']}" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-primary">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+						<h4 class="modal-title">Új befizetés</h4>
+					</div>
+					<form action="insertocost.php" method="post">
+						<div class="modal-body">
+							<div class="form-group">
+                                        <p>{$deposit['floor']} / {$deposit['door']}. ajtó</p>
+                                        
+								
+		                    </div>
+				   
+                                        <div class="form-group">
+	                        <label for="cost">Összeg</label> 
+                              <input type="text" id="cost" name="cost" class="form-control" data-validation="required">
+							<span class="help-block">Költség mértéke</span>
+	                    </div>
+						<div class="form-group">
+	                        <label for="title">Jogcím</label> 
+                                <input type="text" id="title" name="title" class="form-control" data-validation="required">
+	                    </div>
+                                        <div class="form-group">
+	                    <label for="date">Rögzítés dátuma</label> 
+                            <input type="date" id="date" name="date" class="form-control" data-validation="required">
+                            <span class="help-block">Kérem, "éééé-hh-nn" vagy "éééé.hh.nn" formátumot használjon!</span>
+                            <input type="hidden" id="did" name="did" value="{$deposit['id']}">
+	                    </div>
+						</div>
+						<div class="modal-footer">
+							<button type="input" name="submit" value="sendMsg" class="btn btn-success btn-icon"><i class="fa fa-dollar"></i> Költség rögzítése</button>
+							<button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>		
+
+EOT;
+}
+
+function updateDepo($depo, $id) {
+    echo <<<EOT
+
+		<td><a data-toggle="modal" href="#updateDepo-{$depo['id']}">Módosít</a></td>
+		<!-- -- Uj befizetes Modal -- -->
+		<div class="modal fade" id="updateDepo-{$depo['id']}" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-primary">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+						<h4 class="modal-title">Új befizetés</h4>
+					</div>
+					<form action="insertocost.php" method="post">
+						<div class="modal-body">
+							<div class="form-group">
+                                        <p>{$depo['floor']} / {$depo['door']}. ajtó</p>
+                                        
+								
+		                    </div>
+				   
+                                <div class="form-group">
+	                          <label for="floor">Emelet</label> 
+                               <input type="text" class="floor" id="floor" name="floor" class="form-control" value="{$depo['floor']}">
+                                </div>
+						<div class="form-group">
+	                         <label for="door">Ajtó</label>
+		            <input type="text" class="door" id="door" name="door" class="form-control" value="{$depo['door']}">
+	                    </div>
+                                        <div class="form-group">
+	                   <label for="area">Lakás alapterülete</label>
+		            <input type="text" class="area" id="area" name="area" class="form-control" value="{$depo['area']}">
+	                    </div>
+                            <div class="form-group">
+	                        <label for="residents">Lakók száma</label>
+		            <input type="text" id="residents" name="residents" class="form-control" value="{$depo['residents_no']}">
+                                </div>
+                            <div class="form-group">
+	                        <label for="area_ratio">Lakás tulajdoni hányad</label>
+		            <input type="text" class="area_ratio" id="area_ratio" name="area_ratio" class="form-control" value="{$depo['area_ratio']}">
+                                </div>
+                            <div class="form-group">
+	                       <label for="note">Lakó neve</label>
+		            <input type="text" id="note" name="note" class="form-control" value="{$depo['resident_name']}">
+		            <input type="hidden" id="id" name="id" class="form-control" value="{$depo['id']}">
+                                </div>
+                           </div>
+						<div class="modal-footer">
+							<button type="input" name="submit" value="sendMsg" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Módosít</button>
+							<button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>		
+
+EOT;
+   // readOnlyUpdateForm($id);
+}
