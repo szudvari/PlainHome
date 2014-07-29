@@ -1126,9 +1126,10 @@ function oCost($deposit) {
                                 <input type="text" id="title" name="title" class="form-control">
 	                    </div>
                                         <div class="form-group">
-	                    <label for="date">Rögzítés dátuma</label> 
-                            <input type="date" id="date" name="date" class="form-control">
+	                    <label for="date">Rögzítés dátuma</label>
+                            <input type="date" id="date" name="date" onfocus="if(this.value == 'éééé-hh-nn vagy éééé.hh.nn') { this.value = ''; }" value="éééé-hh-nn vagy éééé.hh.nn" class="form-control">
                             <span class="help-block">Kérem, "éééé-hh-nn" vagy "éééé.hh.nn" formátumot használjon!</span>
+							<span class="alertMsg danger"><i class="fa fa-warning"></i> Figyelem! Azonnali könyvelés - a bejegyzés nem törölhető!</span>
                             <input type="hidden" id="did" name="did" value="{$deposit['id']}">
 	                    </div>
 						</div>
