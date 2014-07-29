@@ -8,6 +8,15 @@ include_once 'html.php';
 ob_start();
 htmlHead($website['title'], $house['name']);
 webheader($_SESSION);
+if ((stripos($_SERVER['HTTP_REFERER'], "/mydepo.php")) && (!stripos($_SERVER['HTTP_REFERER'], "payed=1"))){
+$url = $_SERVER['HTTP_REFERER']."&payed=1";
+}
+else if (stripos($_SERVER['HTTP_REFERER'], "payed=1")) {
+    $url = $_SERVER['HTTP_REFERER'];
+}
+    else {
+    $url = $_SERVER['HTTP_REFERER']."?payed=1";
+}
 if ($_SESSION["admin"] > 0)
 {
     $deposit['id'] = $_POST['did'];
@@ -19,7 +28,7 @@ if ($_SESSION["admin"] > 0)
     insertPayment ($deposit, $_SESSION['user']);
     closeDb($con);
 
-    header("Location:deposits.php?payed=1");
+    header("Location:$url");
 }
 else
 {

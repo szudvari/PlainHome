@@ -624,7 +624,8 @@ EOT;
 	</div>
 EOT;
     } else {     //ha adminként lépsz be
-        echo "<a href=\"payment.php?id=" . $id . "\"><button class='btn btn-success btn-icon'><i class='fa fa-dollar'></i>Új befizetés rögzítése</button></a>";
+        echo '<a data-toggle="modal" href="#payment" class="btn btn-success btn-icon"><i class="fa fa-dollar"></i>Új befizetés rögzítése</a>';
+        //echo "<a href=\"payment.php?id=" . $id . "\"><button class='btn btn-success btn-icon'><i class='fa fa-dollar'></i>Új befizetés rögzítése</button></a>";
         echo "<hr />";
         echo "<a href=\"ocost.php?id=" . $id . "\"><button class='btn btn-success btn-icon'><i class='fa fa-history'></i>Új költség rögzítése</button></a>";
         echo "<hr />";
@@ -636,6 +637,45 @@ EOT;
     }
     echo '</div>';
     echo '</div>';
+    echo <<<EOT
+		<!-- -- Uj befizetes Modal -- -->
+		<div class="modal fade" id="payment" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-primary">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+						<h4 class="modal-title">Új könyvelt befizetés rögzítése</h4>
+					</div>
+					<form action="insertpayment.php" method="post">
+						<div class="modal-body">
+							<div class="form-group">
+                                        <p>Lakás: {$deposit['floor']} / {$deposit['door']}. ajtó</p>
+                                        
+								
+		                    </div>
+				   
+                                        <div class="form-group">
+	                        <label for="payment">Összeg</label> 
+                              <input type="text" id="payment" name="payment" class="form-control" data-validation="required">
+							<span class="help-block">Befizetés összege</span>
+	                    </div>
+						<div class="form-group">
+	                        <label for="account_date">Könyvelés dátuma</label> 
+                                <input type="date" id="account_date" name="account_date" class="form-control" data-validation="required">
+                              <input type="hidden" id="did" name="did" value="$id">
+							<span class="help-block">Kérem, "éééé-hh-nn" vagy "éééé.hh.nn" formátumot használjon!</span>
+	                    </div>
+						</div>
+						<div class="modal-footer">
+							<button type="input" name="submit" value="sendMsg" class="btn btn-success btn-icon"><i class="fa fa-dollar"></i> Befizetés rögzítése</button>
+							<button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>		
+
+EOT;
 }
 
 function getAllDepo() {

@@ -16,6 +16,10 @@ if (isset($_GET["password"]))
 {
     popUp("Jelszavát sikeresen megváltoztatta!");
 }
+if (isset($_GET["payed"]))
+{
+    popUp("Befizetés rögzítve.");
+}
 if ($_SESSION['admin'] > 0) {
     echo '<div class="buttons btn-back">
 	   <form action="deposits.php">
