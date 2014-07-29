@@ -501,7 +501,7 @@ EOT;
     if (isset($_SESSION['userid'])) {
 // ha userként lépsz be    
         $user = getUserData($_SESSION['userid']);
-//print_r($user);
+
         echo <<<EOT
 			<div class="content"><div class="row">
 		<div class="col-md-8">
@@ -627,7 +627,8 @@ EOT;
         echo '<a data-toggle="modal" href="#payment" class="btn btn-success btn-icon"><i class="fa fa-dollar"></i>Új befizetés rögzítése</a>';
         //echo "<a href=\"payment.php?id=" . $id . "\"><button class='btn btn-success btn-icon'><i class='fa fa-dollar'></i>Új befizetés rögzítése</button></a>";
         echo "<hr />";
-        echo "<a href=\"ocost.php?id=" . $id . "\"><button class='btn btn-success btn-icon'><i class='fa fa-history'></i>Új költség rögzítése</button></a>";
+        echo '<a data-toggle="modal" href="#cost" class="btn btn-success btn-icon"><i class="fa fa-history"></i>Új költség rögzítése</a>';
+        //echo "<a href=\"ocost.php?id=" . $id . "\"><button class='btn btn-success btn-icon'><i class='fa fa-history'></i>Új költség rögzítése</button></a>";
         echo "<hr />";
         echo '<h3 class="primary"><i class="fa fa-dollar"></i> Közösköltség alakulása az utolsó 12 hónapban</h3>';
         getMyAllCcost($id);
@@ -668,6 +669,52 @@ EOT;
 						</div>
 						<div class="modal-footer">
 							<button type="input" name="submit" value="sendMsg" class="btn btn-success btn-icon"><i class="fa fa-dollar"></i> Befizetés rögzítése</button>
+							<button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>		
+
+EOT;
+                                        
+echo <<<EOT
+
+		<!-- -- Uj koltseg Modal -- -->
+		<div class="modal fade" id="cost" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-primary">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+						<h4 class="modal-title">Új költség rögzítése</h4>
+					</div>
+					<form action="insertocost.php" method="post">
+						<div class="modal-body">
+							<div class="form-group">
+                                        <p>Lakás: {$deposit['floor']} / {$deposit['door']}. ajtó</p>
+                                        
+								
+		                    </div>
+				   
+                                        <div class="form-group">
+	                        <label for="cost">Összeg</label> 
+                              <input type="text" id="cost" name="cost" class="form-control">
+							<span class="help-block">Költség mértéke</span>
+	                    </div>
+						<div class="form-group">
+	                        <label for="title">Jogcím</label> 
+                                <input type="text" id="title" name="title" class="form-control">
+	                    </div>
+                                        <div class="form-group">
+	                    <label for="date">Rögzítés dátuma</label>
+                            <input type="date" id="date" name="date" onfocus="if(this.value == 'éééé-hh-nn vagy éééé.hh.nn') { this.value = ''; }" value="éééé-hh-nn vagy éééé.hh.nn" class="form-control">
+                            <span class="help-block">Kérem, "éééé-hh-nn" vagy "éééé.hh.nn" formátumot használjon!</span>
+							<span class="alertMsg danger"><i class="fa fa-warning"></i> Figyelem! Azonnali könyvelés - a bejegyzés nem törölhető!</span>
+                            <input type="hidden" id="did" name="did" value="$id">
+	                    </div>
+						</div>
+						<div class="modal-footer">
+							<button type="input" value="sendMsg" class="btn btn-success btn-icon"><i class="fa fa-dollar"></i> Költség rögzítése</button>
 							<button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
 						</div>
 					</form>
@@ -2250,7 +2297,7 @@ function getMyAllOcost($id) {
 EOT;
         foreach ($ocost as $row) {
             echo '<tr>';
-            foreach ($ocost as $row) {
+            
                 if (strlen($row['month']) == 1) {
                     $row['month'] = "0" . $row['month'];
                 }
@@ -2264,7 +2311,7 @@ EOT;
                 echo "<td>" . number_format($row['ocost'], 0, ',', ' ') . " Ft</td>";
                 echo "<td>{$row['title']}</td>";
                 echo '</tr>';
-            }
+           
             echo '</tr>';
         }
         echo '</tbody>';
