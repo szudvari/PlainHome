@@ -920,7 +920,7 @@ function updateUser($user) {
     echo <<<EOT
 
 		<td><a data-toggle="modal" href="#updateUser-{$user['id']}">Módosítás</a></td>
-		<!-- -- Uj uzenet Modal -- -->
+		<!-- -- User modositas Modal -- -->
 		<div class="modal fade" id="updateUser-{$user['id']}" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -972,7 +972,7 @@ function updatePassword($user) {
     echo <<<EOT
 
 		<td><a data-toggle="modal" href="#updatePassword-{$user['id']}">Új jelszó</a></td>
-		<!-- -- Uj uzenet Modal -- -->
+		<!-- -- Uj jelszo Modal -- -->
 		<div class="modal fade" id="updatePassword-{$user['id']}" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -983,7 +983,7 @@ function updatePassword($user) {
 					<form action="passwordchange.php" method="post">
 						<div class="modal-body">
 							<div class="form-group">
-                                        <p>{$user['firstname']} {$user['lastname']} - {$user['floor']}. emelet {$user['door']}. ajtó</p>
+                                        <p>felhasználó: {$user['firstname']} {$user['lastname']} - {$user['floor']}. emelet {$user['door']}. ajtó</p>
                                         
 								
 		                    </div>
@@ -1016,19 +1016,19 @@ function kill($user) {
     echo <<<EOT
 
 		<td><a data-toggle="modal" href="#killUser-{$user['id']}">Lakó törlése</a></td>
-		<!-- -- Uj uzenet Modal -- -->
+		<!-- -- User torles Modal -- -->
 		<div class="modal fade" id="killUser-{$user['id']}" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header modal-primary">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
-						<h4 class="modal-title">Felhasználó törl</h4>
+						<h4 class="modal-title">Felhasználó törlése</h4>
 					</div>
 					<form action="killuser.php" method="post">
 						<div class="modal-body">
 							<div class="form-group">
                                         <p class="lead">Biztosan törli a felhasználót?</p>
-                                        <p>{$user['firstname']} {$user['lastname']} - {$user['floor']}. emelet {$user['door']}. ajtó</p>
+                                        <p>Felhasználó: {$user['firstname']} {$user['lastname']} - {$user['floor']}. emelet {$user['door']}. ajtó</p>
                                         
 								
 		                    </div>
@@ -1061,12 +1061,12 @@ function payment($deposit) {
 				<div class="modal-content">
 					<div class="modal-header modal-primary">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
-						<h4 class="modal-title">Új befizetés</h4>
+						<h4 class="modal-title">Új könyvelt befizetés rögzítése</h4>
 					</div>
 					<form action="insertpayment.php" method="post">
 						<div class="modal-body">
 							<div class="form-group">
-                                        <p>{$deposit['floor']} / {$deposit['door']}. ajtó</p>
+                                        <p>Lakás: {$deposit['floor']} / {$deposit['door']}. ajtó</p>
                                         
 								
 		                    </div>
@@ -1100,18 +1100,18 @@ function oCost($deposit) {
     echo <<<EOT
 
 		<td><a data-toggle="modal" href="#newOCost-{$deposit['id']}">Új költség</a></td>
-		<!-- -- Uj befizetes Modal -- -->
+		<!-- -- Uj koltseg Modal -- -->
 		<div class="modal fade" id="newOCost-{$deposit['id']}" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header modal-primary">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
-						<h4 class="modal-title">Új befizetés</h4>
+						<h4 class="modal-title">Új költség rögzítése</h4>
 					</div>
 					<form action="insertocost.php" method="post" id="oCost-{$deposit['id']}">
 						<div class="modal-body">
 							<div class="form-group">
-                                        <p>{$deposit['floor']} / {$deposit['door']}. ajtó</p>
+                                        <p>Lakás: {$deposit['floor']} / {$deposit['door']}. ajtó</p>
                                         
 								
 		                    </div>
