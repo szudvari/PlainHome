@@ -8,7 +8,7 @@ $db['charset'] = "utf8";
 $website['title'] = "PlainHouse";
 $website['version'] = "0.1a";
 
-$house['name'] = "Pöttyös utca 4.";
+$house['name'] = "LOCALHOST";
 $house['infomail'] = "szudvari@gmail.com";
 $house['webpage'] = "http://users.ininet.hu/plainhouse";
 $house['payment_day'] = 15;

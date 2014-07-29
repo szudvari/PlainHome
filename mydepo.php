@@ -23,7 +23,7 @@ if (isset($_GET["payed"]))
 if (isset($_GET["saved"]))
 {
     popUp("Költség rögzítve.");
-}
+}   
 if ($_SESSION['admin'] > 0) {
     echo '<div class="buttons btn-back">
 	   <form action="deposits.php">
