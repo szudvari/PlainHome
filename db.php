@@ -712,8 +712,8 @@ function getAllDepo() {
    <th class="tool-tip" title="Közösköltség"> Közösktg. </th>
    <th> Egyenleg </th>
    <th class="no-print"> Részletek </th>
-   <th class="no-print"> Befizetés </th>
-   <th class="no-print"> Új költség </th>
+   <th class="no-print tool-tip" title="Új könyvelt befizetés rögzítése"> Befizetés </th>
+   <th class="no-print tool-tip" title="Új költség rögzítése"> Új költség </th>
    <th class="no-print"> Módosítás </th>
      
 </tr>
