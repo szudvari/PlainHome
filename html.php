@@ -1151,7 +1151,7 @@ function updateDepo($depo) {
     echo <<<EOT
 
 		<td><a data-toggle="modal" href="#updateDepo-{$depo['id']}">Módosít</a></td>
-		<!-- -- Uj befizetes Modal -- -->
+		<!-- -- Albetet update Modal -- -->
 		<div class="modal fade" id="updateDepo-{$depo['id']}" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -1162,7 +1162,7 @@ function updateDepo($depo) {
 					<form action="insertocost.php" method="post">
 						<div class="modal-body">
 							<div class="form-group">
-                                        <p>{$depo['floor']} / {$depo['door']}. ajtó</p>
+                                        <p>Lakás: {$depo['floor']} / {$depo['door']}. ajtó</p>
                                         
 								
 		                    </div>
