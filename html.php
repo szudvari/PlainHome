@@ -983,7 +983,7 @@ function updatePassword($user) {
 					<form action="passwordchange.php" method="post">
 						<div class="modal-body">
 							<div class="form-group">
-                                        <p>felhasználó: {$user['firstname']} {$user['lastname']} - {$user['floor']}. emelet {$user['door']}. ajtó</p>
+                                        <p>Felhasználó: {$user['firstname']} {$user['lastname']} - {$user['floor']}. emelet {$user['door']}. ajtó</p>
                                         
 								
 		                    </div>
