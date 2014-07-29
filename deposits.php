@@ -42,5 +42,6 @@ else
     notLoggedIn();
 }
 readOnlyUpdateForm ($_SESSION['admin']);
+//oCostFV();
 htmlEnd();
 

@@ -18,6 +18,8 @@ function htmlHead($title, $house) {
         <script src="js/bootstrap-dialog.js" type="text/javascript"></script>
         <script src="js/plainhome.js" type="text/javascript"></script>
         <script src="js/form-validator.js" type="text/javascript"></script>
+        <script src="js/bootstrapValidator.js" type="text/javascript"></script>
+        <script src="js/language/hu_HU.js" type="text/javascript"></script>
 		<script src="js/print.js" type="text/javascript"></script>
         <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>     
         <link href="css/bootstrap-dialog.css" rel="stylesheet" type="text/css"/>
@@ -26,6 +28,7 @@ function htmlHead($title, $house) {
 		<link href="css/plainhome.css" rel="stylesheet">
 		<link href="css/datepicker.css" rel="stylesheet">
 		<link href="css/font-awesome.min.css" rel="stylesheet">
+		<link href="css/bootstrapValidator.css" rel="stylesheet">
 	<!--[if lt IE 9]>
 		<script src="js/html5shiv.js"></script>
 		<script src="js/respond.js"></script>
@@ -1093,6 +1096,7 @@ EOT;
 }
 
 function oCost($deposit) {
+    
     echo <<<EOT
 
 		<td><a data-toggle="modal" href="#newOCost-{$deposit['id']}">Új költség</a></td>
@@ -1104,7 +1108,7 @@ function oCost($deposit) {
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
 						<h4 class="modal-title">Új befizetés</h4>
 					</div>
-					<form action="insertocost.php" method="post">
+					<form action="insertocost.php" method="post" id="oCost-{$deposit['id']}">
 						<div class="modal-body">
 							<div class="form-group">
                                         <p>{$deposit['floor']} / {$deposit['door']}. ajtó</p>
@@ -1114,22 +1118,22 @@ function oCost($deposit) {
 				   
                                         <div class="form-group">
 	                        <label for="cost">Összeg</label> 
-                              <input type="text" id="cost" name="cost" class="form-control" data-validation="required">
+                              <input type="text" id="cost" name="cost" class="form-control">
 							<span class="help-block">Költség mértéke</span>
 	                    </div>
 						<div class="form-group">
 	                        <label for="title">Jogcím</label> 
-                                <input type="text" id="title" name="title" class="form-control" data-validation="required">
+                                <input type="text" id="title" name="title" class="form-control">
 	                    </div>
                                         <div class="form-group">
 	                    <label for="date">Rögzítés dátuma</label> 
-                            <input type="date" id="date" name="date" class="form-control" data-validation="required">
+                            <input type="date" id="date" name="date" class="form-control">
                             <span class="help-block">Kérem, "éééé-hh-nn" vagy "éééé.hh.nn" formátumot használjon!</span>
                             <input type="hidden" id="did" name="did" value="{$deposit['id']}">
 	                    </div>
 						</div>
 						<div class="modal-footer">
-							<button type="input" name="submit" value="sendMsg" class="btn btn-success btn-icon"><i class="fa fa-dollar"></i> Költség rögzítése</button>
+							<button type="input" value="sendMsg" class="btn btn-success btn-icon"><i class="fa fa-dollar"></i> Költség rögzítése</button>
 							<button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
 						</div>
 					</form>
@@ -1138,6 +1142,8 @@ function oCost($deposit) {
 		</div>		
 
 EOT;
+                            oCostFV($deposit['id']);
+    
 }
 
 function updateDepo($depo) {
