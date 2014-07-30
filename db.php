@@ -47,66 +47,6 @@ function insertTable($table, $vars, $con) {
     }
 }
 
-function listDeposits() {
-    mysql_query("set names 'utf8'");
-    mysql_query("set character set 'utf8'");
-    $sql = $sql = "SELECT `id`, `floor`, `door`, `area`, `garage_area`, "
-            . "(`area`+`garage_area`), `residents_no`, `area_ratio`, "
-            . "`garage_area_ratio`, (`area_ratio`+`garage_area_ratio`), "
-            . "`watermeter`, `resident_name` FROM `deposits`;";
-    $result = mysql_query($sql);
-    if (!$result) {
-        echo mysql_errno() . ": " . mysql_error();
-        exit;
-    }
-    $table = array();
-    while ($row = mysql_fetch_assoc($result)) {
-        $table[] = $row;
-    }
-    echo <<<EOT
-'<div class="content">
-<h3 class="success">Izeke</h3>
-<table id="responsiveTable" class="large-only" cellspacing="0">'
-<tr align="left" class="warning">
-   <th> id </th>
-   <th> Emelet </th>
-   <th> Ajtó </th>
-   <th> Lakás terület (nm) </th>
-   <th> Garázs terület (nm) </th>
-   <th> Össz terület (nm) </th>
-   <th> Lakók száma </th>
-   <th> Lakás tulajdoni hányad </th>
-   <th> Garázs tulajdoni hányad </th>
-   <th> Összes tulajdoni hányad </th>
-   <th> Vízóra </th>
-   <th> Lakó neve </th>
-   <th> Részletek </th>
-   <th> Módosítás </th>
-</tr>
-   
-EOT;
-    foreach ($table as $row) {
-        echo '<tbody class="table-hover">';
-        echo '<tr>';
-        echo "<td> {$row['id']} </td>";
-        echo "<td> {$row['floor']} </td>";
-        echo "<td> {$row['door']} </td>";
-        echo "<td> {$row['area']} </td>";
-        foreach ($row as $value) {
-            if (is_numeric($value)) {
-                echo '<td>' . str_replace(".", ",", round($value, 2)) . '</td>';
-            } else {
-                echo '<td>' . $value . '</td>';
-            }
-        }
-        echo "<td><a href=\"mydepo.php?depositid=" . $row['id'] . "\">Részletek</a></td>";
-        echo "<td><a href=\"updatedeposit.php?id=" . $row['id'] . "\" target=\"blank\">Módosít</a></td>";
-        echo '</tr>';
-        echo '</tbody>';
-    }
-    echo '</table>';
-    echo '</div>';
-}
 
 function insertDepoDb($deposit, $con) {
     global $db;
@@ -547,7 +487,7 @@ EOT;
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="input" name="submit" value="sendMsg" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Küldés</button>
+						<button type="submit" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Küldés</button>
 						<button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
 					</div>
 				</form>
@@ -584,7 +524,7 @@ EOT;
 	                    </div>
 					</div>
 					<div class="modal-footer">
-						<button type="submit"  value="editPassword" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Küldés</button>
+						<button type="submit" value="editPassword" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Küldés</button>
 						<button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
 					</div>
 				</form>
@@ -689,7 +629,7 @@ EOT;
 	                    </div>
 						</div>
 						<div class="modal-footer">
-							<button type="submit" value="sendMsg" class="btn btn-success btn-icon"><i class="fa fa-dollar"></i> Befizetés rögzítése</button>
+							<button type="submit" class="btn btn-success btn-icon"><i class="fa fa-dollar"></i> Befizetés rögzítése</button>
 							<button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
 						</div>
 					</form>
@@ -750,7 +690,7 @@ echo <<<EOT
 	                    </div>
 						</div>
 						<div class="modal-footer">
-							<button type="submit" value="sendMsg" class="btn btn-success btn-icon"><i class="fa fa-dollar"></i> Költség rögzítése</button>
+							<button type="submit" class="btn btn-success btn-icon"><i class="fa fa-dollar"></i> Költség rögzítése</button>
 							<button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
 						</div>
 					</form>
@@ -1638,7 +1578,7 @@ function getAllAccounts($year) {
         echo <<<EOT
         <div class="buttons btn-back">
 	   <form action="stat.php">
-	   <button type="input" name="submit" class="btn btn-success btn-icon value="Vissza" ><i class="fa fa-arrow-circle-left"></i>Vissza</button>
+	   <button type="submit" class="btn btn-success btn-icon value="Vissza" ><i class="fa fa-arrow-circle-left"></i>Vissza</button>
 	   </form>
         </div>
         <div class="content">
@@ -1753,7 +1693,7 @@ function getOneDepoAccount($id, $year) {
         echo <<<EOT
         <div class="buttons btn-back">
 	   <form action="stat.php">
-	   <button type="input" name="submit" class="btn btn-success btn-icon value="Vissza" ><i class="fa fa-arrow-circle-left"></i>Vissza</button>
+	   <button type="submit" class="btn btn-success btn-icon value="Vissza" ><i class="fa fa-arrow-circle-left"></i>Vissza</button>
 	   </form>
         </div>
         <div class="content">
@@ -1776,7 +1716,7 @@ EOT;
         echo <<<EOT
         <div class="buttons btn-back">
 	   <form action="stat.php">
-	   <button type="input" name="submit" class="btn btn-success btn-icon value="Vissza" ><i class="fa fa-arrow-circle-left"></i>Vissza</button>
+	   <button type="submit" class="btn btn-success btn-icon value="Vissza" ><i class="fa fa-arrow-circle-left"></i>Vissza</button>
 	   </form>
         </div>
         <div class="content">
@@ -2131,7 +2071,7 @@ function getDepositCcost($id, $year) {
         echo <<<EOT
         <div class="buttons btn-back">
 	   <form action="stat.php">
-	   <button type="input" name="submit" class="btn btn-success value="Vissza" ><i class="fa fa-arrow-circle-left"></i> Vissza</button>
+	   <button type="submit" class="btn btn-success value="Vissza" ><i class="fa fa-arrow-circle-left"></i> Vissza</button>
 	   </form>    
 <h3 class="primary"><i class="fa fa-list"></i> $year évi közösköltség alakulása</h3>
 <table id="responsiveTable" class="large-only" cellspacing="0">
