@@ -16,9 +16,9 @@ function htmlHead($title, $house) {
         <script src="js/jquery.js"></script>
         <script src="js/bootstrap.js"></script>
         <script src="js/bootstrap-dialog.js" type="text/javascript"></script>
+        <script src="js/bootstrapValidator.js" type="text/javascript"></script>
         <script src="js/plainhome.js" type="text/javascript"></script>
         <script src="js/form-validator.js" type="text/javascript"></script>
-        <script src="js/bootstrapValidator.js" type="text/javascript"></script>
         <script src="js/language/hu_HU.js" type="text/javascript"></script>
 		<script src="js/print.js" type="text/javascript"></script>
         <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>     
@@ -50,6 +50,34 @@ function htmlEnd() {
 			</div>
 		</div>
 		<script src="js/stacktable.js" type="text/javascript"></script>
+		<script>
+			$(document).ready(function() {
+			    $('#loginForm').bootstrapValidator({
+			        message: 'This value is not valid',
+			        feedbackIcons: {
+			            valid: 'glyphicon glyphicon-ok',
+			            invalid: 'glyphicon glyphicon-remove',
+			            validating: 'glyphicon glyphicon-refresh'
+			        },
+			        fields: {
+			            username: {
+			                validators: {
+			                    notEmpty: {
+			                        message: 'The username is required'
+			                    }
+			                }
+			            },
+			            password: {
+			                validators: {
+			                    notEmpty: {
+			                        message: 'The password is required'
+			                    }
+			                }
+			            }
+			        }
+			    });
+			});
+		</script>
 	</body>
 	</html>
 EOT;
