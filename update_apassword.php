@@ -34,7 +34,7 @@ if ($_SESSION["admin"] > 0) {
     <td>{$user['email']}</td>
     <td><input type="password" name="pass1"></td>
     <td><input type="password" name="pass2"></td>
-    <td><button type="input" name="submit" value="módosít" class="btn btn-success btn-icon"><i class="fa fa-refresh"></i>Módosít</button></td>
+    <td><button type="submit" class="btn btn-success btn-icon"><i class="fa fa-refresh"></i>Módosít</button></td>
     </tr>
     </tbody>
     </table>
