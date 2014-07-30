@@ -110,48 +110,86 @@ function addUser() {
     $pass = randomPassword();
     echo <<<EOT
 <div class="content">
-    <button id="newuser" value="UjFelhasznaloFelvetele" class="btn btn-success btn-icon"><i class="fa fa-plus"></i>Új felhasználó felvétele</button>
-   <div id="adduser"> 
-   <h3 class="primary"><i class="fa fa-plus"></i> Új felhasználó felvétele</h3>
 
-    <form id="contactform" action="add.php" method="post">
-        <div class="formcolumn">
-            <label for="firstname">Vezetéknév</label>
-            <input type="text" id="firstname" name="firstname" class="form-control" data-validation="required">
+    <a data-toggle="modal" href="#newUser" class="btn btn-success btn-icon"><i class="fa fa fa-plus"></i>Új felhasználó felvétele</a>           
+    <div class="modal fade" id="newUser" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header modal-primary">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+                    <h4 class="modal-title">Új felhasználó felvétele</h4>
+                </div>
+                <form action="add.php" method="post"
+                      data-bv-feedbackicons-valid="glyphicon glyphicon-ok"
+                      data-bv-feedbackicons-invalid="glyphicon glyphicon-remove"
+                      data-bv-feedbackicons-validating="glyphicon glyphicon-refresh">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="firstname">Vezetéknév</label>
+                            <input type="text" id="firstname" name="firstname" class="form-control" data-bv-notempty="true"
+                                   data-bv-notempty-message="A mező kitöltése kötelező!">
 
-            <label for="lastname">Keresztnév</label>
-            <input type="text" id="lastname" name="lastname" class="form-control" data-validation="required">
-        
-            <label for="email">E-mail</label>
-            <input type="text" id="email" name="email" class="form-control">
-    
-            <label for="phone">Telefonszám</label>
-            <input type="text" id="phone" name="phone" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="lastname">Keresztnév</label>
+                            <input type="text" id="lastname" name="lastname" class="form-control" data-bv-notempty="true"
+                                   data-bv-notempty-message="A mező kitöltése kötelező!">
+
+                        </div>
+                        <div class="form-group">
+                            <label for="email">E-mail</label>
+                            <input type="text" id="email" name="email" class="form-control" data-bv-notempty="true"
+                                   data-bv-notempty-message="Az e-mail cím kitöltése kötelező!">
+
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Telefonszám</label>
+                            <input type="text" id="phone" name="phone" class="form-control">
+
+                        </div>
+                        <div class="form-group">
+                            <label for="username">Felhasználónév</label>
+                            <input type="text" id="username" name="username" class="form-control" data-bv-notempty="true"
+                                   data-bv-notempty-message="A mező kitöltése kötelező!">
+
+                        </div>
+                        <div class="form-group">
+                            <label for="floor">Emelet</label>
+                            <input type="text" id="floor" name="floor" class="form-control" data-bv-notempty="true"
+                                   data-bv-notempty-message="A mező kitöltése kötelező!">
+
+                        </div>
+                        <div class="form-group">
+                            <label for="door">Ajtó</label>
+                            <input type="text" id="door" name="door" class="form-control" data-bv-notempty="true"
+                                   data-bv-notempty-message="A mező kitöltése kötelező!">
+
+                        </div>
+                        <div class="form-group">
+                            <label for="pass">Jelszó</label>
+                            <input type="password" id="pass" name="pass" value="$pass" class="form-control"  
+                                   data-bv-identical="true"
+                                   data-bv-identical-field="pass2"
+                                   data-bv-identical-message="A két jelszó nem egyezik">
+
+                        </div>
+                        <label for="pass2">Jelszó újra</label>
+                    <div class="form-group">
+                        <input type="password" id="pass2" name="pass2" value="$pass" class="form-control"  
+                               data-bv-identical="true"
+                               data-bv-identical-field="pass"
+                               data-bv-identical-message="A két jelszó nem egyezik">
+                    </div>
+                    <div class="modal-footer">
+                        <p style="text-align:center;"> Az új felhasználó automatikusan generált jelszava (többször nem jelenik meg):  <span class="pwarning">$pass</span><br>
+                            Ha szeretné megváltoztatni, írja át a jelszó mezőkben!</p>
+                        <button type="submit"  value="newuser" class="btn btn-success btn-icon"><i class="fa fa-plus"></i> Felvesz</button>
+                        <button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
+                    </div>
+                </form>
             </div>
-            
-            <div class="formcolumn">
-            <label for="username">Felhasználónév</label>
-            <input type="text" id="username" name="username" class="form-control" data-validation="required">
-        	
-            <label for="floor">Emelet</label>
-            <input type="text" id="floor" name="floor" class="form-control" data-validation="required">
-
-            <label for="door">Ajtó</label>
-            <input type="text" id="door" name="door" class="form-control" data-validation="required">
-
-            <label for="pass">Jelszó</label>
-            <input type="password" id="pass" name="pass" value="$pass" class="form-control" data-validation="required">
-
-            <label for="pass2">Jelszó újra</label>
-            <input type="password" id="pass2" name="pass2" value="$pass" class="form-control">
-		</div>
-		<div class="buttons">
-        <button type="input" name="submit" value="Hozzaad" class="btn btn-success btn-icon"><i class="fa fa-plus"></i>Hozzáad</button>
-		</div>
-    </form>
-            Az új felhasználó automatikusan generált jelszava (többször nem jelenik meg):  <span class="pwarning">$pass</span><br>
-            Ha szeretné megváltoztatni, írja át a jelszó mezőkben!
-</div>
+        </div>
+    </div>  
 </div>
 EOT;
 }

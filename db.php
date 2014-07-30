@@ -562,22 +562,29 @@ EOT;
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
 					<h4 class="modal-title">Jelszó módosítása</h4>
 				</div>
-				<form action="passwordchange.php" method="post">
+				<form action="passwordchange.php" method="post" 
+                                    data-bv-feedbackicons-valid="glyphicon glyphicon-ok"
+                                    data-bv-feedbackicons-invalid="glyphicon glyphicon-remove"
+                                    data-bv-feedbackicons-validating="glyphicon glyphicon-refresh">
 					<div class="modal-body">
 	                    <div class="form-group">
 	                        <label for="pass1">Új jelszó</label>
-	                        <input type="text" class="form-control" name="pass1" id="pass1" value="" data-validation="required"/>
+	                        <input type="text" class="form-control" name="pass1" id="pass1" value="" data-bv-identical="true"
+                                               data-bv-identical-field="pass2"
+                                               data-bv-identical-message="A két jelszó nem egyezik"">
 							<span class="help-block">Új jelszó</span>
 	                    </div>
 						<div class="form-group">
 	                        <label for="pass2">Jelszó megerősítése</label>
-	                        <input type="text" class="form-control" name="pass2" id="pass2" value="" data-validation="required"/>
+	                        <input type="text" class="form-control" name="pass2" id="pass2" value="" data-bv-identical="true"
+                                               data-bv-identical-field="pass1"
+                                               data-bv-identical-message="A két jelszó nem egyezik"/>
                                 <input type="hidden" class="form-control" name="id" id="id" value="{$_SESSION['userid']}" />
 							<span class="help-block">Adja meg újra jelszavát. A megadott jelszavaknak egyezniük kell!</span>
 	                    </div>
 					</div>
 					<div class="modal-footer">
-						<button type="input" name="submit" value="editPassword" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Küldés</button>
+						<button type="submit"  value="editPassword" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Küldés</button>
 						<button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
 					</div>
 				</form>
@@ -647,7 +654,10 @@ EOT;
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
 						<h4 class="modal-title">Új könyvelt befizetés rögzítése</h4>
 					</div>
-					<form action="insertpayment.php" method="post">
+					<form action="insertpayment.php" method="post"
+                                         data-bv-feedbackicons-valid="glyphicon glyphicon-ok"
+                                         data-bv-feedbackicons-invalid="glyphicon glyphicon-remove"
+                                         data-bv-feedbackicons-validating="glyphicon glyphicon-refresh">
 						<div class="modal-body">
 							<div class="form-group">
                                         <p>Lakás: {$deposit['floor']} / {$deposit['door']}. ajtó</p>
@@ -666,7 +676,7 @@ EOT;
 	                    </div>
 						<div class="form-group">
 	                        <label for="account_date">Könyvelés dátuma</label> 
-                                <input type="text" class="form-control" name="birthday" placeholder="2000.01.01"
+                                <input type="text" class="form-control" name="account_date" id="account_date" placeholder="2000.01.01"
                                 data-bv-notempty="true"
                                 data-bv-notempty-message="A dátum kitöltése kötelező!"
 
@@ -679,7 +689,7 @@ EOT;
 	                    </div>
 						</div>
 						<div class="modal-footer">
-							<button type="input" name="submit" value="sendMsg" class="btn btn-success btn-icon"><i class="fa fa-dollar"></i> Befizetés rögzítése</button>
+							<button type="submit" value="sendMsg" class="btn btn-success btn-icon"><i class="fa fa-dollar"></i> Befizetés rögzítése</button>
 							<button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
 						</div>
 					</form>
@@ -699,7 +709,10 @@ echo <<<EOT
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
 						<h4 class="modal-title">Új költség rögzítése</h4>
 					</div>
-					<form action="insertocost.php" method="post">
+					<form action="insertocost.php" method="post"
+                                         data-bv-feedbackicons-valid="glyphicon glyphicon-ok"
+                                         data-bv-feedbackicons-invalid="glyphicon glyphicon-remove"
+                                         data-bv-feedbackicons-validating="glyphicon glyphicon-refresh">
 						<div class="modal-body">
 							<div class="form-group">
                                         <p>Lakás: {$deposit['floor']} / {$deposit['door']}. ajtó</p>
@@ -709,23 +722,35 @@ echo <<<EOT
 				   
                                         <div class="form-group">
 	                        <label for="cost">Összeg</label> 
-                              <input type="text" id="cost" name="cost" class="form-control">
+                              <input type="text" id="cost" name="cost" class="form-control" data-bv-notempty="true"
+                                               data-bv-notempty-message="Adjon meg egy összeget!"
+                                               data-bv-regexp="true"
+                                               data-bv-regexp-regexp="^[0-9]+$"
+                                               data-bv-regexp-message="Csak számokat írjon be!>
 							<span class="help-block">Költség mértéke</span>
 	                    </div>
 						<div class="form-group">
 	                        <label for="title">Jogcím</label> 
-                                <input type="text" id="title" name="title" class="form-control">
+                                <input type="text" id="title" name="title" class="form-control" data-bv-notempty="true"
+                                               data-bv-notempty-message="Adja meg a költség jogcímét!">
 	                    </div>
                                         <div class="form-group">
 	                    <label for="date">Rögzítés dátuma</label>
-                            <input type="date" id="date" name="date" onfocus="if(this.value == 'éééé-hh-nn vagy éééé.hh.nn') { this.value = ''; }" value="éééé-hh-nn vagy éééé.hh.nn" class="form-control">
+                            <input type="text" id="date" name="date" class="form-control" placeholder="2000.01.01"
+                                data-bv-notempty="true"
+                                data-bv-notempty-message="A dátum kitöltése kötelező!"
+
+                                data-bv-date="true"
+                                data-bv-date-format="YYYY.MM.DD"
+                                data-bv-date-separator="."
+                                data-bv-date-message="A formátum nem megfelelő">
                             <span class="help-block">Kérem, "éééé-hh-nn" vagy "éééé.hh.nn" formátumot használjon!</span>
 							<span class="alertMsg danger"><i class="fa fa-warning"></i> Figyelem! Azonnali könyvelés - a bejegyzés nem törölhető!</span>
                             <input type="hidden" id="did" name="did" value="$id">
 	                    </div>
 						</div>
 						<div class="modal-footer">
-							<button type="input" value="sendMsg" class="btn btn-success btn-icon"><i class="fa fa-dollar"></i> Költség rögzítése</button>
+							<button type="submit" value="sendMsg" class="btn btn-success btn-icon"><i class="fa fa-dollar"></i> Költség rögzítése</button>
 							<button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
 						</div>
 					</form>
