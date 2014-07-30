@@ -98,7 +98,7 @@ function addDeposit() {
                 <input type="text" id="note" name="note" class="form-control">
 </div>
 <div class="buttons">
-            <button type="input" name="hozzad" value="Hozzaad" class="btn btn-success btn-icon"><i class="fa fa-plus"></i> Hozzáad</button>
+            <button type="submit" name="hozzad" value="Hozzaad" class="btn btn-success btn-icon"><i class="fa fa-plus"></i> Hozzáad</button>
 </div>
         </form>
     </div>
@@ -219,7 +219,7 @@ function addAdmin() {
             <input type="password" id="pass2" name="pass2" value="$pass" class="form-control"></div><br>
             
 
-        <button type="input" name="submit" value="Hozzaad" class="btn btn-success btn-icon"><i class="fa fa-sign-in"></i>Hozzáad</button>
+        <button type="submit" value="Hozzaad" class="btn btn-success btn-icon"><i class="fa fa-sign-in"></i>Hozzáad</button>
 
     </form>
             Az új admin automatikusan generált jelszava (többször nem jelenik meg):<span class="pwarning"> $pass</span>
@@ -385,7 +385,7 @@ function updateBaseData($data) {
 		            <input type="text" id="grabage" name="grabage" class="form-control" value="{$data[1]["yearly_amount"]}"> Ft{$data[1]["multiplier"]} 
 		        </div>
 		        <div class="buttons">
-		            <button type="input" name="submit" value="Modosit" class="btn btn-success btn-icon"><i class="fa fa-save"></i> Módosít</button>
+		            <button type="submit" class="btn btn-success btn-icon"><i class="fa fa-save"></i> Módosít</button>
                         </div>
 		    </form>
                         <div class="buttons">
@@ -423,7 +423,7 @@ function sendMessage() {
 							</div>
 						</div>
 						<div class="modal-footer">
-							<button type="input" name="submit" value="sendMsg" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Küldés</button>
+							<button type="submit" value="sendMsg" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Küldés</button>
 							<button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
 						</div>
 					</form>
@@ -452,7 +452,7 @@ function sendMessageNoUser() {
 				<label for="comment">Üzenet</label>
 				<textarea class="form-control" name="comment" id="comment" rows="4"></textarea>
 			</div>
-			<button type="input" name="submit" value="uzenetKuldese" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Küldés</button>
+			<button type="submit" value="uzenetKuldese" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Küldés</button>
 		</form>
 		</div>
 EOT;
@@ -576,7 +576,7 @@ function uploadFile() {
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="input" name="submit" value="uploadFile" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Feltöltés</button>
+                    <button type="submit" value="uploadFile" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Feltöltés</button>
                     <button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
                 </div>
             </form>
@@ -643,7 +643,7 @@ function newBoardMessage() {
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="input" name="submit" value="uploadFile" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Feltöltés</button>
+                    <button type="submit" value="uploadFile" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Feltöltés</button>
                     <button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
                 </div>
             </form>
@@ -684,7 +684,7 @@ function adminStat() {
                         <span class="help-block">Adja meg az évszámot!</span>
                     </div>
                     <div class="modal-footer">
-                        <button type="input" name="submit" value="editPassword" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Választ</button>
+                        <button type="submit" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Választ</button>
                         <button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
                     </div>
             </form>
@@ -717,7 +717,7 @@ function adminStat() {
                         <span class="help-block">Adja meg az ajtót!</span>
                     </div>
                     <div class="modal-footer">
-                        <button type="input" name="submit" value="editPassword" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Választ</button>
+                        <button type="submit" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Választ</button>
                         <button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
                     </div>
             </form>
@@ -741,7 +741,7 @@ function adminStat() {
                         <span class="help-block">Adja meg az évszámot!</span>
                     </div>
                     <div class="modal-footer">
-                        <button type="input" name="submit" value="editPassword" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Választ</button>
+                        <button type="submit" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Választ</button>
                         <button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
                     </div>
             </form>
@@ -765,7 +765,7 @@ function adminStat() {
                         <span class="help-block">Adja meg az évszámot!</span>
                     </div>
                     <div class="modal-footer">
-                        <button type="input" name="submit" value="editPassword" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Választ</button>
+                        <button type="submit" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Választ</button>
                         <button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
                     </div>
             </form>
@@ -798,7 +798,7 @@ function adminStat() {
                         <span class="help-block">Adja meg az ajtót!</span>
                     </div>
                     <div class="modal-footer">
-                        <button type="input" name="submit" value="editPassword" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Választ</button>
+                        <button type="submit" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Választ</button>
                         <button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
                     </div>
             </form>
@@ -831,7 +831,7 @@ function adminStat() {
                         <span class="help-block">Adja meg az ajtót!</span>
                     </div>
                     <div class="modal-footer">
-                        <button type="input" name="submit" value="editPassword" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Választ</button>
+                        <button type="submit" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Választ</button>
                         <button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
                     </div>
             </form>
@@ -861,7 +861,7 @@ function reAccountPayment($id, $payment) {
                                 
     </div>
 		        <div class="buttons">
-		            <button type="input" name="submit" value="Felvesz" class="btn btn-success btn-icon"><i class="fa fa-dollar"></i> Befizetés átkönyvelése</button>
+		            <button type="submit" value="Felvesz" class="btn btn-success btn-icon"><i class="fa fa-dollar"></i> Befizetés átkönyvelése</button>
 		        </div>
 EOT;
 }
@@ -878,7 +878,7 @@ function updateCcost($ccost) {
 		            <input type="hidden" id="id" name="id" class="form-control" value="{$ccost['id']}">
 		        </div>
 		        <div class="buttons">
-		            <button type="input" name="submit" value="Modosit" class="btn btn-success btn-icon"><i class="fa fa-save"></i> Módosít</button>
+		            <button type="submit" value="Modosit" class="btn btn-success btn-icon"><i class="fa fa-save"></i> Módosít</button>
 		        </div>
 		    </form>
 		</div>
@@ -908,7 +908,7 @@ function uploadCSV() {
                     </div>
                     
                 <div class="modal-footer">
-                    <button type="submit"  value="uploadFile" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Feltöltés</button>
+                    <button type="submit" value="uploadFile" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Feltöltés</button>
                     <button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
                 </div>
             </form>
@@ -949,7 +949,7 @@ function sendMessageToUser($email, $id) {
 							</div>
 						</div>
 						<div class="modal-footer">
-							<button type="submit"  class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Küldés</button>
+							<button type="submit" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Küldés</button>
 							<button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
 						</div>
 					</form>
