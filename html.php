@@ -243,7 +243,7 @@ function loginUser() {
 					<label for="pass">Jelszó</label>
 					<input type="password" id="pass" name="pass" class="form-control">
 			</div><br>
-			<button type="input" name="submit" value="Belepes" class="btn btn-success btn-icon"><i class="fa fa-sign-in"></i>Belépés</button>
+			<button type="submit" value="Belepes" class="btn btn-success btn-icon"><i class="fa fa-sign-in"></i>Belépés</button>
 			</form>
 
 EOT;
@@ -1034,12 +1034,12 @@ function updatePassword($user) {
 				   
                                         <div class="form-group">
 	                        <label for="pass1">Új jelszó</label>
-	                        <input type="text" class="form-control" name="pass1" id="pass1" value="" data-validation="required"/>
+	                        <input type="text" class="form-control" name="pass1" id="pass1" value="" />
 							<span class="help-block">Új jelszó</span>
 	                    </div>
 						<div class="form-group">
 	                        <label for="pass2">Jelszó megerősítése</label>
-	                        <input type="text" class="form-control" name="pass2" id="pass2" value="" data-validation="required"/>
+	                        <input type="text" class="form-control" name="pass2" id="pass2" value="" />
                                 <input type="hidden" class="form-control" name="id" id="id" value="{$user['id']}" />
 							<span class="help-block">Adja meg újra a jelszót. A megadott jelszavaknak egyezniük kell!</span>
 	                    </div>
