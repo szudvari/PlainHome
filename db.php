@@ -652,7 +652,7 @@ echo <<<EOT
 					<form action="insertocost.php" method="post"
                                          data-bv-feedbackicons-valid="glyphicon glyphicon-ok"
                                          data-bv-feedbackicons-invalid="glyphicon glyphicon-remove"
-                                         data-bv-feedbackicons-validating="glyphicon glyphicon-refresh">
+                                         data-bv-feedbackicons-validating="glyphicon glyphicon-refresh"/>
 						<div class="modal-body">
 							<div class="form-group">
                                         <p>Lakás: {$deposit['floor']} / {$deposit['door']}. ajtó</p>
@@ -661,12 +661,12 @@ echo <<<EOT
 		                    </div>
 				   
                                         <div class="form-group">
-	                        <label for="cost">Összeg</label> 
+	                        <label for="cost">Összeg</label>
                               <input type="text" id="cost" name="cost" class="form-control" data-bv-notempty="true"
                                                data-bv-notempty-message="Adjon meg egy összeget!"
                                                data-bv-regexp="true"
                                                data-bv-regexp-regexp="^[0-9]+$"
-                                               data-bv-regexp-message="Csak számokat írjon be!>
+                                               data-bv-regexp-message="Csak számokat írjon be!" />
 							<span class="help-block">Költség mértéke</span>
 	                    </div>
 						<div class="form-group">
