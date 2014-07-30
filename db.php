@@ -657,14 +657,25 @@ EOT;
 				   
                                         <div class="form-group">
 	                        <label for="payment">Összeg</label> 
-                              <input type="text" id="payment" name="payment" class="form-control" data-validation="required">
+                              <input type="text" id="payment" name="payment" class="form-control" data-bv-notempty="true"
+                                               data-bv-notempty-message="Adjon meg egy összeget!"
+                                               data-bv-regexp="true"
+                                               data-bv-regexp-regexp="^[0-9]+$"
+                                               data-bv-regexp-message="Csak számokat írjon be!">
 							<span class="help-block">Befizetés összege</span>
 	                    </div>
 						<div class="form-group">
 	                        <label for="account_date">Könyvelés dátuma</label> 
-                                <input type="date" id="account_date" name="account_date" class="form-control" data-validation="required">
+                                <input type="text" class="form-control" name="birthday" placeholder="2000.01.01"
+                                data-bv-notempty="true"
+                                data-bv-notempty-message="A dátum kitöltése kötelező!"
+
+                                data-bv-date="true"
+                                data-bv-date-format="YYYY.MM.DD"
+                                data-bv-date-separator="."
+                                data-bv-date-message="A formátum nem megfelelő">
                               <input type="hidden" id="did" name="did" value="$id">
-							<span class="help-block">Kérem, "éééé-hh-nn" vagy "éééé.hh.nn" formátumot használjon!</span>
+							<span class="help-block">Kérem, "éééé.hh.nn" formátumot használjon!</span>
 	                    </div>
 						</div>
 						<div class="modal-footer">

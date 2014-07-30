@@ -33,6 +33,11 @@ function htmlHead($title, $house) {
 		<script src="js/html5shiv.js"></script>
 		<script src="js/respond.js"></script>
 	<![endif]-->
+            <script>
+		$(document).ready(function() {
+                    $('form').bootstrapValidator();
+                });
+		</script>
      </head>
     <body>
 
@@ -50,11 +55,7 @@ function htmlEnd() {
 			</div>
 		</div>
 		<script src="js/stacktable.js" type="text/javascript"></script>
-		<script>
-		$(document).ready(function() {
-                    $('form').bootstrapValidator();
-                });
-		</script>
+		
 	</body>
 	</html>
 EOT;
@@ -97,7 +98,7 @@ function addDeposit() {
                 <input type="text" id="note" name="note" class="form-control">
 </div>
 <div class="buttons">
-            <button type="input" name="submit" value="Hozzaad" class="btn btn-success btn-icon"><i class="fa fa-plus"></i> Hozzáad</button>
+            <button type="input" name="hozzad" value="Hozzaad" class="btn btn-success btn-icon"><i class="fa fa-plus"></i> Hozzáad</button>
 </div>
         </form>
     </div>
@@ -869,7 +870,7 @@ function uploadCSV() {
                     </div>
                     
                 <div class="modal-footer">
-                    <button type="input" name="submit" value="uploadFile" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Feltöltés</button>
+                    <button type="submit"  value="uploadFile" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Feltöltés</button>
                     <button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
                 </div>
             </form>
@@ -910,7 +911,7 @@ function sendMessageToUser($email, $id) {
 							</div>
 						</div>
 						<div class="modal-footer">
-							<button type="input" name="submit" value="sendMsg" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Küldés</button>
+							<button type="submit"  class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Küldés</button>
 							<button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
 						</div>
 					</form>
@@ -962,7 +963,7 @@ function updateUser($user) {
 		                    </div>
 						</div>
 						<div class="modal-footer">
-							<button type="input" name="submit" value="sendMsg" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Küldés</button>
+							<button type="submit" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Küldés</button>
 							<button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
 						</div>
 					</form>
@@ -1006,7 +1007,7 @@ function updatePassword($user) {
 	                    </div>
 						</div>
 						<div class="modal-footer">
-							<button type="input" name="submit" value="sendMsg" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Módosít</button>
+							<button type="submit" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Módosít</button>
 							<button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
 						</div>
 					</form>
@@ -1045,7 +1046,7 @@ function kill($user) {
 	                    </div>
 						</div>
 						<div class="modal-footer">
-							<button type="input" name="submit" value="sendMsg" class="btn btn-success btn-icon-alt"><i class="fa fa-times"></i> Töröl</button>
+							<button type="submit" class="btn btn-success btn-icon-alt"><i class="fa fa-times"></i> Töröl</button>
 							<button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
 						</div>
 					</form>
@@ -1090,7 +1091,7 @@ function payment($deposit) {
 	                    </div>
 						</div>
 						<div class="modal-footer">
-							<button type="input" name="submit" value="sendMsg" class="btn btn-success btn-icon"><i class="fa fa-dollar"></i> Befizetés rögzítése</button>
+							<button type="submit" class="btn btn-success btn-icon"><i class="fa fa-dollar"></i> Befizetés rögzítése</button>
 							<button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
 						</div>
 					</form>
@@ -1114,9 +1115,10 @@ function oCost($deposit) {
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
 						<h4 class="modal-title">Új költség rögzítése</h4>
 					</div>
-					<form action="insertocost.php" method="post" id="registrationForm" data-bv-feedbackicons-valid="glyphicon glyphicon-ok"
-                    data-bv-feedbackicons-invalid="glyphicon glyphicon-remove"
-                    data-bv-feedbackicons-validating="glyphicon glyphicon-refresh">
+					<form action="insertocost.php" method="post" 
+                                            data-bv-feedbackicons-valid="glyphicon glyphicon-ok"
+                                            data-bv-feedbackicons-invalid="glyphicon glyphicon-remove"
+                                            data-bv-feedbackicons-validating="glyphicon glyphicon-refresh" />
 
 						<div class="modal-body">
 							<div class="form-group">
@@ -1127,7 +1129,13 @@ function oCost($deposit) {
 				   
                                         <div class="form-group">
 	                        <label for="cost">Összeg</label> 
-                              <input type="text" id="cost" name="cost" class="form-control" />
+                              <input type="text" id="cost" name="cost" class="form-control" 
+                              data-bv-notempty="true"
+                              data-bv-notempty-message="Adjon meg egy összeget!"
+                                  
+                              data-bv-regexp="true"
+                              data-bv-regexp-regexp="^[0-9]+$"
+                              data-bv-regexp-message="Csak számokat írjon be!"/>
 							<span class="help-block">Költség mértéke</span>
 	                    </div>
 						<div class="form-group">
@@ -1136,19 +1144,14 @@ function oCost($deposit) {
 	                    </div>
                                         <div class="form-group">
 	                    <label for="date">Rögzítés dátuma</label>
-                            <input type="date" id="date" name="date" placeholder="éééé-hh-nn vagy éééé.hh.nn" class="form-control" data-bv-notempty="true"
-                            data-bv-notempty-message="The date of birth is required"
-
-                            data-bv-date="true"
-                            data-bv-date-format="YYYY/MM/DD"
-                            data-bv-date-message="The date of birth is not valid" />
+                            <input type="date" id="date" name="date" placeholder="2000-01-01 vagy 2000.01.01" class="form-control" />
                             <span class="help-block">Kérem, "éééé-hh-nn" vagy "éééé.hh.nn" formátumot használjon!</span>
 							<span class="alertMsg danger"><i class="fa fa-warning"></i> Figyelem! Azonnali könyvelés - a bejegyzés nem törölhető!</span>
                             <input type="hidden" id="did" name="did" value="{$deposit['id']}">
 	                    </div>
 						</div>
 						<div class="modal-footer">
-							<button type="input" value="sendMsg" class="btn btn-success btn-icon"><i class="fa fa-dollar"></i> Költség rögzítése</button>
+							<button type="submit" class="btn btn-success btn-icon"><i class="fa fa-dollar"></i> Költség rögzítése</button>
 							<button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
 						</div>
 					</form>
@@ -1157,7 +1160,7 @@ function oCost($deposit) {
 		</div>		
 
 EOT;
-                            oCostFV($deposit['id']);
+                           
     
 }
 
@@ -1208,7 +1211,7 @@ function updateDepo($depo) {
                                 </div>
                            </div>
 						<div class="modal-footer">
-							<button type="input" name="submit" value="sendMsg" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Módosít</button>
+							<button type="submit" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Módosít</button>
 							<button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
 						</div>
 					</form>

@@ -34,14 +34,14 @@ if ($_SESSION["admin"] > 0)
     {
         addDeposit();
 
-        showContent("newdeposit", "newdepo");
+        //showContent("newdeposit", "newdepo");
     }
 }
 else
 {
     notLoggedIn();
 }
-readOnlyUpdateForm ($_SESSION['admin']);
+//readOnlyUpdateForm ($_SESSION['admin']);
 //oCostFV();
 htmlEnd();
 
