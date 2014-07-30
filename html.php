@@ -52,36 +52,8 @@ function htmlEnd() {
 		<script src="js/stacktable.js" type="text/javascript"></script>
 		<script>
 		$(document).ready(function() {
-		    $('#registrationForm').bootstrapValidator();
-		});
-		</script>
-		<script>
-		$(document).ready(function() {
-		    $('#loginForm').bootstrapValidator({
-		        message: 'This value is not valid',
-		        feedbackIcons: {
-		            valid: 'glyphicon glyphicon-ok',
-		            invalid: 'glyphicon glyphicon-remove',
-		            validating: 'glyphicon glyphicon-refresh'
-		        },
-		        fields: {
-		            username: {
-		                validators: {
-		                    notEmpty: {
-		                        message: 'The username is required'
-		                    }
-		                }
-		            },
-		            password: {
-		                validators: {
-		                    notEmpty: {
-		                        message: 'The password is required'
-		                    }
-		                }
-		            }
-		        }
-		    });
-		});
+                    $('form').bootstrapValidator();
+                });
 		</script>
 	</body>
 	</html>
