@@ -1132,21 +1132,7 @@ function oCost($deposit) {
 	                    </div>
 						<div class="form-group">
 	                        <label for="title">Jogcím</label> 
-                                <input type="text" id="title" name="title" class="form-control" data-bv-notempty="true"
-                                data-bv-notempty-message="The username is required and cannot be empty"
-
-                                data-bv-stringlength="true"
-                                data-bv-stringlength-min="6"
-                                data-bv-stringlength-max="30"
-                                data-bv-stringlength-message="The username must be more than 6 and less than 30 characters long"
-
-                                data-bv-regexp="true"
-                                data-bv-regexp-regexp="^[a-zA-Z0-9]+$"
-                                data-bv-regexp-message="The username can only consist of alphabetical and number"
-
-                                data-bv-different="true"
-                                data-bv-different-field="password"
-                                data-bv-different-message="The username and password cannot be the same as each other"/>
+                                <input type="text" id="title" name="title" class="form-control" />
 	                    </div>
                                         <div class="form-group">
 	                    <label for="date">Rögzítés dátuma</label>
