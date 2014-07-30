@@ -55,6 +55,34 @@ function htmlEnd() {
 		    $('#registrationForm').bootstrapValidator();
 		});
 		</script>
+		<script>
+		$(document).ready(function() {
+		    $('#loginForm').bootstrapValidator({
+		        message: 'This value is not valid',
+		        feedbackIcons: {
+		            valid: 'glyphicon glyphicon-ok',
+		            invalid: 'glyphicon glyphicon-remove',
+		            validating: 'glyphicon glyphicon-refresh'
+		        },
+		        fields: {
+		            username: {
+		                validators: {
+		                    notEmpty: {
+		                        message: 'The username is required'
+		                    }
+		                }
+		            },
+		            password: {
+		                validators: {
+		                    notEmpty: {
+		                        message: 'The password is required'
+		                    }
+		                }
+		            }
+		        }
+		    });
+		});
+		</script>
 	</body>
 	</html>
 EOT;
@@ -1114,7 +1142,10 @@ function oCost($deposit) {
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
 						<h4 class="modal-title">Új költség rögzítése</h4>
 					</div>
-					<form action="insertocost.php" method="post" id="oCost-{$deposit['id']}">
+					<form action="insertocost.php" method="post" id="registrationForm" data-bv-feedbackicons-valid="glyphicon glyphicon-ok"
+                    data-bv-feedbackicons-invalid="glyphicon glyphicon-remove"
+                    data-bv-feedbackicons-validating="glyphicon glyphicon-refresh">
+
 						<div class="modal-body">
 							<div class="form-group">
                                         <p>Lakás: {$deposit['floor']} / {$deposit['door']}. ajtó</p>
@@ -1124,16 +1155,35 @@ function oCost($deposit) {
 				   
                                         <div class="form-group">
 	                        <label for="cost">Összeg</label> 
-                              <input type="text" id="cost" name="cost" class="form-control">
+                              <input type="text" id="cost" name="cost" class="form-control" />
 							<span class="help-block">Költség mértéke</span>
 	                    </div>
 						<div class="form-group">
 	                        <label for="title">Jogcím</label> 
-                                <input type="text" id="title" name="title" class="form-control">
+                                <input type="text" id="title" name="title" class="form-control" data-bv-notempty="true"
+                                data-bv-notempty-message="The username is required and cannot be empty"
+
+                                data-bv-stringlength="true"
+                                data-bv-stringlength-min="6"
+                                data-bv-stringlength-max="30"
+                                data-bv-stringlength-message="The username must be more than 6 and less than 30 characters long"
+
+                                data-bv-regexp="true"
+                                data-bv-regexp-regexp="^[a-zA-Z0-9]+$"
+                                data-bv-regexp-message="The username can only consist of alphabetical and number"
+
+                                data-bv-different="true"
+                                data-bv-different-field="password"
+                                data-bv-different-message="The username and password cannot be the same as each other"/>
 	                    </div>
                                         <div class="form-group">
 	                    <label for="date">Rögzítés dátuma</label>
-                            <input type="date" id="date" name="date" placeholder="éééé-hh-nn vagy éééé.hh.nn" class="form-control">
+                            <input type="date" id="date" name="date" placeholder="éééé-hh-nn vagy éééé.hh.nn" class="form-control" data-bv-notempty="true"
+                            data-bv-notempty-message="The date of birth is required"
+
+                            data-bv-date="true"
+                            data-bv-date-format="YYYY/MM/DD"
+                            data-bv-date-message="The date of birth is not valid" />
                             <span class="help-block">Kérem, "éééé-hh-nn" vagy "éééé.hh.nn" formátumot használjon!</span>
 							<span class="alertMsg danger"><i class="fa fa-warning"></i> Figyelem! Azonnali könyvelés - a bejegyzés nem törölhető!</span>
                             <input type="hidden" id="did" name="did" value="{$deposit['id']}">
