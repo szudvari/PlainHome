@@ -684,10 +684,10 @@ echo <<<EOT
                                 data-bv-date-format="YYYY.MM.DD"
                                 data-bv-date-separator="."
                                 data-bv-date-message="A formátum nem megfelelő">
-                            <span class="help-block">Kérem, "éééé-hh-nn" vagy "éééé.hh.nn" formátumot használjon!</span>
-							<span class="alertMsg danger"><i class="fa fa-warning"></i> Figyelem! Azonnali könyvelés - a bejegyzés nem törölhető!</span>
+                            <span class="help-block">Kérem, "éééé.hh.nn" formátumot használjon!</span>
                             <input type="hidden" id="did" name="did" value="$id">
 	                    </div>
+								<div class="alertMsg danger"><i class="fa fa-warning"></i> Figyelem! Azonnali könyvelés - a bejegyzés nem törölhető!</div>
 						</div>
 						<div class="modal-footer">
 							<button type="submit" class="btn btn-success btn-icon"><i class="fa fa-dollar"></i> Költség rögzítése</button>

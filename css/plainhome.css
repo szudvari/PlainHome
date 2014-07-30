@@ -141,6 +141,17 @@ tr.completed { background: #f0f0f0; }
 /* ==========================================
 	Alert Notifications
    ========================================== */
+.alertMsgmod {
+    font-size: 14px;
+	font-family: 'Open Sans', sans-serif;
+    line-height: 1.5em;
+    margin: 20px 0;
+    padding: 12px 30px 10px 20px;
+    position: relative;
+}
+
+
+
 .alertMsg {
     font-size: 14px;
 	font-family: 'Open Sans', sans-serif;
