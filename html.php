@@ -1208,8 +1208,7 @@ function oCost($deposit) {
 	                    </div>
                                         <div class="form-group">
 	                    <label for="date">Rögzítés dátuma</label>
-<<<<<<< HEAD
-                            <input type="date" id="date" name="date" class="form-control" placeholder="2000.01.01"
+                            <input type="text" id="date" name="date" class="form-control" placeholder="2000.01.01"
                                 data-bv-notempty="true"
                                 data-bv-notempty-message="A dátum kitöltése kötelező!"
 
@@ -1222,10 +1221,6 @@ function oCost($deposit) {
                             <input type="hidden" id="did" name="did" value="{$deposit['id']}">
 	                    </div>
                             <div class="alertMsg danger"><i class="fa fa-warning"></i> Figyelem! Azonnali könyvelés - a bejegyzés nem törölhető!</div>
-=======
-                            <input type="date" id="date" name="date" placeholder="2000.01.01" class="form-control" />
-                            <span class="help-block">Kérem, "éééé.hh.nn" formátumot használjon!</span>
-                            <input type="hidden" id="did" name="did" value="{$deposit['id']}">
 	                    </div>
 	<div class="alertMsg danger"><i class="fa fa-warning"></i> Figyelem! Azonnali könyvelés - a bejegyzés nem törölhető!</div>
 >>>>>>> origin/master
