@@ -769,15 +769,15 @@ function getAllDepo() {
 
 
             <div class="col-md-1"> Emelet / Ajtó </div>
-            <div class="col-md-1"> Lakás terület (nm) </div>
-            <div class="col-md-1"> Lakók száma </div>
-            <div class="col-md-1 tool-tip" title="Lakás tulajdoni hányad">Lakás th </div>
-            <div class="col-md-1"> Lakó neve </div>
-            <div class="col-md-1" title="Közösköltség">Közösktg. </div>
-            <div class="col-md-1"> Egyenleg </div>
+            <div class="col-md-1" style='text-align:right'> Terület </div>
+            <div class="col-md-1" style='text-align:right'> Lakók </div>
+            <div class="col-md-1 tool-tip" title="Lakás tulajdoni hányad" style='text-align:right'>Lakás th </div>
+            <div class="col-md-2"> Lakó neve </div>
+            <div class="col-md-1 tool-tip" title="Közösköltség">Közösktg. </div>
+            <div class="col-md-1" style="text-align:right; padding-right:-5%;"> Egyenleg </div>
             <div class="col-md-1"> Részletek </div>
-            <div class="col-md-1" title="Új könyvelt befizetés rögzítése"> Befizetés </div>
-            <div class="col-md-1" title="Új költség rögzítése"> Új költség </div>
+            <div class="col-md-1 tool-tip" title="Új könyvelt befizetés rögzítése"> Befizetés </div>
+            <div class="col-md-1 tool-tip" title="Új költség rögzítése"> Új költség </div>
             <div class="col-md-1"> Módosítás </div>
 
         </div>
@@ -786,12 +786,12 @@ EOT;
     foreach ($deposit as $row) {
         echo '<div class="row" style="font-size:0.8em">';
         echo "<div class='col-md-1'> {$row['floor']} / {$row['door']}</div>";
-        echo "<div class='col-md-1'>" . str_replace(".", ",", round($row['area'], 2)) . "</div>";
-        echo "<div class='col-md-1'>" . str_replace(".", ",", round($row['residents_no'], 2)) . "</div>";
-        echo "<div class='col-md-1'>" . str_replace(".", ",", round($row['area_ratio'], 2)) . "</div>";
-        echo "<div class='col-md-1'>" . $row['resident_name'] . "</div>";
-        echo "<div class='col-md-1'>" . number_format($row['ccost'], 0, ',', ' ') . "</div>";
-        echo "<div class='col-md-1'>" . number_format($row['balance'], 0, ',', ' ') . "</div>";
+        echo "<div class='col-md-1' style='text-align:right;'>" . str_replace(".", ",", round($row['area'], 2)) . " m<sup>2</div>";
+        echo "<div class='col-md-1' style='text-align:right;'>" . str_replace(".", ",", round($row['residents_no'], 2)) . " fő</div>";
+        echo "<div class='col-md-1' style='text-align:right;'>" . str_replace(".", ",", round($row['area_ratio'], 2)) . "</div>";
+        echo "<div class='col-md-2'>" . $row['resident_name'] . "</div>";
+        echo "<div class='col-md-1' style='text-align:right;'>" . number_format($row['ccost'], 0, ',', ' ') . " Ft</div>";
+        echo "<div class='col-md-1' style='text-align:right; padding-right:-5%;'>" . number_format($row['balance'], 0, ',', ' ') . " Ft</div>";
         echo "<div class='col-md-1'><a href=\"mydepo.php?depositid=" . $row['id'] . "\">Részletek</a></div>";
         payment($row);
         oCost($row);
@@ -800,14 +800,14 @@ EOT;
         }
     
     echo '<div class="row" style="font-size:0.8em">';
-    echo '<div class="col-md-1">Összesen:</div>';
-    echo '<div class="col-md-1" style="text-align:right;">' . number_format($sumarea, 0, ',', ' ') . ' m<sup>2</sup></div>';
-    echo "<div class='col-md-1' style='text-align:right;'>$sumresidents fő</div>";
-    echo "<div class='col-md-1' style='text-align:right;'>" . number_format(str_replace(".", ",", round($sumarearatio, 2)), 0, ',', ' ') . "</div>";
-    echo '<div class="col-md-1"></div>';
-    echo "<div class='col-md-1' style='text-align:right;'>" . number_format($sumccost, 0, ',', ' ') . "</div>";
-    echo "<div class='col-md-1' style='text-align:right;'>" . number_format($sumbalance, 0, ',', ' ') . "</div>";
-    echo '<div class="col-md-4"></div>';
+    echo '<div class="col-md-1" style="background:#d9534f; color:#ffffff;">Összesen:</div>';
+    echo '<div class="col-md-1" style="text-align:right; background:#336699; color:#ffffff;">' . number_format($sumarea, 0, ',', ' ') . ' m<sup>2</sup></div>';
+    echo "<div class='col-md-1' style='text-align:right; background:#336699; color:#ffffff;'>$sumresidents fő</div>";
+    echo "<div class='col-md-1' style='text-align:right; background:#336699; color:#ffffff;'>" . number_format(str_replace(".", ",", round($sumarearatio, 2)), 0, ',', ' ') . "</div>";
+    echo '<div class="col-md-2" style="background:#336699;">&nbsp;</div>';
+    echo "<div class='col-md-1' style='text-align:right; background:#336699; color:#ffffff;'>" . number_format($sumccost, 0, ',', ' ') . " Ft</div>";
+    echo "<div class='col-md-1' style='text-align:right; background:#336699; color:#ffffff; padding-right:-5%;'>" . number_format($sumbalance, 0, ',', ' ') . " Ft</div>";
+    echo '<div class="col-md-4" style="background:#336699;">&nbsp;</div>';
     echo '</div>';
     echo '</div>';
    
