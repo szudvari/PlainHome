@@ -124,49 +124,49 @@ function addUser() {
                       data-bv-feedbackicons-invalid="glyphicon glyphicon-remove"
                       data-bv-feedbackicons-validating="glyphicon glyphicon-refresh">
                     <div class="modal-body">
-                        <div class="form-group">
+                        <div class="form-group form-group-spec">
                             <label for="firstname">Vezetéknév</label>
                             <input type="text" id="firstname" name="firstname" class="form-control" data-bv-notempty="true"
                                    data-bv-notempty-message="A mező kitöltése kötelező!">
 
                         </div>
-                        <div class="form-group">
+                        <div class="form-group form-group-spec">
                             <label for="lastname">Keresztnév</label>
                             <input type="text" id="lastname" name="lastname" class="form-control" data-bv-notempty="true"
                                    data-bv-notempty-message="A mező kitöltése kötelező!">
 
                         </div>
-                        <div class="form-group">
+                        <div class="form-group form-group-spec">
                             <label for="email">E-mail</label>
                             <input type="email" id="email" name="email" class="form-control" data-bv-notempty="true"
                                    data-bv-notempty-message="Az e-mail cím kitöltése kötelező!"
                                        data-bv-emailaddress-message="Hibás e-mail cím!">
 
                         </div>
-                        <div class="form-group">
+                        <div class="form-group form-group-spec">
                             <label for="phone">Telefonszám</label>
                             <input type="text" id="phone" name="phone" class="form-control">
 
                         </div>
-                        <div class="form-group">
+                        <div class="form-group form-group-spec">
                             <label for="username">Felhasználónév</label>
                             <input type="text" id="username" name="username" class="form-control" data-bv-notempty="true"
                                    data-bv-notempty-message="A mező kitöltése kötelező!">
 
                         </div>
-                        <div class="form-group">
+                        <div class="form-group form-group-spec">
                             <label for="floor">Emelet</label>
                             <input type="text" id="floor" name="floor" class="form-control" data-bv-notempty="true"
                                    data-bv-notempty-message="A mező kitöltése kötelező!">
 
                         </div>
-                        <div class="form-group">
+                        <div class="form-group form-group-spec">
                             <label for="door">Ajtó</label>
                             <input type="text" id="door" name="door" class="form-control" data-bv-notempty="true"
                                    data-bv-notempty-message="A mező kitöltése kötelező!">
 
                         </div>
-                        <div class="form-group">
+                        <div class="form-group form-group-spec">
                             <label for="pass">Jelszó</label>
                             <input type="password" id="pass" name="pass" value="$pass" class="form-control"  
                                    data-bv-identical="true"
@@ -174,15 +174,16 @@ function addUser() {
                                    data-bv-identical-message="A két jelszó nem egyezik">
 
                         </div>
+						<div class="form-group form-group-spec">
                         <label for="pass2">Jelszó újra</label>
-                    <div class="form-group">
+                    
                         <input type="password" id="pass2" name="pass2" value="$pass" class="form-control"  
                                data-bv-identical="true"
                                data-bv-identical-field="pass"
                                data-bv-identical-message="A két jelszó nem egyezik">
                     </div>
                     <div class="modal-footer">
-                        <p style="text-align:center;"> Az új felhasználó automatikusan generált jelszava (többször nem jelenik meg):  <span class="pwarning">$pass</span><br>
+                        <p class="help-block-pass"> Az új felhasználó automatikusan generált jelszava (többször nem jelenik meg):  <span class="pwarning">$pass</span><br>
                             Ha szeretné megváltoztatni, írja át a jelszó mezőkben!</p>
                         <button type="submit"  value="newuser" class="btn btn-success btn-icon"><i class="fa fa-plus"></i> Felvesz</button>
                         <button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
