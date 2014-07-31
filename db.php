@@ -859,7 +859,7 @@ function listResidents() {
   <div class="col-md-1 tool-tip" title="Telefon"> <i class="fa fa-phone"></i></div>
   <div class="col-md-1 tool-tip" title="Felhasználónév"><i class="fa fa-child"></i></div>
   <div class="col-md-1 tool-tip" title="Emelet/Ajtó"> <i class="fa fa-building"></i> </div>
-  <div class="col-md-1 tool-tip" title="Státsuz"> <i class="fa fa-thumbs-up"></i> </div>
+  <div class="col-md-1 tool-tip" title="Státusz"> <i class="fa fa-thumbs-up"></i> </div>
   <div class="col-md-1 tool-tip" title="Utolsó belépés"><i class="fa fa-book"></i></div> 
   <div class="col-md-1 tool-tip" title="Státusz módosítása"> <i class="fa fa-exchange"></i>  </div>
   <div class="col-md-1 tool-tip" title="Módosítás"> <i class="fa fa-check-square-o"></i> </div>
