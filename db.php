@@ -771,12 +771,12 @@ function getAllDepo() {
             <div class="col-md-1"> Emelet / Ajtó </div>
             <div class="col-md-1" style='text-align:right;'> Terület </div>
             <div class="col-md-1" style='text-align:right;'> Lakók </div>
-            <div class="col-md-1 tool-tip" title="Lakás tulajdoni hányad" style='text-align:right; border-top:none;'>Lakás th </div>
-            <div class="col-md-2" style='border-top:none;'> Lakó neve </div>
+            <div class="col-md-1 tool-tip" title="Lakás tulajdoni hányad" style='text-align:right;'>Lakás th </div>
+            <div class="col-md-2"> Lakó neve </div>
             <div class="col-md-1 tool-tip" title="Közösköltség" >Közösktg. </div>
             <div class="col-md-1" style="text-align:right;"> Egyenleg </div>
             <div class="col-md-1" > Részletek </div>
-            <div class="col-md-1 tool-tip" title="Új könyvelt befizetés rögzítése" style='border-top:none;'> Befizetés </div>
+            <div class="col-md-1 tool-tip" title="Új könyvelt befizetés rögzítése"> Befizetés </div>
             <div class="col-md-1 tool-tip" title="Új költség rögzítése"> Új költség </div>
             <div class="col-md-1"> Módosítás </div>
 
