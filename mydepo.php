@@ -25,11 +25,13 @@ if (isset($_GET["saved"]))
     popUp("Költség rögzítve.");
 }   
 if ($_SESSION['admin'] > 0) {
-    echo '<div class="buttons btn-back">
+    echo '<div class="content">
+<div class="buttons btn-back">
 	   <form action="deposits.php">
 	   <button type="submit" class="btn btn-success btn-icon"><i class="fa fa-arrow-circle-left"></i>Vissza</button>
 	   </form>
-	   </div>';
+	   </div>
+	</div>';
 }
 
 if (isset($_GET['depositid']) && ($_SESSION['admin']>0)) {
