@@ -236,6 +236,7 @@ th {
 .primaryth{
 	background: #336699;
 	color: #ffffff;
+	font-size:0.8em ;
 }
 .warningtr{
 	background: red;
