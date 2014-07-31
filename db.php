@@ -763,42 +763,44 @@ function getAllDepo() {
     echo <<<EOT
 <h3 class="primary"><i class="fa fa-list"></i> Albetétek - lista</h3>
 <a href="#" class="btn btn-primary btn-icon no-print" onclick="jQuery.print('#section-to-print')"><i class="fa fa-print"></i> Nyomtatás</a>    
-<table id="responsiveTable" class="large-only" cellspacing="0">
-<tr align="left" class="primary">
-   <th> id </th>
-   <th> Emelet </th>
-   <th> Ajtó </th>
-   <th> Lakás terület (nm) </th>
-   <th> Lakók száma </th>
-   <th class="tool-tip" title="Lakás tulajdoni hányad"> Lakás th </th>
-   <th> Lakó neve </th>
-   <th class="tool-tip" title="Közösköltség"> Közösktg. </th>
-   <th> Egyenleg </th>
-   <th class="no-print"> Részletek </th>
-   <th class="no-print tool-tip" title="Új könyvelt befizetés rögzítése"> Befizetés </th>
-   <th class="no-print tool-tip" title="Új költség rögzítése"> Új költség </th>
-   <th class="no-print"> Módosítás </th>
-     
-</tr>
+<div>
+    <div class="container">
+        <div class="heading">
+
+
+            <div class="colh"> id </div>
+            <div class="colh"> Emelet </div>
+            <div class="colh"> Ajtó </div>
+            <div class="colh"> Lakás terület (nm) </div>
+            <div class="colh"> Lakók száma </div>
+            <div class="colh tool-tip" title="Lakás tulajdoni hányad">Lakás th </div>
+            <div class="colh"> Lakó neve </div>
+            <div class="colh tool-tip" title="Közösköltség">Közösktg. </div>
+            <div class="colh"> Egyenleg </div>
+            <div class="col no-print"> Részletek </div>
+            <div class="col no-print tool-tip" title="Új könyvelt befizetés rögzítése"> Befizetés </div>
+            <div class="col no-print tool-tip" title="Új költség rögzítése"> Új költség </div>
+            <div class="col no-print"> Módosítás </div>
+
+        </div>
    
 EOT;
     foreach ($deposit as $row) {
-        echo '<tbody>';
-        echo '<tr>';
-        echo "<td style='text-align:right;'> {$row['id']} </td>";
-        echo "<td style='text-align:right;'> {$row['floor']} </td>";
-        echo "<td style='text-align:right;'> {$row['door']} </td>";
-        echo "<td style='text-align:right;'>" . str_replace(".", ",", round($row['area'], 2)) . "</td>";
-        echo "<td style='text-align:right;'>" . str_replace(".", ",", round($row['residents_no'], 2)) . "</td>";
-        echo "<td style='text-align:right;'>" . str_replace(".", ",", round($row['area_ratio'], 2)) . "</td>";
-        echo "<td style='text-align:left;'>" . $row['resident_name'] . "</td>";
-        echo "<td style='text-align:right;'>" . number_format($row['ccost'], 0, ',', ' ') . "</td>";
-        echo "<td style='text-align:right;'>" . number_format($row['balance'], 0, ',', ' ') . "</td>";
-        echo "<td class='no-print'><a href=\"mydepo.php?depositid=" . $row['id'] . "\">Részletek</a></td>";
+        echo '<div class="table-row">';
+        echo "<div class='col'> {$row['id']} </div>";
+        echo "<div class='col'> {$row['floor']} </div>";
+        echo "<div class='col'> {$row['door']} </div>";
+        echo "<div class='col'>" . str_replace(".", ",", round($row['area'], 2)) . "</div>";
+        echo "<div class='col'>" . str_replace(".", ",", round($row['residents_no'], 2)) . "</div>";
+        echo "<div class='col'>" . str_replace(".", ",", round($row['area_ratio'], 2)) . "</div>";
+        echo "<div class='col'>" . $row['resident_name'] . "</div>";
+        echo "<div class='col'>" . number_format($row['ccost'], 0, ',', ' ') . "</div>";
+        echo "<div class='col'>" . number_format($row['balance'], 0, ',', ' ') . "</div>";
+        echo "<div class='col no-print'><a href=\"mydepo.php?depositid=" . $row['id'] . "\">Részletek</a></div>";
         payment($row);
         oCost($row);
         updateDepo($row);
-        echo '</tr>';
+        echo '</div>';
     }
     echo '<tr>';
     echo '<td class="tdprimary" colspan=3>Összesen:</td>';

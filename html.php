@@ -1098,7 +1098,7 @@ EOT;
 function payment($deposit) {
     echo <<<EOT
 
-		<td><a data-toggle="modal" href="#newPayment-{$deposit['id']}">Új befizetés</a></td>
+		<div class='col no-print'><a data-toggle="modal" href="#newPayment-{$deposit['id']}">Új befizetés</a></div>
 		<!-- -- Uj befizetes Modal -- -->
 		<div class="modal fade" id="newPayment-{$deposit['id']}" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog">
@@ -1144,7 +1144,7 @@ function oCost($deposit) {
     
     echo <<<EOT
 
-		<td><a data-toggle="modal" href="#newOCost-{$deposit['id']}">Új költség</a></td>
+		<div class='col no-print'><a data-toggle="modal" href="#newOCost-{$deposit['id']}">Új költség</a></div>
 		<!-- -- Uj koltseg Modal -- -->
 		<div class="modal fade" id="newOCost-{$deposit['id']}" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog">
@@ -1205,7 +1205,7 @@ EOT;
 function updateDepo($depo) {
     echo <<<EOT
 
-		<td><a data-toggle="modal" href="#updateDepo-{$depo['id']}">Módosít</a></td>
+		<div class='col no-print'><a data-toggle="modal" href="#updateDepo-{$depo['id']}">Módosít</a></div>
 		<!-- -- Albetet update Modal -- -->
 		<div class="modal fade" id="updateDepo-{$depo['id']}" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog">

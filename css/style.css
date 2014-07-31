@@ -1945,3 +1945,38 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6d0019', end
 	margin:0 auto;
 	box-shadow:inset 0 1px 0 #7bffb6;
 }
+
+                /*--------------------------------
+		 CSS tables
+		---------------------------------*/
+.container{
+    display:table;
+    width:100%;
+    border-collapse: collapse;
+    }
+.heading {
+     font-weight: bold;
+     display:table-row;
+     background-color:#336699;
+     text-align: left;
+     line-height: 25px;
+     font-size: 14px;
+     font-family:arial;
+     color:#fff;
+    
+}
+.table-row{  
+     display:table-row;
+     text-align: right;
+}
+.col{
+    display:table-cell;
+    border: 1px solid #CCC;
+	padding:0 0 0 5px;
+}
+.colh{
+    display:table-cell;
+    border: 1px solid #CCC;
+	padding:0 0 0 5px;
+	text-align: center;
+}
