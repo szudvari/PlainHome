@@ -775,11 +775,12 @@ function getAllDepo() {
             <div class="col-md-2"> Lakó neve </div>
             <div class="col-md-1 tool-tip" title="Közösköltség" >Közösktg. </div>
             <div class="col-md-1" style="text-align:right;"> Egyenleg </div>
+    <div class="no-print">
             <div class="col-md-1" > Részletek </div>
             <div class="col-md-1 tool-tip" title="Új könyvelt befizetés rögzítése"> Befizetés </div>
             <div class="col-md-1 tool-tip" title="Új költség rögzítése"> Új költség </div>
             <div class="col-md-1"> Módosítás </div>
-
+    </div>
         </div>
    
 EOT;
@@ -792,10 +793,12 @@ EOT;
         echo "<div class='col-md-2'>" . $row['resident_name'] . "</div>";
         echo "<div class='col-md-1' style='text-align:right;'>" . number_format($row['ccost'], 0, ',', ' ') . " Ft</div>";
         echo "<div class='col-md-1' style='text-align:right;'>" . number_format($row['balance'], 0, ',', ' ') . " Ft</div>";
+    echo '<div class="no-print">';
         echo "<div class='col-md-1'><a href=\"mydepo.php?depositid=" . $row['id'] . "\">Részletek</a></div>";
         payment($row);
         oCost($row);
         updateDepo($row);
+        echo '</div>';
         echo '</div>';
         }
     
@@ -807,7 +810,13 @@ EOT;
     echo '<div class="col-md-2" style="background:#336699;">&nbsp;</div>';
     echo "<div class='col-md-1' style='text-align:right; background:#336699; color:#ffffff;'>" . number_format($sumccost, 0, ',', ' ') . " Ft</div>";
     echo "<div class='col-md-1' style='text-align:right; background:#336699; color:#ffffff;'>" . number_format($sumbalance, 0, ',', ' ') . " Ft</div>";
+<<<<<<< HEAD
     echo '<div id="col4"class="col-md-4" style="background:#336699;">&nbsp;</div>';
+=======
+    echo '<div class="no-print">';
+    echo '<div class="col-md-4" style="background:#336699;">&nbsp;</div>';
+>>>>>>> FETCH_HEAD
+    echo '</div>';
     echo '</div>';
     echo '</div>';
    
