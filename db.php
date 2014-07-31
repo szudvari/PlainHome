@@ -881,7 +881,6 @@ EOT;
                 $color = "green";
             }
                   
-            echo $lastweek;
             echo '<div class="row" style="font-size:0.8em;">';
             
             echo '<div class="col-md-2"><i class="fa fa-square" style="color:'. $color.';"></i>' . ' ' . $row['firstname'] . ' ' . $row['lastname'] . '</div>';
