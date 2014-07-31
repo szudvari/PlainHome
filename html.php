@@ -1307,10 +1307,7 @@ function updateDepo($depo) {
                     <div class="form-group">
                         <label for="area">Lakás alapterülete</label>
                         <input type="text" class="area" id="area" name="area" value="{$depo['area']}" data-bv-notempty="true"
-                               data-bv-notempty-message="A mező kitöltése kötelező!"
-                               data-bv-regexp="true"
-                               data-bv-regexp-regexp="^[0-9]+$"
-                               data-bv-regexp-message="Csak számokat írjon be!">
+                               data-bv-notempty-message="A mező kitöltése kötelező!">
                     </div>
                     <div class="form-group">
                         <label for="residents">Lakók száma</label>
