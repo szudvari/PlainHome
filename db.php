@@ -873,7 +873,7 @@ EOT;
 
             echo '<div class="row" style="font-size:0.8em;">';
             
-            echo '<div class="col-md-2"><i class="fa fa-square"></i>' . ' ' . $row['firstname'] . ' ' . $row['lastname'] . '</div>';
+            echo '<div class="col-md-2"><i class="fa fa-square" style="color: green;"></i>' . ' ' . $row['firstname'] . ' ' . $row['lastname'] . '</div>';
             sendMessageToUser($row['email'], $row['id']);
             echo '<div class="col-md-1" style="text-align:center;">' . $row['phone'] . '</div>';
             echo '<div class="col-md-1">' . $row['username'] . '</div>';
