@@ -178,6 +178,10 @@
 		/* ==========================================
 			Forms
 		   ========================================== */
+		.form-group1 {
+		  margin-bottom: 15px;
+		  font-size:0.85em;
+		}
 		.form-control, input.floor, input.door, input.area, input.area_ratio {
 		  display: block;
 		  width: 100%;
@@ -248,6 +252,14 @@
 		  margin-bottom: 20px;
 		  color: #999999;
 		  font-size: 13px;
+		}
+		
+		.help-block-pass {
+		  display: block;
+		  margin-top: 5px;
+		  margin-bottom: 20px;
+		  color: #999999;
+		  font-size: 0.9em;
 		}
 
 		.highlightField {
