@@ -864,7 +864,7 @@ function listResidents() {
   <div class="col-md-1 tool-tip" title="Státusz módosítása"> <i class="fa fa-exchange"></i>  </div>
   <div class="col-md-1 tool-tip" title="Módosítás"> <i class="fa fa-check-square-o"></i> </div>
   <div class="col-md-1 tool-tip" title="Új jelszó"> <i class="fa fa-key"></i> </div>
-  <div class="col-md-1 tool-tip" title="Felhasnáló törlése"> <i class="fa fa-times"></i></div>
+  <div class="col-md-1 tool-tip" title="Felhasználó törlése"> <i class="fa fa-times"></i></div>
         </div>
     </div>
 EOT;
@@ -1042,12 +1042,12 @@ function listAdmins() {
         echo <<<EOT
    <div class="container">
    <div class="row primaryth">
-   <div class="col-md-2"> Username </div>
-   <div class="col-md-2"> E-mail </div>
-   <div class="col-md-2"> Szerepkör</div>
-   <div class="col-md-2"> Jelszó módosítás </div>
-   <div class="col-md-2"> Szerepkör módosítása </div>
-   <div class="col-md-2"> Admin törlése </div>
+   <div class="col-md-2 tool-tip" title="Felhasználónév"><i class="fa fa-child"></i></div>
+   <div class="col-md-2 tool-tip" title="E-mail"> <i class="fa fa-envelope"></i></div>
+   <div class="col-md-2 tool-tip" title="Szerepkör"> <i class="fa fa-thumbs-up"></i> </div>
+   <div class="col-md-2 tool-tip" title="Új jelszó"> <i class="fa fa-key"></i> </div>
+   <div class="col-md-2 tool-tip" title="Szerepkör módosítása"> <i class="fa fa-exchange"></i>  </div>
+   <div class="col-md-2 tool-tip" title="Admin törlése"> <i class="fa fa-times"></i></div>
    </div>
    </div>
 EOT;
