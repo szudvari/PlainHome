@@ -237,6 +237,7 @@ th {
 	background: #336699;
 	color: #ffffff;
 	font-size:0.8em ;
+        border-top: none; 
 }
 .warningtr{
 	background: red;
