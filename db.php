@@ -807,7 +807,7 @@ EOT;
     echo '<div class="col-md-2" style="background:#336699;">&nbsp;</div>';
     echo "<div class='col-md-1' style='text-align:right; background:#336699; color:#ffffff;'>" . number_format($sumccost, 0, ',', ' ') . " Ft</div>";
     echo "<div class='col-md-1' style='text-align:right; background:#336699; color:#ffffff;'>" . number_format($sumbalance, 0, ',', ' ') . " Ft</div>";
-    echo '<div class="col-md-4" style="background:#336699;">&nbsp;</div>';
+    echo '<div id="col4"class="col-md-4" style="background:#336699;">&nbsp;</div>';
     echo '</div>';
     echo '</div>';
    
