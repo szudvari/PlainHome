@@ -1,0 +1,135 @@
+<!doctype html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="favicon.ico" rel="icon" type="image/x-icon" />
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/bootstrap-dialog.js" type="text/javascript"></script>
+    <script src="js/bootstrapValidator.js" type="text/javascript"></script>
+    <script src="js/plainhome.js" type="text/javascript"></script>
+    <script src="js/form-validator.js" type="text/javascript"></script>
+    <script src="js/language/hu_HU.js" type="text/javascript"></script>
+	<script src="js/print.js" type="text/javascript"></script>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>     
+    <link href="css/bootstrap-dialog.css" rel="stylesheet" type="text/css"/>
+	<link href="css/bootstrap.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+	<link href="css/plainhome.css" rel="stylesheet">
+	<link href="css/datepicker.css" rel="stylesheet">
+	<link href="css/font-awesome.min.css" rel="stylesheet">
+	<link href="css/bootstrapValidator.css" rel="stylesheet">
+<!--[if lt IE 9]>
+	<script src="js/html5shiv.js"></script>
+	<script src="js/respond.js"></script>
+<![endif]-->
+<title>tablazat div-el</title>
+<style type="text/css">
+.container{
+    display:table;
+    width:100%;
+    border-collapse: collapse;
+    }
+.heading {
+     font-weight: bold;
+     display:table-row;
+     background-color:#336699;
+     text-align: left;
+     line-height: 25px;
+     font-size: 14px;
+     font-family:arial;
+     color:#fff;
+    
+}
+.table-row{  
+     display:table-row;
+     text-align: right;
+}
+.col{
+    display:table-cell;
+    border: 1px solid #CCC;
+	padding:0 0 0 5px;
+}
+.colh{
+    display:table-cell;
+    border: 1px solid #CCC;
+	padding:0 0 0 5px;
+	text-align: center;
+}
+
+  </style>
+</head>
+
+ 
+<body>
+	<div>
+	<div class="container">
+	    <div class="heading">
+	         <div class="colh">ID</div>
+	         <div class="colh">Emelet</div>
+	         <div class="colh">Ajtó</div>
+	         <div class="colh">Lakás terület (nm)</div>
+	         <div class="colh">Lakók száma</div>
+	         <div class="colh tool-tip" title="Lakás tulajdoni hányad">Lakás th</div>
+	         <div class="colh"> Lakó neve </div>
+	         <div class="colh tool-tip" title="Közösköltség">Közösktg.</div>
+	         <div class="colh">Egyenleg</div>
+	         <div class="colh no-print">Részletek</div>
+	         <div class="colh no-print tool-tip" title="Új könyvelt befizetés rögzítése">Befizetés</div>
+	         <div class="col no-print tool-tip" title="Új költség rögzítése">Új költség</div>
+	         <div class="col no-print">Módosítás</div>
+	    </div>
+	    <div class="table-row">
+	         <div class="col">1</div>
+	         <div class="col">fsz.</div>
+			 <div class="col">1</div>
+	         <div class="col">52,35</div>
+	         <div class="col">2</div>
+	         <div class="col">164</div>
+	         <div class="col" style='text-align:left;'>JÁVORSZKYNÉ HORVÁTH ILDIKÓ</div>
+	         <div class="col">10 050</div>
+	         <div class="col">-1 116 594</div>
+	         <div class="col">Részletek</div>
+	         <div class="col">Új befizetés</div>
+	         <div class="col">Új költség</div>
+	         <div class="col">Módosít</div>
+	    </div>
+	</div>
+	<div class="container">
+	    <div class="table-row">
+	         <div class="col tdprimary" style='text-align:left;'>Összesen</div>
+	         <div class="col tdwarning">3 205 m<sup>2</sup></div>
+			 <div class="col">ures</div>
+			<div class="col">ures</div>
+			<div class="col">ures</div>
+			<div class="col">ures</div>
+			<div class="col">ures</div>
+	         <div class="col warning">116 fő</div>
+	         <div class="col">9 960</div>
+	         <div class="col">ures</div>
+	         <div class="col">608 800</div>
+	         <div class="col">-3 088 257</div>
+	         <div class="col">ures</div>
+	    </div>
+	</div>
+	<table class="container" style="width:100%;">
+		<tr>
+			<td class="tdprimary" colspan="3">1</td>
+			<td>2</td>
+			<td>3</td>
+			<td>4</td>
+			<td>5</td>
+			<td>6</td>
+			<td>7</td>
+			<td>8</td>
+			<td>9</td>
+			<td>10</td>
+			<td>11</td>
+			<td>12</td>
+			<td>13</td>
+		</tr>
+	</table>
+	</div>
+</body>
+</html>
