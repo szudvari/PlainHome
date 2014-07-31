@@ -952,7 +952,7 @@ EOT;
 function sendMessageToUser($email, $id) {
     echo <<<EOT
 
-		<div class="col-md-1"><a data-toggle="modal" href="#newMsg-$id">Üzenet<br><span style="font-size:0.75em">$email</span></a></div>
+		<div class="col-md-1 tool-tip" title="$email"><a data-toggle="modal" href="#newMsg-$id">Üzenet</a></div>
 		<!-- -- Uj uzenet Modal -- -->
 		<div class="modal fade" id="newMsg-$id" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog">
