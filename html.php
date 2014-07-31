@@ -952,7 +952,7 @@ EOT;
 function sendMessageToUser($email, $id) {
     echo <<<EOT
 
-		<div class="col-md-1 tool-tip" title="$email"><a data-toggle="modal" href="#newMsg-$id">Üzenet</a></div>
+		<div class="col-md-1 tool-tip" title="$email" style='text-align:center;'><a data-toggle="modal" href="#newMsg-$id">Üzenet</a></div>
 		<!-- -- Uj uzenet Modal -- -->
 		<div class="modal fade" id="newMsg-$id" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog">
@@ -992,7 +992,7 @@ EOT;
 function updateUser($user) {
     echo <<<EOT
 
-		<div class="col-md-1"><a data-toggle="modal" href="#updateUser-{$user['id']}">Módosítás</a></div>
+		<div class="col-md-1" style='text-align:center;'><a data-toggle="modal" href="#updateUser-{$user['id']}">Módosítás</a></div>
 		<!-- -- User modositas Modal -- -->
 		<div class="modal fade" id="updateUser-{$user['id']}" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog">
@@ -1051,7 +1051,7 @@ EOT;
 function updatePassword($user) {
     echo <<<EOT
 
-		<div class="col-md-1"><a data-toggle="modal" href="#updatePassword-{$user['id']}">Új jelszó</a></div>
+		<div class="col-md-1" style='text-align:center;'><a data-toggle="modal" href="#updatePassword-{$user['id']}">Új jelszó</a></div>
 		<!-- -- Uj jelszo Modal -- -->
 		<div class="modal fade" id="updatePassword-{$user['id']}" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog">
@@ -1102,7 +1102,7 @@ EOT;
 function kill($user) {
     echo <<<EOT
 
-		<div class="col-md-1"><a data-toggle="modal" href="#killUser-{$user['id']}">Törlés</a></div>
+		<div class="col-md-1" style='text-align:center;'><a data-toggle="modal" href="#killUser-{$user['id']}">Törlés</a></div>
 		<!-- -- User torles Modal -- -->
 		<div class="modal fade" id="killUser-{$user['id']}" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog">
@@ -1348,7 +1348,7 @@ EOT;
 function updateAdminPassword($user) {
     echo <<<EOT
 
-		<div class="col-md-2"><a data-toggle="modal" href="#updatePassword-{$user['id']}">Új jelszó</a></div>
+		<div class="col-md-2" style="text-align:center;"><a data-toggle="modal" href="#updatePassword-{$user['id']}">Új jelszó</a></div>
 		<!-- -- Uj jelszo Modal -- -->
 		<div class="modal fade" id="updatePassword-{$user['id']}" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog">
@@ -1399,7 +1399,7 @@ EOT;
 function killAdm($user) {
     echo <<<EOT
 
-		<div class="col-md-2"><a data-toggle="modal" href="#killUser-{$user['id']}">Törlés</a></div>
+		<div class="col-md-2" style='text-align:center;'><a data-toggle="modal" href="#killUser-{$user['id']}">Törlés</a></div>
 		<!-- -- User torles Modal -- -->
 		<div class="modal fade" id="killUser-{$user['id']}" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog">

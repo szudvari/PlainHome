@@ -871,24 +871,22 @@ EOT;
         echo "<tbody>";
         foreach ($table as $row) {
 
-            echo '<div class="row" style="font-size:0.8em; text-align: center;">';
+            echo '<div class="row" style="font-size:0.8em;">';
             
-            echo '<div class="col-md-2">' . $row['firstname'] . ' ' . $row['lastname'] . '</div>';
+            echo '<div class="col-md-2" style="text-align:center;">' . $row['firstname'] . ' ' . $row['lastname'] . '</div>';
             sendMessageToUser($row['email'], $row['id']);
-            echo '<div class="col-md-1">' . $row['phone'] . '</div>';
-            echo '<div class="col-md-1">' . $row['username'] . '</div>';
-            echo '<div class="col-md-1">' . $row['floor'] . ' / '. $row['door'] .'</div>';
+            echo '<div class="col-md-1" style="text-align:center;">' . $row['phone'] . '</div>';
+            echo '<div class="col-md-1" style="text-align:center;">' . $row['username'] . '</div>';
+            echo '<div class="col-md-1" style="text-align:center;">' . $row['floor'] . ' / '. $row['door'] .'</div>';
 
-            echo '<div class="col-md-1">' . $row['active'] . '</div>';
-            echo '<div class="col-md-1">' . $row['last_login'] . '</div>';
-//            foreach ($row as $value) {
-//                echo "<td>$value</td>";
-//            }
+            echo '<div class="col-md-1" style="text-align:center;">' . $row['active'] . '</div>';
+            echo '<div class="col-md-1" style="text-align:center;">' . $row['last_login'] . '</div>';
+
             if ($row['active'] == "aktív") {
-                echo "<div class='col-md-1'><a id=\"alink\" href=\"update_ustatus.php?uid={$row['id']}"
+                echo "<div class='col-md-1' style='text-align:center;'><a id=\"alink\" href=\"update_ustatus.php?uid={$row['id']}"
                 . "&status=1\">Letiltás</a></div>";
             } else {
-                echo "<div class='col-md-1'><a id=\"alink\" href=\"update_ustatus.php?uid={$row['id']}"
+                echo "<div class='col-md-1' style='text-align:center;'><a id=\"alink\" href=\"update_ustatus.php?uid={$row['id']}"
                 . "&status=0\">Aktiválás</a></div>";
             }
             updateUser($row);
@@ -1053,17 +1051,17 @@ function listAdmins() {
 EOT;
         foreach ($table as $row) {
 
-            echo '<div class="row" style="font-size:0.8em; text-align:center;">';
-            echo "<div class='col-md-2'>{$row['username']}</div>";
-            echo "<div class='col-md-2'>{$row['email']}</div>";
-            echo "<div class='col-md-2'>{$row['role']}</div>";
+            echo '<div class="row" style="font-size:0.8em;">';
+            echo "<div class='col-md-2' style='text-align:center;'>{$row['username']}</div>";
+            echo "<div class='col-md-2' style='text-align:center;'>{$row['email']}</div>";
+            echo "<div class='col-md-2' style='text-align:center;'>{$row['role']}</div>";
             updateAdminPassword($row);
 
             if ($row['role'] == "Közösképviselő") {
-                echo "<div class='col-md-2'><a id=\"alink\" href=\"update_arole.php?uid={$row['id']}"
+                echo "<div class='col-md-2' style='text-align:center;'><a id=\"alink\" href=\"update_arole.php?uid={$row['id']}"
                 . "&status=0\">Szerepkör módosítása</a></div>";
             } else {
-                echo "<div class='col-md-2'><a id=\"alink\" href=\"update_arole.php?uid={$row['id']}"
+                echo "<div class='col-md-2' style='text-align:center;'><a id=\"alink\" href=\"update_arole.php?uid={$row['id']}"
                 . "&status=1\">Szerepkör módosítása</a></div>";
             }
             killAdm($row);
