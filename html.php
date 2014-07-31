@@ -1122,9 +1122,9 @@ function payment($deposit) {
 	                    </div>
 						<div class="form-group">
 	                        <label for="account_date">Könyvelés dátuma</label> 
-                                <input type="date" id="account_date" name="account_date" placeholder="éééé-hh-nn vagy éééé.hh.nn" class="form-control" data-validation="required">
+                                <input type="date" id="account_date" name="account_date" placeholder="éééé.hh.nn" class="form-control" data-validation="required">
                               <input type="hidden" id="did" name="did" value="{$deposit['id']}">
-							<span class="help-block">Kérem, "éééé-hh-nn" vagy "éééé.hh.nn" formátumot használjon!</span>
+							<span class="help-block">Kérem, "éééé.hh.nn" formátumot használjon!</span>
 	                    </div>
 								<div class="alertMsg danger"><i class="fa fa-warning"></i> Figyelem! Azonnali könyvelés - a bejegyzés nem törölhető!</div>
 						</div>
