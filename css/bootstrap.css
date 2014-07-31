@@ -1434,7 +1434,7 @@ margin-top: 20px;
 padding: 10px;
 }
 
-.col-md-1, .col-md-2 {
+.col-md-1, .col-md-2, .col-md-4 {
 	  position: relative;
 	  min-height: 1px;
 	 // padding-right: 10px;
