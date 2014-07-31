@@ -1122,7 +1122,7 @@ function payment($deposit) {
 	                    </div>
 						<div class="form-group">
 	                        <label for="account_date">Könyvelés dátuma</label> 
-                                <input type="date" id="account_date" name="account_date" placeholder="éééé.hh.nn" class="form-control" data-validation="required">
+                                <input type="date" id="account_date" name="account_date" placeholder="2000.01.01" class="form-control" data-validation="required">
                               <input type="hidden" id="did" name="did" value="{$deposit['id']}">
 							<span class="help-block">Kérem, "éééé.hh.nn" formátumot használjon!</span>
 	                    </div>
@@ -1182,11 +1182,11 @@ function oCost($deposit) {
 	                    </div>
                                         <div class="form-group">
 	                    <label for="date">Rögzítés dátuma</label>
-                            <input type="date" id="date" name="date" placeholder="2000-01-01 vagy 2000.01.01" class="form-control" />
-                            <span class="help-block">Kérem, "éééé-hh-nn" vagy "éééé.hh.nn" formátumot használjon!</span>
-							<span class="alertMsg danger"><i class="fa fa-warning"></i> Figyelem! Azonnali könyvelés - a bejegyzés nem törölhető!</span>
+                            <input type="date" id="date" name="date" placeholder="2000.01.01" class="form-control" />
+                            <span class="help-block">Kérem, "éééé.hh.nn" formátumot használjon!</span>
                             <input type="hidden" id="did" name="did" value="{$deposit['id']}">
 	                    </div>
+	<div class="alertMsg danger"><i class="fa fa-warning"></i> Figyelem! Azonnali könyvelés - a bejegyzés nem törölhető!</div>
 						</div>
 						<div class="modal-footer">
 							<button type="submit" class="btn btn-success btn-icon"><i class="fa fa-dollar"></i> Költség rögzítése</button>
