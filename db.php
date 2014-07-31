@@ -1039,44 +1039,42 @@ function listAdmins() {
         }
         echo '<div class="content">';
         echo '<h3 class="primary"><i class="fa fa-users"></i> Adminisztrátorok </h3>';
-        echo '<table id="responsiveTable" class="large-only" cellspacing="0">';
+        
         echo <<<EOT
-   <tr align="left" class="primary">
-   <th> ID </th>
-   <th> Username </th>
-   <th> E-mail </th>
-   <th> Szerepkör</th>
-   <th> Jelszó módosítás </th>
-   <th> Szerepkör módosítása </th>
-   <th> Admin törlése </th>
-   </tr>
+   <div class="container">
+   <div class="row primaryth">
+   <div class="col-md-2"> Username </div>
+   <div class="col-md-2"> E-mail </div>
+   <div class="col-md-2"> Szerepkör</div>
+   <div class="col-md-2"> Jelszó módosítás </div>
+   <div class="col-md-2"> Szerepkör módosítása </div>
+   <div class="col-md-2"> Admin törlése </div>
+   </div>
+   </div>
 EOT;
-        echo "<tbody>";
         foreach ($table as $row) {
 
-            echo '<tr>';
-            foreach ($row as $value) {
-                echo "<td>$value</td>";
-            }
-            echo <<<EOT
-      
-        <td><a href="update_apassword.php?uid={$row['id']}">Jelszó módosítás</a></td>
-EOT;
+            echo '<div class="row" style="font-size:0.8em">';
+            echo "<div class='col-md-2'>{$row['username']}</div>";
+            echo "<div class='col-md-2'>{$row['email']}</div>";
+            echo "<div class='col-md-2'>{$row['role']}</div>";
+            updateAdminPassword($row);
+
             if ($row['role'] == "Közösképviselő") {
-                echo "<td><a id=\"alink\" href=\"update_arole.php?uid={$row['id']}"
-                . "&status=0\">Szerepkör módosítása</a></td>";
+                echo "<div class='col-md-2'><a id=\"alink\" href=\"update_arole.php?uid={$row['id']}"
+                . "&status=0\">Szerepkör módosítása</a></div>";
             } else {
-                echo "<td><a id=\"alink\" href=\"update_arole.php?uid={$row['id']}"
-                . "&status=1\">Szerepkör módosítása</a></td>";
+                echo "<div class='col-md-2'><a id=\"alink\" href=\"update_arole.php?uid={$row['id']}"
+                . "&status=1\">Szerepkör módosítása</a></div>";
             }
-
-            echo "<td><a href=\"killadmin.php?uid={$row['id']}\">Admin törlése</a></td>";
-
-            echo '</tr>';
+            killAdm($row);
+            echo '</div>';
+            
+            
         }
+        echo '</div>';
 
-        echo '</tbody>';
-        echo '</table>';
+        
     } else {
         echo 'Nincsenek adminisztrátorok. Vegyen fel egyet!';
     }

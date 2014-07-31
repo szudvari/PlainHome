@@ -199,34 +199,61 @@ function addAdmin() {
     $pass = randomPassword();
     echo <<<EOT
     <div class="content">
-    <button id="newadmin" value="UjAdminFelvetele" class="btn btn-success btn-icon"><i class="fa fa-plus"></i>Új admin felvétele</button>
-    <div id="addadmin">
-    <h3>Új admin felvétele</h3>
-    <form action="adda.php" method="post">
-        <div class="form-group">
-            <label for="username">Felhasználónév</label>
-            <input type="text" id="username" name="username" class="form-control"></div><br>
 
-        <div class="form-group">
-            <label for="email">E-mail cím</label>
-            <input type="text" id="email" name="email" class="form-control"></div><br>
+    <a data-toggle="modal" href="#newUser" class="btn btn-success btn-icon"><i class="fa fa fa-plus"></i>Új adminisztrátor felvétele</a>           
+    <div class="modal fade" id="newUser" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header modal-primary">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+                    <h4 class="modal-title">Új felhasználó felvétele</h4>
+                </div>
+                <form action="adda.php" method="post"
+                      data-bv-feedbackicons-valid="glyphicon glyphicon-ok"
+                      data-bv-feedbackicons-invalid="glyphicon glyphicon-remove"
+                      data-bv-feedbackicons-validating="glyphicon glyphicon-refresh">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="email">E-mail</label>
+                            <input type="email" id="email" name="email" class="form-control" data-bv-notempty="true"
+                                   data-bv-notempty-message="Az e-mail cím kitöltése kötelező!"
+                                       data-bv-emailaddress-message="Hibás e-mail cím!">
 
-        <div class="form-group">
-            <label for="pass">Jelszó</label>
-            <input type="password" id="pass" name="pass" value="$pass" class="form-control"></div><br>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="username">Felhasználónév</label>
+                            <input type="text" id="username" name="username" class="form-control" data-bv-notempty="true"
+                                   data-bv-notempty-message="A mező kitöltése kötelező!">
 
-        <div class="form-group">
-            <label for="pass2">Jelszó újra</label>
-            <input type="password" id="pass2" name="pass2" value="$pass" class="form-control"></div><br>
-            
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="pass">Jelszó</label>
+                            <input type="password" id="pass" name="pass" value="$pass" class="form-control"  
+                                   data-bv-identical="true"
+                                   data-bv-identical-field="pass2"
+                                   data-bv-identical-message="A két jelszó nem egyezik">
 
-        <button type="submit" value="Hozzaad" class="btn btn-success btn-icon"><i class="fa fa-sign-in"></i>Hozzáad</button>
-
-    </form>
-            Az új admin automatikusan generált jelszava (többször nem jelenik meg):<span class="pwarning"> $pass</span>
-            Ha szeretné megváltoztatni, írja át a jelszó mezőkben!
+                        </div>
+                        <label for="pass2">Jelszó újra</label>
+                    <div class="form-group">
+                        <input type="password" id="pass2" name="pass2" value="$pass" class="form-control"  
+                               data-bv-identical="true"
+                               data-bv-identical-field="pass"
+                               data-bv-identical-message="A két jelszó nem egyezik">
+                    </div>
+                    <div class="modal-footer">
+                        <p style="text-align:center;"> Az új felhasználó automatikusan generált jelszava (többször nem jelenik meg):  <span class="pwarning">$pass</span><br>
+                            Ha szeretné megváltoztatni, írja át a jelszó mezőkben!</p>
+                        <button type="submit"  value="newuser" class="btn btn-success btn-icon"><i class="fa fa-plus"></i> Felvesz</button>
+                        <button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>  
 </div>
-    </div>
 EOT;
 }
 
@@ -1317,4 +1344,93 @@ function updateDepo($depo) {
 
 EOT;
 
+}
+function updateAdminPassword($user) {
+    echo <<<EOT
+
+		<div class="col-md-2"><a data-toggle="modal" href="#updatePassword-{$user['id']}">Új jelszó</a></div>
+		<!-- -- Uj jelszo Modal -- -->
+		<div class="modal fade" id="updatePassword-{$user['id']}" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-primary">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+						<h4 class="modal-title">Felhasználó jelszavának módosítása</h4>
+					</div>
+					<form action="update_apassword.php" method="post"
+                                            data-bv-feedbackicons-valid="glyphicon glyphicon-ok"
+                                            data-bv-feedbackicons-invalid="glyphicon glyphicon-remove"
+                                            data-bv-feedbackicons-validating="glyphicon glyphicon-refresh">
+						<div class="modal-body">
+							<div class="form-group">
+                                        <p>Admin: {$user['username']} - {$user['email']} </p>
+                                        
+								
+		                    </div>
+				   
+                                        <div class="form-group">
+	                        <label for="pass1">Új jelszó</label>
+	                        <input type="text" class="form-control" name="pass1" id="pass1" value="" data-bv-identical="true"
+                                               data-bv-identical-field="pass2"
+                                               data-bv-identical-message="A két jelszó nem egyezik"/>
+							<span class="help-block">Új jelszó</span>
+	                    </div>
+						<div class="form-group">
+	                        <label for="pass2">Jelszó megerősítése</label>
+	                        <input type="text" class="form-control" name="pass2" id="pass2" value="" data-bv-identical="true"
+                                               data-bv-identical-field="pass1"
+                                               data-bv-identical-message="A két jelszó nem egyezik"/>
+                                <input type="hidden" class="form-control" name="uid" id="uid" value="{$user['id']}" />
+							<span class="help-block">Adja meg újra a jelszót. A megadott jelszavaknak egyezniük kell!</span>
+	                    </div>
+						</div>
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Módosít</button>
+							<button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>		
+
+EOT;
+}
+
+function killAdm($user) {
+    echo <<<EOT
+
+		<div class="col-md-2"><a data-toggle="modal" href="#killUser-{$user['id']}">Törlés</a></div>
+		<!-- -- User torles Modal -- -->
+		<div class="modal fade" id="killUser-{$user['id']}" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header modal-primary">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+						<h4 class="modal-title">Felhasználó törlése</h4>
+					</div>
+					<form action="killadmin.php" method="post">
+						<div class="modal-body">
+							<div class="form-group">
+                                        <p class="lead">Biztosan törli a felhasználót?</p>
+                                        <p>Felhasználó: Admin: {$user['username']} - {$user['email']} </p>
+                                        
+								
+		                    </div>
+				   
+                                	<div class="form-group">
+	                        
+                                        <input type="hidden" class="form-control" name="uid" id="uid" value="{$user['id']}" />
+					<div class="alertMsg danger">Figyelem! A művelet nem visszavonható!</div>
+	                    </div>
+						</div>
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-success btn-icon-alt"><i class="fa fa-times"></i> Töröl</button>
+							<button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>		
+
+EOT;
 }
