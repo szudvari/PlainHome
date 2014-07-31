@@ -810,7 +810,7 @@ EOT;
     echo '<div class="col-md-4"></div>';
     echo '</div>';
     echo '</div>';
-    echo '</div>';
+   
     
     
     echo '</div>';
