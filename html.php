@@ -1214,7 +1214,7 @@ function updateDepo($depo) {
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
 						<h4 class="modal-title">Albetét módosítása</h4>
 					</div>
-					<form action="insertocost.php" method="post">
+					<form action="updatedepo.php" method="post">
 						<div class="modal-body">
 							<div class="form-group">
                                         <p>Lakás: {$depo['floor']} / {$depo['door']}. ajtó</p>
