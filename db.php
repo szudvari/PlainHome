@@ -765,7 +765,7 @@ function getAllDepo() {
 <a href="#" class="btn btn-primary btn-icon no-print" onclick="jQuery.print('#section-to-print')"><i class="fa fa-print"></i> Nyomtatás</a>    
 
     <div class="container">
-        <div class="row">
+        <div class="row primaryth">
 
 
             <div class="col-md-1"> Emelet / Ajtó </div>
@@ -842,7 +842,7 @@ function listResidents() {
             }
         }
         echo '<div class="content">';
-        echo '<h3 class="primary"><i class="fa fa-users"></i> Regisztrált lakók </h3>';
+        echo '<h3 class="primary"><i class="fa fa-users"></i>   </h3>';
         echo '<table id="responsiveTable" class="large-only" cellspacing="0">';
         echo <<<EOT
    <tr align="left" class="primary">
