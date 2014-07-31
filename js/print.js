@@ -112,7 +112,7 @@
                 var iframeCount = $iframe.length;
                 if (iframeCount === 0) {
                     // Create a new iFrame if none is given
-                    $iframe = $('<iframe height="0" width="0" border="0" wmode="Opaque"/>').prependTo('body').css({
+                    $iframe = $('<iframe height="0" width="1024" border="0" wmode="Opaque"/>').prependTo('body').css({
                         "position" : "absolute",
                         "top" : -999,
                         "left" : -999
