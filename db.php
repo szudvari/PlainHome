@@ -848,7 +848,7 @@ function listResidents() {
             }
         }
         echo '<div class="content">';
-        echo '<h3 class="primary"><i class="fa fa-users"></i>   </h3>';
+        echo '<h3 class="primary"><i class="fa fa-users"></i> Felhasználólista</h3>';
 
         echo <<<EOT
         <div class="container">
