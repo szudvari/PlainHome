@@ -119,3 +119,16 @@ EOT;
 
     mail($user['email'], $subject, $message, "From: $from\n");
 }
+
+function makeUnixTime ($string) {
+    $year=substr($string,0,4);
+    $month=substr($string,5,2);
+    $day=substr($string,8,2);
+    $hour=substr($string,11,2);
+    $min=substr($string,14,2);
+    $sec=substr($string,17,2);
+    
+    $time = mktime($sec,$min,$hour,$month,$day,$year);
+    
+    return $time;
+}

@@ -868,12 +868,23 @@ function listResidents() {
         </div>
     </div>
 EOT;
-        echo "<tbody>";
+        $lastweek = time() - (7 * 24 * 60 * 60);
         foreach ($table as $row) {
-
+            $time=makeUnixTime($row['last_login']);
+            if ($time == "943916400") {
+                $color = "grey";
+            }
+            else if ($time < $lastweek) {
+                $color = "yellow"; 
+            }
+            else {
+                $color = "green";
+            }
+                  
+            echo $lastweek;
             echo '<div class="row" style="font-size:0.8em;">';
             
-            echo '<div class="col-md-2"><i class="fa fa-square" style="color: green;"></i>' . ' ' . $row['firstname'] . ' ' . $row['lastname'] . '</div>';
+            echo '<div class="col-md-2"><i class="fa fa-square" style="color:'. $color.';"></i>' . ' ' . $row['firstname'] . ' ' . $row['lastname'] . '</div>';
             sendMessageToUser($row['email'], $row['id']);
             echo '<div class="col-md-1" style="text-align:center;">' . $row['phone'] . '</div>';
             echo '<div class="col-md-1">' . $row['username'] . '</div>';
