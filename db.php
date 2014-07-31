@@ -801,19 +801,27 @@ EOT;
         oCost($row);
         updateDepo($row);
         echo '</div>';
+    echo '</div>';
     }
-    echo '<tr>';
-    echo '<td class="tdprimary" colspan=3>Összesen:</td>';
-    echo "<td class='tdwarning' style='text-align:right;'>" . number_format($sumarea, 0, ',', ' ') . " m<sup>2</sup></td>";
-    echo "<td class='tdwarning' style='text-align:right;'>$sumresidents fő</td>";
-    echo "<td class='tdwarning' style='text-align:right;'>" . number_format(str_replace(".", ",", round($sumarearatio, 2)), 0, ',', ' ') . "</td>";
-    echo '<td class="tdprimary"></td>';
-    echo "<td class='tdwarning' style='text-align:right;'>" . number_format($sumccost, 0, ',', ' ') . "</td>";
-    echo "<td class='tdwarning' style='text-align:right;'>" . number_format($sumbalance, 0, ',', ' ') . "</td>";
-    echo '<td class="tdprimary no-print"  colspan=4></td>';
-    echo '</tr>';
-    echo '</tbody>';
-    echo '</table>';
+    echo '<div class="container">';
+    echo '<div class="table-row">';
+    echo '<div class="colh">$nbsp;</div>';
+    echo '<div class="colh">$nbsp;</div>';
+    echo '<div class="col tdprimary" style="text-align:left;">Összesen:</div>';
+    echo "<div class='col tdwarning' style='text-align:right;'>" . number_format($sumarea, 0, ',', ' ') . " m<sup>2</sup></div>";
+    echo "<div class='col tdwarning' style='text-align:right;'>$sumresidents fő</td>";
+    echo "<div class='col tdwarning' style='text-align:right;'>" . number_format(str_replace(".", ",", round($sumarearatio, 2)), 0, ',', ' ') . "</td>";
+    echo '<div class="col tdprimary"></td>';
+    echo "<div class='col tdwarning' style='text-align:right;'>" . number_format($sumccost, 0, ',', ' ') . "</td>";
+    echo "<div class='col tdwarning' style='text-align:right;'>" . number_format($sumbalance, 0, ',', ' ') . "</td>";
+    echo '<div class="col tdprimary no-print"></td>';
+    echo '<div class="col tdprimary no-print"></td>';
+    echo '<div class="col tdprimary no-print"></td>';
+    echo '<div class="col tdprimary no-print"></td>';
+    echo '</div>';
+    echo '</div>';
+    echo '</div>';
+    
     echo '</div>';
 }
 
