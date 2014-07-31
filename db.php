@@ -875,7 +875,7 @@ EOT;
                 $color = "grey";
             }
             else if ($time < $lastweek) {
-                $color = "yellow"; 
+                $color = "#f0ad4e"; 
             }
             else {
                 $color = "green";
