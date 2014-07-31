@@ -771,7 +771,7 @@ function getAllDepo() {
             <div class="col-md-1"> Emelet / Ajtó </div>
             <div class="col-md-1"> Lakás terület (nm) </div>
             <div class="col-md-1"> Lakók száma </div>
-            <div class="col-md-1" title="Lakás tulajdoni hányad">Lakás th </div>
+            <div class="col-md-1 tool-tip" title="Lakás tulajdoni hányad">Lakás th </div>
             <div class="col-md-1"> Lakó neve </div>
             <div class="col-md-1" title="Közösköltség">Közösktg. </div>
             <div class="col-md-1"> Egyenleg </div>
@@ -784,7 +784,7 @@ function getAllDepo() {
    
 EOT;
     foreach ($deposit as $row) {
-        echo '<div class="row">';
+        echo '<div class="row" style="font-size:0.8em">';
         echo "<div class='col-md-1'> {$row['floor']} / {$row['door']}</div>";
         echo "<div class='col-md-1'>" . str_replace(".", ",", round($row['area'], 2)) . "</div>";
         echo "<div class='col-md-1'>" . str_replace(".", ",", round($row['residents_no'], 2)) . "</div>";
@@ -799,7 +799,7 @@ EOT;
         echo '</div>';
         }
     
-    echo '<div class="row">';
+    echo '<div class="row" style="font-size:0.8em">';
     echo '<div class="col-md-1">Összesen:</div>';
     echo '<div class="col-md-1" style="text-align:right;">' . number_format($sumarea, 0, ',', ' ') . ' m<sup>2</sup></div>';
     echo "<div class='col-md-1' style='text-align:right;'>$sumresidents fő</div>";
