@@ -1107,7 +1107,10 @@ function payment($deposit) {
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
 						<h4 class="modal-title">Új könyvelt befizetés rögzítése</h4>
 					</div>
-					<form action="insertpayment.php" method="post">
+					<form action="insertpayment.php" method="post"
+                                            data-bv-feedbackicons-valid="glyphicon glyphicon-ok"
+                                            data-bv-feedbackicons-invalid="glyphicon glyphicon-remove"
+                                            data-bv-feedbackicons-validating="glyphicon glyphicon-refresh">
 						<div class="modal-body">
 							<div class="form-group">
                                         <p>Lakás: {$deposit['floor']} / {$deposit['door']}. ajtó</p>
@@ -1117,17 +1120,30 @@ function payment($deposit) {
 				   
                                         <div class="form-group">
 	                        <label for="payment">Összeg</label> 
-                              <input type="text" id="payment" name="payment" class="form-control" data-validation="required">
+                              <input type="text" id="payment" name="payment" class="form-control" data-bv-notempty="true"
+                              data-bv-notempty-message="Adjon meg egy összeget!
+                                  
+                              data-bv-regexp="true"
+                              data-bv-regexp-regexp="^[0-9]+$"
+                              data-bv-regexp-message="Csak számokat írjon be!"">
 							<span class="help-block">Befizetés összege</span>
 	                    </div>
 						<div class="form-group">
 	                        <label for="account_date">Könyvelés dátuma</label> 
-                                <input type="date" id="account_date" name="account_date" placeholder="éééé-hh-nn vagy éééé.hh.nn" class="form-control" data-validation="required">
+                                <input type="text" class="form-control" name="account_date" id="account_date" placeholder="2000.01.01"
+                                data-bv-notempty="true"
+                                data-bv-notempty-message="A dátum kitöltése kötelező!"
+
+                                data-bv-date="true"
+                                data-bv-date-format="YYYY.MM.DD"
+                                data-bv-date-separator="."
+                                data-bv-date-message="A formátum nem megfelelő">
                               <input type="hidden" id="did" name="did" value="{$deposit['id']}">
-							<span class="help-block">Kérem, "éééé-hh-nn" vagy "éééé.hh.nn" formátumot használjon!</span>
-							<span class="alertMsg danger"><i class="fa fa-warning"></i> Figyelem! Azonnali könyvelés - a bejegyzés nem törölhető!</span>
+							<span class="help-block">Kérem, "éééé.hh.nn" formátumot használjon!</span>
+							
 	                    </div>
-						</div>
+                            <div class="alertMsg danger"><i class="fa fa-warning"></i> Figyelem! Azonnali könyvelés - a bejegyzés nem törölhető!</div>
+                            </div>
 						<div class="modal-footer">
 							<button type="submit" class="btn btn-success btn-icon"><i class="fa fa-dollar"></i> Befizetés rögzítése</button>
 							<button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
@@ -1178,15 +1194,24 @@ function oCost($deposit) {
 	                    </div>
 						<div class="form-group">
 	                        <label for="title">Jogcím</label> 
-                                <input type="text" id="title" name="title" class="form-control" />
+                                <input type="text" id="title" name="title" class="form-control" data-bv-notempty="true"
+                                data-bv-notempty-message="A mező kitöltése kötelező!" />
 	                    </div>
                                         <div class="form-group">
 	                    <label for="date">Rögzítés dátuma</label>
-                            <input type="date" id="date" name="date" placeholder="2000-01-01 vagy 2000.01.01" class="form-control" />
-                            <span class="help-block">Kérem, "éééé-hh-nn" vagy "éééé.hh.nn" formátumot használjon!</span>
-							<span class="alertMsg danger"><i class="fa fa-warning"></i> Figyelem! Azonnali könyvelés - a bejegyzés nem törölhető!</span>
+                            <input type="date" id="date" name="date" class="form-control" placeholder="2000.01.01"
+                                data-bv-notempty="true"
+                                data-bv-notempty-message="A dátum kitöltése kötelező!"
+
+                                data-bv-date="true"
+                                data-bv-date-format="YYYY.MM.DD"
+                                data-bv-date-separator="."
+                                data-bv-date-message="A formátum nem megfelelő">
+                            <span class="help-block">Kérem, "éééé.hh.nn" formátumot használjon!</span>
+							
                             <input type="hidden" id="did" name="did" value="{$deposit['id']}">
 	                    </div>
+                            <div class="alertMsg danger"><i class="fa fa-warning"></i> Figyelem! Azonnali könyvelés - a bejegyzés nem törölhető!</div>
 						</div>
 						<div class="modal-footer">
 							<button type="submit" class="btn btn-success btn-icon"><i class="fa fa-dollar"></i> Költség rögzítése</button>
@@ -1214,7 +1239,10 @@ function updateDepo($depo) {
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
 						<h4 class="modal-title">Albetét módosítása</h4>
 					</div>
-					<form action="updatedepo.php" method="post">
+					<form action="updatedepo.php" method="post" 
+                                            data-bv-feedbackicons-valid="glyphicon glyphicon-ok"
+                                            data-bv-feedbackicons-invalid="glyphicon glyphicon-remove"
+                                            data-bv-feedbackicons-validating="glyphicon glyphicon-refresh" >
 						<div class="modal-body">
 							<div class="form-group">
                                         <p>Lakás: {$depo['floor']} / {$depo['door']}. ajtó</p>
@@ -1224,27 +1252,49 @@ function updateDepo($depo) {
 				   
                                 <div class="form-group">
 	                          <label for="floor">Emelet</label> 
-                               <input type="text" class="floor" id="floor" name="floor" class="form-control" value="{$depo['floor']}">
+                               <input type="text" class="floor" id="floor" name="floor" value="{$depo['floor']}" data-bv-notempty="true"
+                                data-bv-notempty-message="A mező kitöltése kötelező!"
+                                data-bv-regexp="true"
+                              data-bv-regexp-regexp="^[0-9]+$"
+                              data-bv-regexp-message="Csak számokat írjon be!">
+                               
                                 </div>
 						<div class="form-group">
 	                         <label for="door">Ajtó</label>
-		            <input type="text" class="door" id="door" name="door" class="form-control" value="{$depo['door']}">
+		            <input type="text" class="door" id="door" name="door" value="{$depo['door']}" data-bv-notempty="true"
+                                data-bv-notempty-message="A mező kitöltése kötelező!"
+                                    data-bv-regexp="true"
+                              data-bv-regexp-regexp="^[0-9]+$"
+                              data-bv-regexp-message="Csak számokat írjon be!">
 	                    </div>
                                         <div class="form-group">
 	                   <label for="area">Lakás alapterülete</label>
-		            <input type="text" class="area" id="area" name="area" class="form-control" value="{$depo['area']}">
+		            <input type="text" class="area" id="area" name="area" value="{$depo['area']}" data-bv-notempty="true"
+                                data-bv-notempty-message="A mező kitöltése kötelező!"
+                                    data-bv-regexp="true"
+                              data-bv-regexp-regexp="^[0-9]+$"
+                              data-bv-regexp-message="Csak számokat írjon be!">
 	                    </div>
                             <div class="form-group">
 	                        <label for="residents">Lakók száma</label>
-		            <input type="text" id="residents" name="residents" class="form-control" value="{$depo['residents_no']}">
+		            <input type="text" id="residents" name="residents" class="form-control" value="{$depo['residents_no']}" data-bv-notempty="true"
+                                data-bv-notempty-message="A mező kitöltése kötelező!""
+                                    data-bv-regexp="true"
+                              data-bv-regexp-regexp="^[0-9]+$"
+                              data-bv-regexp-message="Csak számokat írjon be!">
                                 </div>
                             <div class="form-group">
 	                        <label for="area_ratio">Lakás tulajdoni hányad</label>
-		            <input type="text" class="area_ratio" id="area_ratio" name="area_ratio" class="form-control" value="{$depo['area_ratio']}">
+		            <input type="text" class="area_ratio" id="area_ratio" name="area_ratio"  value="{$depo['area_ratio']}" data-bv-notempty="true"
+                                data-bv-notempty-message="A mező kitöltése kötelező!""
+                                    data-bv-regexp="true"
+                              data-bv-regexp-regexp="^[0-9]+$"
+                              data-bv-regexp-message="Csak számokat írjon be!">
                                 </div>
                             <div class="form-group">
 	                       <label for="note">Lakó neve</label>
-		            <input type="text" id="note" name="note" class="form-control" value="{$depo['resident_name']}">
+		            <input type="text" id="note" name="note" class="form-control" value="{$depo['resident_name']}" data-bv-notempty="true"
+                                data-bv-notempty-message="A mező kitöltése kötelező!">
 		            <input type="hidden" id="id" name="id" class="form-control" value="{$depo['id']}">
                                 </div>
                            </div>
