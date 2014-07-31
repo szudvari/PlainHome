@@ -1041,7 +1041,7 @@ function listAdmins() {
         
         echo <<<EOT
    <div class="container">
-   <div class="row primaryth">
+   <div class="row primaryth" style="font-size:1.2em; text-align:center;">
    <div class="col-md-2 tool-tip" title="Felhasználónév"><i class="fa fa-child"></i></div>
    <div class="col-md-2 tool-tip" title="E-mail"> <i class="fa fa-envelope"></i></div>
    <div class="col-md-2 tool-tip" title="Szerepkör"> <i class="fa fa-thumbs-up"></i> </div>
@@ -1053,7 +1053,7 @@ function listAdmins() {
 EOT;
         foreach ($table as $row) {
 
-            echo '<div class="row" style="font-size:0.8em">';
+            echo '<div class="row" style="font-size:0.8em; text-align:center;">';
             echo "<div class='col-md-2'>{$row['username']}</div>";
             echo "<div class='col-md-2'>{$row['email']}</div>";
             echo "<div class='col-md-2'>{$row['role']}</div>";
