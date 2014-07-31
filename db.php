@@ -852,34 +852,33 @@ function listResidents() {
 
         echo <<<EOT
         <div class="container">
-    <div class="row primaryth">
+    <div class="row primaryth"  style="font-size:1.2em; text-align:center;">
         
-  <div class="col-md-1"> Név </div>
-  <div class="col-md-1"> e-mail cím</div>
-  <div class="col-md-1"> telefon</div>
-  <div class="col-md-1 tool-tip" title="Felhasználónév"> UN</div>
-  <div class="col-md-1"> Emelet </div>
-  <div class="col-md-1"> Ajtó </div>
-  <div class="col-md-1"> Aktív </div>
-  <div class="col-md-1 tool-tip" title="Utolsó belépés"> Log</div> 
-  <div class="col-md-1 tool-tip" title="Státusz módosítása"> Státusz  </div>
-  <div class="col-md-1"> Módosítás </div>
-  <div class="col-md-1"> Új jelszó </div>
-  <div class="col-md-1"> Törlés</div>
+  <div class="col-md-2 tool-tip" title="Név"> <i class="fa fa-user"></i> </div>
+  <div class="col-md-1 tool-tip" title="Üzenet küldése"> <i class="fa fa-envelope"></i></div>
+  <div class="col-md-1 tool-tip" title="Telefon"> <i class="fa fa-phone"></i></div>
+  <div class="col-md-1 tool-tip" title="Felhasználónév"><i class="fa fa-child"></i></div>
+  <div class="col-md-1 tool-tip" title="Emelet/Ajtó"> <i class="fa fa-building"></i> </div>
+  <div class="col-md-1 tool-tip" title="Státsuz"> <i class="fa fa-thumbs-up"></i> </div>
+  <div class="col-md-1 tool-tip" title="Utolsó belépés"><i class="fa fa-book"></i></div> 
+  <div class="col-md-1 tool-tip" title="Státusz módosítása"> <i class="fa fa-exchange"></i>  </div>
+  <div class="col-md-1 tool-tip" title="Módosítás"> <i class="fa fa-check-square-o"></i> </div>
+  <div class="col-md-1 tool-tip" title="Új jelszó"> <i class="fa fa-key"></i> </div>
+  <div class="col-md-1 tool-tip" title="Felhasnáló törlése"> <i class="fa fa-times"></i></div>
         </div>
     </div>
 EOT;
         echo "<tbody>";
         foreach ($table as $row) {
 
-            echo '<div class="row" style="font-size:0.8em">';
+            echo '<div class="row" style="font-size:0.8em; text-align: center;">';
             
-            echo '<div class="col-md-1">' . $row['firstname'] . ' ' . $row['lastname'] . '</div>';
+            echo '<div class="col-md-2">' . $row['firstname'] . ' ' . $row['lastname'] . '</div>';
             sendMessageToUser($row['email'], $row['id']);
             echo '<div class="col-md-1">' . $row['phone'] . '</div>';
             echo '<div class="col-md-1">' . $row['username'] . '</div>';
-            echo '<div class="col-md-1">' . $row['floor'] . '</div>';
-            echo '<div class="col-md-1">' . $row['door'] . '</div>';
+            echo '<div class="col-md-1">' . $row['floor'] . ' / '. $row['door'] .'</div>';
+
             echo '<div class="col-md-1">' . $row['active'] . '</div>';
             echo '<div class="col-md-1">' . $row['last_login'] . '</div>';
 //            foreach ($row as $value) {
