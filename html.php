@@ -924,7 +924,7 @@ EOT;
 function sendMessageToUser($email, $id) {
     echo <<<EOT
 
-		<td><a data-toggle="modal" href="#newMsg-$id">$email</a></td>
+		<div class="col-md-1"><a data-toggle="modal" href="#newMsg-$id">Üzenet<br><span style="font-size:0.75em">$email</span></a></div>
 		<!-- -- Uj uzenet Modal -- -->
 		<div class="modal fade" id="newMsg-$id" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog">
@@ -945,8 +945,9 @@ function sendMessageToUser($email, $id) {
 								<textarea class="form-control" name="comment" id="comment" rows="4"></textarea>
                                                                 <input type="hidden" value="$email" id="email" name="email">
 								<span class="help-block">Kérjük fogalmazza meg röviden, lényegretörően üzenetét. HTML kód nem használható!</span>
-								<span class="alertMsg info">A levelet az alábbi címre postázzuk: $email.</span>
+								
 							</div>
+                                                          <div class="alertMsg warning">A levelet az alábbi címre postázzuk: $email.</div>
 						</div>
 						<div class="modal-footer">
 							<button type="submit" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Küldés</button>
@@ -963,7 +964,7 @@ EOT;
 function updateUser($user) {
     echo <<<EOT
 
-		<td><a data-toggle="modal" href="#updateUser-{$user['id']}">Módosítás</a></td>
+		<div class="col-md-1"><a data-toggle="modal" href="#updateUser-{$user['id']}">Módosítás</a></div>
 		<!-- -- User modositas Modal -- -->
 		<div class="modal fade" id="updateUser-{$user['id']}" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog">
@@ -972,21 +973,27 @@ function updateUser($user) {
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
 						<h4 class="modal-title">Felhasználó adatainak módosítása</h4>
 					</div>
-					<form action="update_user.php" method="post">
+					<form action="update_user.php" method="post"
+                                            data-bv-feedbackicons-valid="glyphicon glyphicon-ok"
+                                            data-bv-feedbackicons-invalid="glyphicon glyphicon-remove"
+                                            data-bv-feedbackicons-validating="glyphicon glyphicon-refresh">
 						<div class="modal-body">
 							<div class="form-group">
 		                        <label for="firstname">Vezetéknév</label>
-								<input type="text" class="form-control" name="firstname" id="firstname" data-validation="required" value="{$user['firstname']}" />
+								<input type="text" class="form-control" name="firstname" id="firstname" value="{$user['firstname']}" data-bv-notempty="true" 
+                               data-bv-notempty-message="Írja be a vezetéknevet!"/>
 								
 		                    </div>
 							<div class="form-group">
 		                        <label for="lastname">Keresztnév</label>
-								<input type="text" class="form-control" name="lastname" id="lastname" data-validation="required" value="{$user['lastname']}" />
+								<input type="text" class="form-control" name="lastname" id="lastname" value="{$user['lastname']}" data-bv-notempty="true" 
+                               data-bv-notempty-message="Írja be a keresztnevet" />
 								
 		                    </div>
                                                                 <div class="form-group">
 		                        <label for="email">e-mail</label>
-								<input type="text" class="form-control" name="email" id="email" data-validation="required" value="{$user['email']}" />
+								<input type="email" class="form-control" name="email" id="email" value="{$user['email']}" data-bv-notempty="true"
+                                                                    data-bv-emailaddress-message="Hibás e-mail cím"/>
 								
 		                    </div>
                                         <div class="form-group">
@@ -996,7 +1003,8 @@ function updateUser($user) {
 		                    </div>      
                                         <div class="form-group">
 		                        <label for="username">Felhasználónév</label>
-								<input type="text" class="form-control" name="username" id="username" data-validation="required" value="{$user['username']}" />
+								<input type="text" class="form-control" name="username" id="username" value="{$user['username']}" data-bv-notempty="true" 
+                                                                 data-bv-notempty-message="Írja be a felhasználónevet!"/>
 								<input type="hidden" id="user_id" name="user_id" value="{$user['id']}">
 		                    </div>
 						</div>
@@ -1015,7 +1023,7 @@ EOT;
 function updatePassword($user) {
     echo <<<EOT
 
-		<td><a data-toggle="modal" href="#updatePassword-{$user['id']}">Új jelszó</a></td>
+		<div class="col-md-1"><a data-toggle="modal" href="#updatePassword-{$user['id']}">Új jelszó</a></div>
 		<!-- -- Uj jelszo Modal -- -->
 		<div class="modal fade" id="updatePassword-{$user['id']}" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog">
@@ -1024,7 +1032,10 @@ function updatePassword($user) {
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
 						<h4 class="modal-title">Felhasználó jelszavának módosítása</h4>
 					</div>
-					<form action="passwordchange.php" method="post">
+					<form action="passwordchange.php" method="post"
+                                            data-bv-feedbackicons-valid="glyphicon glyphicon-ok"
+                                            data-bv-feedbackicons-invalid="glyphicon glyphicon-remove"
+                                            data-bv-feedbackicons-validating="glyphicon glyphicon-refresh">
 						<div class="modal-body">
 							<div class="form-group">
                                         <p>Felhasználó: {$user['firstname']} {$user['lastname']} - {$user['floor']}. emelet {$user['door']}. ajtó</p>
@@ -1034,12 +1045,16 @@ function updatePassword($user) {
 				   
                                         <div class="form-group">
 	                        <label for="pass1">Új jelszó</label>
-	                        <input type="text" class="form-control" name="pass1" id="pass1" value="" />
+	                        <input type="text" class="form-control" name="pass1" id="pass1" value="" data-bv-identical="true"
+                                               data-bv-identical-field="pass2"
+                                               data-bv-identical-message="A két jelszó nem egyezik"/>
 							<span class="help-block">Új jelszó</span>
 	                    </div>
 						<div class="form-group">
 	                        <label for="pass2">Jelszó megerősítése</label>
-	                        <input type="text" class="form-control" name="pass2" id="pass2" value="" />
+	                        <input type="text" class="form-control" name="pass2" id="pass2" value="" data-bv-identical="true"
+                                               data-bv-identical-field="pass1"
+                                               data-bv-identical-message="A két jelszó nem egyezik"/>
                                 <input type="hidden" class="form-control" name="id" id="id" value="{$user['id']}" />
 							<span class="help-block">Adja meg újra a jelszót. A megadott jelszavaknak egyezniük kell!</span>
 	                    </div>
@@ -1059,7 +1074,7 @@ EOT;
 function kill($user) {
     echo <<<EOT
 
-		<td><a data-toggle="modal" href="#killUser-{$user['id']}">Lakó törlése</a></td>
+		<div class="col-md-1"><a data-toggle="modal" href="#killUser-{$user['id']}">Törlés</a></div>
 		<!-- -- User torles Modal -- -->
 		<div class="modal fade" id="killUser-{$user['id']}" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog">
@@ -1080,7 +1095,7 @@ function kill($user) {
                                 	<div class="form-group">
 	                        
                                         <input type="hidden" class="form-control" name="id" id="id" value="{$user['id']}" />
-					<span class="alertMsg danger">Figyelem! A művelet nem visszavonható!</span>
+					<div class="alertMsg danger">Figyelem! A művelet nem visszavonható!</div>
 	                    </div>
 						</div>
 						<div class="modal-footer">

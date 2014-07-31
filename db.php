@@ -511,7 +511,7 @@ EOT;
 	                        <label for="pass1">Új jelszó</label>
 	                        <input type="text" class="form-control" name="pass1" id="pass1" value="" data-bv-identical="true"
                                                data-bv-identical-field="pass2"
-                                               data-bv-identical-message="A két jelszó nem egyezik"">
+                                               data-bv-identical-message="A két jelszó nem egyezik">
 							<span class="help-block">Új jelszó</span>
 	                    </div>
 						<div class="form-group">
@@ -849,55 +849,57 @@ function listResidents() {
         }
         echo '<div class="content">';
         echo '<h3 class="primary"><i class="fa fa-users"></i>   </h3>';
-        echo '<table id="responsiveTable" class="large-only" cellspacing="0">';
+
         echo <<<EOT
-   <tr align="left" class="primary">
-   <th> ID </th>
-   <th> Név </th>
-   <th> e-mail cím</th>
-   <th> telefonszám</th>
-   <th> Felhasználónév</th>
-   <th> Emelet </th>
-   <th> Ajtó </th>
-   <th> Aktív </th> 
-   <th> Utolsó belépés </th> 
-   <th> Státusz módosítása  </th>
-   <th> Módosítás </th>
-   <th> Új jelszó </th>
-   <th> Törlés</th>
-   </tr>
+        <div class="container">
+    <div class="row primaryth">
+        
+  <div class="col-md-1"> Név </div>
+  <div class="col-md-1"> e-mail cím</div>
+  <div class="col-md-1"> telefon</div>
+  <div class="col-md-1 tool-tip" title="Felhasználónév"> UN</div>
+  <div class="col-md-1"> Emelet </div>
+  <div class="col-md-1"> Ajtó </div>
+  <div class="col-md-1"> Aktív </div>
+  <div class="col-md-1 tool-tip" title="Utolsó belépés"> Log</div> 
+  <div class="col-md-1 tool-tip" title="Státusz módosítása"> Státusz  </div>
+  <div class="col-md-1"> Módosítás </div>
+  <div class="col-md-1"> Új jelszó </div>
+  <div class="col-md-1"> Törlés</div>
+        </div>
+    </div>
 EOT;
         echo "<tbody>";
         foreach ($table as $row) {
 
-            echo '<tr>';
-            echo '<td>' . $row['id'] . '</td>';
-            echo '<td>' . $row['firstname'] . ' ' . $row['lastname'] . '</td>';
+            echo '<div class="row" style="font-size:0.8em">';
+            
+            echo '<div class="col-md-1">' . $row['firstname'] . ' ' . $row['lastname'] . '</div>';
             sendMessageToUser($row['email'], $row['id']);
-            echo '<td>' . $row['phone'] . '</td>';
-            echo '<td>' . $row['username'] . '</td>';
-            echo '<td>' . $row['floor'] . '</td>';
-            echo '<td>' . $row['door'] . '</td>';
-            echo '<td>' . $row['active'] . '</td>';
-            echo '<td>' . $row['last_login'] . '</td>';
+            echo '<div class="col-md-1">' . $row['phone'] . '</div>';
+            echo '<div class="col-md-1">' . $row['username'] . '</div>';
+            echo '<div class="col-md-1">' . $row['floor'] . '</div>';
+            echo '<div class="col-md-1">' . $row['door'] . '</div>';
+            echo '<div class="col-md-1">' . $row['active'] . '</div>';
+            echo '<div class="col-md-1">' . $row['last_login'] . '</div>';
 //            foreach ($row as $value) {
 //                echo "<td>$value</td>";
 //            }
             if ($row['active'] == "aktív") {
-                echo "<td><a id=\"alink\" href=\"update_ustatus.php?uid={$row['id']}"
-                . "&status=1\">Letiltás</a></td>";
+                echo "<div class='col-md-1'><a id=\"alink\" href=\"update_ustatus.php?uid={$row['id']}"
+                . "&status=1\">Letiltás</a></div>";
             } else {
-                echo "<td><a id=\"alink\" href=\"update_ustatus.php?uid={$row['id']}"
-                . "&status=0\">Aktiválás</a></td>";
+                echo "<div class='col-md-1'><a id=\"alink\" href=\"update_ustatus.php?uid={$row['id']}"
+                . "&status=0\">Aktiválás</a></div>";
             }
             updateUser($row);
             updatePassword($row);
             kill($row);
-            echo '</tr>';
+            echo '</div>';
+            
         }
 
-        echo '</tbody>';
-        echo '</table>';
+        echo '</div>';
     } else {
         echo 'Még nem vett fel lakókat. Vegyen fel egyet!';
     }
