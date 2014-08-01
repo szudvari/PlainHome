@@ -679,8 +679,8 @@ echo <<<EOT
 	                    </div>
 								<div class="alertMsg danger"><i class="fa fa-warning"></i> Figyelem! Azonnali könyvelés - a bejegyzés nem törölhető!</div>
 						</div>
-	                    <script>
-                            $('.datepicker').on('changeDate', function(ev){
+						<script>
+                            $('.datepicker').datepicker().on('changeDate', function(ev){
 							    $(this).datepicker('hide');
 							});
                         </script>
