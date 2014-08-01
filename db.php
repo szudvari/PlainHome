@@ -621,7 +621,10 @@ EOT;
 							<span class="help-block">Kérem, "éééé.hh.nn" formátumot használjon!</span>
 	                    </div>
 	                    <script>
-                            $('.datepicker').datepicker();
+                            $('.datepicker').on('changeDate', function(ev){
+							    $(this).datepicker('hide');
+							});
+
                         </script>
 						</div>
 						<div class="modal-footer">
