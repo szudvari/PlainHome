@@ -1141,6 +1141,7 @@ EOT;
 }
 
 function payment($deposit) {
+	$today = today();
     echo <<<EOT
 
 		<div class='col-md-1'><a data-toggle="modal" href="#newPayment-{$deposit['id']}">Új befizetés</a></div>
@@ -1174,18 +1175,13 @@ function payment($deposit) {
                     </div>
                     <div class="form-group">
                         <label for="account_date">Könyvelés dátuma</label> 
-                        <input type="text" class="form-control" name="account_date" id="account_date" placeholder="2000.01.01"
-                               data-bv-notempty="true"
-                               data-bv-notempty-message="A dátum kitöltése kötelező!"
-                               data-bv-date="true"
-                               data-bv-date-format="YYYY.MM.DD"
-                               data-bv-date-separator="."
-                               data-bv-date-message="A formátum nem megfelelő">
+                        <input class="datepicker form-control" value="$today">
                         <input type="hidden" id="did" name="did" value="{$deposit['id']}">
-                        <span class="help-block">Kérem, "éééé.hh.nn" formátumot használjon!</span>
-
                     </div>
                     <div class="alertMsg danger"><i class="fa fa-warning"></i> Figyelem! Azonnali könyvelés - a bejegyzés nem törölhető!</div>
+					<script>
+                        $('.datepicker').datepicker();
+                    </script>
                 </div>
 
                 <div class="modal-footer">
@@ -1241,7 +1237,6 @@ function oCost($deposit) {
                 <div class="form-group">
                     <label for="date">Rögzítés dátuma</label>
                     <input class="datepicker form-control" value="$today">
-                    <span class="help-block">Kérem, "éééé.hh.nn" formátumot használjon!</span>
                     <input type="hidden" id="did" name="did" value="{$deposit['id']}">
                 </div>
                 <div class="alertMsg danger"><i class="fa fa-warning"></i> Figyelem! Azonnali könyvelés - a bejegyzés nem törölhető!</div>
