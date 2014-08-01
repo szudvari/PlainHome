@@ -20,8 +20,8 @@ else if (stripos($_SERVER['HTTP_REFERER'], "payed=1")) {
 if ($_SESSION["admin"] > 0)
 {
     $deposit['id'] = $_POST['did'];
-    $deposit['payment'] = str_replace(".", "-", $_POST['payment']);
-    $deposit['account_date'] = $_POST['account_date'];
+    $deposit['payment'] = $_POST['payment'];
+    $deposit['account_date'] = str_replace(".", "-", $_POST['account_date']);
     
 //print_r($deposit);
     $con = connectDb();

@@ -616,7 +616,7 @@ EOT;
 	                    </div>
 						<div class="form-group">
 	                        <label for="account_date">Könyvelés dátuma</label> 
-                                <input class="datepicker form-control" value="$today">
+                                <input class="datepicker form-control" value="$today" id="account_date" name="account_date">
                               <input type="hidden" id="did" name="did" value="$id">
 	                    </div>
 	<div class="alertMsg danger"><i class="fa fa-warning"></i> Figyelem! Azonnali könyvelés - a bejegyzés nem törölhető!</div>
@@ -674,7 +674,7 @@ echo <<<EOT
 	                    </div>
                                         <div class="form-group">
 	                    <label for="date">Rögzítés dátuma</label>
-                            <input class="datepicker form-control" value="$today">
+                            <input class="datepicker form-control" value="$today" name="date" id="date">
                             <input type="hidden" id="did" name="did" value="$id">
 	                    </div>
 								<div class="alertMsg danger"><i class="fa fa-warning"></i> Figyelem! Azonnali könyvelés - a bejegyzés nem törölhető!</div>

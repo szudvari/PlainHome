@@ -1175,7 +1175,7 @@ function payment($deposit) {
                     </div>
                     <div class="form-group">
                         <label for="account_date">Könyvelés dátuma</label> 
-                        <input class="datepicker-pay-{$deposit['id']} form-control" value="$today">
+                        <input class="datepicker-pay-{$deposit['id']} form-control" value="$today" name="account_date" id="account_date">
                         <input type="hidden" id="did" name="did" value="{$deposit['id']}">
                     </div>
                     <div class="alertMsg danger"><i class="fa fa-warning"></i> Figyelem! Azonnali könyvelés - a bejegyzés nem törölhető!</div>
@@ -1238,7 +1238,7 @@ function oCost($deposit) {
                 </div>
                 <div class="form-group">
                     <label for="date">Rögzítés dátuma</label>
-                    <input class="datepicker-cost-{$deposit['id']} form-control" value="$today">
+                    <input class="datepicker-cost-{$deposit['id']} form-control" value="$today" name="date" id="date">
                     <input type="hidden" id="did" name="did" value="{$deposit['id']}">
                 </div>
                 <div class="alertMsg danger"><i class="fa fa-warning"></i> Figyelem! Azonnali könyvelés - a bejegyzés nem törölhető!</div>
