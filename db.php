@@ -624,7 +624,6 @@ EOT;
                             $('.datepicker').on('changeDate', function(ev){
 							    $(this).datepicker('hide');
 							});
-
                         </script>
 						</div>
 						<div class="modal-footer">
@@ -680,8 +679,10 @@ echo <<<EOT
 	                    </div>
 								<div class="alertMsg danger"><i class="fa fa-warning"></i> Figyelem! Azonnali könyvelés - a bejegyzés nem törölhető!</div>
 						</div>
-						<script>
-                            $('.datepicker').datepicker();
+	                    <script>
+                            $('.datepicker').on('changeDate', function(ev){
+							    $(this).datepicker('hide');
+							});
                         </script>
 						<div class="modal-footer">
 							<button type="submit" class="btn btn-success btn-icon"><i class="fa fa-dollar"></i> Költség rögzítése</button>

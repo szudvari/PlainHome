@@ -1180,7 +1180,9 @@ function payment($deposit) {
                     </div>
                     <div class="alertMsg danger"><i class="fa fa-warning"></i> Figyelem! Azonnali könyvelés - a bejegyzés nem törölhető!</div>
 					<script>
-                        $('.datepicker-pay-{$deposit['id']}').datepicker();
+                        $('.datepicker-pay-{$deposit['id']}').datepicker().on('changeDate', function(ev){
+						    $(this).datepicker('hide');
+						});
                     </script>
                 </div>
 
@@ -1241,12 +1243,12 @@ function oCost($deposit) {
                 </div>
                 <div class="alertMsg danger"><i class="fa fa-warning"></i> Figyelem! Azonnali könyvelés - a bejegyzés nem törölhető!</div>
                                 <script>
-                                    $('.datepicker-cost-{$deposit['id']}').datepicker();
+                                    $('.datepicker-cost-{$deposit['id']}').datepicker().on('changeDate', function(ev){
+									$(this).datepicker('hide');
+								    });
                                 </script>
-            </div>
-            
-
-            <div class="modal-footer">
+            	</div>
+                <div class="modal-footer">
                 <button type="submit" class="btn btn-success btn-icon"><i class="fa fa-dollar"></i> Költség rögzítése</button>
                 <button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
             </div>
