@@ -11,6 +11,10 @@ a {
 		color: #2c3e50;
 		text-decoration: none;
 	}
+	a:focus {
+	  outline: none !important;
+	  text-decoration: none !important;
+	}
 
 hr {
   border: 0;
