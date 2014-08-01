@@ -1240,7 +1240,7 @@ function oCost($deposit) {
                 </div>
                 <div class="form-group">
                     <label for="date">Rögzítés dátuma</label>
-                    <input class="datepicker" value="$today">
+                    <input class="datepicker form-control" value="$today">
                     <span class="help-block">Kérem, "éééé.hh.nn" formátumot használjon!</span>
                     <input type="hidden" id="did" name="did" value="{$deposit['id']}">
                 </div>
