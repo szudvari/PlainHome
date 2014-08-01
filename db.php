@@ -363,7 +363,7 @@ function getMyDepo($id) {
     $grabage_cost = round(($grabage['yearly_amount'] * $deposit['residents_no']), 0);
 
     $ccosts = $ccost_cost + $grabage_cost;
-
+	$today = today();
 
     echo <<<EOT
 <div class="content">
@@ -616,17 +616,13 @@ EOT;
 	                    </div>
 						<div class="form-group">
 	                        <label for="account_date">Könyvelés dátuma</label> 
-                                <input type="text" class="form-control" name="account_date" id="account_date" placeholder="2000.01.01"
-                                data-bv-notempty="true"
-                                data-bv-notempty-message="A dátum kitöltése kötelező!"
-
-                                data-bv-date="true"
-                                data-bv-date-format="YYYY.MM.DD"
-                                data-bv-date-separator="."
-                                data-bv-date-message="A formátum nem megfelelő">
+                                <input class="datepicker form-control" value="$today">
                               <input type="hidden" id="did" name="did" value="$id">
 							<span class="help-block">Kérem, "éééé.hh.nn" formátumot használjon!</span>
 	                    </div>
+	                    <script>
+                            $('.datepicker').datepicker();
+                        </script>
 						</div>
 						<div class="modal-footer">
 							<button type="submit" class="btn btn-success btn-icon"><i class="fa fa-dollar"></i> Befizetés rögzítése</button>
@@ -676,19 +672,14 @@ echo <<<EOT
 	                    </div>
                                         <div class="form-group">
 	                    <label for="date">Rögzítés dátuma</label>
-                            <input type="text" id="date" name="date" class="form-control" placeholder="2000.01.01"
-                                data-bv-notempty="true"
-                                data-bv-notempty-message="A dátum kitöltése kötelező!"
-
-                                data-bv-date="true"
-                                data-bv-date-format="YYYY.MM.DD"
-                                data-bv-date-separator="."
-                                data-bv-date-message="A formátum nem megfelelő">
-                            <span class="help-block">Kérem, "éééé.hh.nn" formátumot használjon!</span>
+                            <input class="datepicker form-control" value="$today">
                             <input type="hidden" id="did" name="did" value="$id">
 	                    </div>
 								<div class="alertMsg danger"><i class="fa fa-warning"></i> Figyelem! Azonnali könyvelés - a bejegyzés nem törölhető!</div>
 						</div>
+						<script>
+                            $('.datepicker').datepicker();
+                        </script>
 						<div class="modal-footer">
 							<button type="submit" class="btn btn-success btn-icon"><i class="fa fa-dollar"></i> Költség rögzítése</button>
 							<button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
