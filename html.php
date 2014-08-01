@@ -17,6 +17,7 @@ function htmlHead($title, $house) {
         <script src="js/bootstrap.js"></script>
         <script src="js/bootstrap-dialog.js" type="text/javascript"></script>
         <script src="js/bootstrapValidator.js" type="text/javascript"></script>
+		<script src="js/bootstrap-datepicker.js"></script>
         <script src="js/plainhome.js" type="text/javascript"></script>
         <script src="js/form-validator.js" type="text/javascript"></script>
         <script src="js/language/hu_HU.js" type="text/javascript"></script>
