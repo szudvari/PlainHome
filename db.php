@@ -872,13 +872,13 @@ EOT;
         foreach ($table as $row) {
             $time=makeUnixTime($row['last_login']);
             if ($time == "943916400") {
-                $color = "grey";
+                $color = "#cccccc";
             }
             else if ($time < $lastweek) {
                 $color = "#f0ad4e"; 
             }
             else {
-                $color = "green";
+                $color = "#5cb85c";
             }
                   
             echo '<div class="row" style="font-size:0.8em;">';
