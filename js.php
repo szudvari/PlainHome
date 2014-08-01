@@ -1,6 +1,6 @@
 <?php
 
-function showContent ($areaId, $buttonId) {
+function showContent($areaId, $buttonId) {
     echo <<<EOT
      
    <script type="text/javascript">
@@ -15,7 +15,7 @@ function showContent ($areaId, $buttonId) {
 EOT;
 }
 
-function popUp ($message) {
+function popUp($message) {
     echo <<<EOT
     
     <script type="text/javascript">
@@ -28,7 +28,7 @@ function popUp ($message) {
 EOT;
 }
 
-function readOnlyUpdateForm ($id) {
+function readOnlyUpdateForm($id) {
     echo <<<EOT
     
 <script type="text/javascript">
@@ -43,8 +43,8 @@ function readOnlyUpdateForm ($id) {
 EOT;
 }
 
-function hideArea ($areaId) {
-echo <<<EOT
+function hideArea($areaId) {
+    echo <<<EOT
     
     <script type="text/javascript">
             $("#$areaId").hide();
@@ -52,7 +52,7 @@ echo <<<EOT
 EOT;
 }
 
-function validateForm () {
+function validateForm() {
     echo <<<EOT
 
 <script>
