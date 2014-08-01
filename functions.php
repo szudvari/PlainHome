@@ -132,3 +132,8 @@ function makeUnixTime ($string) {
     
     return $time;
 }
+
+function today () {
+    $today=date("Y.m.d");
+    return $today;
+}

@@ -22,6 +22,6 @@ closeDb($con);
 // echo $nextyear;
 // echo "<br>";
 // echo $lastyear;
-
+echo "Today is " . date("Y.m.d") . "<br>";
 htmlEnd();
 
