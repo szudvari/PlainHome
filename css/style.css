@@ -677,6 +677,7 @@
 		.list-group {
 		    margin-bottom: 20px;
 		    padding-left: 0;
+		 width: 40%;
 		}
 		.list-group-item {
 		    background-color: #ffffff;
