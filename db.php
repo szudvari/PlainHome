@@ -618,8 +618,8 @@ EOT;
 	                        <label for="account_date">Könyvelés dátuma</label> 
                                 <input class="datepicker form-control" value="$today">
                               <input type="hidden" id="did" name="did" value="$id">
-							<span class="help-block">Kérem, "éééé.hh.nn" formátumot használjon!</span>
 	                    </div>
+	<div class="alertMsg danger"><i class="fa fa-warning"></i> Figyelem! Azonnali könyvelés - a bejegyzés nem törölhető!</div>
 	                    <script>
                             $('.datepicker').on('changeDate', function(ev){
 							    $(this).datepicker('hide');
