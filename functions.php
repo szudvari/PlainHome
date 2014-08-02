@@ -134,6 +134,6 @@ function makeUnixTime ($string) {
 }
 
 function today () {
-    $today=date("Y.m.d.");
+    $today=date("Y.m.d");
     return $today;
 }
