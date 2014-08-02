@@ -191,7 +191,7 @@
 				month = d.getMonth(),
 				currentDate = this.date.valueOf();
 			this.picker.find('.datepicker-days th:eq(1)')
-						.text(DPGlobal.dates.months[month]+' '+year);
+						.text(year+'.'+' '+DPGlobal.dates.months[month]);
 			var prevMonth = new Date(year, month-1, 28,0,0,0,0),
 				day = DPGlobal.getDaysInMonth(prevMonth.getFullYear(), prevMonth.getMonth());
 			prevMonth.setDate(day);
