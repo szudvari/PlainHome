@@ -229,7 +229,7 @@
 			
 			var months = this.picker.find('.datepicker-months')
 						.find('th:eq(1)')
-							.text(year)
+							.text(year+'.')
 							.end()
 						.find('span').removeClass('active');
 			if (currentYear === year) {
