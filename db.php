@@ -2628,7 +2628,7 @@ function depostisToDropDown() {
         $deposits[] = $row;
     }
     echo '<select name="depoid" class="form-control">';
-    echo '<option value="NULL">Válasszon...</option>';
+    echo '<option value="" disabled selected>Válasszon...</option>';
     foreach ($deposits as $row) {//Array or records stored in $row
     if ($row['id'] == $house['deposit_id']){
         echo '<option value="'.$row['id'].'">TÁRSASHÁZ</option>';
