@@ -1934,9 +1934,9 @@ EOT;
     echo <<<EOT
     <hr/>
     <h4 class="primary"> Üzemeltetési bankszámlaszám: {$house['bank_account']} </h4>
-    <p>Kérjük a befizetéseket a fenti bankszámlára teljesíteni!</p>
+    <div class="alertMsg warning"><i class="fa fa-warning"></i>Kérjük a befizetéseket a fenti bankszámlára teljesíteni!</div>
     <hr/>
-    <p style="font-weight: bold;">Amennyiben naprakészen, online is szeretné követni közösköltsége alakulását, írjon egy üzenetet az {$house['infomail']} e-mail címre!</p>
+    <div class="alertMsg warning"><i class="fa fa-warning"></i>Amennyiben naprakészen, online is szeretné követni közösköltsége alakulását, írjon egy üzenetet az {$house['infomail']} e-mail címre!</div>
     </div>
 EOT;
 }
