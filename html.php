@@ -658,23 +658,24 @@ function newBoardMessage() {
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="title">Cím</label>
-                        <input type="text" class="form-control" name="title" id="title" value="" data-validation="required">
+                        <input type="text" class="form-control" name="title" id="title" value="" data-bv-notempty="true"
+                                               data-bv-notempty-message="A mező kitöltése kötelező!">
                         <span class="help-block">A hír címe</span>
                     </div>
                     <div class="form-group">
                         <label for="text">Üzenet</label>
-                        <textarea rows="6" cols="50" class="form-control" name="text" id="text" data-validation="required"></textarea>
+                        <textarea rows="6" cols="50" class="form-control" name="text" id="text" data-bv-notempty="true"
+                                               data-bv-notempty-message="A mező kitöltése kötelező!"></textarea>
                         <span class="help-block">Az hír törzse</span>
                     </div>
                     <div class="form-group">
                         <label for="valid_till">Érvényesség</label>
-                        <input class="datepicker-yearly form-control" name="valid_till" id="valid_till">
-                        <input type="date" class="form-control" name="valid_till" id="valid_till" value="" />
+                        <input class="datepicker-valid form-control" name="valid_till" id="valid_till">
                         <span class="help-block">Az üzenet eddig érvényes. Hagyja üresen, ha nem korátozott az érvényességi idő. </span>
                     </div>
                 </div>
 EOT;
-    dailyDatepicker("datepicker-documents");
+    dailyDatepicker("datepicker-valid");
 echo <<<EOT
                 <div class="modal-footer">
                     <button type="submit" value="uploadFile" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Feltöltés</button>
