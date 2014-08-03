@@ -11,8 +11,12 @@ htmlHead($website['title'], $house['name']);
 webheader($_SESSION);
 
 $con=  connectDb();
-getAllPaymentTotal(2014);
-getHousePayments(2014);
+echo <<<EOT
+<form method="get">
+EOT;
+depostisToDropDown();
+echo "</form>";
+
 closeDb($con);
 
 

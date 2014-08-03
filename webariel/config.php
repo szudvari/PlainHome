@@ -6,7 +6,7 @@ $db['pass'] = "OrkosAdatbazisa";
 $db['charset'] = "utf8";
 
 $website['title'] = "PlainHouse";
-$website['version'] = "1.0";
+$website['version'] = "1.3";
 
 $house['name'] = "Kossuth utca 3.";
 $house['infomail'] = "info@webariel.hu";
