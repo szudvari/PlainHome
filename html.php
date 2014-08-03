@@ -710,7 +710,8 @@ function adminStat() {
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="year">Melyik évre kíváncsi?</label>
-                        <input type="text" class="form-control" name="year" id="year" value="" data-validation="required"/>
+                        <input type="text" class="form-control" name="year" id="year" value="" data-bv-notempty="true"
+                               data-bv-notempty-message="A mező kitöltése kötelező!">
                         <span class="help-block">Adja meg az évszámot!</span>
                     </div>
                     <div class="modal-footer">
@@ -734,7 +735,8 @@ function adminStat() {
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="year">Melyik évre kíváncsi?</label>
-                        <input type="text" class="form-control" name="year" id="year" value="" data-validation="required"/>
+                        <input type="text" class="form-control" name="year" id="year" value="" data-bv-notempty="true"
+                               data-bv-notempty-message="A mező kitöltése kötelező!">
                         <span class="help-block">Adja meg az évszámot!</span>
                     </div>
                     <div class="form-group">
@@ -766,7 +768,8 @@ echo <<<EOT
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="year">Melyik évre kíváncsi?</label>
-                        <input type="text" class="form-control" name="year" id="year" value="" data-validation="required"/>
+                        <input type="text" class="form-control" name="year" id="year" value="" data-bv-notempty="true"
+                               data-bv-notempty-message="A mező kitöltése kötelező!">
                         <span class="help-block">Adja meg az évszámot!</span>
                     </div>
                     <div class="modal-footer">
@@ -790,7 +793,8 @@ echo <<<EOT
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="year">Melyik évre kíváncsi?</label>
-                        <input type="text" class="form-control" name="year" id="year" value="" data-validation="required"/>
+                        <input type="text" class="form-control" name="year" id="year" value="" data-bv-notempty="true"
+                               data-bv-notempty-message="A mező kitöltése kötelező!">
                         <span class="help-block">Adja meg az évszámot!</span>
                     </div>
                     <div class="modal-footer">
@@ -814,7 +818,8 @@ echo <<<EOT
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="year">Melyik évre kíváncsi?</label>
-                        <input type="text" class="form-control" name="year" id="year" value="" data-validation="required"/>
+                        <input type="text" class="form-control" name="year" id="year" value="" data-bv-notempty="true"
+                               data-bv-notempty-message="A mező kitöltése kötelező!">
                         <span class="help-block">Adja meg az évszámot!</span>
                     </div>
                     <div class="form-group">
@@ -846,7 +851,8 @@ echo <<<EOT
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="year">Melyik évre kíváncsi?</label>
-                        <input type="text" class="form-control" name="year" id="year" value="" data-validation="required"/>
+                        <input type="text" class="form-control" name="year" id="year" value="" data-bv-notempty="true"
+                               data-bv-notempty-message="A mező kitöltése kötelező!">
                         <span class="help-block">Adja meg az évszámot!</span>
                     </div>
                     <div class="form-group">

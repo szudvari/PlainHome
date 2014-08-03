@@ -2627,7 +2627,8 @@ function depostisToDropDown() {
     while ($row = mysql_fetch_assoc($result)) {
         $deposits[] = $row;
     }
-    echo '<select name="depoid" class="form-control">';
+    echo '<select name="depoid" class="form-control" data-bv-notempty="true"
+                               data-bv-notempty-message="Válasszon egy lakást!">';
     echo '<option value="" disabled selected>Válasszon...</option>';
     foreach ($deposits as $row) {//Array or records stored in $row
     if ($row['id'] == $house['deposit_id']){
