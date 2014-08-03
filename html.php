@@ -668,10 +668,14 @@ function newBoardMessage() {
                     </div>
                     <div class="form-group">
                         <label for="valid_till">Érvényesség</label>
+                        <input class="datepicker-yearly form-control" name="valid_till" id="valid_till">
                         <input type="date" class="form-control" name="valid_till" id="valid_till" value="" />
                         <span class="help-block">Az üzenet eddig érvényes. Hagyja üresen, ha nem korátozott az érvényességi idő. </span>
                     </div>
                 </div>
+EOT;
+    dailyDatepicker("datepicker-documents");
+echo <<<EOT
                 <div class="modal-footer">
                     <button type="submit" value="uploadFile" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Feltöltés</button>
                     <button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
@@ -710,9 +714,12 @@ function adminStat() {
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="year">Melyik évre kíváncsi?</label>
-                        <input type="text" class="form-control" name="year" id="year" value="" data-bv-notempty="true"
+                        <input class="datepicker-yearly form-control" name="year" id="year" data-bv-notempty="true"
                                data-bv-notempty-message="A mező kitöltése kötelező!">
                         <span class="help-block">Adja meg az évszámot!</span>
+EOT;
+    yearlyDatepicker("datepicker-yearly");
+echo <<<EOT
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Választ</button>
@@ -735,10 +742,14 @@ function adminStat() {
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="year">Melyik évre kíváncsi?</label>
-                        <input type="text" class="form-control" name="year" id="year" value="" data-bv-notempty="true"
+                     <input class="datepicker-yearlybydepo form-control" name="year" id="year" data-bv-notempty="true"
                                data-bv-notempty-message="A mező kitöltése kötelező!">
+                       
                         <span class="help-block">Adja meg az évszámot!</span>
-                    </div>
+EOT;
+    yearlyDatepicker("datepicker-yearlybydepo");
+echo <<<EOT
+   </div>
                     <div class="form-group">
                         <label for="depoid">Melyik lakásra kíváncsi</label>
 EOT;
@@ -768,9 +779,12 @@ echo <<<EOT
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="year">Melyik évre kíváncsi?</label>
-                        <input type="text" class="form-control" name="year" id="year" value="" data-bv-notempty="true"
+                        <input class="datepicker-payment form-control" name="year" id="year" data-bv-notempty="true"
                                data-bv-notempty-message="A mező kitöltése kötelező!">
                         <span class="help-block">Adja meg az évszámot!</span>
+EOT;
+    yearlyDatepicker("datepicker-payment");
+echo <<<EOT
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Választ</button>
@@ -793,9 +807,12 @@ echo <<<EOT
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="year">Melyik évre kíváncsi?</label>
-                        <input type="text" class="form-control" name="year" id="year" value="" data-bv-notempty="true"
+                        <input class="datepicker-housepayment form-control" name="year" id="year" data-bv-notempty="true"
                                data-bv-notempty-message="A mező kitöltése kötelező!">
                         <span class="help-block">Adja meg az évszámot!</span>
+EOT;
+    yearlyDatepicker("datepicker-housepayment");
+echo <<<EOT
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Választ</button>
@@ -818,7 +835,7 @@ echo <<<EOT
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="year">Melyik évre kíváncsi?</label>
-                        <input type="text" class="form-control" name="year" id="year" value="" data-bv-notempty="true"
+                        <input class="datepicker-depopayment form-control" name="year" id="year" data-bv-notempty="true"
                                data-bv-notempty-message="A mező kitöltése kötelező!">
                         <span class="help-block">Adja meg az évszámot!</span>
                     </div>
@@ -830,6 +847,9 @@ EOT;
     closeDb($con);
 echo <<<EOT
                     </div>
+EOT;
+    yearlyDatepicker("datepicker-depopayment");
+echo <<<EOT
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Választ</button>
                         <button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
@@ -851,7 +871,7 @@ echo <<<EOT
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="year">Melyik évre kíváncsi?</label>
-                        <input type="text" class="form-control" name="year" id="year" value="" data-bv-notempty="true"
+                        <input class="datepicker-depoccosts form-control" name="year" id="year" data-bv-notempty="true"
                                data-bv-notempty-message="A mező kitöltése kötelező!">
                         <span class="help-block">Adja meg az évszámot!</span>
                     </div>
@@ -863,6 +883,9 @@ EOT;
     closeDb($con);
 echo <<<EOT
                     </div>
+EOT;
+    yearlyDatepicker("datepicker-depoccosts");
+echo <<<EOT
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Választ</button>
                         <button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
@@ -1182,11 +1205,9 @@ function payment($deposit) {
                         <input type="hidden" id="did" name="did" value="{$deposit['id']}">
                     </div>
                     <div class="alertMsg danger"><i class="fa fa-warning"></i> Figyelem! Azonnali könyvelés - a bejegyzés nem törölhető!</div>
-					<script>
-                        $('.datepicker-pay-{$deposit['id']}').datepicker().on('changeDate', function(ev){
-						    $(this).datepicker('hide');
-						});
-                    </script>
+EOT;
+    dailyDatepicker("datepicker-pay-{$deposit['id']}");
+echo <<<EOT
                 </div>
 
                 <div class="modal-footer">
@@ -1245,11 +1266,9 @@ function oCost($deposit) {
                     <input type="hidden" id="did" name="did" value="{$deposit['id']}">
                 </div>
                 <div class="alertMsg danger"><i class="fa fa-warning"></i> Figyelem! Azonnali könyvelés - a bejegyzés nem törölhető!</div>
-                                <script>
-                                    $('.datepicker-cost-{$deposit['id']}').datepicker().on('changeDate', function(ev){
-									$(this).datepicker('hide');
-								    });
-                                </script>
+EOT;
+    dailyDatepicker("datepicker-cost-{$deposit['id']}");
+echo <<<EOT
             	</div>
                 <div class="modal-footer">
                 <button type="submit" class="btn btn-success btn-icon"><i class="fa fa-dollar"></i> Költség rögzítése</button>

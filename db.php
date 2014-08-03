@@ -657,15 +657,13 @@ EOT;
 	                    </div>
 						<div class="form-group">
 	                        <label for="account_date">Könyvelés dátuma</label> 
-                                <input class="datepicker form-control" value="$today" id="account_date" name="account_date">
+                                <input class="datepicker-payment form-control" value="$today" id="account_date" name="account_date">
                               <input type="hidden" id="did" name="did" value="$id">
 	                    </div>
 	<div class="alertMsg danger"><i class="fa fa-warning"></i> Figyelem! Azonnali könyvelés - a bejegyzés nem törölhető!</div>
-	                    <script>
-                            $('.datepicker').on('changeDate', function(ev){
-							    $(this).datepicker('hide');
-							});
-                        </script>
+EOT;
+    dailyDatepicker("datepicker-payment");
+echo <<<EOT
 						</div>
 						<div class="modal-footer">
 							<button type="submit" class="btn btn-success btn-icon"><i class="fa fa-dollar"></i> Befizetés rögzítése</button>
@@ -715,16 +713,14 @@ EOT;
 	                    </div>
                                         <div class="form-group">
 	                    <label for="date">Rögzítés dátuma</label>
-                            <input class="datepicker form-control" value="$today" name="date" id="date">
+                            <input class="datepicker-cost form-control" value="$today" name="date" id="date">
                             <input type="hidden" id="did" name="did" value="$id">
 	                    </div>
 								<div class="alertMsg danger"><i class="fa fa-warning"></i> Figyelem! Azonnali könyvelés - a bejegyzés nem törölhető!</div>
 						</div>
-						<script>
-                            $('.datepicker').datepicker().on('changeDate', function(ev){
-							    $(this).datepicker('hide');
-							});
-                        </script>
+EOT;
+    dailyDatepicker("datepicker-cost");
+echo <<<EOT
 						<div class="modal-footer">
 							<button type="submit" class="btn btn-success btn-icon"><i class="fa fa-dollar"></i> Költség rögzítése</button>
 							<button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>

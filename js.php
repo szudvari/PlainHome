@@ -61,3 +61,26 @@ function validateForm() {
 EOT;
 }
 
+function yearlyDatepicker ($class) {
+    echo <<<EOT
+<script>
+    $('.$class').datepicker({
+        format: " yyyy",
+        viewMode: "years",
+        minViewMode: "years"
+    }).on('changeDate', function(ev) {
+        $(this).datepicker('hide');
+    });
+</script> 
+EOT;
+}
+
+function dailyDatepicker ($class) {
+    echo <<<EOT
+<script>
+    $('.$class').datepicker().on('changeDate', function(ev) {
+        $(this).datepicker('hide');
+    });
+</script>
+EOT;
+}
