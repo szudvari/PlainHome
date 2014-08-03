@@ -13,15 +13,13 @@ webheader($_SESSION);
 
 if ($_SESSION["admin"] > 0) {
     $year = $_POST['year'];
-    $floor = $_POST['floor'];
-    $door = $_POST['door'];
-    if ($floor == 0 && $door!=0) {
-        $floor = "fsz.";
-    }
+    $id = $_POST['depoid'];
+   
     $con = connectDb();
-    $id = getDepositId($floor, $door);
+    //$id = getDepositId($floor, $door);
     getOneDepoAccount($id, $year);
     closeDb($con);
+    
 } else {
     notLoggedIn();
 }

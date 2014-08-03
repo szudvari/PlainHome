@@ -738,14 +738,13 @@ function adminStat() {
                         <span class="help-block">Adja meg az évszámot!</span>
                     </div>
                     <div class="form-group">
-                        <label for="year">Melyik lakásra kíváncsi</label>
-                        <input type="text" class="form-control" name="floor" id="floor" value="" data-validation="required"/>
-                        <span class="help-block">Adja meg az emeletet!</span>
-                     </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="door" id="door" value="" data-validation="required"/>
-                        <span class="help-block">Adja meg az ajtót!</span>
-                    </div>
+                        <label for="depoid">Melyik lakásra kíváncsi</label>
+EOT;
+    $con=  connectDb();
+    depostisToDropDown();
+    closeDb($con);
+echo <<<EOT
+                            </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Választ</button>
                         <button type="button" class="btn btn-warning btn-icon" data-dismiss="modal"><i class="fa fa-times-circle"></i> Mégsem</button>
@@ -819,13 +818,12 @@ function adminStat() {
                         <span class="help-block">Adja meg az évszámot!</span>
                     </div>
                     <div class="form-group">
-                        <label for="year">Melyik lakásra kíváncsi</label>
-                        <input type="text" class="form-control" name="floor" id="floor" value="" data-validation="required"/>
-                        <span class="help-block">Adja meg az emeletet!</span>
-                     </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="door" id="door" value="" data-validation="required"/>
-                        <span class="help-block">Adja meg az ajtót!</span>
+                        <label for="depoid">Melyik lakásra kíváncsi</label>
+EOT;
+    $con=  connectDb();
+    depostisToDropDown();
+    closeDb($con);
+echo <<<EOT
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Választ</button>
@@ -852,13 +850,12 @@ function adminStat() {
                         <span class="help-block">Adja meg az évszámot!</span>
                     </div>
                     <div class="form-group">
-                        <label for="year">Melyik lakásra kíváncsi</label>
-                        <input type="text" class="form-control" name="floor" id="floor" value="" data-validation="required"/>
-                        <span class="help-block">Adja meg az emeletet!</span>
-                     </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="door" id="door" value="" data-validation="required"/>
-                        <span class="help-block">Adja meg az ajtót!</span>
+                    <label for="depoid">Melyik lakásra kíváncsi</label>
+EOT;
+    $con=  connectDb();
+    depostisToDropDown();
+    closeDb($con);
+echo <<<EOT
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-success btn-icon"><i class="fa fa-check-square-o"></i> Választ</button>

@@ -13,14 +13,9 @@ webheader($_SESSION);
 
 if ($_SESSION["admin"] > 0) {
     $year = $_POST['year'];
-    $floor = $_POST['floor'];
-    $door = $_POST['door'];
-    if ($floor == 0 && $door!=0) {
-        $floor = "fsz.";
-    }
+    $id = $_POST['depoid'];
     echo "<div class='content'>";
     $con = connectDb();
-    $id = getDepositId($floor, $door);
     getDepositPayments($year, $id);
     closeDb($con);
 

@@ -2615,7 +2615,8 @@ function updateLastLogin($id) {
 }
 
 function depostisToDropDown() {
-    $sql = "SELECT id, floor, door from deposits ORDER BY door;";
+    global $house;
+    $sql = "SELECT id, floor, door from deposits ORDER BY ABS(`door`);";
 //echo $sql;
     $result = mysql_query($sql);
     if (!$result)
@@ -2626,9 +2627,15 @@ function depostisToDropDown() {
     while ($row = mysql_fetch_assoc($result)) {
         $deposits[] = $row;
     }
-    echo '<select name="deposits">';
+    echo '<select name="depoid" class="form-control">';
+    echo '<option value="NULL">Válasszon...</option>';
     foreach ($deposits as $row) {//Array or records stored in $row
-        echo "<option value={$row['id']}>{$row['floor']} / {$row['door']}</option>";
+    if ($row['id'] == $house['deposit_id']){
+        echo '<option value="'.$row['id'].'">TÁRSASHÁZ</option>';
+    }
+    else {
+        echo '<option value="'.$row['id'].'">'.$row['floor'].' / '.$row['door'].'</option>';
+    }
     }
     echo "</select>";
 }
