@@ -285,12 +285,12 @@ function webheader($user) {
     echo <<<EOT
     <div class="container">
 	    <div class="row">
-	        <div class="col-md-8">
+	        <div class="col-md-4">
 	            <div class="logo">
 	                <a href="index.php"><img alt="PlainHome" src="pics/logo.png" /></a>
 	            </div>
 	        </div>
-	        <div class="col-md-4 userInfo">
+	        <div class="col-md-8 userInfo">
 	            <p class="textRight"><i class="fa fa-home"></i> {$house['name']}</p>
 	        </div>
 	        <div>
