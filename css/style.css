@@ -682,6 +682,13 @@
 		    padding-left: 0;
 		 width: 40%;
 		}
+		
+		.list-group-dash {
+		    margin-bottom: 20px;
+		    padding-left: 0;
+		}
+		
+		
 		.list-group-item {
 		    background-color: #ffffff;
 		    border: 1px solid #dddddd;

@@ -495,7 +495,7 @@ EOT;
 		</div>
 
 		<div class="col-md-4">
-	        <div class="list-group">
+	        <div class="list-group-dash">
 				<li class="list-group-item active">Motorház</li>
 				<a data-toggle="modal" href="#ktgAlakul" class="list-group-item">Közösköltség alakulása</a>
 				<a data-toggle="modal" href="#otherCost" class="list-group-item">Egyéb költségek listázása</a>
