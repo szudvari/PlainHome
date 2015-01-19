@@ -1926,7 +1926,7 @@ EOT;
     getDepositPayments($year, $id);
     echo '<hr />';
     echo '<h3 class="primary"><i class="fa fa-history"></i> Az albetétre terhelt további költségek</h3>';
-    getMyAllOcostCurrentYear($id);
+    getMyAllOcostGivenYear($id, $year);
     echo <<<EOT
     <hr/>
     <h4 class="primary"> Üzemeltetési bankszámlaszám: {$house['bank_account']} </h4>
@@ -2510,6 +2510,60 @@ EOT;
 function getMyAllOcostCurrentYear($id) {
     global $db;
     $year = date('Y');
+    $sql = "SELECT `deposits`.`floor`,`deposits`.`door`,`ocost`.`year`,`ocost`.`month`,`ocost`.`day`,`ocost`.`ocost`, `ocost`.`title` FROM deposits "
+            . "LEFT JOIN `{$db['name']}`.`ocost` ON `deposits`.`id` = `ocost`.`deposit_id` WHERE `deposits`.`id` = $id AND `ocost`.`year` = $year "
+            . "ORDER BY `ocost`.`year` DESC, `ocost`.`month` DESC, `ocost`.`day` DESC";
+    $result = mysql_query($sql);
+    if (!$result)
+    {
+        die("geMyAllOcost hiba:" . mysql_errno() . " - " . mysql_error());
+    }
+
+    while ($row = mysql_fetch_assoc($result)) {
+        $ocost[] = $row;
+    }
+
+    if (mysql_num_rows($result) == 0)
+    {
+        echo "Nincsenek további költségek az albetétre terhelve.";
+    }
+    else
+    {
+        echo <<<EOT
+        <table id="responsiveTable" class="large-only" cellspacing="0">
+            <tr align="left" class="primary">
+                <th> Emelet </th>
+                <th> Ajtó </th>
+                <th> Dátum </th>
+                <th> Költség</th>
+                <th> Jogcím</th>
+            </tr>
+            <tbody>
+EOT;
+        foreach ($ocost as $row) {
+            if (strlen($row['month']) == 1)
+            {
+                $row['month'] = "0" . $row['month'];
+            }
+            if (strlen($row['day']) == 1)
+            {
+                $row['day'] = "0" . $row['day'];
+            }
+            echo '<tr>';
+            echo "<td>{$row['floor']}</td>";
+            echo "<td>{$row['door']}</td>";
+            echo "<td>{$row['year']}.{$row['month']}.{$row['day']}</td>";
+            echo "<td>" . number_format($row['ocost'], 0, ',', ' ') . " Ft</td>";
+            echo "<td>{$row['title']}</td>";
+            echo '</tr>';
+        }
+        echo '</tbody>';
+        echo '</table>';
+    }
+}
+function getMyAllOcostGivenYear($id, $year) {
+    global $db;
+    
     $sql = "SELECT `deposits`.`floor`,`deposits`.`door`,`ocost`.`year`,`ocost`.`month`,`ocost`.`day`,`ocost`.`ocost`, `ocost`.`title` FROM deposits "
             . "LEFT JOIN `{$db['name']}`.`ocost` ON `deposits`.`id` = `ocost`.`deposit_id` WHERE `deposits`.`id` = $id AND `ocost`.`year` = $year "
             . "ORDER BY `ocost`.`year` DESC, `ocost`.`month` DESC, `ocost`.`day` DESC";
