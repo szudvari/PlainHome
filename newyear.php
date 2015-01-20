@@ -18,12 +18,12 @@ if ($_SESSION["admin"] > 0)
     $lastyear = lastYear();
     closeDb($con);
 
-    if ((($year == $lastyear && $month == 12) && $day > ($house['payment_day'] + 5)) || ($year > $lastyear))
+    if ((($year == $lastyear && $month == 12) && $day > ($house['payment_day'] + 4)) || ($year > $lastyear))
     {
         $con = connectDb();
         startNewYear($lastyear);
         closeDb($con);
-        header("Location:admin.php");
+        //header("Location:admin.php");
     }
      else
     {
