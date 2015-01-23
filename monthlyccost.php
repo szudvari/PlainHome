@@ -42,6 +42,7 @@ else
         //echo $sql;
         mysql_query($sql);
     }
+    updateAllBalance($year);
 }
 
 closeDb($con);
