@@ -1208,7 +1208,8 @@ function insertPayment($data, $user) {
 function getMyPayments($id) {
     global $db;
     $closing_balance = getCurrentBalance($id);
-    $balance = getActualBalance($closing_balance, $id);
+    /*$balance = getActualBalance($closing_balance, $id);*/
+    $balance = $closing_balance;
     if ($balance < 0) {
         $abalance = $balance * -1;
     } else {
