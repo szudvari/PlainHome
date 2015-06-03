@@ -571,10 +571,10 @@ EOT;
 EOT;
     } else {     //ha adminként lépsz be
         echo '<a data-toggle="modal" href="#payment" class="btn btn-success btn-icon"><i class="fa fa-dollar"></i>Új befizetés rögzítése</a>';
-        //echo "<a href=\"payment.php?id=" . $id . "\"><button class='btn btn-success btn-icon'><i class='fa fa-dollar'></i>Új befizetés rögzítése</button></a>";
+//echo "<a href=\"payment.php?id=" . $id . "\"><button class='btn btn-success btn-icon'><i class='fa fa-dollar'></i>Új befizetés rögzítése</button></a>";
         echo "<hr />";
         echo '<a data-toggle="modal" href="#cost" class="btn btn-success btn-icon"><i class="fa fa-history"></i>Új költség rögzítése</a>';
-        //echo "<a href=\"ocost.php?id=" . $id . "\"><button class='btn btn-success btn-icon'><i class='fa fa-history'></i>Új költség rögzítése</button></a>";
+//echo "<a href=\"ocost.php?id=" . $id . "\"><button class='btn btn-success btn-icon'><i class='fa fa-history'></i>Új költség rögzítése</button></a>";
         echo "<hr />";
         echo '<h3 class="primary"><i class="fa fa-dollar"></i> Közösköltség alakulása az utolsó 12 hónapban</h3>';
         getMyAllCcost($id);
@@ -1172,7 +1172,7 @@ function getCurrentBalance($id) {
     }
     if (mysql_num_rows($result) == 0) {
         echo "<span style='color: red; font-weight: bold;'>Figyelem! Az előző év könyvelése még nem zárult le, addig folyószámla adatai nem pontosak!</span>";
-        //exit;
+//exit;
     }
     while ($row = mysql_fetch_assoc($result)) {
         $balance = $row["actual_balance"];
@@ -1208,7 +1208,7 @@ function insertPayment($data, $user) {
 function getMyPayments($id) {
     global $db;
     $closing_balance = getCurrentBalance($id);
-    /*$balance = getActualBalance($closing_balance, $id);*/
+    /* $balance = getActualBalance($closing_balance, $id); */
     $balance = $closing_balance;
     if ($balance < 0) {
         $abalance = $balance * -1;
@@ -2205,7 +2205,7 @@ function updateAllBalance($year) {
             echo "select ccost $i hiba -" . mysql_errno() . ": " . mysql_error();
             exit;
         }
-          while ($row = mysql_fetch_assoc($result)) {
+        while ($row = mysql_fetch_assoc($result)) {
             $ccost = $row['ccost'];
         }
         $actual = $balance - $ccost + $amount;
@@ -2486,4 +2486,81 @@ function getAllOcosts($id, $year) {
         $ocost[] = $row;
     }
     return $ocost;
+}
+
+function updateDepoBalance($year, $id) {
+    global $db;
+    $nextyear = date("Y-m-d", mktime(0, 0, 0, 12, 31, $year));
+    $lastyear = date("Y-m-d", mktime(0, 0, 0, 1, 1, $year));
+
+    $sql = "SELECT SUM(`amount`) as amount FROM `payment` WHERE `deposit_id`=$id AND (`account_date` between '$lastyear' AND '$nextyear')";
+
+    $result = mysql_query($sql);
+    if (!$result) {
+        echo "select amount $id hiba -" . mysql_errno() . ": " . mysql_error();
+        exit;
+    }
+    while ($row = mysql_fetch_assoc($result)) {
+        $amount = $row['amount'];
+    }
+    $sql = "SELECT `opening_balance` FROM `deposit_balance` WHERE `deposit_id`=$id AND `year`=$year";
+    $result = mysql_query($sql);
+    if (!$result) {
+        echo "select balance $id hiba -" . mysql_errno() . ": " . mysql_error();
+        exit;
+    }
+    while ($row = mysql_fetch_assoc($result)) {
+        $balance = $row['opening_balance'];
+    }
+    $sql = "SELECT SUM(`ccost`) as ccost FROM `ccost` WHERE `deposit_id`=$id AND `year`=$year;";
+    $result = mysql_query($sql);
+    if (!$result) {
+        echo "select ccost $id hiba -" . mysql_errno() . ": " . mysql_error();
+        exit;
+    }
+    while ($row = mysql_fetch_assoc($result)) {
+        $ccost = $row['ccost'];
+    }
+    $actual = $balance - $ccost + $amount;
+    $sql = "UPDATE `{$db['name']}`.`deposit_balance` SET `actual_balance` = $actual WHERE `deposit_balance`.`deposit_id` = $id and `deposit_balance`.`year`=$year;";
+    $result = mysql_query($sql);
+    if (!$result) {
+        echo "update balance $id hiba -" . mysql_errno() . ": " . mysql_error();
+        exit;
+    }
+}
+function getDepositIdByCcost($ccost_id) {
+    $sql = "select deposit_id from ccost where id=\"$ccost_id\";";
+    $res = mysql_query($sql);
+    if (!$res) {
+        echo "A ($sql) kérdés futtatása sikertelen: " . mysql_error();
+        exit;
+    }
+
+    if (mysql_num_rows($res) == 0) {
+        echo "Nincs ilyen albetét";
+        exit;
+    }
+    while ($row = mysql_fetch_assoc($res)) {
+        $id = $row["deposit_id"];
+    }
+    return $id;
+}
+
+function getCcostYear($ccost_id) {
+    $sql = "select year from ccost where id=\"$ccost_id\";";
+    $res = mysql_query($sql);
+    if (!$res) {
+        echo "A ($sql) kérdés futtatása sikertelen: " . mysql_error();
+        exit;
+    }
+
+    if (mysql_num_rows($res) == 0) {
+        echo "Nincs ilyen albetét";
+        exit;
+    }
+    while ($row = mysql_fetch_assoc($res)) {
+        $year = $row["year"];
+    }
+    return $year;
 }

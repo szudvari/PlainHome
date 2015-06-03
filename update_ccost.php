@@ -14,6 +14,9 @@ $ccost['ccost'] = $_POST['ccost'];
 
 $con = connectDb();
 updateCcostDb($ccost);
+$id = getDepositIdByCcost($ccost['id']);
+$year = getCcostYear($ccost['id']);
+updateDepoBalance($year, $id);
 closeDb($con);
 header("Location:stat.php?update=1");
 }
