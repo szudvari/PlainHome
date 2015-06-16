@@ -741,7 +741,9 @@ function getAllDepo() {
 
 
         $deposit[$i]["ccost"] = $ccost_cost + $grabage_cost;
-        $deposit[$i]["balance"] = getCurrentBalance($deposit[$i]["id"]);
+        $deposit[$i]["ocost"] = getAllOcost($deposit[$i]["id"], date('Y'));
+        $deposit[$i]["cbalance"] = getCurrentBalance($deposit[$i]["id"]);
+        $deposit[$i]["balance"] = $deposit[$i]["cbalance"]-$deposit[$i]["ocost"];
         $sumarea += $deposit[$i]['area'];
         $sumresidents += $deposit[$i]['residents_no'];
         $sumarearatio += $deposit[$i]['area_ratio'];
@@ -1208,8 +1210,9 @@ function insertPayment($data, $user) {
 function getMyPayments($id) {
     global $db;
     $closing_balance = getCurrentBalance($id);
+    $ocost = getAllOcost($id, date('Y'));
     /* $balance = getActualBalance($closing_balance, $id); */
-    $balance = $closing_balance;
+    $balance = $closing_balance-$ocost;
     if ($balance < 0) {
         $abalance = $balance * -1;
     } else {
